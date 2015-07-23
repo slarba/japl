@@ -1,4 +1,4 @@
-package com.mlt.japl;
+package com.mlt.japl.tools;
 
 import java.util.Arrays;
 

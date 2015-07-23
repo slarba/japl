@@ -1,6 +1,5 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.PrecisionMaintainingFn;
 
 public class MulFn extends PrecisionMaintainingFn {
 

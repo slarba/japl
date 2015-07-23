@@ -1,4 +1,4 @@
-package com.mlt.japl;
+package com.mlt.japl.fns;
 
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;

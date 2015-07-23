@@ -1,8 +1,8 @@
 package com.mlt.japl.arrays;
 
-import com.mlt.japl.Dimensions;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 
 /**
  * Base for primitive-containing arrays

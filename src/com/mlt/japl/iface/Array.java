@@ -1,6 +1,6 @@
 package com.mlt.japl.iface;
 
-import com.mlt.japl.Dimensions;
+import com.mlt.japl.tools.Dimensions;
 
 public interface Array {
 	static final int INTEGER = 1;

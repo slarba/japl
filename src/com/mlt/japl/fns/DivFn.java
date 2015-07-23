@@ -1,6 +1,5 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.PrecisionIncreasingFn;
 
 public class DivFn extends PrecisionIncreasingFn {
 
