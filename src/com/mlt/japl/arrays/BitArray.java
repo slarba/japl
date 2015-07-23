@@ -1,4 +1,7 @@
-package com.mlt.japl;
+package com.mlt.japl.arrays;
+
+import com.mlt.japl.Dimensions;
+import com.mlt.japl.iface.Array;
 
 public class BitArray extends BaseArray {
 

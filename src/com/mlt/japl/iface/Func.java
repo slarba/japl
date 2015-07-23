@@ -1,4 +1,4 @@
-package com.mlt.japl;
+package com.mlt.japl.iface;
 
 public interface Func {
 	double D_D(double d);

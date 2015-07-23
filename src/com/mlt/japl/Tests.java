@@ -4,6 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mlt.japl.arrays.DoubleArray;
+import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.fns.DivFn;
+import com.mlt.japl.fns.MulFn;
+import com.mlt.japl.iface.Array;
+import com.mlt.japl.iface.Func;
+import com.mlt.japl.scalars.DoubleScalar;
+import com.mlt.japl.scalars.IntScalar;
+
 public class Tests {
 
 	@Test

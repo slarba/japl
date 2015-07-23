@@ -1,4 +1,8 @@
-package com.mlt.japl;
+package com.mlt.japl.scalars;
+
+import com.mlt.japl.Dimensions;
+import com.mlt.japl.arrays.DoubleArray;
+import com.mlt.japl.iface.Array;
 
 
 public class DoubleScalar extends BaseScalar {

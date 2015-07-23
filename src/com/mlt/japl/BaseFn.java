@@ -1,5 +1,10 @@
 package com.mlt.japl;
 
+import com.mlt.japl.errors.AplError;
+import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.iface.Array;
+import com.mlt.japl.iface.Func;
+
 public abstract class BaseFn implements Func {
 
 	public abstract Array createResultArrayFor(Array a, int axis);

@@ -1,5 +1,9 @@
 package com.mlt.japl;
 
+import com.mlt.japl.errors.LengthError;
+import com.mlt.japl.errors.RankError;
+import com.mlt.japl.iface.Array;
+
 public abstract class PrecisionMaintainingFn extends BaseFn {
 
 	@Override

@@ -1,4 +1,9 @@
-package com.mlt.japl;
+package com.mlt.japl.scalars;
+
+import com.mlt.japl.Dimensions;
+import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.errors.AplError;
+import com.mlt.japl.iface.Array;
 
 public class IntScalar extends BaseScalar {
 
