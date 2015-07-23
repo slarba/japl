@@ -84,4 +84,13 @@ public class BitArray extends BaseArray {
 		return (data[whole]&(1<<part))!=0 ? 1 : 0;
 	}
 
+	@Override
+	public long atI(int idx) {
+		return atB(idx);
+	}
+	
+	@Override
+	public void setI(int idx, long val) {
+		setB(idx, val);
+	}
 }

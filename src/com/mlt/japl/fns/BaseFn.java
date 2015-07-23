@@ -163,22 +163,113 @@ public abstract class BaseFn implements Func {
 		for(i=0; i<rlen; i++) r.setA(i, dyadic(a.atA(i),b.atA(i), axis));
 		return r;		
 	}
+
+	Array loop_I_M(Array r, Array a, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setI(i, monadic(a.atA(i), axis).atI(0));
+		return r;				
+	}
+
+	Array loop_D_M(Array r, Array a, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setD(i, monadic(a.atA(i), axis).atD(0));
+		return r;				
+	}
+	
+	Array loop_I_I_M(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
+		return r;
+	}
+
+	Array loop_D_I_M(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
+		return r;
+	}
+
+	Array loop_D_D_M(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
+		return r;
+	}
+	
+	Array loop_I_M_I(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
+		return r;
+	}
+
+	Array loop_D_M_I(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
+		return r;
+	}
+
+	Array loop_D_M_D(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
+		return r;
+	}
+
+	Array loop_D_M_M(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
+		return r;
+	}
+	
+	Array loop_I_D_M(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
+		return r;
+	}
+
+	Array loop_I_M_D(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
+		return r;
+	}
+
+	Array loop_I_M_M(Array r, Array a, Array b, int axis) {
+		int i;
+		int rlen = r.actualLength();
+		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
+		return r;
+	}
 	
 	@Override
 	public Array monadic(Array a, int axis) {
 		Array result = createResultArrayFor(a, axis);
 
 		switch(result.type()) {
+		case Array.BIT:
 		case Array.INTEGER:
 			switch(a.type()) {
+			case Array.BIT:
 			case Array.INTEGER: return loop_I_I(result, a);
 			case Array.DOUBLE:  return loop_I_D(result, a);
+			case Array.MIXED:   return loop_I_M(result, a, axis);
 			}
+			break;
 		case Array.DOUBLE:
 			switch(a.type()) {
+			case Array.BIT:
 			case Array.INTEGER: return loop_D_I(result, a);
 			case Array.DOUBLE:  return loop_D_D(result, a);
+			case Array.MIXED:   return loop_D_M(result, a, axis);
 			}
+			break;
 		case Array.MIXED:
 			return loop_M_A(result, a, axis);
 		}
@@ -191,32 +282,65 @@ public abstract class BaseFn implements Func {
 		Array result = createResultArrayFor(a, b, axis);
 
 		switch(result.type()) {
+		case Array.BIT:
 		case Array.INTEGER:
 			switch(a.type()) {
+			case Array.BIT:
 			case Array.INTEGER:
 				switch(b.type()) {
+				case Array.BIT:
 				case Array.INTEGER:  return loop_I_I_I(result, a, b);
 				case Array.DOUBLE:   return loop_I_I_D(result, a, b);
+				case Array.MIXED:    return loop_I_I_M(result, a, b, axis);
 				}
+				break;
 			case Array.DOUBLE:
 				switch(b.type()) {
+				case Array.BIT:
 				case Array.INTEGER:  return loop_I_D_I(result, a, b);
 				case Array.DOUBLE:   return loop_I_D_D(result, a, b);
+				case Array.MIXED:    return loop_I_D_M(result, a, b, axis);
 				}
+				break;
+			case Array.MIXED:
+				switch(b.type()) {
+				case Array.BIT:
+				case Array.INTEGER:  return loop_I_M_I(result, a, b, axis);
+				case Array.DOUBLE:   return loop_I_M_D(result, a, b, axis);
+				case Array.MIXED:    return loop_I_M_M(result, a, b, axis);
+				}
+				break;
 			}
+			break;
 		case Array.DOUBLE:
 			switch(a.type()) {
+			case Array.BIT:
 			case Array.INTEGER:
 				switch(b.type()) {
+				case Array.BIT:
 				case Array.INTEGER:  return loop_D_I_I(result, a, b);
 				case Array.DOUBLE:   return loop_D_I_D(result, a, b);
+				case Array.MIXED:    return loop_D_I_M(result, a, b, axis);
 				}
+				break;
 			case Array.DOUBLE:
 				switch(b.type()) {
+				case Array.BIT:
 				case Array.INTEGER:  return loop_D_D_I(result, a, b);
 				case Array.DOUBLE:   return loop_D_D_D(result, a, b);
+				case Array.MIXED:    return loop_D_D_M(result, a, b, axis);
 				}
+				break;
+			case Array.MIXED:
+				switch(b.type()) {
+				case Array.BIT:
+				case Array.INTEGER:  return loop_D_M_I(result, a, b, axis);
+				case Array.DOUBLE:   return loop_D_M_D(result, a, b, axis);
+				case Array.MIXED:    return loop_D_M_M(result, a, b, axis);
+				}
+				break;
 			}
+			break;
 		case Array.MIXED:
 			return loop_M_A_A(result, a, b, axis);
 		}

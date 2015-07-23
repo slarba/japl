@@ -2,6 +2,7 @@ package com.mlt.japl.arrays;
 
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class IotaArray extends BaseArray {
@@ -27,10 +28,15 @@ public class IotaArray extends BaseArray {
 	}
 
 	@Override
+	public Array atA(int idx) {
+		return new IntScalar(atI(idx));
+	}
+
+	@Override
 	public int type() {
 		return INTEGER;
 	}
-
+	
 	@Override
 	public int actualLength() {
 		return n;
