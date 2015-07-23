@@ -10,6 +10,14 @@ public abstract class PrimitiveBaseFn implements Func {
 	public abstract Array createResultArrayFor(Array a, int axis);
 	public abstract Array createResultArrayFor(Array a, Array b, int axis);
 
+	public int I_C(char c) {		
+		throw new AplError();
+	}
+
+	public int I_CC(char a, char b) {		
+		throw new AplError();
+	}
+	
 	public double D_D(double d) {
 		throw new AplError();
 	}

@@ -27,6 +27,12 @@ public class BitArray extends BaseArray {
 		initData(data);
 	}
 
+	public BitArray(int actualLength, Dimensions dims) {
+		super(dims);
+		this.actualLen = actualLength;
+		this.data = new long[1+(actualLen/64)];
+	}
+
 	private void initData(long[] d) {
 		this.data = new long[1+(actualLen/64)];
 		for(int i=0; i<actualLen; i++) {
@@ -93,4 +99,9 @@ public class BitArray extends BaseArray {
 	public void setI(int idx, long val) {
 		setB(idx, val);
 	}
+
+	public static Array similarTo(Array a) {
+		return new BitArray(a.actualLength(), a.dims());		
+	}
+
 }
