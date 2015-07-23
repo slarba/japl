@@ -70,7 +70,11 @@ public class AplParser implements AplParserConstants {
   {
         switch(n)
         {
-//		case "/":  return new ReduceFn(arg);//		case "\\": return new ScanFn(arg);//		case "¨": return new EachFn(arg);//		case "⌿": return new FirstAxisReduceFn(arg);//		case "⍀": return new FirstAxisScanFn(arg);
+                case "/":  return new ReduceFn(arg);
+                case "\u005c\u005c": return new ScanFn(arg);
+                case "\u00a8": return new EachFn(arg);
+                case "\u233f": return new FirstAxisReduceFn(arg);
+                case "\u2340": return new FirstAxisScanFn(arg);
                 default:
                         throw new SyntaxError();
         }

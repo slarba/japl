@@ -27,6 +27,11 @@ public class CharArray extends BaseArray {
 		this.data = data;
 	}
 
+	public CharArray(Dimensions shape, String data) {
+		super(shape);
+		this.data = data.toCharArray();
+	}
+	
 	@Override
 	public int type() {
 		return CHARACTER;

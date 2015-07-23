@@ -2,17 +2,17 @@ package com.mlt.japl.fns;
 
 import com.mlt.japl.iface.Func;
 
-public class OuterProdFn extends SpecialBaseFn {
+public class ReduceFn extends SpecialBaseFn {
 
 	private Func fn;
 
-	public OuterProdFn(Func fn) {
+	public ReduceFn(Func fn) {
 		this.fn = fn;
 	}
 	
 	@Override
 	public String getName() {
-		return "outerprod<" + fn.getName() + ">";
+		return "reduce<" + fn.getName() + ">";
 	}
 
 }

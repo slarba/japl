@@ -85,7 +85,7 @@ public class AplParser
   {
 	switch(n)
 	{
-//		case "/":  return new ReduceFn(arg);//		case "\\": return new ScanFn(arg);//		case "¨": return new EachFn(arg);//		case "\u233f": return new FirstAxisReduceFn(arg);//		case "\u2340": return new FirstAxisScanFn(arg);
+		case "/":  return new ReduceFn(arg);		case "\\": return new ScanFn(arg);		case "¨": return new EachFn(arg);		case "\u233f": return new FirstAxisReduceFn(arg);		case "\u2340": return new FirstAxisScanFn(arg);
 		default:
 			throw new SyntaxError();
 	}
