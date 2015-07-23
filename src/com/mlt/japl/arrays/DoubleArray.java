@@ -65,6 +65,7 @@ public class DoubleArray extends BaseArray {
 
 	@Override
 	public Array morePreciseUnInitializedCopy(Array b) {
+		if(b.type()==MIXED) return new NestedArray(dims(), new Array[data.length]);
 		return unInitializedCopy();  // no more precise than that
 	}
 
