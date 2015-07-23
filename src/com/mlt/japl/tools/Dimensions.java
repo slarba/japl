@@ -119,4 +119,8 @@ public class Dimensions {
 		Dimensions d = (Dimensions)o;
 		return Arrays.equals(dims, d.dims);
 	}
+
+	public int[] asArray() {
+		return dims;
+	}
 }

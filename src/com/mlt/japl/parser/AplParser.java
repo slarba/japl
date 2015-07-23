@@ -37,7 +37,7 @@ public class AplParser implements AplParserConstants {
                 case "\u2308": return new CeilFn();
                 case "\u2223": return new AbsFn();
                 case "\u00f7": return new DivFn();
-//		case "⍴": return new RhoFn();
+                case "\u2374": return new RhoFn();
 //		case "⍳": return new IotaFn();
 //		case "○": return new TrigFn();
 //		case "∈": return new ExistsFn();
