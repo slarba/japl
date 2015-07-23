@@ -1,8 +1,17 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
+
 
 public class MulFn extends PrecisionMaintainingFn {
 
+	@Override
+	public Array createResultArrayFor(Array a, int axis) {
+		if(a.isScalar()) return new IntScalar();
+		return new IntArray(a.dims(), new long[a.actualLength()]);
+	}
 
 	@Override
 	public long I_I(long a) {

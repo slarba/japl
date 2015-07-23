@@ -23,7 +23,17 @@ public abstract class BaseArray implements Array {
 		this.dims = dims;
 		depth = 1;
 	}
-		
+
+	@Override
+	public long atB(int... indx) {
+		return atB(dims.calculateIndex(indx));
+	}
+
+	@Override
+	public long atB(int idx) {
+		throw new DomainError();		
+	}
+	
 	@Override
 	public int depth() {
 		return depth;
@@ -36,7 +46,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public Array atA(int... indx) {
-		throw new DomainError();
+		return atA(dims.calculateIndex(indx));
 	}
 
 	@Override
@@ -46,7 +56,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public long atI(int... indx) {
-		throw new DomainError();
+		return atI(dims.calculateIndex(indx));
 	}
 
 	@Override
@@ -56,7 +66,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public double atD(int... indx) {
-		throw new DomainError();
+		return atD(dims.calculateIndex(indx));
 	}
 
 	@Override
@@ -66,7 +76,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public char atC(int... indx) {
-		throw new DomainError();
+		return atC(dims.calculateIndex(indx));
 	}
 
 	@Override
@@ -119,4 +129,8 @@ public abstract class BaseArray implements Array {
 		throw new DomainError();
 	}
 
+	@Override
+	public void setB(int idx, long val) {
+		throw new DomainError();
+	}
 }

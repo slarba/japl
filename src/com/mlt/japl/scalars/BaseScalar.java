@@ -17,8 +17,18 @@ public abstract class BaseScalar implements Array {
 	}
 
 	@Override
-	public Array atA(int... indx) {
+	public long atB(int... indx) {
+		return atB(0);
+	}
+
+	@Override
+	public long atB(int idx) {
 		throw new DomainError();
+	}
+	
+	@Override
+	public Array atA(int... indx) {
+		return atA(0);
 	}
 
 	@Override
@@ -28,7 +38,7 @@ public abstract class BaseScalar implements Array {
 
 	@Override
 	public long atI(int... indx) {
-		throw new DomainError();
+		return atI(0);
 	}
 
 	@Override
@@ -38,7 +48,7 @@ public abstract class BaseScalar implements Array {
 
 	@Override
 	public double atD(int... indx) {
-		throw new DomainError();
+		return atD(0);
 	}
 
 	@Override
@@ -48,7 +58,7 @@ public abstract class BaseScalar implements Array {
 
 	@Override
 	public char atC(int... indx) {
-		throw new DomainError();
+		return atC(0);
 	}
 
 	@Override
@@ -105,4 +115,10 @@ public abstract class BaseScalar implements Array {
 	public void setA(int idx, Array val) {
 		throw new DomainError();
 	}
+
+	@Override
+	public void setB(int idx, long val) {
+		throw new DomainError();
+	}
+
 }

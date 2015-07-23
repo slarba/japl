@@ -14,6 +14,11 @@ public class DoubleArray extends BaseArray {
 		data = EMPTY;
 	}
 	
+	public DoubleArray(double... data) {
+		super(new Dimensions(data.length));
+		this.data = data;
+	}
+	
 	public DoubleArray(Dimensions dimensions, double... data) {
 		super(dimensions);
 		this.data = data;
@@ -34,11 +39,6 @@ public class DoubleArray extends BaseArray {
 		return new DoubleScalar(atD(idx));
 	}
 	
-	@Override
-	public double atD(int... indx) {
-		return data[dims.calculateIndex(indx) % data.length];
-	}
-
 	@Override
 	public double atD(int idx) {
 		return data[idx % data.length];		

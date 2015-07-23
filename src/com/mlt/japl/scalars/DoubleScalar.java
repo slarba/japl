@@ -56,4 +56,5 @@ public class DoubleScalar extends BaseScalar {
 	public Array morePreciseUnInitializedCopy() {
 		return unInitializedCopy();  // no more precise than that
 	}
+
 }

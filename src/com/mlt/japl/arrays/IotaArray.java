@@ -1,20 +1,26 @@
 package com.mlt.japl.arrays;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
 public class IotaArray extends BaseArray {
 	private int n;
 
-	public IotaArray(int n) {
+	public IotaArray() {
+		this.n = 0;
+	}
+	
+	public IotaArray(Dimensions dims, int n) {
+		super(dims);
 		this.n = n;
 	}
 	
-	@Override
-	public long atI(int... indx) {
-		return atI(dims.calculateIndex(indx));
+	public IotaArray(int n) {
+		super(new Dimensions(n));
+		this.n = n;
 	}
-
+	
 	@Override
 	public long atI(int idx) {
 		return (idx%n)+1;
@@ -32,25 +38,27 @@ public class IotaArray extends BaseArray {
 
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return null;
+		return new IotaArray(newShape, n);
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new IntArray(dims(), new long[n]);
 	}
 
 	@Override
 	public Array morePreciseUnInitializedCopy(Array b) {
-		// TODO Auto-generated method stub
-		return null;
+		switch(b.type()) {
+		case DOUBLE: 		return new DoubleArray(dims(), new double[n]);
+		case INTEGER:       return unInitializedCopy();
+		case MIXED:         return unInitializedCopy();
+		}
+		throw new AplError();
 	}
 
 	@Override
 	public Array morePreciseUnInitializedCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DoubleArray(dims(), new double[n]);
 	}
 
 }

@@ -14,6 +14,11 @@ public class IntArray extends BaseArray {
 		data = EMPTY;
 	}
 	
+	public IntArray(long... data) {
+		super(new Dimensions(data.length));
+		this.data = data;
+	}
+	
 	public IntArray(Dimensions dims, long... data) {
 		super(dims);
 		this.data = data;
@@ -34,11 +39,6 @@ public class IntArray extends BaseArray {
 		return new IntScalar(atI(idx));
 	}
 	
-	@Override
-	public long atI(int... indx) {
-		return data[dims.calculateIndex(indx) % data.length];
-	}
-
 	@Override
 	public long atI(int idx) {
 		return data[idx % data.length];		
