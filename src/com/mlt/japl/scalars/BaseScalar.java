@@ -38,12 +38,12 @@ public abstract class BaseScalar implements Array {
 	
 	@Override
 	public Array atA(int... indx) {
-		return atA(0);
+		return this;
 	}
 
 	@Override
 	public Array atA(int idx) {
-		throw new DomainError();
+		return this;
 	}
 
 	@Override

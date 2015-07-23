@@ -3,3 +3,6 @@
 /SimpleCharStream.java
 /Token.java
 /TokenMgrError.java
+/AplParser.java
+/AplParserConstants.java
+/AplParserTokenManager.java
