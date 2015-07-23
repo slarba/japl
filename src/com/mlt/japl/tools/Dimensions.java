@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Dimensions {
 	int[] dims;
 	int[] spans;
+	int length;
 	
 	private static final int[] EMPTY_DIMS = new int[] {};
 	public static final Dimensions EMPTY = new Dimensions();
@@ -12,6 +13,7 @@ public class Dimensions {
 	public Dimensions() {
 		dims = EMPTY_DIMS;
 		spans = EMPTY_DIMS;
+		length = 0;
 	}
 
 	public Dimensions(int... dims) {
@@ -19,9 +21,73 @@ public class Dimensions {
 
 		spans = new int[dims.length];
 		spans[dims.length-1] = 1;
+		int len = 1;
 		for(int i=dims.length-1; i>0; i--) {
+			len *= dims[i];
 			spans[i-1] = spans[i]*dims[i];
 		}			
+		if(dims.length==0) 
+			length=0; 
+		else 
+			length = len*dims[0];
+	}
+	
+	public Dimensions reverse() {
+		int[] nds = new int[dims.length];
+		int j = 0;
+		for(int i=nds.length-1; i>=0; i--) {
+			nds[j++] = dims[i];
+		}
+		return new Dimensions(nds);
+	}
+
+	public Dimensions concat(Dimensions o) {
+		int[] nds = new int[dims.length + o.dims.length];
+		for(int i=0; i<dims.length; i++) {
+			nds[i] = dims[i];
+		}
+		for(int i=dims.length; i<o.dims.length; i++) {
+			nds[i] = o.dims[i];
+		}
+		return new Dimensions(nds);
+	}
+	
+	public Dimensions elideAxis(int axis) {
+		int[] nds = new int[dims.length-1];
+		for(int i=0; i<nds.length; i++) {
+			if(i==axis) continue;
+			nds[i] = dims[i];
+		}
+		return new Dimensions(nds);		
+	}
+
+	public Dimensions permute(int[] permutations) {
+		int[] nds = new int[dims.length];
+		for(int i=0; i<nds.length; i++) {
+			nds[i] = dims[permutations[i]];
+		}
+		return new Dimensions(nds);		
+	}
+	
+	public int axis(int i) {
+		return dims[i];
+	}
+	
+	public Dimensions offsetBy(int[] offsets) {
+		int[] nds = new int[dims.length];
+		for(int i=0; i<nds.length; i++) {
+			nds[i] = Math.max(0, dims[i]+offsets[i]);
+		}
+		return new Dimensions(nds);		
+	}
+
+	public Dimensions offsetAxisBy(int axis, int offset) {
+		int[] nds = new int[dims.length];
+		for(int i=0; i<nds.length; i++) {
+			if(axis==i) nds[i] = Math.max(0, dims[i]+offset);
+			else nds[i] = dims[i];
+		}
+		return new Dimensions(nds);		
 	}
 	
 	public int rank() {
@@ -29,16 +95,13 @@ public class Dimensions {
 	}
 
 	public int length() {
-		int[] dims = this.dims;
-		int rank = dims.length;
-		if(rank==0) return 0;
-		int len = 1;
-		for(int i=0; i<rank; i++) {
-			len *= dims[i];
-		}
-		return len;
+		return length;
 	}
 
+	public Iterator iteratorAlongAxis(int axis) {
+		return new AxisIterator(dims, spans, axis);
+	}
+	
 	public int calculateIndex(int... indx) {
 		int i;
 		int result = 0;
