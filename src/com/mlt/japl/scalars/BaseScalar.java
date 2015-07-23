@@ -7,6 +7,16 @@ import com.mlt.japl.tools.Dimensions;
 public abstract class BaseScalar implements Array {
 
 	@Override
+	public Array morePreciseUnInitializedCopy() {
+		throw new DomainError();
+	}
+
+	@Override
+	public Array morePreciseUnInitializedCopy(Array b) {
+		throw new DomainError();
+	}
+
+	@Override
 	public int rank() {
 		return 0;
 	}
