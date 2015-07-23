@@ -5,62 +5,55 @@ import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 
-public abstract class BaseFn implements Func {
+public abstract class PrimitiveBaseFn implements Func {
 
 	public abstract Array createResultArrayFor(Array a, int axis);
 	public abstract Array createResultArrayFor(Array a, Array b, int axis);
 
-	@Override
 	public double D_D(double d) {
 		throw new AplError();
 	}
-	@Override
+
 	public double D_I(long d) {
 		throw new AplError();
 	}
-	@Override
+
 	public double D_DD(double a, double b) {
 		throw new AplError();
 	}
-	@Override
+
 	public double D_DI(double a, long b) {
 		throw new AplError();
 	}
-	@Override
+
 	public double D_ID(long a, double b) {
 		throw new AplError();
 	}
-	@Override
+
 	public double D_II(long a, long b) {
 		throw new AplError();
 	}
 
-	@Override
 	public long I_D(double d) {
 		throw new AplError();
 	}
 
-	@Override
 	public long I_I(long d) {
 		throw new AplError();
 	}
 
-	@Override
 	public long I_DD(double a, double b) {
 		throw new AplError();
 	}
 
-	@Override
 	public long I_DI(double a, long b) {
 		throw new AplError();
 	}
 
-	@Override
 	public long I_ID(long a, double b) {
 		throw new AplError();
 	}
 
-	@Override
 	public long I_II(long a, long b) {
 		throw new AplError();
 	}

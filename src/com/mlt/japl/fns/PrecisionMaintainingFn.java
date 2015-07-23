@@ -3,7 +3,7 @@ package com.mlt.japl.fns;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.ResultArrayUtil;
 
-public abstract class PrecisionMaintainingFn extends BaseFn {
+public abstract class PrecisionMaintainingFn extends PrimitiveBaseFn {
 
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {

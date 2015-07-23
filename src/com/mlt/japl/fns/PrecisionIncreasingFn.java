@@ -4,7 +4,7 @@ import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
 
-public abstract class PrecisionIncreasingFn extends BaseFn {
+public abstract class PrecisionIncreasingFn extends PrimitiveBaseFn {
 
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {

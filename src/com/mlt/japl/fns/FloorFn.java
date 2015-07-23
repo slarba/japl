@@ -4,7 +4,7 @@ import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.ResultArrayUtil;
 
-public class FloorFn extends BaseFn {
+public class FloorFn extends PrimitiveBaseFn {
 
 	@Override
 	public long I_D(double d) {
