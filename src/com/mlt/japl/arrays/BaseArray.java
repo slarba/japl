@@ -3,6 +3,7 @@ package com.mlt.japl.arrays;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 /**
  * Base for primitive-containing arrays
@@ -133,4 +134,10 @@ public abstract class BaseArray implements Array {
 	public void setB(int idx, long val) {
 		throw new DomainError();
 	}
+
+	@Override
+	public String asString(PrintConfig printConfig) {
+		return printConfig.print(this);
+	}
+	
 }

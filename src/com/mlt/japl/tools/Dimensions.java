@@ -123,4 +123,13 @@ public class Dimensions {
 	public int[] asArray() {
 		return dims;
 	}
+
+	public int lastDim() {
+		if(dims.length==0) return 0;
+		return dims[dims.length-1];
+	}
+
+	public Iterator iteratorAlongLastAxis() {
+		return iteratorAlongAxis(dims.length-1);
+	}
 }

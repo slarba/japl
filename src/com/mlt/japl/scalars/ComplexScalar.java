@@ -2,11 +2,16 @@ package com.mlt.japl.scalars;
 
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class ComplexScalar extends BaseScalar {
 
+	private double im;
+	private double re;
+
 	public ComplexScalar(double re, double im) {
-		// TODO Auto-generated constructor stub
+		this.re = re;
+		this.im = im;
 	}
 
 	@Override
@@ -25,6 +30,11 @@ public class ComplexScalar extends BaseScalar {
 	public Array unInitializedCopy() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String asString(PrintConfig printConfig) {
+		return printConfig.print(re, im);
 	}
 
 }

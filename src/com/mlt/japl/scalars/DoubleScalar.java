@@ -3,6 +3,7 @@ package com.mlt.japl.scalars;
 import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 
 public class DoubleScalar extends BaseScalar {
@@ -55,6 +56,11 @@ public class DoubleScalar extends BaseScalar {
 	@Override
 	public Array morePreciseUnInitializedCopy() {
 		return unInitializedCopy();  // no more precise than that
+	}
+
+	@Override
+	public String asString(PrintConfig printConfig) {
+		return printConfig.print(data);
 	}
 
 }

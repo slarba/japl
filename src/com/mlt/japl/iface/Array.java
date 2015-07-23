@@ -1,6 +1,7 @@
 package com.mlt.japl.iface;
 
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public interface Array {
 	static final int INTEGER = 1;
@@ -45,4 +46,5 @@ public interface Array {
 	Array unInitializedCopy();
 	Array morePreciseUnInitializedCopy();
 	Array morePreciseUnInitializedCopy(Array b);
+	String asString(PrintConfig printConfig);
 }
