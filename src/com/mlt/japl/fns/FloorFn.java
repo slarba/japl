@@ -37,4 +37,9 @@ public class FloorFn extends PrimitiveBaseFn {
 		return ResultArrayUtil.precisionMaintainingFn(a,b,axis);
 	}
 
+	@Override
+	public String getName() {
+		return "floor";
+	}
+
 }

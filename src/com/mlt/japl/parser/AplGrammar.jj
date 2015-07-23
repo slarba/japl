@@ -1,0 +1,487 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  JDK_VERSION = "1.7";
+  UNICODE_INPUT = true;
+  LOOKAHEAD = 2;
+//  FORCE_LA_CHECK=true;
+  COMMON_TOKEN_ACTION = true;
+  TOKEN_MANAGER_USES_PARSER = true;
+  static = false;
+}
+
+PARSER_BEGIN(AplParser)
+package com.mlt.japl.parser;
+
+import java.io.Reader;
+import com.mlt.japl.iface.*;
+import com.mlt.japl.fns.*;
+import com.mlt.japl.ast.*;
+import com.mlt.japl.errors.*;
+import com.mlt.japl.workspace.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AplParser
+{
+  EvalContext context;
+  
+  public AplParser(Reader reader, EvalContext context)
+  {
+    this(reader);
+    this.context = context;
+  }
+
+  public EvalContext getContext()
+  {
+    return context;
+  }
+  
+  public Func lookupFn(String name)
+  {
+	switch(name)
+	{
+		case "\u002b": return new AddFn();
+		case "\u2212": return new SubFn();
+		case "\u00d7": return new MulFn();
+//		case "\u002c": return new RavelFn();
+		case "\u230a": return new FloorFn();
+		case "\u2308": return new CeilFn();
+		case "\u2223": return new AbsFn();
+		case "\u00f7": return new DivFn();
+//		case "\u2374": return new RhoFn();
+//		case "\u2373": return new IotaFn();
+//		case "\u25cb": return new TrigFn();
+//		case "\u2208": return new ExistsFn();
+//		case "\u003c": return new LtFn();
+//		case "\u003e": return new GtFn();
+//		case "\u2264": return new LteFn();
+//		case "\u2265": return new GteFn();
+		case "\u003d": return new EqFn();
+//		case "\u223c": return new NotFn();
+//		case "\u2260": return new NeqFn();
+//		case "\u2228": return new OrFn();  // logical or
+//		case "\u2227": return new AndFn();  // logical and
+//		case "\u2371": return new NorFn();  // nor
+//		case "\u2372": return new NandFn();  // nand
+//		case "\u2349": return new ReverseFn();
+//		case "\u233d": return new ReverseLastFn();
+//		case "\u2296": return new ReverseFirstFn();
+//		case "\u2191": return new TakeFn();
+//		case "\u2193": return new DropFn();
+//		case "\u2261": return new DepthFn();
+//		case "\u2282": return new EncloseFn();
+//		case "\u2283": return new DiscloseFn();//		case "\u22a5": return new DecodeFn();//		case "\u222a": return new UnionFn();//		case "/": return new ReplicateFn();
+		default:
+		System.out.println("trying to find function " + name);
+			return context.tryGetFunction(name);
+	}
+  }
+
+  public Func buildMonadicOperator(String n, Func arg)
+  {
+	switch(n)
+	{
+//		case "/":  return new ReduceFn(arg);//		case "\\": return new ScanFn(arg);//		case "¨": return new EachFn(arg);//		case "\u233f": return new FirstAxisReduceFn(arg);//		case "\u2340": return new FirstAxisScanFn(arg);
+		default:
+			throw new SyntaxError();
+	}
+  }
+  
+  public AstNode parse()
+  {
+     try
+     {
+		return apl_expr();
+     } catch(ParseException e)
+     {
+		throw new SyntaxError();
+     }
+  }
+}
+
+PARSER_END(AplParser)
+
+TOKEN_MGR_DECLS:
+{
+  // trick: check identifier if it is bound to function and make it a FUNC token
+  // in effect modifies the parser dynamically
+  public void CommonTokenAction(Token t)
+  {
+	EvalContext ctx = parser.getContext();
+	if(t.kind==AplParserConstants.ID)
+	{
+		if(ctx.isBoundToFunction(t.image))
+		{
+		  t.kind = AplParserConstants.FUNC;
+		}
+	}
+  }
+}
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* OPERATORS */
+{
+  < FUNC :
+    "\u003f"  // roll ?
+  | "\u2308"  // ceil
+  | "\u230a"  // floor
+  | "\u2374"  // rho, shape
+  | "\u223c"  // tilde (not)
+  | "\u2223"  // abs
+  | "\u2373"  // iota
+  | "\u22c6"  // exponential
+  | "\u2212"  // negation/sub
+  | "\u002b"  // identity/add
+  | "\u00d7"  // signum/mul
+  | "\u00f7"  // reciprocal/divide
+  | "\u002c"  // ravel,catenate
+  | "\u2339"  // matrix inverse
+  | "\u25cb"  // pi times
+  | "\u235f"  // log
+  | "\u233d"  // reverse last axis
+  | "\u2296"  // reverse first axis
+  | "\u234b"  // grade up
+  | "\u2352"  // grade down
+  | "\u234e"  // execute apl expr
+  | "\u2355"  // format
+  | "\u2349"  // transpose
+  | "\u0021"  // factorial
+  | "\u2208"  // epsilon, membership
+  | "\u2191"  // take
+  | "\u2193"  // drop
+  | "\u22a5"  // decode
+  | "\u22a4"  // encode
+  | "\u2339"  // matrix divide
+  | "\u2349"  // general transpose
+  | "\u003c"  // less than
+  | "\u2264"  // less than or equal
+  | "\u003d"  // equal
+  | "\u2265"  // greater than or equal
+  | "\u003e"  // greater than
+  | "\u2260"  // not equal
+  | "\u2228"  // logical or
+  | "\u2227"  // logical and
+  | "\u2371"  // nor
+  | "\u2372"  // nand
+  | "\u2208"  // epsilon
+  | "\u2261"  // depth
+  | "\u2282"  // enclose
+  | "\u2283"  // disclose
+  | "\u222a"  // union
+  >
+| < OUTERPROD : "\u2218." >
+| < MONADICOPERATOR: ["/"]|["\\"]|["\u00a8"]|["\u233f"]|["\u2340"] >
+}
+
+TOKEN :
+{
+  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"])+ >
+| < CONSTANT : < NUMBER > >
+| < CPLXCONSTANT: < NUMBER > "J" < NUMBER > >
+| < STRING : < STRINGDELIM > (< STRINGCHAR >)+ < STRINGDELIM > >
+| < #NUMBER: ((< SIGN >)? (< DIGIT >)+ ("." (< DIGIT >)+)?) >
+| < #SIGN : ["¯"] >
+| < #DIGIT : [ "0"-"9" ] >
+| < #STRINGDELIM : ["'"] >
+| < #STRINGCHAR : ~["'"] >
+}
+
+// top level expression ends with EOF
+AstNode apl_expr() :
+{
+  AstNode t;
+}
+{
+	t = expr() < EOF >
+	{
+	  return t;
+	}
+}
+
+// expression is a single expression or a list of expressions
+AstNode expr() :
+{
+  AstNode t;
+  AstNode c;
+  List<AstNode> statements = new ArrayList<AstNode>();
+}
+{
+	t = singleexpr()
+	("\u22c4" c=singleexpr()
+		{
+		  statements.add(c);
+		}
+	)*
+	{
+	  if(statements.size()==0) return t;
+	  statements.add(0, t);
+	  return new StatementListNode(statements);
+	}
+}
+
+// single expression is either monadic/niladic call or dyadic call/array
+AstNode singleexpr() :
+{
+  AstNode t;
+}
+{
+    t = monadic_call_or_niladic()
+  	{
+  	  return t;
+  	}
+|   t = dyadic_call_or_array()
+	{
+	  return t;
+	}
+}
+
+// monadic call starts with a function expression, followed by optional axis expression and
+// argument expr
+AstNode monadic_call_or_niladic() :
+{
+  Func s;
+  AstNode t = null;
+  AstNode arg = null;
+  AstNode axis = null;
+}
+{
+  s=fn_expr() ("[" axis=expr() "]")? (t=singleexpr())?
+  {
+    if(t!=null)
+    {
+      return new MonadicCallNode(s, t, axis);
+    } else
+    {
+      return new NiladicCallNode(s);
+    }
+  }
+}
+
+// dyadic call starts with an array, followed by function expression, possible axis expr and right
+// single expression
+AstNode dyadic_call_or_array() :
+{
+  AstNode left;
+  Func op = null;
+  AstNode right = null;
+  AstNode axis = null;
+}
+{
+  left=array() (op=fn_expr() ("[" axis=expr() "]")? right=singleexpr())?
+  {
+    if(op!=null)
+    {
+		return new DyadicCallNode(op, left, right, axis);
+    } else
+    {
+		return left;
+    }
+  }
+}
+
+// array is a sequence of 1 or more elements (identifiers, paren-enclosed expressions, constants)
+AstNode array() :
+{
+  AstNode idexpr = null;
+  Token s;
+  boolean mustEvaluate = false;
+  List<AstNode > nodeList = new ArrayList<AstNode>();
+}
+{
+	(idexpr = identifierexpr()
+	  {
+	    nodeList.add(idexpr);
+	    mustEvaluate = true;
+	  }
+	| s = < CONSTANT >
+	  {
+	    nodeList.add(new ConstantAstNode(s.toString()));
+	  }
+    | s = < STRING >
+      {
+	    nodeList.add(new ConstantAstNode(s.toString()));
+      }
+    | s = < CPLXCONSTANT >
+	  {
+	    nodeList.add(new ConstantAstNode(s.toString(), ConstantAstNode.COMPLEX));
+	  }
+	| "(" idexpr = singleexpr()
+	  {
+	    nodeList.add(idexpr);
+	    mustEvaluate = true;
+	  }
+	  ")")+
+	{
+	  if(mustEvaluate)
+	  {
+	    if(nodeList.size()==1) return nodeList.get(0);
+	    return new EvalArrayNode(nodeList);
+	  }
+	  else
+	  {
+	    if(nodeList.size()==1) return nodeList.get(0);
+		return new ConstArrayNode(nodeList);
+	  }
+	}
+}
+
+AstNode identifierexpr() :
+{
+  AstNode e = null;
+  AstNode e2 = null;
+  Token ident = null;
+}
+{
+  ident = < ID > ("[" e = indexexpr() "]")? ("←" e2=singleexpr())?
+  {
+    if(e2!=null)
+    	return new AssignmentNode(ident.toString(), e2);
+    else
+	    return new IdentifierNode(ident.toString(), e);
+  }
+}
+
+IndexExprNode indexexpr() :
+{
+  AstNode e1 = null;
+  IndexExprNode e2 = null;
+}
+{
+  (e1=singleexpr())? (";" e2=indexexpr())?
+  {
+    return new IndexExprNode(e1, e2);
+  }
+}
+
+Func fn_expr() :
+{
+  Func s = null;
+  AstNode userfn = null;
+  Token m = null;
+}
+{
+    userfn = userfndef() { return new UserFnNode(userfn, context); }
+  | s = operatorexpr() (m = < MONADICOPERATOR >)? {
+       if(m!=null)
+         return buildMonadicOperator(m.toString(), s);
+       else
+    	 return s;
+    }
+}
+
+AstNode userfndef() :
+{
+  AstNode fnBody = null;
+}
+{
+  "{" fnBody = expr() "}"
+  {
+    return fnBody;
+  }
+}
+
+Func operatorexpr() :
+{
+  Func right = null;
+}
+{
+  right = function_or_inner_product()
+  {
+    return right;
+  }
+| right =monadic_operator_as_fn()
+  {
+    return right;
+  }
+| right = outer_product()
+  {
+	return right;
+  }
+}
+
+Func outer_product() :
+{
+  Func right = null;
+}
+{
+	< OUTERPROD > right = operatorexpr()
+	{
+	  return new OuterProdFn(right);
+	}
+}
+
+Func monadic_operator_as_fn() :
+{
+  Token s = null;
+}
+{
+	s = < MONADICOPERATOR >
+	{
+	  return lookupFn(s.toString());
+	}
+}
+
+Func operatorexpr_noinnerprod() :
+{
+  	Func s = null;
+  	Token t = null;
+}
+{
+	s = outer_product()
+	{
+	  return s;
+	}
+|   s = monadic_operator_as_fn()
+    {
+      return s;
+    }
+|   t = < FUNC >
+    {
+      return lookupFn(t.toString());
+    }
+}
+
+Func function_or_inner_product() :
+{
+  Token s = null;
+  Token t = null;
+  Func right = null;
+  List<Func> chain = new ArrayList<Func>();
+}
+{
+	s = < FUNC > ("." right = operatorexpr_noinnerprod()
+	{
+	  chain.add(right);
+	})*
+	{
+	  if(chain.size() > 1)
+	  {
+	    chain.add(0,lookupFn(s.toString()));
+	    Func x = chain.get(0);
+	    for(int i=1; i<chain.size(); i++)
+	    {
+	      x = new InnerProdFn(x, chain.get(i));
+	    }
+		return x;
+	  }
+	  else if(chain.size()==1)
+	  {
+	    return new InnerProdFn(lookupFn(s.toString()), chain.get(0));
+	  }
+	  else
+	  {
+	     return lookupFn(s.toString());
+	  }
+	}
+}

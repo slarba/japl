@@ -34,5 +34,10 @@ public class DivFn extends PrecisionIncreasingFn {
 		return ((double)a)/b;
 	}
 
+	@Override
+	public String getName() {
+		return "/";
+	}
+
 
 }

@@ -13,7 +13,13 @@ public class NestedArray extends BaseArray {
 		data = EMPTY;
 		this.depth = 1;
 	}
-		
+	
+	public NestedArray(Array[] d) {
+		super(new Dimensions(d.length));
+		this.data = d;
+		fixDepth();
+	}
+	
 	private NestedArray(Dimensions dims, int depth, Array... data) {
 		super(dims);
 		this.data = data;
@@ -23,12 +29,16 @@ public class NestedArray extends BaseArray {
 	public NestedArray(Dimensions dims, Array... data) {
 		super(dims);
 		this.data = data;
+		fixDepth();
+	}
+
+	private void fixDepth() {
 		int depth = 0;
 		for(int i=0; i<data.length; i++) {
 			if(data[i]==null) break;
 			depth = Math.max(depth, data[i].depth()+1);			
 		}
-		this.depth = depth;
+		this.depth = depth;		
 	}
 	
 	@Override

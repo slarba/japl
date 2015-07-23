@@ -9,4 +9,9 @@ public class DepthFn extends SpecialBaseFn {
 	public Array monadic(Array a, int axis) {
 		return new IntScalar(a.depth());
 	}
+
+	@Override
+	public String getName() {
+		return "depth";
+	}
 }

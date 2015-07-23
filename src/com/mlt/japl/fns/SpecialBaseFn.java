@@ -4,7 +4,7 @@ import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 
-public class SpecialBaseFn implements Func {
+public abstract class SpecialBaseFn implements Func {
 
 	@Override
 	public Array monadic(Array a, int axis) {

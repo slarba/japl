@@ -37,4 +37,9 @@ public class SubFn extends PrecisionMaintainingFn {
 		return a-b;
 	}
 
+	@Override
+	public String getName() {
+		return "-";
+	}
+
 }

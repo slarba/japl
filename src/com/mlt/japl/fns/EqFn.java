@@ -33,5 +33,10 @@ public class EqFn extends LogicalBaseFn {
 		return a==b ? 1 : 0;
 	}
 
+	@Override
+	public String getName() {
+		return "=";
+	}
+
 	
 }

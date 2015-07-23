@@ -28,4 +28,9 @@ public class AddFn extends PrecisionMaintainingFn {
 	public Array monadic(Array a, int axis) {
 		return a;
 	}
+
+	@Override
+	public String getName() {
+		return "+";
+	}
 }

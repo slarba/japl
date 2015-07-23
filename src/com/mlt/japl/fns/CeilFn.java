@@ -37,4 +37,9 @@ public class CeilFn extends PrimitiveBaseFn {
 		return ResultArrayUtil.precisionMaintainingFn(a,b,axis);
 	}
 
+	@Override
+	public String getName() {
+		return "ceil";
+	}
+
 }

@@ -6,7 +6,7 @@ import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 
-public class LogicalBaseFn extends PrimitiveBaseFn {
+public abstract class LogicalBaseFn extends PrimitiveBaseFn {
 
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {
