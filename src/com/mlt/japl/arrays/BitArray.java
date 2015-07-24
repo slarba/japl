@@ -137,12 +137,12 @@ public class BitArray extends BaseArray {
 	}
 
 	public Array and(BitArray bi) {
-		long[] result = new long[Math.max(1+(length()/64), 1+(bi.length()/64))];
+		long[] result = new long[data.length];
 		long[] bdata = bi.data;
 		long[] adata = this.data;
 		for(int i=0; i<result.length; i++)
 			result[i] = adata[i] & bdata[i];
-		return new BitArray(dims(), true, result);
+		return new BitArray(dims(), true, actualLen, result);
 	}
 	
 }
