@@ -10,6 +10,14 @@ import com.mlt.japl.tools.Iterator;
 public class IteratorTest {
 
 	@Test
+	public void testAxisIteratorWithEmptyDimensions() {
+		Dimensions n = new Dimensions(3);
+		Dimensions r = n.elideAxis(0);
+		Iterator i = r.linearIterator();
+		assertTrue(i.isFinished());
+	}
+	
+	@Test
 	public void testAxisIteration() {
 		Dimensions n = new Dimensions(2,3);
 		Iterator i = n.iteratorAlongAxis(1);

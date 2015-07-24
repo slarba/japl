@@ -39,7 +39,7 @@ public class ArrayScalar extends BaseScalar {
 	
 	@Override
 	public Array unInitializedCopy() {
-		return new ArrayScalar(data);
+		return new ArrayScalar();
 	}
 	
 	@Override

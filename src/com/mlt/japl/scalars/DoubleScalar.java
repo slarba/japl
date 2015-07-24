@@ -40,7 +40,7 @@ public class DoubleScalar extends BaseScalar {
 	
 	@Override
 	public Array unInitializedCopy() {
-		return new DoubleScalar(data);
+		return new DoubleScalar();
 	}
 	
 	@Override

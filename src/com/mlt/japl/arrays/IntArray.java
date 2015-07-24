@@ -80,4 +80,9 @@ public class IntArray extends BaseArray {
 		return new DoubleArray(dims(), new double[data.length]);
 	}
 
+	@Override
+	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+		if(resultDims.rank()==0) return new IntScalar();
+		return new IntArray(resultDims, new long[resultDims.length()]);
+	}	
 }

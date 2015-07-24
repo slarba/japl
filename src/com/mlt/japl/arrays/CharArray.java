@@ -3,6 +3,7 @@ package com.mlt.japl.arrays;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.CharScalar;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class CharArray extends BaseArray {
@@ -75,6 +76,12 @@ public class CharArray extends BaseArray {
 	@Override
 	public void setC(int idx, char val) {
 		data[idx] = val;
+	}
+
+	@Override
+	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+		if(resultDims.rank()==0) return new CharScalar();
+		return new CharArray(resultDims, new char[resultDims.length()]);
 	}
 
 }

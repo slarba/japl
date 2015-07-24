@@ -46,7 +46,7 @@ public class IntScalar extends BaseScalar {
 
 	@Override
 	public Array unInitializedCopy() {
-		return new IntScalar(data);
+		return new IntScalar();
 	}
 
 	@Override

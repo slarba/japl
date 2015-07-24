@@ -20,16 +20,15 @@ public class Dimensions {
 		this.dims = dims;
 
 		spans = new int[dims.length];
+		if(dims.length==0) return;
+		
 		spans[dims.length-1] = 1;
 		int len = 1;
 		for(int i=dims.length-1; i>0; i--) {
 			len *= dims[i];
 			spans[i-1] = spans[i]*dims[i];
 		}			
-		if(dims.length==0) 
-			length=0; 
-		else 
-			length = len*dims[0];
+		length = len*dims[0];
 	}
 	
 	public Dimensions reverse() {
@@ -54,9 +53,10 @@ public class Dimensions {
 	
 	public Dimensions elideAxis(int axis) {
 		int[] nds = new int[dims.length-1];
-		for(int i=0; i<nds.length; i++) {
+		int j=0;
+		for(int i=0; i<dims.length; i++) {
 			if(i==axis) continue;
-			nds[i] = dims[i];
+			nds[j++] = dims[i];
 		}
 		return new Dimensions(nds);		
 	}
@@ -131,5 +131,9 @@ public class Dimensions {
 
 	public Iterator iteratorAlongLastAxis() {
 		return iteratorAlongAxis(dims.length-1);
+	}
+
+	public Iterator linearIterator() {
+		return new LinearIterator(length());
 	}
 }

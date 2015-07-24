@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.math.BigInteger;
+
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
@@ -67,4 +69,13 @@ public class IotaArray extends BaseArray {
 		return new DoubleArray(dims(), new double[n]);
 	}
 
+	@Override
+	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+		if(resultDims.rank()==0) return new IntScalar();
+		return new IntArray(resultDims, new long[resultDims.length()]);
+	}
+
+	public long sum() {
+		return (n*(n+1))/2;
+	}
 }

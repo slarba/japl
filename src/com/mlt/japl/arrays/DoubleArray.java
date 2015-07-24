@@ -2,6 +2,7 @@ package com.mlt.japl.arrays;
 
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.DoubleScalar;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class DoubleArray extends BaseArray {
@@ -73,5 +74,10 @@ public class DoubleArray extends BaseArray {
 	public Array morePreciseUnInitializedCopy() {
 		return unInitializedCopy();  // no more precise than that
 	}
-
+	
+	@Override
+	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+		if(resultDims.rank()==0) return new DoubleScalar();
+		return new DoubleArray(resultDims, new double[resultDims.length()]);
+	}
 }

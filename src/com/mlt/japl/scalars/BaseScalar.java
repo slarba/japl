@@ -1,11 +1,17 @@
 package com.mlt.japl.scalars;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
 public abstract class BaseScalar implements Array {
 
+	@Override 
+	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+		throw new AplError();
+	};
+	
 	@Override
 	public Array morePreciseUnInitializedCopy() {
 		throw new DomainError();

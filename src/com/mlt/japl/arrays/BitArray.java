@@ -138,5 +138,11 @@ public class BitArray extends BaseArray {
 			result[i] = adata[i] & bdata[i];
 		return new BitArray(dims(), true, actualLen, result);
 	}
+
+	@Override
+	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+		if(resultDims.rank()==0) return new IntScalar();
+		return new IntArray(resultDims, new long[resultDims.length()]);
+	}
 	
 }

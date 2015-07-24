@@ -40,7 +40,7 @@ public class CharScalar extends BaseScalar {
 	
 	@Override
 	public Array unInitializedCopy() {
-		return new CharScalar(data);
+		return new CharScalar();
 	}
 	
 	@Override
