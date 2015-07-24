@@ -2,6 +2,7 @@ package com.mlt.japl.fns;
 
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.ResultArrayUtil;
 
 public class CeilFn extends PrimitiveBaseFn {
@@ -28,6 +29,7 @@ public class CeilFn extends PrimitiveBaseFn {
 	
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {
+		if(a.isScalar()) return new IntScalar();
 		if(a.type()==Array.MIXED) return a.unInitializedCopy();
 		return new IntArray(a.dims(), new long[a.actualLength()]);
 	}

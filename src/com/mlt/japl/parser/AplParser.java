@@ -47,8 +47,8 @@ public class AplParser implements AplParserConstants {
 //		case "≥": return new GteFn();
                 case "=": return new EqFn();
 //		case "∼": return new NotFn();
-//		case "≠": return new NeqFn();
-//		case "∨": return new OrFn();  // logical or
+                case "\u2260": return new NeqFn();
+                case "\u2228": return new OrFn();  // logical or
                 case "\u2227": return new AndFn();  // logical and
 //		case "⍱": return new NorFn();  // nor
 //		case "⍲": return new NandFn();  // nand

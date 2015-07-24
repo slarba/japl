@@ -115,21 +115,35 @@ public class BitArray extends BaseArray {
 		return new BitArray(a.actualLength(), a.dims());		
 	}
 
+	// integer AND bitarray
 	public Array and(long atI) {
 		if(atI==1) return this;
-		return new BitArray(dims(), 0);
+		if(atI==0) return new BitArray(dims(), 0);
+		throw new DomainError();
 	}
 
+	// integer OR bitarray
 	public Array or(long atI) {
 		if(atI==0) return this;
-		return new BitArray(dims(), 1);
+		if(atI==1) return new BitArray(dims(), 1);
+		throw new DomainError();
 	}
 
+	// bitarray AND integer
 	public Array andRight(long atI) {
-		if(atI==1) return new BitArray(dims, 1);
-		return new BitArray(dims, 0);
+		if(atI==1) return this;
+		if(atI==0) return new BitArray(dims, 0);
+		throw new DomainError();
 	}
 
+	// bitarray OR integer
+	public Array orRight(long atI) {
+		if(atI==1) return new BitArray(dims, 1);
+		if(atI==0) return this;
+		throw new DomainError();
+	}
+	
+	// bitarray AND bitarray
 	public Array and(BitArray bi) {
 		long[] result = new long[data.length];
 		long[] bdata = bi.data;
@@ -139,6 +153,16 @@ public class BitArray extends BaseArray {
 		return new BitArray(dims(), true, actualLen, result);
 	}
 
+	// bitarray OR bitarray
+	public Array or(BitArray bi) {
+		long[] result = new long[data.length];
+		long[] bdata = bi.data;
+		long[] adata = this.data;
+		for(int i=0; i<result.length; i++)
+			result[i] = adata[i] | bdata[i];
+		return new BitArray(dims(), true, actualLen, result);
+	}
+	
 	@Override
 	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new IntScalar();

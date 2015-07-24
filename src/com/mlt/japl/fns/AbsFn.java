@@ -13,7 +13,7 @@ public class AbsFn extends PrimitiveBaseFn {
 
 	@Override
 	public long I_II(long a, long b) {
-		return a%b;
+		return b%a;
 	}
 
 	@Override
@@ -23,11 +23,12 @@ public class AbsFn extends PrimitiveBaseFn {
 	
 	@Override
 	public double D_DD(double a, double b) {
-		return a%b;
+		return b%a;
 	}
 	
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {
+		if(a.isScalar()) return a.unInitializedCopy();
 		if(a.type()==Array.MIXED) return a.unInitializedCopy();
 		return new IntArray(a.dims(), new long[a.actualLength()]);
 	}
