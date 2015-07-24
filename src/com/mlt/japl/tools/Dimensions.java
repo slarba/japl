@@ -7,9 +7,9 @@ public class Dimensions {
 	int[] spans;
 	int length;
 	
-	private static final int[] EMPTY_DIMS = new int[] {};
+	private static final int[] EMPTY_DIMS = new int[] {0};
 	public static final Dimensions EMPTY = new Dimensions();
-		
+
 	public Dimensions() {
 		dims = EMPTY_DIMS;
 		spans = EMPTY_DIMS;

@@ -16,7 +16,7 @@ public class TestEmptyArrays {
 
 	private void testEmptyProperties(Array d) {
 		assertEquals(1, d.depth());
-		assertEquals(0, d.rank());
+		assertEquals(1, d.rank());
 		assertEquals(0, d.actualLength());
 		assertEquals(0, d.length());
 		assertNotNull(d.dims());

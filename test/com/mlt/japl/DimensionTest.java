@@ -12,7 +12,7 @@ public class DimensionTest {
 	public void testEmptyDimensions() {
 		Dimensions d = new Dimensions();
 		assertEquals(0, d.length());
-		assertEquals(0, d.rank());
+		assertEquals(1, d.rank());
 	}
 
 	@Test
