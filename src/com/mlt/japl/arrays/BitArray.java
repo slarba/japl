@@ -168,5 +168,13 @@ public class BitArray extends BaseArray {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}
+
+	public Array not() {
+		long[] result = new long[data.length];
+		long[] adata = this.data;
+		for(int i=0; i<result.length; i++)
+			result[i] = adata[i] ^ (-1);
+		return new BitArray(dims(), true, actualLen, result);
+	}
 	
 }

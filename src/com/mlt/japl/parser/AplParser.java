@@ -41,12 +41,12 @@ public class AplParser implements AplParserConstants {
                 case "\u2373": return new IotaFn();
 //		case "○": return new TrigFn();
 //		case "∈": return new ExistsFn();
-//		case "<": return new LtFn();
-//		case ">": return new GtFn();
-//		case "≤": return new LteFn();
-//		case "≥": return new GteFn();
+                case "<": return new LtFn();
+                case ">": return new GtFn();
+                case "\u2264": return new LteFn();
+                case "\u2265": return new GteFn();
                 case "=": return new EqFn();
-//		case "∼": return new NotFn();
+                case "\u223c": return new NotFn();
                 case "\u2260": return new NeqFn();
                 case "\u2228": return new OrFn();  // logical or
                 case "\u2227": return new AndFn();  // logical and

@@ -163,7 +163,11 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 			    AstNode ast = parser.apl_expr();
 			    System.out.println(ast.print());
 			    
+			    long startTime = System.nanoTime();
 			    String result = ast.eval(env).asString(new PrintConfig());
+			    long stopTime = System.nanoTime();
+			    System.out.println("   eval() took " + ((stopTime-startTime)/1000.0) + " us");
+			    
 			    if(!(ast instanceof AssignmentNode)) {
 				    editor.append("\n" + result);			    	
 			    }
