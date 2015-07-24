@@ -34,6 +34,20 @@ public class EvalTest {
 		assertEquals(1,r.rank());
 		assertEquals(2, r.atI(0));
 	}
+
+	@Test
+	public void testSimplEvalBitArray() {
+		Array r = itn.eval("1 0 1 1 0 0 0 1 1 0 1");
+		assertEquals(Array.BIT, r.type());
+		assertEquals(1,r.depth());
+		assertEquals(11,r.length());
+		assertEquals(11,r.actualLength());
+		assertEquals(1,r.rank());
+		assertEquals(1, r.atB(0));
+		assertEquals(0, r.atB(1));
+		assertEquals(1, r.atB(2));
+		assertEquals(1, r.atB(3));
+	}
 	
 	@Test
 	public void testSimplEval() {
@@ -139,4 +153,16 @@ public class EvalTest {
 		assertEquals(1,r.depth());
 		assertEquals(0, r.atI(0));
 	}	
+
+	@Test
+	public void testSimplEval10() {
+		Array r = itn.eval("20 25⍴1 1 0 0 1 0 1 1 0 0 0 1");
+		assertEquals(Array.BIT, r.type());
+		assertEquals(2, r.rank());
+		assertEquals(20*25,r.length());
+		assertEquals(12,r.actualLength());
+		assertEquals(1,r.depth());
+		assertEquals(1, r.atI(0));
+	}	
+
 }

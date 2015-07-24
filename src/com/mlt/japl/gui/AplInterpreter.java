@@ -178,6 +178,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 			  editor.append("\nLENGTH ERROR");
 		  } catch(DomainError err) {
 			  editor.append("\nDOMAIN ERROR");
+			  err.printStackTrace();
 		  } catch(IndexError err) {
 			  editor.append("\nINDEX ERROR");
 		  } catch(ValueError err) {

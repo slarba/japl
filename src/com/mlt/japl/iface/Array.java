@@ -47,4 +47,5 @@ public interface Array {
 	Array morePreciseUnInitializedCopy();
 	Array morePreciseUnInitializedCopy(Array b);
 	String asString(PrintConfig printConfig);
+	boolean isIntegral();
 }

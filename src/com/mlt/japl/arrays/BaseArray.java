@@ -101,6 +101,11 @@ public abstract class BaseArray implements Array {
 	}
 
 	@Override
+	public boolean isIntegral() {
+		return type()==Array.BIT || type()==Array.INTEGER;
+	}
+	
+	@Override
 	public int rank() {
 		return dims.rank();
 	}

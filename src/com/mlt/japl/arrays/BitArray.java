@@ -2,6 +2,7 @@ package com.mlt.japl.arrays;
 
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class BitArray extends BaseArray {
@@ -26,13 +27,25 @@ public class BitArray extends BaseArray {
 		actualLen = data.length;
 		initData(data);
 	}
-
+	
 	public BitArray(int actualLength, Dimensions dims) {
 		super(dims);
 		this.actualLen = actualLength;
 		this.data = new long[1+(actualLen/64)];
 	}
 
+	private BitArray(Dimensions dims, boolean b, long[] result) {
+		super(dims);
+		this.actualLen = dims.length();
+		this.data = result;
+	}
+
+	private BitArray(Dimensions dims, boolean b, int oldActualLen, long[] result) {
+		super(dims);
+		this.actualLen = oldActualLen;
+		this.data = result;
+	}
+	
 	private void initData(long[] d) {
 		this.data = new long[1+(actualLen/64)];
 		for(int i=0; i<actualLen; i++) {
@@ -52,8 +65,7 @@ public class BitArray extends BaseArray {
 
 	@Override
 	public Array reshape(Dimensions newShape) {
-		// TODO Auto-generated method stub
-		return null;
+		return new BitArray(newShape, true, actualLen, data);
 	}
 
 	@Override
@@ -94,6 +106,11 @@ public class BitArray extends BaseArray {
 	public long atI(int idx) {
 		return atB(idx);
 	}
+
+	@Override
+	public Array atA(int idx) {
+		return new IntScalar(atB(idx));
+	}
 	
 	@Override
 	public void setI(int idx, long val) {
@@ -104,4 +121,28 @@ public class BitArray extends BaseArray {
 		return new BitArray(a.actualLength(), a.dims());		
 	}
 
+	public Array and(long atI) {
+		if(atI==1) return this;
+		return new BitArray(dims(), 0);
+	}
+
+	public Array or(long atI) {
+		if(atI==0) return this;
+		return new BitArray(dims(), 1);
+	}
+
+	public Array andRight(long atI) {
+		if(atI==1) return new BitArray(dims, 1);
+		return new BitArray(dims, 0);
+	}
+
+	public Array and(BitArray bi) {
+		long[] result = new long[Math.max(1+(length()/64), 1+(bi.length()/64))];
+		long[] bdata = bi.data;
+		long[] adata = this.data;
+		for(int i=0; i<result.length; i++)
+			result[i] = adata[i] & bdata[i];
+		return new BitArray(dims(), true, result);
+	}
+	
 }

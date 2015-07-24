@@ -2,6 +2,7 @@ package com.mlt.japl.ast;
 
 import java.util.List;
 
+import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
@@ -10,6 +11,7 @@ import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.CharScalar;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.scalars.IntScalar;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class ConstArrayNode implements AstNode {	
@@ -25,6 +27,7 @@ public class ConstArrayNode implements AstNode {
 		int charNodes = 0;
 		int stringNodes = 0;
 		int complexNodes = 0;
+		int totalIntZerosOnes = 0;
 		
 		int totalLen = nodes.size();
 		
@@ -36,6 +39,9 @@ public class ConstArrayNode implements AstNode {
 				doubleNodes++;
 			} else if(c.isInteger()) {
 				intNodes++;
+				int v = c.getInt();
+				if(v==1 || v==0)
+					totalIntZerosOnes++;
 			} else if(c.isCharConstant()) { 
 				charNodes++;
 			} else if(c.isComplex()) {
@@ -44,7 +50,14 @@ public class ConstArrayNode implements AstNode {
 				throw new RuntimeException("unknown constant type");
 		}
 
-		if(totalLen == intNodes) {  // contains only int tokens -> intarray
+		if(totalLen == totalIntZerosOnes) {
+			Array b = new BitArray(totalIntZerosOnes, new Dimensions(totalIntZerosOnes));
+			int i=0;
+			for(AstNode n : nodes) {
+				b.setB(i++, ((ConstantAstNode)n).getInt());
+			}
+			value = b;
+		} else if(totalLen == intNodes) {  // contains only int tokens -> intarray
 			long[] data = new long[totalLen];
 			int i=0;
 			for(AstNode n : nodes) {

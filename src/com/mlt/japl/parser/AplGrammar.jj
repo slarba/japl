@@ -39,7 +39,7 @@ public class AplParser
   {
     return context;
   }
-  
+
   public Func lookupFn(String name)
   {
 	switch(name)
@@ -64,7 +64,7 @@ public class AplParser
 //		case "\u223c": return new NotFn();
 //		case "\u2260": return new NeqFn();
 //		case "\u2228": return new OrFn();  // logical or
-//		case "\u2227": return new AndFn();  // logical and
+		case "\u2227": return new AndFn();  // logical and
 //		case "\u2371": return new NorFn();  // nor
 //		case "\u2372": return new NandFn();  // nand
 //		case "\u2349": return new ReverseFn();

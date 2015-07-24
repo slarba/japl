@@ -87,6 +87,11 @@ public abstract class BaseScalar implements Array {
 	}
 
 	@Override
+	public boolean isIntegral() {
+		return type()==Array.BIT || type()==Array.INTEGER;
+	}
+	
+	@Override
 	public Dimensions dims() {
 		return Dimensions.EMPTY;
 	}

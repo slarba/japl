@@ -1,11 +1,5 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.errors.LengthError;
-import com.mlt.japl.errors.RankError;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.IntScalar;
-
 public class EqFn extends LogicalBaseFn {
 
 	@Override

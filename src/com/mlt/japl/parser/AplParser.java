@@ -49,7 +49,7 @@ public class AplParser implements AplParserConstants {
 //		case "∼": return new NotFn();
 //		case "≠": return new NeqFn();
 //		case "∨": return new OrFn();  // logical or
-//		case "∧": return new AndFn();  // logical and
+                case "\u2227": return new AndFn();  // logical and
 //		case "⍱": return new NorFn();  // nor
 //		case "⍲": return new NandFn();  // nand
 //		case "⍉": return new ReverseFn();
