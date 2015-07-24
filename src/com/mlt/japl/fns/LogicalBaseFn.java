@@ -12,7 +12,7 @@ public abstract class LogicalBaseFn extends PrimitiveBaseFn {
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {
 		if(a.isScalar()) return new IntScalar();
-		if(a.type()==Array.MIXED) return new NestedArray(a.dims(), new Array[a.actualLength()]);
+		if(a.type()==Array.NESTED) return new NestedArray(a.dims(), new Array[a.actualLength()]);
 		return BitArray.similarTo(a);
 	}
 
@@ -20,16 +20,16 @@ public abstract class LogicalBaseFn extends PrimitiveBaseFn {
 	public Array createResultArrayFor(Array a, Array b, int axis) {
 		if(a.isScalar()) {
 			if(b.isScalar()) return new IntScalar();
-			if(b.type()==Array.MIXED) return new NestedArray(b.dims(), new Array[b.actualLength()]);
+			if(b.type()==Array.NESTED) return new NestedArray(b.dims(), new Array[b.actualLength()]);
 			return BitArray.similarTo(b);
 		}
 		if(b.isScalar()) {
-			if(a.type()==Array.MIXED) return new NestedArray(a.dims(), new Array[a.actualLength()]);
+			if(a.type()==Array.NESTED) return new NestedArray(a.dims(), new Array[a.actualLength()]);
 			return BitArray.similarTo(a);
 		}
 		if(a.rank() != b.rank()) throw new RankError();
 		if(!a.dims().equals(b.dims())) throw new LengthError();
-		if(a.type()==Array.MIXED) return new NestedArray(a.dims(), new Array[a.actualLength()]);
+		if(a.type()==Array.NESTED) return new NestedArray(a.dims(), new Array[a.actualLength()]);
 		return BitArray.similarTo(a);
 	}
 

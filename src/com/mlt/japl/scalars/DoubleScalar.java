@@ -50,7 +50,7 @@ public class DoubleScalar extends BaseScalar {
 
 	@Override
 	public Array morePreciseUnInitializedCopy(Array b) {
-		if(b.type()==MIXED) return new ArrayScalar();
+		if(b.type()==NESTED) return new ArrayScalar();
 		return unInitializedCopy();  // no more precise than that
 	}
 

@@ -19,7 +19,7 @@ public class ArrayScalar extends BaseScalar {
 	
 	@Override
 	public int type() {
-		return MIXED;
+		return NESTED;
 	}
 
 	@Override

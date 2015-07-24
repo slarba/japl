@@ -59,7 +59,7 @@ public class IotaArray extends BaseArray {
 		switch(b.type()) {
 		case DOUBLE: 		return new DoubleArray(dims(), new double[n]);
 		case INTEGER:       return unInitializedCopy();
-		case MIXED:         return unInitializedCopy();
+		case NESTED:         return unInitializedCopy();
 		}
 		throw new AplError();
 	}

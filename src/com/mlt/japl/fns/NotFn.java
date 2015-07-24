@@ -20,7 +20,7 @@ public class NotFn extends LogicalBaseFn {
 		if(a.isScalar()) {
 			return new IntScalar(a.atI(0)^1);
 		}
-		if(a.type()==Array.MIXED) {
+		if(a.type()==Array.NESTED) {
 			Array result = new NestedArray(a.dims(), new Array[a.actualLength()]);
 			for(int i=0; i<result.actualLength(); i++) {
 				result.setA(i, monadic(a.atA(i), axis));

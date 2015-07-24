@@ -1,5 +1,6 @@
 package com.mlt.japl.ast;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.workspace.EvalContext;
@@ -47,5 +48,10 @@ public class UserFnNode implements AstNode, Func {
 	@Override
 	public String getName() {
 		return print();
+	}
+
+	@Override
+	public int resultTypeFor(int a, int b) {
+		throw new AplError();
 	}
 }

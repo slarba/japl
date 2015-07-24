@@ -24,7 +24,7 @@ public class NestedTest {
 		Array a = new IntScalar(42);
 		Array b = new IntArray(new Dimensions(2,3), 4, 5, 6);
 		Array c = new NestedArray(new Dimensions(2,3), a, b);
-		assertEquals(Array.MIXED, c.type());
+		assertEquals(Array.NESTED, c.type());
 		assertEquals(2, c.depth());
 		
 		Func f = new DivFn();

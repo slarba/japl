@@ -1,11 +1,17 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 
 public abstract class SpecialBaseFn implements Func {
 
+	@Override
+	public int resultTypeFor(int a, int b) {
+		throw new AplError();
+	}
+	
 	@Override
 	public Array monadic(Array a, int axis) {
 		throw new ValenceError();

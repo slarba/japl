@@ -29,7 +29,10 @@ public class DyadicCallNode implements AstNode {
 			axis = (int)ax.atI(0)-1;
 			if(axis<0) throw new AxisError();
 		}
-		return fn.dyadic(left.eval(context), right.eval(context), axis);  // TODO: axis expr eval
+		// order is very important, right first!
+		Array r = right.eval(context);
+		Array l = left.eval(context);
+		return fn.dyadic(l, r, axis);
 	}
 
 	@Override

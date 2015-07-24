@@ -29,7 +29,7 @@ public class AbsFn extends PrimitiveBaseFn {
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {
 		if(a.isScalar()) return a.unInitializedCopy();
-		if(a.type()==Array.MIXED) return a.unInitializedCopy();
+		if(a.type()==Array.NESTED) return a.unInitializedCopy();
 		return new IntArray(a.dims(), new long[a.actualLength()]);
 	}
 

@@ -54,7 +54,7 @@ public class IntScalar extends BaseScalar {
 		switch(b.type()) {
 		case DOUBLE: 		return new DoubleScalar();
 		case INTEGER:       return new IntScalar();
-		case MIXED:         return new ArrayScalar();
+		case NESTED:         return new ArrayScalar();
 		}
 		throw new AplError();
 	}	

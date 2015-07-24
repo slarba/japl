@@ -36,6 +36,26 @@ public class EqFn extends LogicalBaseFn {
 	}
 
 	@Override
+	public long I_CI(char a, long b) {
+		return 0;
+	}
+
+	@Override
+	public long I_IC(long a, char b) {
+		return 0;
+	}
+
+	@Override
+	public long I_CD(char a, double b) {
+		return 0;
+	}
+
+	@Override
+	public long I_DC(double a, char b) {
+		return 0;
+	}
+	
+	@Override
 	public Array monadic(Array a, int axis) {
 		throw new ValenceError();
 	}

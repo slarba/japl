@@ -6,10 +6,10 @@ import com.mlt.japl.utils.PrintConfig;
 public interface Array {
 	static final int INTEGER = 1;
 	static final int DOUBLE = 2;
-	static final int CHARACTER = 3;
-	static final int BIT = 4;
-	static final int MIXED = 5;
-
+	static final int CHARACTER = 4;
+	static final int BIT = 8;
+	static final int NESTED = 16;
+	
 	int type();
 	int rank();
 	int depth();

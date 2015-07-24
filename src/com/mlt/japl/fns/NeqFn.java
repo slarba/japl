@@ -27,6 +27,26 @@ public class NeqFn extends LogicalBaseFn {
 	}
 
 	@Override
+	public long I_CI(char a, long b) {
+		return 1;
+	}
+
+	@Override
+	public long I_IC(long a, char b) {
+		return 1;
+	}
+
+	@Override
+	public long I_CD(char a, double b) {
+		return 1;
+	}
+
+	@Override
+	public long I_DC(double a, char b) {
+		return 1;
+	}
+
+	@Override
 	public String getName() {
 		return "!=";
 	}

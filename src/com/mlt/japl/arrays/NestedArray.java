@@ -55,7 +55,7 @@ public class NestedArray extends BaseArray {
 
 	@Override
 	public int type() {
-		return MIXED;
+		return NESTED;
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public class IntArray extends BaseArray {
 		switch(b.type()) {
 		case DOUBLE: 		return new DoubleArray(dims(), new double[data.length]);
 		case INTEGER:       return unInitializedCopy();
-		case MIXED:         return new NestedArray(dims(), new Array[data.length]);
+		case NESTED:         return new NestedArray(dims(), new Array[data.length]);
 		}
 		throw new AplError();
 		
