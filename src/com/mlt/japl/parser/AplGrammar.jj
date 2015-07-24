@@ -73,7 +73,7 @@ public class AplParser
 //		case "\u2191": return new TakeFn();
 //		case "\u2193": return new DropFn();
 		case "\u2261": return new DepthFn();
-//		case "\u2282": return new EncloseFn();
+		case "\u2282": return new EncloseFn();
 //		case "\u2283": return new DiscloseFn();//		case "\u22a5": return new DecodeFn();//		case "\u222a": return new UnionFn();//		case "/": return new ReplicateFn();
 		default:
 		System.out.println("trying to find function " + name);

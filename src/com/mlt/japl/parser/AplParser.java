@@ -58,7 +58,7 @@ public class AplParser implements AplParserConstants {
 //		case "↑": return new TakeFn();
 //		case "↓": return new DropFn();
                 case "\u2261": return new DepthFn();
-//		case "⊂": return new EncloseFn();
+                case "\u2282": return new EncloseFn();
 //		case "⊃": return new DiscloseFn();//		case "⊥": return new DecodeFn();//		case "∪": return new UnionFn();//		case "/": return new ReplicateFn();
                 default:
                 System.out.println("trying to find function " + name);

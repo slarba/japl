@@ -23,9 +23,10 @@ public class RhoFn extends SpecialBaseFn {
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
 		if(a.type()!=Array.INTEGER) throw new DomainError();
-		if(a.rank()!=1) throw new RankError();
-		
-		int[] newDims = new int[a.length()];
+		if(a.rank()>1) throw new RankError();
+		int alen = a.length();
+		if(alen==0) return new IntArray();
+		int[] newDims = new int[alen];
 		for(int i=0; i<newDims.length; i++)
 			newDims[i] = (int)a.atI(i);
 		return b.reshape(new Dimensions(newDims));

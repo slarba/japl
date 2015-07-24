@@ -34,12 +34,6 @@ public class BitArray extends BaseArray {
 		this.data = new long[1+(actualLen/64)];
 	}
 
-	private BitArray(Dimensions dims, boolean b, long[] result) {
-		super(dims);
-		this.actualLen = dims.length();
-		this.data = result;
-	}
-
 	private BitArray(Dimensions dims, boolean b, int oldActualLen, long[] result) {
 		super(dims);
 		this.actualLen = oldActualLen;

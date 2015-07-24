@@ -1,56 +1,54 @@
 package com.mlt.japl.scalars;
 
-import com.mlt.japl.arrays.DoubleArray;
+import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
+public class ArrayScalar extends BaseScalar {
 
-public class DoubleScalar extends BaseScalar {
-
-	private double data;
-	
-	public DoubleScalar() {
-		data = 0;
+	private Array data;
+		
+	public ArrayScalar() {
+		data = null;
 	}
 	
-	public DoubleScalar(double value) {
+	public ArrayScalar(Array value) {
 		data = value;
 	}
 	
 	@Override
 	public int type() {
-		return DOUBLE;
+		return MIXED;
 	}
 
 	@Override
-	public double atD(int... idx) {
+	public int depth() {
+		return data.depth()+1;
+	}
+
+	@Override
+	public Array atA(int idx) {
 		return data;
 	}
 
 	@Override
-	public double atD(int idx) {
-		return data;
-	}
-
-	@Override
-	public void setD(int idx, double val) {
+	public void setA(int idx, Array val) {
 		data = val;
 	}
 	
 	@Override
 	public Array unInitializedCopy() {
-		return new DoubleScalar(data);
+		return new ArrayScalar(data);
 	}
 	
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new DoubleArray(newShape, new double[] { data });
+		return new NestedArray(newShape, new Array[] { data });
 	}
 
 	@Override
 	public Array morePreciseUnInitializedCopy(Array b) {
-		if(b.type()==MIXED) return new ArrayScalar();
 		return unInitializedCopy();  // no more precise than that
 	}
 
@@ -63,5 +61,4 @@ public class DoubleScalar extends BaseScalar {
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(data);
 	}
-
 }

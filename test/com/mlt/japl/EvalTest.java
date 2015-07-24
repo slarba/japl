@@ -5,7 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.ArrayScalar;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.Interpreter;
 
@@ -164,5 +167,20 @@ public class EvalTest {
 		assertEquals(1,r.depth());
 		assertEquals(1, r.atI(0));
 	}	
+
+	@Test
+	public void testEnclosedAdd() {
+		Array r = itn.eval("1+⊂2 3");
+		assertTrue(r instanceof ArrayScalar);
+		assertEquals(3, r.atA(0).atI(0));
+		assertEquals(4, r.atA(0).atI(1));
+	}
+
+	@Test
+	public void testZeroRho() {
+		Array r = itn.eval("0⍴0");
+		assertTrue(r instanceof IntArray);
+		assertEquals(1, r.rank());
+	}
 
 }
