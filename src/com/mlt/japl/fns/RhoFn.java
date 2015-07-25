@@ -4,7 +4,6 @@ import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class RhoFn extends SpecialBaseFn {

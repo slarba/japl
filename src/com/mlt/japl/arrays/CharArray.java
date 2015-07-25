@@ -1,9 +1,7 @@
 package com.mlt.japl.arrays;
 
-import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.CharScalar;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class CharArray extends BaseArray {

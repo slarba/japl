@@ -1,8 +1,5 @@
 package com.mlt.japl.arrays;
 
-import java.math.BigInteger;
-
-import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;

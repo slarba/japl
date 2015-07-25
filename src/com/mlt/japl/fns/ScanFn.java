@@ -1,6 +1,5 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.IotaArray;
 import com.mlt.japl.errors.AxisError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;

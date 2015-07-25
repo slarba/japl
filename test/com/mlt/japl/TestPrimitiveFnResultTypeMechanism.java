@@ -1,12 +1,9 @@
 package com.mlt.japl;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import com.mlt.japl.fns.AddFn;
 import com.mlt.japl.fns.SubFn;
-import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.scalars.IntScalar;

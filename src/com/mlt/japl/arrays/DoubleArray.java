@@ -2,7 +2,6 @@ package com.mlt.japl.arrays;
 
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.DoubleScalar;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class DoubleArray extends BaseArray {

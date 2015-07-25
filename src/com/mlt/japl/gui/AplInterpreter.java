@@ -21,8 +21,16 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
-import com.mlt.japl.ast.*;
-import com.mlt.japl.errors.*;
+import com.mlt.japl.ast.AssignmentNode;
+import com.mlt.japl.ast.AstNode;
+import com.mlt.japl.errors.AxisError;
+import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.errors.IndexError;
+import com.mlt.japl.errors.LengthError;
+import com.mlt.japl.errors.RankError;
+import com.mlt.japl.errors.SyntaxError;
+import com.mlt.japl.errors.ValenceError;
+import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;

@@ -1,8 +1,5 @@
 package com.mlt.japl.tools;
 
-import com.mlt.japl.errors.LengthError;
-import com.mlt.japl.errors.RankError;
-import com.mlt.japl.iface.Array;
 
 public class ResultArrayUtil {
 

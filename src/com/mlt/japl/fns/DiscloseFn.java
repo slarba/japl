@@ -2,7 +2,6 @@ package com.mlt.japl.fns;
 
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.ArrayScalar;
 
 public class DiscloseFn extends SpecialBaseFn {
 

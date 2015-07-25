@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.mlt.japl.arrays.BaseArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Iterator;
 

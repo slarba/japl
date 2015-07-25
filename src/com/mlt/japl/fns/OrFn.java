@@ -1,12 +1,8 @@
 package com.mlt.japl.fns;
 
 import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.errors.DomainError;
-import com.mlt.japl.errors.LengthError;
-import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.IntScalar;
 
 public class OrFn extends PrimitiveBaseFn {
 

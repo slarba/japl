@@ -1,9 +1,6 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.IntScalar;
-import com.mlt.japl.tools.ResultArrayUtil;
 
 public class FloorFn extends PrimitiveBaseFn {
 
