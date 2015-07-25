@@ -19,6 +19,11 @@ public class DoubleArray extends BaseArray {
 		super(new Dimensions(data.length));
 		this.data = data;
 	}
+
+	public DoubleArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
+		super(dims);
+		data = new double[actualLength];
+	}
 	
 	public DoubleArray(Dimensions dimensions, double... data) {
 		super(dimensions);
@@ -63,20 +68,9 @@ public class DoubleArray extends BaseArray {
 	public Array unInitializedCopy() {
 		return new DoubleArray(dims(), new double[data.length]);
 	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		if(b.type()==NESTED) return new NestedArray(dims(), new Array[data.length]);
-		return unInitializedCopy();  // no more precise than that
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		return unInitializedCopy();  // no more precise than that
-	}
 	
 	@Override
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new DoubleScalar();
 		return new DoubleArray(resultDims, new double[resultDims.length()]);
 	}

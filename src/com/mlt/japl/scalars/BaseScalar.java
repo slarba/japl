@@ -8,19 +8,9 @@ import com.mlt.japl.tools.Dimensions;
 public abstract class BaseScalar implements Array {
 
 	@Override 
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		throw new AplError();
 	};
-	
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		throw new DomainError();
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		throw new DomainError();
-	}
 
 	@Override
 	public int rank() {

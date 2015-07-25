@@ -2,7 +2,7 @@ package com.mlt.japl.fns;
 
 import com.mlt.japl.iface.Array;
 
-public class AddFn extends PrecisionMaintainingFn {
+public class AddFn extends PrimitiveBaseFn {
 	
 	@Override
 	public double D_DD(double a, double b) {

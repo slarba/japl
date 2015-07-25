@@ -1,6 +1,9 @@
 package com.mlt.japl.fns;
 
-public class NeqFn extends LogicalBaseFn {
+import com.mlt.japl.errors.ValenceError;
+import com.mlt.japl.iface.Array;
+
+public class NeqFn extends PrimitiveBaseFn {
 	@Override
 	public int I_CC(char a, char b) {
 		return a!=b ? 1 : 0;
@@ -47,8 +50,20 @@ public class NeqFn extends LogicalBaseFn {
 	}
 
 	@Override
+	public Array monadic(Array a, int axis) {
+		// logical functions don't have monadic form by default
+		throw new ValenceError();
+	}
+
+	@Override
 	public String getName() {
 		return "!=";
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		if(a.isScalar() && b.isScalar()) return Array.INTEGER;
+		return Array.BIT;
 	}
 
 }

@@ -14,6 +14,11 @@ public class IntArray extends BaseArray {
 		data = EMPTY;
 	}
 	
+	public IntArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
+		super(dims);
+		data = new long[actualLength];
+	}
+	
 	public IntArray(long... data) {
 		super(new Dimensions(data.length));
 		this.data = data;
@@ -65,23 +70,7 @@ public class IntArray extends BaseArray {
 	}
 
 	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		switch(b.type()) {
-		case DOUBLE: 		return new DoubleArray(dims(), new double[data.length]);
-		case INTEGER:       return unInitializedCopy();
-		case NESTED:         return new NestedArray(dims(), new Array[data.length]);
-		}
-		throw new AplError();
-		
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		return new DoubleArray(dims(), new double[data.length]);
-	}
-
-	@Override
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}	

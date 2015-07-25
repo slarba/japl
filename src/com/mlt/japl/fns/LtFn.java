@@ -3,7 +3,7 @@ package com.mlt.japl.fns;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 
-public class LtFn extends LogicalBaseFn {
+public class LtFn extends PrimitiveBaseFn {
 
 	@Override
 	public int I_CC(char a, char b) {
@@ -39,5 +39,10 @@ public class LtFn extends LogicalBaseFn {
 	public Array monadic(Array a, int axis) {
 		throw new ValenceError();
 	}
-
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		if(a.isScalar() && b.isScalar()) return Array.INTEGER;
+		return Array.BIT;
+	}
 }

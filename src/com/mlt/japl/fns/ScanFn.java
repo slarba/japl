@@ -34,7 +34,7 @@ public class ScanFn extends SpecialBaseFn {
 
 		int count = a.dims().axis(axis);
 		Dimensions resultDims = a.dims();
-		Array result = a.ofSameTypeWithDimensions(resultDims);
+		Array result = a.unInitializedReshapedCopy(resultDims);
 
 		Iterator resultIterator = resultDims.iteratorAlongAxis(axis);
 		Iterator sourceIterator = a.dims().iteratorAlongAxis(axis);

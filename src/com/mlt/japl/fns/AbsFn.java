@@ -37,18 +37,6 @@ public class AbsFn extends PrimitiveBaseFn {
 	}
 	
 	@Override
-	public Array createResultArrayFor(Array a, int axis) {
-		if(a.isScalar()) return a.unInitializedCopy();
-		if(a.type()==Array.NESTED) return a.unInitializedCopy();
-		return new IntArray(a.dims(), new long[a.actualLength()]);
-	}
-
-	@Override
-	public Array createResultArrayFor(Array a, Array b, int axis) {
-		return ResultArrayUtil.precisionMaintainingFn(a,b,axis);
-	}
-
-	@Override
 	public String getName() {
 		return "abs";
 	}

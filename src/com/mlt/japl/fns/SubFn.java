@@ -1,6 +1,6 @@
 package com.mlt.japl.fns;
 
-public class SubFn extends PrecisionMaintainingFn {
+public class SubFn extends PrimitiveBaseFn {
 
 	@Override
 	public long I_I(long a) {

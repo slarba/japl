@@ -1,8 +1,7 @@
 package com.mlt.japl.fns;
 
 
-public class DivFn extends PrecisionIncreasingFn {
-
+public class DivFn extends PrimitiveBaseFn {
 
 	@Override
 	public double D_D(double d) {

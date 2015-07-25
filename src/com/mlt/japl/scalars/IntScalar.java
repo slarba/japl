@@ -50,21 +50,6 @@ public class IntScalar extends BaseScalar {
 	}
 
 	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		switch(b.type()) {
-		case DOUBLE: 		return new DoubleScalar();
-		case INTEGER:       return new IntScalar();
-		case NESTED:         return new ArrayScalar();
-		}
-		throw new AplError();
-	}	
-	
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		return new DoubleScalar();
-	}
-
-	@Override
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(data);
 	}	

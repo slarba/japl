@@ -16,6 +16,12 @@ public class NestedArray extends BaseArray {
 		this.depth = 1;
 	}
 	
+	public NestedArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
+		super(dims);
+		this.depth = 1;
+		data = new Array[actualLength];
+	}
+	
 	public NestedArray(Array[] d) {
 		super(new Dimensions(d.length));
 		this.data = d;
@@ -97,19 +103,9 @@ public class NestedArray extends BaseArray {
 	public Array unInitializedCopy() {
 		return new NestedArray(dims(), new Array[data.length]);
 	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		return unInitializedCopy();
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		return unInitializedCopy();
-	}
 	
 	@Override
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new ArrayScalar();
 		return new NestedArray(resultDims, new Array[resultDims.length()]);
 	}

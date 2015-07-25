@@ -18,6 +18,11 @@ public class CharArray extends BaseArray {
 		this.data = data.toCharArray();
 	}
 	
+	public CharArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
+		super(dims);
+		data = new char[actualLength];
+	}
+	
 	public CharArray(char... data) {
 		super(new Dimensions(data.length));
 		this.data = data;
@@ -54,16 +59,6 @@ public class CharArray extends BaseArray {
 	}
 
 	@Override
-	public Array morePreciseUnInitializedCopy() {
-		throw new DomainError();
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		throw new DomainError();
-	}
-
-	@Override
 	public Array atA(int idx) {
 		return new CharScalar(atC(idx));
 	}
@@ -79,7 +74,7 @@ public class CharArray extends BaseArray {
 	}
 
 	@Override
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new CharScalar();
 		return new CharArray(resultDims, new char[resultDims.length()]);
 	}

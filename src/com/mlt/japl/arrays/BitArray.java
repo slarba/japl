@@ -22,6 +22,12 @@ public class BitArray extends BaseArray {
 		initData(data);
 	}
 
+	public BitArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
+		super(dims);
+		this.actualLen = actualLength;
+		data = new long[1+(actualLength/64)];
+	}
+
 	public BitArray(Dimensions d, long... data) {
 		super(d);
 		actualLen = data.length;
@@ -64,18 +70,6 @@ public class BitArray extends BaseArray {
 
 	@Override
 	public Array unInitializedCopy() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -164,7 +158,7 @@ public class BitArray extends BaseArray {
 	}
 	
 	@Override
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}

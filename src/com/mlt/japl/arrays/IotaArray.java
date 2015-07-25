@@ -55,22 +55,7 @@ public class IotaArray extends BaseArray {
 	}
 
 	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		switch(b.type()) {
-		case DOUBLE: 		return new DoubleArray(dims(), new double[n]);
-		case INTEGER:       return unInitializedCopy();
-		case NESTED:         return unInitializedCopy();
-		}
-		throw new AplError();
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		return new DoubleArray(dims(), new double[n]);
-	}
-
-	@Override
-	public Array ofSameTypeWithDimensions(Dimensions resultDims) {
+	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}

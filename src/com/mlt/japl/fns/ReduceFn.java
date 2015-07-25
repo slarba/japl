@@ -33,19 +33,24 @@ public class ReduceFn extends SpecialBaseFn {
 
 		int count = a.dims().axis(axis);
 		Dimensions resultDims = a.dims().elideAxis(axis);
-		Array result = a.ofSameTypeWithDimensions(resultDims);
+		Array result = a.unInitializedReshapedCopy(resultDims);
 
 		Iterator resultIterator = resultDims.linearIterator();
 		Iterator sourceIterator = a.dims().iteratorAlongAxis(axis);
 
 		switch(result.type()) {
 		case Array.BIT:
+			// there are efficient algorithms for counting one bits in an integer!
+			// that could be used for special case of +
 		case Array.INTEGER:
-			// special case: iota array can be summed quicker
-			if(result.isScalar() && a instanceof IotaArray && a.rank()==1) {
+			// special case: rank 1 iota array can be summed quicker
+			if(fn instanceof AddFn && a instanceof IotaArray && a.rank()==1) {
 				result.setI(0, ((IotaArray)a).sum());
 				break;
 			}
+			//if(fn instanceof MulFn) {
+			// reduction value is always zero if any of the values is zero, could be used for optimization
+			//}
 			while(true) {
 				long tmp = a.atI(sourceIterator.index());
 				sourceIterator.step();

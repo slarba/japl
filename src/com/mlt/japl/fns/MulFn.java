@@ -5,13 +5,7 @@ import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 
 
-public class MulFn extends PrecisionMaintainingFn {
-
-	@Override
-	public Array createResultArrayFor(Array a, int axis) {
-		if(a.isScalar()) return new IntScalar();
-		return new IntArray(a.dims(), new long[a.actualLength()]);
-	}
+public class MulFn extends PrimitiveBaseFn {
 
 	@Override
 	public long I_I(long a) {
@@ -41,12 +35,6 @@ public class MulFn extends PrecisionMaintainingFn {
 	@Override
 	public long I_II(long a, long b) {
 		return a*b;
-	}
-
-	@Override
-	public int resultTypeFor(Array a) {
-		if(a.type()==Array.NESTED) return Array.NESTED;
-		return Array.INTEGER;
 	}
 	
 	@Override

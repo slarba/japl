@@ -6,5 +6,5 @@ public interface Func {
 	String getName();
 	
 	int resultTypeFor(Array a);
-	int resultTypeFor(Array type, Array type2);
+	int resultTypeFor(Array a, Array b);
 }

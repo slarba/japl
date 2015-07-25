@@ -49,17 +49,6 @@ public class DoubleScalar extends BaseScalar {
 	}
 
 	@Override
-	public Array morePreciseUnInitializedCopy(Array b) {
-		if(b.type()==NESTED) return new ArrayScalar();
-		return unInitializedCopy();  // no more precise than that
-	}
-
-	@Override
-	public Array morePreciseUnInitializedCopy() {
-		return unInitializedCopy();  // no more precise than that
-	}
-
-	@Override
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(data);
 	}
