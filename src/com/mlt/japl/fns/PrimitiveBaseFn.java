@@ -112,16 +112,21 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		if(!a.dims().equals(b.dims())) throw new LengthError();
 	}
 
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		if(a.type()==Array.NESTED || b.type()==Array.NESTED) return Array.NESTED;
-		int t = a.type()|(b.type()<<16);
+	public int resultTypeFor(int a, int b) {
+		if(a==Array.NESTED || b==Array.NESTED) return Array.NESTED;
+		int t = a|(b<<16);
 		if(resultTypes.containsKey(t))
 			return resultTypes.get(t);
 		else
 			throw new DomainError();
+		
 	}
-
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return resultTypeFor(a.type(), b.type());
+	}
+	
 	@Override
 	public int resultTypeFor(Array a) {
 		int t = a.type();
@@ -129,7 +134,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		if(resultTypes.containsKey(t))
 			return resultTypes.get(t);
 		else
-			throw new DomainError();
+			throw new DomainError();		
 	}
 
 	@Override

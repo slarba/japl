@@ -62,6 +62,11 @@ public class CharArray extends BaseArray {
 	}
 
 	@Override
+	public void setA(int idx, Array val) {
+		setC(idx, val.atC(idx));
+	}
+	
+	@Override
 	public char atC(int idx) {
 		return data[idx % data.length];		
 	}

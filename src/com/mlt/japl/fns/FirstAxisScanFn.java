@@ -26,4 +26,5 @@ public class FirstAxisScanFn extends SpecialBaseFn {
 	public String getName() {
 		return "scanfirstaxis<" + fn.getName() + ">";
 	}
+
 }

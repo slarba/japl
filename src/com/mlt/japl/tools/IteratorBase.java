@@ -1,14 +1,20 @@
 package com.mlt.japl.tools;
 
+import java.util.Arrays;
+
 public abstract class IteratorBase implements Iterator {
 
 	protected int[] dims;
 	protected int[] spans;
 	protected int[] iter;
 	protected boolean finished;
-
-	public IteratorBase() {
-		super();
+	protected int axis;
+	
+	public IteratorBase(int[] dims, int[] spans, int axis) {
+		this.dims = dims;
+		this.spans = spans;
+		this.axis = axis;
+		this.iter = new int[dims.length];
 	}
 
 	@Override
@@ -32,4 +38,8 @@ public abstract class IteratorBase implements Iterator {
 		return iter[axis];
 	}
 
+	@Override
+	public void reset() {
+		Arrays.fill(iter, 0);
+	}
 }

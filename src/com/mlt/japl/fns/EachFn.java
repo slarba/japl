@@ -52,5 +52,5 @@ public class EachFn extends SpecialBaseFn {
 	public int resultTypeFor(Array a, Array b) {
 		return fn.resultTypeFor(a,b);
 	}
-	
+
 }

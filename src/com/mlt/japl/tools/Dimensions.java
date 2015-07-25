@@ -45,8 +45,8 @@ public class Dimensions {
 		for(int i=0; i<dims.length; i++) {
 			nds[i] = dims[i];
 		}
-		for(int i=dims.length; i<o.dims.length; i++) {
-			nds[i] = o.dims[i];
+		for(int i=0; i<o.dims.length; i++) {
+			nds[i+dims.length] = o.dims[i];
 		}
 		return new Dimensions(nds);
 	}
@@ -139,5 +139,16 @@ public class Dimensions {
 
 	public Iterator reverseIteratorAlongAxis(int axis) {
 		return new ReverseAxisIterator(dims, spans, axis);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder b = new StringBuilder();
+		b.append("dims=");
+		for(int i=0; i<dims.length; i++) {
+			if(i!=0) b.append(',');
+			b.append(dims[i]);
+		}
+		return b.toString();
 	}
 }

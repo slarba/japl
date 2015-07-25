@@ -54,6 +54,11 @@ public class IntArray extends BaseArray {
 	}
 	
 	@Override
+	public void setA(int idx, Array val) {
+		setI(idx, val.atI(idx));
+	}
+	
+	@Override
 	public Array reshape(int... newShape) {
 		return new IntArray(new Dimensions(newShape), data);
 	}

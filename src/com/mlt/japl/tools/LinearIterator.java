@@ -29,4 +29,9 @@ public class LinearIterator implements Iterator {
 		return 0;
 	}
 
+	@Override
+	public void reset() {
+		iter = 0;
+	}
+
 }

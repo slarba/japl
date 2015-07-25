@@ -41,12 +41,12 @@ public class ExistsFn extends SpecialBaseFn {
 	
 	@Override
 	public int resultTypeFor(Array a) {
-		return 0;
+		throw new ValenceError();
 	}
 
 	@Override
 	public int resultTypeFor(Array a, Array b) {
-		return Array.INTEGER;
+		return Array.BIT;
 	}
 
 }

@@ -105,6 +105,11 @@ public class BitArray extends BaseArray {
 		setB(idx, val);
 	}
 
+	@Override
+	public void setA(int idx, Array val) {
+		setB(idx, val.atI(idx));
+	}
+	
 	public static Array similarTo(Array a) {
 		return new BitArray(a.actualLength(), a.dims());		
 	}

@@ -5,4 +5,5 @@ public interface Iterator {
 	void step();
 	int index();
 	int axis(int axis);
+	void reset();
 }

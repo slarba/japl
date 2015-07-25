@@ -55,6 +55,11 @@ public class DoubleArray extends BaseArray {
 	}
 	
 	@Override
+	public void setA(int idx, Array val) {
+		setD(idx, val.atD(idx));
+	}
+	
+	@Override
 	public Array reshape(Dimensions newShape) {
 		return new DoubleArray(newShape, data);
 	}

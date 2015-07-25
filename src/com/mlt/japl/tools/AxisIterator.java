@@ -2,13 +2,8 @@ package com.mlt.japl.tools;
 
 public class AxisIterator extends IteratorBase {
 
-	private int axis;
-	
 	public AxisIterator(int[] dims, int[] spans, int axis) {
-		this.dims = dims;
-		this.spans = spans;
-		this.axis = axis;
-		this.iter = new int[dims.length];
+		super(dims,spans,axis);
 	}
 
 	@Override

@@ -2,13 +2,8 @@ package com.mlt.japl.tools;
 
 public class ReverseAxisIterator extends IteratorBase implements Iterator {
 
-	private int axis;
-	
 	public ReverseAxisIterator(int[] dims, int[] spans, int axis) {
-		this.dims = dims;
-		this.spans = spans;
-		this.axis = axis;
-		this.iter = new int[dims.length];
+		super(dims,spans,axis);
 		iter[axis] = dims[axis]-1;
 	}
 
@@ -26,4 +21,9 @@ public class ReverseAxisIterator extends IteratorBase implements Iterator {
 		}
 	}
 
+	@Override
+	public void reset() {
+		super.reset();
+		iter[axis] = dims[axis]-1;
+	}
 }

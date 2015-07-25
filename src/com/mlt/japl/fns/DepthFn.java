@@ -25,4 +25,5 @@ public class DepthFn extends SpecialBaseFn {
 	public int resultTypeFor(Array a, Array b) {
 		throw new ValenceError();
 	}
+
 }
