@@ -2,52 +2,14 @@
 package com.mlt.japl.parser;
 
 import java.io.Reader;
+import com.mlt.japl.iface.*;
+import com.mlt.japl.fns.*;
+import com.mlt.japl.ast.*;
+import com.mlt.japl.errors.*;
+import com.mlt.japl.workspace.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mlt.japl.ast.AssignmentNode;
-import com.mlt.japl.ast.AstNode;
-import com.mlt.japl.ast.ConstArrayNode;
-import com.mlt.japl.ast.ConstantAstNode;
-import com.mlt.japl.ast.DyadicCallNode;
-import com.mlt.japl.ast.EvalArrayNode;
-import com.mlt.japl.ast.IdentifierNode;
-import com.mlt.japl.ast.IndexExprNode;
-import com.mlt.japl.ast.MonadicCallNode;
-import com.mlt.japl.ast.NiladicCallNode;
-import com.mlt.japl.ast.StatementListNode;
-import com.mlt.japl.ast.UserFnNode;
-import com.mlt.japl.errors.SyntaxError;
-import com.mlt.japl.fns.AbsFn;
-import com.mlt.japl.fns.AddFn;
-import com.mlt.japl.fns.AndFn;
-import com.mlt.japl.fns.CeilFn;
-import com.mlt.japl.fns.DepthFn;
-import com.mlt.japl.fns.DiscloseFn;
-import com.mlt.japl.fns.DivFn;
-import com.mlt.japl.fns.EachFn;
-import com.mlt.japl.fns.EncloseFn;
-import com.mlt.japl.fns.EqFn;
-import com.mlt.japl.fns.FirstAxisReduceFn;
-import com.mlt.japl.fns.FirstAxisScanFn;
-import com.mlt.japl.fns.FloorFn;
-import com.mlt.japl.fns.GtFn;
-import com.mlt.japl.fns.GteFn;
-import com.mlt.japl.fns.InnerProdFn;
-import com.mlt.japl.fns.IotaFn;
-import com.mlt.japl.fns.LtFn;
-import com.mlt.japl.fns.LteFn;
-import com.mlt.japl.fns.MulFn;
-import com.mlt.japl.fns.NeqFn;
-import com.mlt.japl.fns.NotFn;
-import com.mlt.japl.fns.OrFn;
-import com.mlt.japl.fns.OuterProdFn;
-import com.mlt.japl.fns.ReduceFn;
-import com.mlt.japl.fns.RhoFn;
-import com.mlt.japl.fns.ScanFn;
-import com.mlt.japl.fns.SubFn;
-import com.mlt.japl.iface.Func;
-import com.mlt.japl.workspace.EvalContext;
 
 public class AplParser implements AplParserConstants {
   EvalContext context;
@@ -91,8 +53,8 @@ public class AplParser implements AplParserConstants {
 //		case "⍱": return new NorFn();  // nor
 //		case "⍲": return new NandFn();  // nand
 //		case "⍉": return new ReverseFn();
-//		case "⌽": return new ReverseLastFn();
-//		case "⊖": return new ReverseFirstFn();
+                case "\u233d": return new ReverseLastFn();
+                case "\u2296": return new ReverseFirstFn();
 //		case "↑": return new TakeFn();
 //		case "↓": return new DropFn();
                 case "\u2261": return new DepthFn();

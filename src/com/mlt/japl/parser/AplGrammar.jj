@@ -68,8 +68,8 @@ public class AplParser
 //		case "\u2371": return new NorFn();  // nor
 //		case "\u2372": return new NandFn();  // nand
 //		case "\u2349": return new ReverseFn();
-//		case "\u233d": return new ReverseLastFn();
-//		case "\u2296": return new ReverseFirstFn();
+		case "\u233d": return new ReverseLastFn();
+		case "\u2296": return new ReverseFirstFn();
 //		case "\u2191": return new TakeFn();
 //		case "\u2193": return new DropFn();
 		case "\u2261": return new DepthFn();

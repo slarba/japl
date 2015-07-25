@@ -136,4 +136,8 @@ public class Dimensions {
 	public Iterator linearIterator() {
 		return new LinearIterator(length());
 	}
+
+	public Iterator reverseIteratorAlongAxis(int axis) {
+		return new ReverseAxisIterator(dims, spans, axis);
+	}
 }
