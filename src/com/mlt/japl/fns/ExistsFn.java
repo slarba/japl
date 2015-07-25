@@ -5,6 +5,7 @@ import java.util.HashSet;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class ExistsFn extends SpecialBaseFn {
@@ -21,9 +22,15 @@ public class ExistsFn extends SpecialBaseFn {
 
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
+		if(a.isScalar() && b.isScalar()) {
+			return IntScalar.fromBoolean(a.atA(0).hashCode() == b.atA(0).hashCode());
+		}
 		HashSet<Array> set = new HashSet<Array>();
 		for(int i=0; i<b.length(); i++) {
 			set.add(b.atA(i));
+		}
+		if(a.isScalar()) {
+			return IntScalar.fromBoolean(set.contains(a.atA(0)));
 		}
 		Array r = new BitArray(new Dimensions(a.length()), true, a.length());
 		for(int i=0; i<b.length(); i++) {

@@ -17,6 +17,10 @@ public class IntScalar extends BaseScalar {
 		data = value;
 	}
 	
+	public static Array fromBoolean(boolean n) {
+		return new IntScalar(n ? 1 : 0);
+	}
+	
 	@Override
 	public int type() {
 		return INTEGER;
