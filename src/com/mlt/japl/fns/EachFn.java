@@ -1,5 +1,6 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 
 public class EachFn extends SpecialBaseFn {
@@ -14,4 +15,15 @@ public class EachFn extends SpecialBaseFn {
 	public String getName() {
 		return "each<" + fn.getName() + ">";
 	}
+	
+	@Override
+	public int resultTypeFor(Array a) {
+		return fn.resultTypeFor(a);
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return fn.resultTypeFor(a,b);
+	}
+	
 }

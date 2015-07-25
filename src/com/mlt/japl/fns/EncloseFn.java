@@ -1,5 +1,6 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.ArrayScalar;
 
@@ -16,4 +17,14 @@ public class EncloseFn extends SpecialBaseFn {
 		return "enclose";
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		if(a.isScalar()) return a.type();
+		return Array.NESTED;
+	}
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		throw new ValenceError();
+	}
 }

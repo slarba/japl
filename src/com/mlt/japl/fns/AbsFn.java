@@ -25,6 +25,16 @@ public class AbsFn extends PrimitiveBaseFn {
 	public double D_DD(double a, double b) {
 		return b%a;
 	}
+
+	@Override
+	public double D_ID(long a, double b) {
+		return b%a;
+	}
+
+	@Override
+	public double D_DI(double a, long b) {
+		return b%a;
+	}
 	
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {

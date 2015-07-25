@@ -33,4 +33,18 @@ public abstract class LogicalBaseFn extends PrimitiveBaseFn {
 		return BitArray.similarTo(a);
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		if(a.type()==Array.NESTED) return Array.NESTED;
+		if(a.isScalar()) return Array.INTEGER;
+		return Array.BIT;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		if(a.type()==Array.NESTED || b.type()==Array.NESTED) return Array.NESTED;
+		if(a.isScalar() && b.isScalar()) return Array.INTEGER;
+		return Array.BIT;
+	}
+	
 }

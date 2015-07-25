@@ -4,5 +4,7 @@ public interface Func {
 	Array monadic(Array a, int axis);
 	Array dyadic(Array a, Array b, int axis);
 	String getName();
-	int resultTypeFor(int type, int type2);
+	
+	int resultTypeFor(Array a);
+	int resultTypeFor(Array type, Array type2);
 }

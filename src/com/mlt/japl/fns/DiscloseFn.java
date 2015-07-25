@@ -1,5 +1,6 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.ArrayScalar;
 
@@ -14,5 +15,15 @@ public class DiscloseFn extends SpecialBaseFn {
 	@Override
 	public String getName() {
 		return "disclose";
+	}
+	
+	@Override
+	public int resultTypeFor(Array a) {
+		return a.rank()==0 ? a.atA(0).type() : a.type();
+	}
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		throw new ValenceError();
 	}
 }

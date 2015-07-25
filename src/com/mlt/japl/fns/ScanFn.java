@@ -2,6 +2,7 @@ package com.mlt.japl.fns;
 
 import com.mlt.japl.arrays.IotaArray;
 import com.mlt.japl.errors.AxisError;
+import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.tools.Dimensions;
@@ -86,6 +87,16 @@ public class ScanFn extends SpecialBaseFn {
 		return result;
 	}
 		
+	@Override
+	public int resultTypeFor(Array a) {
+		return fn.resultTypeFor(a);
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		throw new ValenceError();
+	}
+	
 	@Override
 	public String getName() {
 		return "scan<" + fn.getName() + ">";

@@ -1,5 +1,7 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.errors.ValenceError;
+import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 
 public class FirstAxisReduceFn extends SpecialBaseFn {
@@ -13,6 +15,16 @@ public class FirstAxisReduceFn extends SpecialBaseFn {
 	@Override
 	public String getName() {
 		return "reducefirstaxis<" + fn.getName() + ">";
+	}
+
+	@Override
+	public int resultTypeFor(Array a) {
+		return fn.resultTypeFor(a);
+	}
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		throw new ValenceError();
 	}
 
 }

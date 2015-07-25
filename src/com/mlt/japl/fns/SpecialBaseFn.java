@@ -8,11 +8,6 @@ import com.mlt.japl.iface.Func;
 public abstract class SpecialBaseFn implements Func {
 
 	@Override
-	public int resultTypeFor(int a, int b) {
-		throw new AplError();
-	}
-	
-	@Override
 	public Array monadic(Array a, int axis) {
 		throw new ValenceError();
 	}

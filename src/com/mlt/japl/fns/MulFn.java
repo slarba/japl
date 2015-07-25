@@ -39,15 +39,16 @@ public class MulFn extends PrecisionMaintainingFn {
 	}
 
 	@Override
-	public double D_II(long a, long b) {
-		return a*b;
-	}
-
-	@Override
 	public long I_II(long a, long b) {
 		return a*b;
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		if(a.type()==Array.NESTED) return Array.NESTED;
+		return Array.INTEGER;
+	}
+	
 	@Override
 	public String getName() {
 		return "*";

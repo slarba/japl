@@ -26,6 +26,22 @@ public class CeilFn extends PrimitiveBaseFn {
 	public double D_DD(double a, double b) {
 		return Math.max(a, b);
 	}
+
+	@Override
+	public double D_DI(double a, long b) {
+		return Math.max(a, b);
+	}
+
+	@Override
+	public double D_ID(long a, double b) {
+		return Math.max(a, b);
+	}
+	
+	@Override
+	public int resultTypeFor(Array a) {
+		if(a.type()==Array.NESTED) return Array.NESTED;
+		return Array.INTEGER;
+	}
 	
 	@Override
 	public Array createResultArrayFor(Array a, int axis) {

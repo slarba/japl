@@ -11,8 +11,15 @@ public abstract class PrimitiveBaseFn implements Func {
 	public abstract Array createResultArrayFor(Array a, Array b, int axis);
 
 	@Override
-	public int resultTypeFor(int a, int b) {
-		throw new AplError();
+	public int resultTypeFor(Array a, Array b) {
+		if(a.type()==Array.NESTED || b.type()==Array.NESTED) return Array.NESTED;
+		if(a.type()==Array.DOUBLE || b.type()==Array.DOUBLE) return Array.DOUBLE;
+		return Array.INTEGER;
+	}
+
+	@Override
+	public int resultTypeFor(Array a) {
+		return a.type();
 	}
 	
 	public int I_C(char c) {		

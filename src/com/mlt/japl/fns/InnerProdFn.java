@@ -1,5 +1,7 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.errors.ValenceError;
+import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 
 public class InnerProdFn extends SpecialBaseFn {
@@ -11,6 +13,16 @@ public class InnerProdFn extends SpecialBaseFn {
 		this.leftFn = leftFn;
 		this.rightFn = rightFn;
 		
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return leftFn.resultTypeFor(a, b);
+	}
+	
+	@Override
+	public int resultTypeFor(Array a) {
+		throw new ValenceError();
 	}
 
 	@Override

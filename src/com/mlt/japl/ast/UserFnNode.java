@@ -44,14 +44,18 @@ public class UserFnNode implements AstNode, Func {
 		return body.eval(derived);
 	}
 
-
 	@Override
 	public String getName() {
 		return print();
 	}
 
 	@Override
-	public int resultTypeFor(int a, int b) {
+	public int resultTypeFor(Array a) {
+		throw new AplError();
+	}
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
 		throw new AplError();
 	}
 }

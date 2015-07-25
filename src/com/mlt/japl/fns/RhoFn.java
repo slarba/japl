@@ -33,6 +33,16 @@ public class RhoFn extends SpecialBaseFn {
 	}
 
 	@Override
+	public int resultTypeFor(Array a) {
+		return Array.INTEGER;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return b.type();
+	}
+	
+	@Override
 	public String getName() {
 		return "rho";
 	}
