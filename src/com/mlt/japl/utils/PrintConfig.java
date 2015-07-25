@@ -27,6 +27,7 @@ public class PrintConfig {
 	}
 	
 	public String print(double data) {
+		if(data==(long)data) return Long.toString((long)data);
 		return String.format(Locale.US, getDoubleFormatString(), data);
 	}
 
@@ -51,6 +52,9 @@ public class PrintConfig {
 //		if(a.rank()==0) {
 //			return get(0).asString(config);
 //		}
+		String space = " ";
+		if(a.type()==Array.CHARACTER) space="";
+		
 		int lastDim = a.dims().lastDim();
 		int[] maxLens = computLastDimMaxWidths(a, lastDim);
 
@@ -73,7 +77,7 @@ public class PrintConfig {
 			for(int n=0; n<maxSubRowHeight; n++) {
 				for(int j=0; j<lastDim; j++) {
 					String[] rowPart = row.get(j);
-					String spacer = rowPart.length>1 ? "|" : " ";
+					String spacer = rowPart.length>1 ? "|" : space;
 					boolean last = j==lastDim-1;
 					boolean outputNewLine = rowPart.length>1;
 					if(n>=rowPart.length) {

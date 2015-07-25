@@ -23,6 +23,7 @@ import javax.swing.text.BadLocationException;
 
 import com.mlt.japl.ast.*;
 import com.mlt.japl.errors.*;
+import com.mlt.japl.iface.Array;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
 import com.mlt.japl.parser.TokenMgrError;
@@ -161,10 +162,12 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 		    if(line.length()>0) {
 			    AplParser parser = new AplParser(new StringReader(line), env);
 			    AstNode ast = parser.apl_expr();
-			    System.out.println(ast.print());
+			    System.out.println("AST: " + ast.print());
 			    
 			    long startTime = System.nanoTime();
-			    String result = ast.eval(env).asString(new PrintConfig());
+			    Array evalResult = ast.eval(env);
+				String result = evalResult.asString(new PrintConfig());
+				System.out.println("   result type = " + evalResult.getClass());
 			    long stopTime = System.nanoTime();
 			    System.out.println("   eval() took " + ((stopTime-startTime)/1000.0) + " us");
 			    

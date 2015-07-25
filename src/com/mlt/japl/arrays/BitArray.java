@@ -93,7 +93,7 @@ public class BitArray extends BaseArray {
 		int i = idx % actualLen;
 		int whole = i / 64;
 		int part = i % 64;
-		return (data[whole]&(1<<part))!=0 ? 1 : 0;
+		return (data[whole]>>>part)&1;
 	}
 
 	@Override
