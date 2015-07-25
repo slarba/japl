@@ -51,5 +51,19 @@ public class IntScalar extends BaseScalar {
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(data);
 	}	
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof IntScalar) {
+			return ((IntScalar)o).data == data;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 1+17*Long.hashCode(data);
+	}
 
 }

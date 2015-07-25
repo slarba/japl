@@ -1,5 +1,6 @@
 package com.mlt.japl.ast;
 
+import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.workspace.EvalContext;
@@ -14,12 +15,16 @@ public class NiladicCallNode implements AstNode {
 	
 	@Override
 	public Array eval(EvalContext context) {
-		return null;
+		return new IntArray();
 	}
 
 	@Override
 	public String print() {
 		return fn.getName() + "()";
+	}
+
+	public Func func() {
+		return fn;
 	}
 
 }

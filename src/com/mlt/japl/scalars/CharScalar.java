@@ -52,5 +52,18 @@ public class CharScalar extends BaseScalar {
 		return printConfig.print(data);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof CharScalar) {
+			return ((CharScalar)o).data == data;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 1+31*Character.hashCode(data);
+	}
 
 }

@@ -21,7 +21,7 @@ public class UserFnNode implements AstNode, Func {
 	
 	@Override
 	public Array eval(EvalContext context) {
-		return null;
+		throw new RuntimeException("foo");
 	}
 
 	@Override
@@ -42,6 +42,11 @@ public class UserFnNode implements AstNode, Func {
 		derived.set("\u03b1", a);
 		derived.set("\u03c9", b);
 		return body.eval(derived);
+	}
+
+	@Override
+	public Array niladic() {
+		return body.eval(frame);
 	}
 
 	@Override

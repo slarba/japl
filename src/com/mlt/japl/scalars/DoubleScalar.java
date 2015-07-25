@@ -53,4 +53,18 @@ public class DoubleScalar extends BaseScalar {
 		return printConfig.print(data);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof DoubleScalar) {
+			return ((DoubleScalar)o).data == data;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 1+7*Double.hashCode(data);
+	}
+
 }

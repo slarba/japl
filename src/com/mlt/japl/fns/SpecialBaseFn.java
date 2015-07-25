@@ -53,4 +53,8 @@ public abstract class SpecialBaseFn implements Func {
 		return result;
 	}
 
+	@Override
+	public Array niladic() {
+		throw new ValenceError();
+	}
 }

@@ -40,7 +40,7 @@ public class AplParser implements AplParserConstants {
                 case "\u2374": return new RhoFn();
                 case "\u2373": return new IotaFn();
 //		case "○": return new TrigFn();
-//		case "∈": return new ExistsFn();
+                case "\u2208": return new ExistsFn();
                 case "<": return new LtFn();
                 case ">": return new GtFn();
                 case "\u2264": return new LteFn();
@@ -53,8 +53,8 @@ public class AplParser implements AplParserConstants {
 //		case "⍱": return new NorFn();  // nor
 //		case "⍲": return new NandFn();  // nand
 //		case "⍉": return new ReverseFn();
-                case "\u233d": return new ReverseLastFn();
-                case "\u2296": return new ReverseFirstFn();
+                case "\u233d": return new ReverseFn(false);
+                case "\u2296": return new ReverseFn(true);
 //		case "↑": return new TakeFn();
 //		case "↓": return new DropFn();
                 case "\u2261": return new DepthFn();
@@ -71,11 +71,11 @@ public class AplParser implements AplParserConstants {
   {
         switch(n)
         {
-                case "/":  return new ReduceFn(arg);
-                case "\u005c\u005c": return new ScanFn(arg);
+                case "/":  return new ReduceFn(arg, false);
+                case "\u005c\u005c": return new ScanFn(arg, false);
                 case "\u00a8": return new EachFn(arg);
-                case "\u233f": return new FirstAxisReduceFn(arg);
-                case "\u2340": return new FirstAxisScanFn(arg);
+                case "\u233f": return new ReduceFn(arg, true);
+                case "\u2340": return new ScanFn(arg, true);
                 default:
                         throw new SyntaxError();
         }

@@ -11,10 +11,12 @@ public class ScanFn extends SpecialBaseFn {
 
 	private Func fn;
 	private PrimitiveBaseFn primFn;
+	private boolean first;
 
-	public ScanFn(Func fn) {
+	public ScanFn(Func fn, boolean first) {
 		// TODO: special version!
 		this.fn = fn;
+		this.first = first;
 		if(fn instanceof PrimitiveBaseFn) {
 			primFn = (PrimitiveBaseFn)fn;
 		}
@@ -27,7 +29,8 @@ public class ScanFn extends SpecialBaseFn {
 			return fn.monadic(a, axis);
 		}
 		if(axis<0) {
-			axis = a.rank()-1;
+			if(first) axis = 0;
+			else axis = a.rank()-1;
 		}
 		if(axis<0 || axis>=a.rank()) throw new AxisError();
 

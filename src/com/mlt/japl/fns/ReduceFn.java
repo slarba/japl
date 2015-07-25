@@ -12,10 +12,12 @@ public class ReduceFn extends SpecialBaseFn {
 
 	private PrimitiveBaseFn primFn;
 	private Func fn;
+	private boolean first;
 	
-	public ReduceFn(Func fn) {
+	public ReduceFn(Func fn, boolean first) {
 		// TODO: special version!
 		this.fn = fn;
+		this.first = first;
 		if(fn instanceof PrimitiveBaseFn) {
 			primFn = (PrimitiveBaseFn)fn;
 		}
@@ -27,7 +29,8 @@ public class ReduceFn extends SpecialBaseFn {
 			return fn.monadic(a, axis);
 		}
 		if(axis<0) {
-			axis = a.rank()-1;
+			if(first) axis = 0;
+			else axis = a.rank()-1;
 		}
 		if(axis<0 || axis>=a.rank()) throw new AxisError();
 

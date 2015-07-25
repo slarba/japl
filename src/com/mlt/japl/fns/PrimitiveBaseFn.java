@@ -11,6 +11,7 @@ import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
+import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.iface.PrimitiveFunc;
@@ -559,5 +560,11 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		}
 	
 		throw new DomainError();
+	}
+	
+	@Override
+	public Array niladic()
+	{
+		throw new ValenceError();
 	}
 }
