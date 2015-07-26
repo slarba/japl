@@ -24,4 +24,14 @@ public class IndexExprNode implements AstNode {
 		return (first!=null ? first.print() : "") + (rest!=null ? ";" + rest.print() : "");
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		return 0;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return 0;
+	}
+
 }

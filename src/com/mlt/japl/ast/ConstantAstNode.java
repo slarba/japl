@@ -91,4 +91,14 @@ public class ConstantAstNode implements AstNode {
 	public Array getAsCell() {
 		return parsedValue;
 	}
+
+	@Override
+	public int resultTypeFor(Array a) {
+		return parsedValue.type();
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return parsedValue.type();
+	}
 }

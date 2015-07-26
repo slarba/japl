@@ -51,4 +51,14 @@ public class DyadicCallNode implements AstNode {
 	public AstNode getRight() {
 		return right;
 	}
+
+	@Override
+	public int resultTypeFor(Array a) {
+		return Array.NESTED;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return fn.resultTypeFor(a,b);
+	}
 }

@@ -11,9 +11,13 @@ import com.mlt.japl.tools.Iterator;
 public class OuterProdFn extends SpecialBaseFn {
 
 	private Func fn;
+	private PrimitiveFunc primFn;
 	
 	public OuterProdFn(Func fn) {
 		this.fn = fn;
+		if(fn instanceof PrimitiveFunc) {
+			primFn = (PrimitiveFunc)fn;
+		}
 	}
 
 	@Override
@@ -38,8 +42,7 @@ public class OuterProdFn extends SpecialBaseFn {
 			} while(!bi.isFinished());
 			ai.step();
 			bi.reset();
-		}
-
+		}			
 		return result;
 	}
 	

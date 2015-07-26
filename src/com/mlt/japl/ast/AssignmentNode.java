@@ -30,4 +30,16 @@ public class AssignmentNode implements AstNode {
 		return id + " <- " + expr.print();
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

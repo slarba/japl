@@ -35,4 +35,23 @@ public class IdentifierNode implements AstNode {
 		return expr;
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		if(id.equals("\u03c9")) {
+			return a.type();
+		}
+		return Array.NESTED;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		if(id.equals("\u03b1")) {
+			return a.type();
+		}
+		if(id.equals("\u03c9")) {
+			return b.type();
+		}
+		return Array.NESTED;
+	}
+
 }

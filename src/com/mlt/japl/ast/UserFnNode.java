@@ -56,12 +56,12 @@ public class UserFnNode implements AstNode, Func {
 
 	@Override
 	public int resultTypeFor(Array a) {
-		throw new AplError();
+		return body.resultTypeFor(a);
 	}
 
 	@Override
 	public int resultTypeFor(Array a, Array b) {
-		throw new AplError();
+		return body.resultTypeFor(a,b);
 	}
 
 }

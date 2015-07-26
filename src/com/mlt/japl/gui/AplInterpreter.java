@@ -178,6 +178,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 				String result = evalResult.asString(new PrintConfig());
 				System.out.println("   result type = " + evalResult.getClass());
 				System.out.println("   result rank = " + evalResult.rank());
+				System.out.println("   result depth = " + evalResult.depth());
 				System.out.println("   result dims = " + evalResult.dims());
 			    System.out.println("   eval() took " + ((stopTime-startTime)/1000.0) + " us");
 			    

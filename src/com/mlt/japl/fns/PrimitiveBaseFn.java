@@ -111,20 +111,17 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		if(a.rank()!=b.rank()) throw new RankError();
 		if(!a.dims().equals(b.dims())) throw new LengthError();
 	}
-
-	public int resultTypeFor(int a, int b) {
-		if(a==Array.NESTED || b==Array.NESTED) return Array.NESTED;
-		int t = a|(b<<16);
+	
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		int a1 = a.type();
+		int b1 = b.type();
+		if(a1==Array.NESTED || b1==Array.NESTED) return Array.NESTED;
+		int t = a1|(b1<<16);
 		if(resultTypes.containsKey(t))
 			return resultTypes.get(t);
 		else
 			throw new DomainError();
-		
-	}
-	
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		return resultTypeFor(a.type(), b.type());
 	}
 	
 	@Override

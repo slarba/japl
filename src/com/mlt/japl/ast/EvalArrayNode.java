@@ -39,4 +39,14 @@ public class EvalArrayNode implements AstNode {
 		}
 		return "evalarray[" + builder.toString() + "]";
 	}
+
+	@Override
+	public int resultTypeFor(Array a) {
+		return Array.NESTED;
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return Array.NESTED;
+	}
 }

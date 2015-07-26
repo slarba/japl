@@ -41,4 +41,14 @@ public class MonadicCallNode implements AstNode {
 		return right;
 	}
 
+	@Override
+	public int resultTypeFor(Array a) {
+		return fn.resultTypeFor(a);
+	}
+
+	@Override
+	public int resultTypeFor(Array a, Array b) {
+		return fn.resultTypeFor(a, b);
+	}
+
 }
