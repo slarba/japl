@@ -32,8 +32,8 @@ public class ExistsFn extends SpecialBaseFn {
 		if(a.isScalar()) {
 			return IntScalar.fromBoolean(set.contains(a.atA(0)));
 		}
-		Array r = new BitArray(new Dimensions(a.length()), true, a.length());
-		for(int i=0; i<b.length(); i++) {
+		Array r = new BitArray(a.dims(), true, a.length());
+		for(int i=0; i<a.length(); i++) {
 			r.setB(i, set.contains(a.atA(i)) ? 1 : 0);
 		}
 		return r;

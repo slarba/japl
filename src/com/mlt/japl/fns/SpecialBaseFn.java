@@ -44,11 +44,11 @@ public abstract class SpecialBaseFn implements Func {
 
 	private Array makeSimilarArrayOfType(int type, Array a) {
 		switch(type) {
-		case Array.BIT:   		  return new BitArray(a.dims(), true, a.actualLength());
-		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.actualLength());
-		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.actualLength());
-		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.actualLength());
-		case Array.NESTED:		  return new NestedArray(a.dims(), true, a.actualLength());
+		case Array.BIT:   		  return new BitArray(a.dims(), true, a.length());
+		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.length());
+		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.length());
+		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.length());
+		case Array.NESTED:		  return new NestedArray(a.dims(), true, a.length());
 		default:
 			throw new AplError();
 		}		

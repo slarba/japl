@@ -165,7 +165,7 @@ public class BitArray extends BaseArray {
 	@Override
 	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new IntScalar();
-		return new IntArray(resultDims, new long[resultDims.length()]);
+		return new BitArray(resultDims, true, resultDims.length(), new long[1+(resultDims.length()/64)]);
 	}
 
 	public Array not() {

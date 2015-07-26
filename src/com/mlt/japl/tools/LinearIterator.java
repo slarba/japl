@@ -34,4 +34,9 @@ public class LinearIterator implements Iterator {
 		iter = 0;
 	}
 
+	@Override
+	public int[] iter() {
+		return null;
+	}
+
 }

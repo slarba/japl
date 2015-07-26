@@ -56,6 +56,7 @@ public class EqFn extends PrimitiveBaseFn {
 	
 	@Override
 	public int resultTypeFor(Array a, Array b) {
+		if(a.isNested() || b.isNested()) return Array.NESTED;
 		if(a.isScalar() && b.isScalar()) return Array.INTEGER;
 		return Array.BIT;
 	}

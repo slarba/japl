@@ -26,4 +26,9 @@ public class ReverseAxisIterator extends IteratorBase implements Iterator {
 		super.reset();
 		iter[axis] = dims[axis]-1;
 	}
+
+	@Override
+	public int[] iter() {
+		return iter;
+	}
 }

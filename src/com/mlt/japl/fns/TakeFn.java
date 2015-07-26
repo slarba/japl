@@ -40,14 +40,14 @@ public class TakeFn extends SpecialBaseFn {
 		Array result = makeSimilarArrayOfType(b.type(), resultDims);
 		
 		if(b.dims().fitsInside(resultDims)) {
-			Iterator srcIterator = b.dims().offsetIterator(offsets, limits);
-			Iterator dstIterator = resultDims.offsetIterator(offsets, limits);
+			Iterator srcIterator = b.dims().iteratorAlongAxis(b.rank()-1);
 	
 			do {
-				result.setA(dstIterator.index(), b.atA(srcIterator.index()));
+				result.setA(result.dims().calculateIndex(srcIterator.iter()), b.atA(srcIterator.index()));
 				srcIterator.step();
-				dstIterator.step();
 			} while(!srcIterator.isFinished());
+		} else {
+			
 		}
 		return result;
 	}

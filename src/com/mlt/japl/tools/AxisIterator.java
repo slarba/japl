@@ -19,4 +19,9 @@ public class AxisIterator extends IteratorBase {
 			finished = true;
 		}
 	}
+
+	@Override
+	public int[] iter() {
+		return iter;
+	}
 }

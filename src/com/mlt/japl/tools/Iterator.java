@@ -6,4 +6,5 @@ public interface Iterator {
 	int index();
 	int axis(int axis);
 	void reset();
+	int[] iter();
 }

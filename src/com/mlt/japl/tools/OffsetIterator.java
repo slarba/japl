@@ -54,4 +54,9 @@ public class OffsetIterator implements Iterator {
 		this.iter = Arrays.copyOf(offsets, offsets.length);
 	}
 
+	@Override
+	public int[] iter() {
+		return iter;
+	}
+
 }

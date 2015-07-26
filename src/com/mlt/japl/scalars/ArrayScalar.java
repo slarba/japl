@@ -23,6 +23,11 @@ public class ArrayScalar extends BaseScalar {
 	}
 
 	@Override
+	public boolean isNested() {
+		return true;
+	}
+	
+	@Override
 	public int depth() {
 		return data.depth()+1;
 	}
