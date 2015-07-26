@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -60,4 +62,14 @@ public class IotaArray extends BaseArray {
 	public long sum() {
 		return (n*(n+1))/2;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof IotaArray) {
+			return n == ((IotaArray)o).n;
+		}
+		return false;
+	}
+
 }

@@ -56,4 +56,9 @@ public class ArrayScalar extends BaseScalar {
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(data);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return data.equals(o);
+	}
 }

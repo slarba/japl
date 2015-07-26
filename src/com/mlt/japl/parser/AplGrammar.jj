@@ -47,7 +47,7 @@ public class AplParser
 		case "\u002b": return new AddFn();
 		case "\u2212": return new SubFn();
 		case "\u00d7": return new MulFn();
-//		case "\u002c": return new RavelFn();
+		case "\u002c": return new RavelFn();
 		case "\u230a": return new FloorFn();
 		case "\u2308": return new CeilFn();
 		case "\u2223": return new AbsFn();

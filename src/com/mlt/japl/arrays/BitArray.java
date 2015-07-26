@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
@@ -175,5 +177,13 @@ public class BitArray extends BaseArray {
 			result[i] = adata[i] ^ (-1);
 		return new BitArray(dims(), true, actualLen, result);
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof BitArray) {
+			return Arrays.equals(data, ((BitArray)o).data);
+		}
+		return false;
+	}
 }

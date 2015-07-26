@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -78,4 +80,14 @@ public class IntArray extends BaseArray {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}	
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof IntArray) {
+			return Arrays.equals(data, ((IntArray)o).data);
+		}
+		return false;
+	}
+
 }

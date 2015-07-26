@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.ArrayScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -109,4 +111,12 @@ public class NestedArray extends BaseArray {
 		return new NestedArray(resultDims, new Array[resultDims.length()]);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof NestedArray) {
+			return Arrays.deepEquals(data, ((NestedArray)o).data);
+		}
+		return false;
+	}	
 }

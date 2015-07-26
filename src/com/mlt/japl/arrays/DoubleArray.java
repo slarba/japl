@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -78,4 +80,14 @@ public class DoubleArray extends BaseArray {
 		if(resultDims.rank()==0) return new DoubleScalar();
 		return new DoubleArray(resultDims, new double[resultDims.length()]);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof DoubleArray) {
+			return Arrays.equals(data, ((DoubleArray)o).data);
+		}
+		return false;
+	}
+
 }

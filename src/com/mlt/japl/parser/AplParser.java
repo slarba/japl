@@ -32,7 +32,7 @@ public class AplParser implements AplParserConstants {
                 case "+": return new AddFn();
                 case "\u2212": return new SubFn();
                 case "\u00d7": return new MulFn();
-//		case ",": return new RavelFn();
+                case ",": return new RavelFn();
                 case "\u230a": return new FloorFn();
                 case "\u2308": return new CeilFn();
                 case "\u2223": return new AbsFn();

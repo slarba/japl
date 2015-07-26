@@ -12,6 +12,17 @@ public class DepthFn extends SpecialBaseFn {
 	}
 
 	@Override
+	public Array dyadic(Array a, Array b, int axis) {
+		if(a.rank()!=b.rank()) return new IntScalar(0);
+		if(a.depth()!=b.depth()) return new IntScalar(0);
+		if(!a.dims().equals(b.dims())) return new IntScalar(0);
+		for(int i=0; i<a.length(); i++) {
+			if(!a.atA(i).equals(b.atA(i))) return new IntScalar(0);
+		}
+		return new IntScalar(1);
+	}
+
+	@Override
 	public String getName() {
 		return "depth";
 	}
