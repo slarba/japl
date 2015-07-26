@@ -31,9 +31,9 @@ public class TakeFn extends SpecialBaseFn {
 		int[] lengths = new int[len];
 		for(int i=0; i<offsets.length; i++) {
 			int x = (int)a.atI(i);
-			lengths[i] = Math.max(0, Math.abs(x)-bdims[i]);
-			if(x<0) limits[i] = -x;
-			if(x>=0) offsets[i] = x;
+			lengths[i] = Math.abs(x)-bdims[i];
+			if(x<0) offsets[i] = Math.max(0, bdims[i]+x);
+			if(x>=0) limits[i] = x;
 		}
 
 		Dimensions resultDims = b.dims().offsetBy(lengths);
@@ -47,7 +47,11 @@ public class TakeFn extends SpecialBaseFn {
 				srcIterator.step();
 			} while(!srcIterator.isFinished());
 		} else {
-			
+			Iterator srcIterator = resultDims.iteratorAlongAxis(b.rank()-1);
+			do {
+				result.setA(srcIterator.index(), b.atA(srcIterator.iter()));
+				srcIterator.step();
+			} while(!srcIterator.isFinished());			
 		}
 		return result;
 	}

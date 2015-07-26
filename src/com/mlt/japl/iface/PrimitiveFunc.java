@@ -1,5 +1,11 @@
 package com.mlt.japl.iface;
 
+/**
+ * Primitive function interface
+ * 
+ * @author mtl
+ *
+ */
 public interface PrimitiveFunc {
 	public int I_C(char c);
 

@@ -118,20 +118,18 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		int b1 = b.type();
 		if(a1==Array.NESTED || b1==Array.NESTED) return Array.NESTED;
 		int t = a1|(b1<<16);
-		if(resultTypes.containsKey(t))
-			return resultTypes.get(t);
-		else
-			throw new DomainError();
+		Integer i = resultTypes.get(t);
+		if(i!=null) return i;
+		throw new DomainError();
 	}
 	
 	@Override
 	public int resultTypeFor(Array a) {
 		int t = a.type();
 		if(t==Array.NESTED) return t;
-		if(resultTypes.containsKey(t))
-			return resultTypes.get(t);
-		else
-			throw new DomainError();		
+		Integer i = resultTypes.get(t);
+		if(i!=null) return i;
+		throw new DomainError();		
 	}
 
 	@Override
@@ -418,7 +416,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 			case Array.BIT:
 			case Array.INTEGER: return loop_I_I(result, a);
 			case Array.DOUBLE:  return loop_I_D(result, a);
-			case Array.NESTED:   return loop_I_M(result, a, axis);
+			case Array.NESTED:  return loop_I_M(result, a, axis);
 			}
 			break;
 		case Array.DOUBLE:
