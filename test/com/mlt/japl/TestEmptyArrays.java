@@ -20,7 +20,7 @@ public class TestEmptyArrays {
 		assertEquals(0, d.actualLength());
 		assertEquals(0, d.length());
 		assertNotNull(d.dims());
-		assertEquals(d.dims(), Dimensions.EMPTY);		
+		assertEquals(d.dims(), Dimensions.EMPTY_ARRAY);		
 	}
 	
 	@Test

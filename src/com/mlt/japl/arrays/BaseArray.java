@@ -16,7 +16,7 @@ public abstract class BaseArray implements Array {
 	private int depth;
 	
 	public BaseArray() {
-		dims = Dimensions.EMPTY;
+		dims = Dimensions.EMPTY_ARRAY;
 		depth = 1;
 	}
 	
