@@ -55,8 +55,8 @@ public class AplParser implements AplParserConstants {
 //		case "⍉": return new ReverseFn();
                 case "\u233d": return new ReverseFn(false);
                 case "\u2296": return new ReverseFn(true);
-//		case "↑": return new TakeFn();
-//		case "↓": return new DropFn();
+                case "\u2191": return new TakeFn();
+                case "\u2193": return new DropFn();
                 case "\u2261": return new DepthFn();
                 case "\u2282": return new EncloseFn();
                 case "\u2283": return new DiscloseFn();

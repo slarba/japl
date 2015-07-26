@@ -1,6 +1,7 @@
 package com.mlt.japl.fns;
 
 
+import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Iterator;
@@ -33,9 +34,42 @@ public class ReverseFn extends SpecialBaseFn {
 		return copyWithIterators(a, result, srcIterator, dstIterator);
 	}
 
+	/*
+		if(b.getRank()==0) return b;
+		if(a.getRank()!=0) throw new ValenceError();
+		int offset = a.get(0).coerceToInt();
+		axis = 0;
+		
+		Indexer indexer = new Indexer(b.getDimensions());
+		
+		Cell[] result = new Cell[b.getLength()];
+		
+		for(int i=0; i<result.length; i++) {
+			result[indexer.getIndexWithMod(indexer.getIter(), axis, offset)] = b.get(indexer.index());
+			indexer.step();
+		}
+		return new CellArray(result, b.getDimensions());
+	 * (non-Javadoc)
+	 * @see com.mlt.japl.fns.SpecialBaseFn#dyadic(com.mlt.japl.iface.Array, com.mlt.japl.iface.Array, int)
+	 */
+
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
-		throw new ValenceError();
+		// rotate
+		if(b.isScalar()) return b;
+		
+		if(!a.isScalar()) throw new LengthError();
+		long offset = a.atI(0);
+		
+		if(axis<0) {
+			if(first) axis = 0;
+			else axis = b.rank()-1;
+		}
+		
+		Array result = b.unInitializedReshapedCopy(b.dims());
+		Iterator srcIterator = b.dims().offsetIteratorAlongAxis(axis, offset);
+		Iterator dstIterator = b.dims().iteratorAlongAxis(axis);
+		return copyWithIterators(b, result, srcIterator, dstIterator);
 	}
 	
 	@Override

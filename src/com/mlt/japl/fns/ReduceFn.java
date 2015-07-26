@@ -41,6 +41,21 @@ public class ReduceFn extends SpecialBaseFn {
 		Iterator resultIterator = resultDims.linearIterator();
 		Iterator sourceIterator = a.dims().iteratorAlongAxis(axis);
 
+		if(primFn==null) {
+			while(true) {
+				Array tmp = a.atA(sourceIterator.index());
+				sourceIterator.step();
+				for(int i=1; i<count; i++) {
+					tmp = fn.dyadic(tmp, a.atA(sourceIterator.index()), -1);
+					sourceIterator.step();
+				}
+				result.setA(resultIterator.index(), tmp);
+				resultIterator.step();
+				if(resultIterator.isFinished()) break;
+			}
+			return result;
+		}
+		
 		switch(result.type()) {
 		case Array.BIT:
 			// there are efficient algorithms for counting one bits in an integer!

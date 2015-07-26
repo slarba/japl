@@ -82,6 +82,14 @@ public class Dimensions {
 		return new Dimensions(nds);		
 	}
 
+	public Dimensions offsetByMinus(int[] offsets) {
+		int[] nds = new int[dims.length];
+		for(int i=0; i<nds.length; i++) {
+			nds[i] = Math.max(0, dims[i]-offsets[i]);
+		}
+		return new Dimensions(nds);		
+	}
+	
 	public Dimensions offsetAxisBy(int axis, int offset) {
 		int[] nds = new int[dims.length];
 		for(int i=0; i<nds.length; i++) {
@@ -151,5 +159,21 @@ public class Dimensions {
 			b.append(dims[i]);
 		}
 		return b.toString();
+	}
+
+	public Iterator offsetIteratorAlongAxis(int axis, long offset) {
+		return new OffsetAxisIterator(dims, spans, axis, (int)offset);
+	}
+
+	public Iterator offsetIterator(int[] offsets, int[] limits) {
+		return new OffsetIterator(dims, spans, offsets, limits);
+	}
+
+	public boolean fitsInside(Dimensions resultDims) {
+		if(resultDims.rank() != rank()) return false;
+		for(int i=0; i<dims.length; i++) {
+			if(dims[i]>resultDims.dims[i]) return false;
+		}
+		return true;
 	}
 }

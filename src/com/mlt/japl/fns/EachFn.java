@@ -13,11 +13,7 @@ public class EachFn extends SpecialBaseFn {
 	
 	@Override
 	public Array monadic(Array a, int axis) {
-		if(a.type()!=Array.NESTED) {
-			return fn.monadic(a, axis);
-		}
-		
-		Array result = a.unInitializedReshapedCopy(a.dims());
+		Array result = makeSimilarArrayOfType(Array.NESTED, a.dims());
 		for(int i=0; i<result.actualLength(); i++) {
 			result.setA(i, fn.monadic(a.atA(i), axis));
 		}
@@ -26,10 +22,16 @@ public class EachFn extends SpecialBaseFn {
 
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
-		if(b.type()!=Array.NESTED) {
-			return fn.dyadic(a, b, axis);
+//		if(b.type()!=Array.NESTED) {
+//			return fn.dyadic(a, b, axis);
+//		}
+		if(b.isScalar()) {
+			Array result = makeSimilarArrayOfType(Array.NESTED, a.dims());
+			for(int i=0; i<result.actualLength(); i++) {
+				result.setA(i, fn.dyadic(a.atA(i), b.atA(0), axis));
+			}
+			return result;
 		}
-		
 		Array result = b.unInitializedReshapedCopy(b.dims());
 		for(int i=0; i<result.actualLength(); i++) {
 			result.setA(i, fn.dyadic(a.atA(i), b.atA(i), axis));
