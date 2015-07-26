@@ -16,7 +16,7 @@ public class StatementListNode implements AstNode {
 	@Override
 	public Array eval(EvalContext context) {
 		Array last = null;
-		for(int i=statements.size()-1; i>=0; i--) {
+		for(int i=0; i<statements.size(); i++) {
 			last = statements.get(i).eval(context);
 		}
 		return last;
