@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.CharsetDecoder;
 
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
@@ -33,11 +35,13 @@ public class Interpreter {
 	}
 	
 	public void eval(InputStream s) {
-		AplParser parser = new AplParser(new InputStreamReader(s), context);
+		AplParser parser;
 		try {
+			parser = new AplParser(new InputStreamReader(s, "UTF-8"), context);
 			parser.eval_stream();
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
