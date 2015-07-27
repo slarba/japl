@@ -11,29 +11,29 @@ public interface AplParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int FUNC = 5;
+  int FUNC = 6;
   /** RegularExpression Id. */
-  int OUTERPROD = 6;
+  int OUTERPROD = 7;
   /** RegularExpression Id. */
-  int MONADICOPERATOR = 7;
+  int MONADICOPERATOR = 8;
   /** RegularExpression Id. */
-  int ID = 8;
+  int ID = 9;
   /** RegularExpression Id. */
-  int CONSTANT = 9;
+  int CONSTANT = 10;
   /** RegularExpression Id. */
-  int CPLXCONSTANT = 10;
+  int CPLXCONSTANT = 11;
   /** RegularExpression Id. */
-  int STRING = 11;
+  int STRING = 12;
   /** RegularExpression Id. */
-  int NUMBER = 12;
+  int NUMBER = 13;
   /** RegularExpression Id. */
-  int SIGN = 13;
+  int SIGN = 14;
   /** RegularExpression Id. */
-  int DIGIT = 14;
+  int DIGIT = 15;
   /** RegularExpression Id. */
-  int STRINGDELIM = 15;
+  int STRINGDELIM = 16;
   /** RegularExpression Id. */
-  int STRINGCHAR = 16;
+  int STRINGCHAR = 17;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -45,6 +45,7 @@ public interface AplParserConstants {
     "\"\\r\"",
     "\"\\t\"",
     "\"\\n\"",
+    "<token of kind 5>",
     "<FUNC>",
     "\"\\u2218.\"",
     "<MONADICOPERATOR>",
@@ -58,10 +59,19 @@ public interface AplParserConstants {
     "<STRINGDELIM>",
     "<STRINGCHAR>",
     "\"\\u22c4\"",
-    "\"[\"",
-    "\"]\"",
     "\"(\"",
     "\")\"",
+    "\":If\"",
+    "\":Then\"",
+    "\":Else\"",
+    "\":EndIf\"",
+    "\":While\"",
+    "\":Do\"",
+    "\":EndWhile\"",
+    "\":Repeat\"",
+    "\":EndRepeat\"",
+    "\"[\"",
+    "\"]\"",
     "\"\\u2190\"",
     "\";\"",
     "\"{\"",

@@ -129,6 +129,8 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 				  ,"\u222a"  // union/unique
 				  ,"\u233f"  // reduce first axis
 				  ,"\u2340"  // scan first axis
+				  ,"\u236c"  // zilde
+				  ,"\u235d"  // lamp
 		};
 		for(String s : buttons) {
 			toolbar.add(createButton(s,font));
@@ -166,7 +168,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 		    int start=editor.getLineStartOffset(offset);
 		    int end=editor.getLineEndOffset(offset);
 
-		    String line = editor.getText(start, (end-start)).trim();
+		    String line = editor.getText(start, (end-start)).trim() + "\n";
 		    if(line.length()>0) {
 			    AplParser parser = new AplParser(new StringReader(line), env);
 			    AstNode ast = parser.apl_expr();

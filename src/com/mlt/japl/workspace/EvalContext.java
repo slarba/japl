@@ -2,6 +2,7 @@ package com.mlt.japl.workspace;
 
 import java.util.HashMap;
 
+import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
@@ -31,7 +32,7 @@ public class EvalContext {
 	}
 	
 	public EvalContext() {
-		
+		valueMap.put("\u236c", new IntArray());
 	}
 	
 	public EvalContext(EvalContext parent) {

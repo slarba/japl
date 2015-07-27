@@ -130,6 +130,10 @@ SKIP :
 | "\n"
 }
 
+SKIP:
+{ <"\u235d" (~["\n"])* "\n">
+}
+
 TOKEN : /* OPERATORS */
 {
   < FUNC :
@@ -186,7 +190,7 @@ TOKEN : /* OPERATORS */
 
 TOKEN :
 {
-  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"])+ >
+  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"])+ >
 | < CONSTANT : < NUMBER > >
 | < CPLXCONSTANT: < NUMBER > "J" < NUMBER > >
 | < STRING : < STRINGDELIM > (< STRINGCHAR >)+ < STRINGDELIM > >
@@ -236,7 +240,16 @@ AstNode singleexpr() :
   AstNode t;
 }
 {
-    t = monadic_call_or_niladic()
+ 	t = repeat_expr()
+ 	{		return t;
+ 	} 
+|   t = if_expr()
+    {
+      return t;    }
+|   t = while_expr()
+	{
+	  return t;	}
+|   t = monadic_call_or_niladic()
   	{
   	  return t;
   	}
@@ -244,7 +257,36 @@ AstNode singleexpr() :
 	{
 	  return t;
 	}
+|   "(" t = expr() ")"	{
+	  return t;	}  
 }
+
+AstNode if_expr() :
+{  AstNode cond, thenbranch, elsebranch=null;
+}
+{	":If" cond=singleexpr() ":Then" thenbranch=expr() (":Else" elsebranch=expr())? ":EndIf"
+	{
+	  return new IfNode(cond, thenbranch, elsebranch);	}
+}
+
+AstNode while_expr() :
+{
+  AstNode cond, body;
+}
+{
+	":While" cond=singleexpr() ":Do" body=expr() ":EndWhile"
+	{
+	  return new WhileNode(cond, body);
+	}
+}
+
+AstNode repeat_expr() :
+{
+  AstNode count, body;}
+{
+  ":Repeat" count=singleexpr() ":Do" body=expr() ":EndRepeat"
+  {
+    return new RepeatNode(count, body);  }}
 
 // monadic call starts with a function expression, followed by optional axis expression and
 // argument expr
