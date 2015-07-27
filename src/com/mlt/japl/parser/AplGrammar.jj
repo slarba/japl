@@ -201,6 +201,15 @@ TOKEN :
 | < #STRINGCHAR : ~["'"] >
 }
 
+void eval_stream() :
+{
+  AstNode t;}
+{	(t=expr()	  {
+	    System.out.println("evaluating: " + t.print());
+	    t.eval(context);	  })+
+	  < EOF >
+}
+
 // top level expression ends with EOF
 AstNode apl_expr() :
 {

@@ -1,5 +1,7 @@
 package com.mlt.japl.workspace;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringReader;
 
@@ -9,6 +11,7 @@ import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.ast.AstNode;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.parser.AplParser;
+import com.mlt.japl.parser.ParseException;
 import com.mlt.japl.scalars.CharScalar;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.scalars.IntScalar;
@@ -27,6 +30,16 @@ public class Interpreter {
 	
 	public Array eval(String s) {
 		return parse(s).eval(context);
+	}
+	
+	public void eval(InputStream s) {
+		AplParser parser = new AplParser(new InputStreamReader(s), context);
+		try {
+			parser.eval_stream();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public AstNode parse(String s) {
@@ -75,4 +88,7 @@ public class Interpreter {
 		context.set(id, new CharScalar(val));
 	}
 
+	public static void main(String[] args) {
+		new Interpreter(System.out).eval(System.in);
+	}
 }
