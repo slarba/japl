@@ -2,6 +2,8 @@ package com.mlt.japl.tools;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.IndexError;
+
 public class Dimensions {
 	int[] dims;
 	int[] spans;
@@ -175,5 +177,29 @@ public class Dimensions {
 			if(dims[i]>resultDims.dims[i]) return false;
 		}
 		return true;
+	}
+
+	public Dimensions laminate(Dimensions dims2, int axis) {
+		int[] rdims = new int[dims.length];
+		for(int i=0; i<dims.length; i++) {
+			if(i==axis) {
+				rdims[i] = dims[i] + dims2.dims[i];
+			} else {
+				if(dims[i] != dims2.dims[i]) throw new IndexError();
+				rdims[i] = dims[i];
+			}
+		}
+		return new Dimensions(rdims);
+	}
+
+	public int indexWithReplacedAxis(int axis, int j, int[] indx) {
+		int i;
+		int result = 0;
+		int[] spans = this.spans;
+		for(i=0; i<indx.length; i++) {
+			if(i==axis) result += spans[i] * j;
+			else result += spans[i] * indx[i];
+		}
+		return result;
 	}
 }

@@ -23,7 +23,7 @@ public class NestedArray extends BaseArray {
 		data = new Array[actualLength];
 	}
 	
-	public NestedArray(Array[] d) {
+	public NestedArray(Array... d) {
 		super(new Dimensions(d.length));
 		this.data = d;
 		fixDepth();
