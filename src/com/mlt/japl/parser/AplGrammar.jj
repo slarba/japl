@@ -124,13 +124,11 @@ TOKEN_MGR_DECLS:
 SKIP :
 {
   " "
-| "\r"
 | "\t"
-| "\n"
 }
 
 SKIP:
-{ <"\u235d" (~["\n"])* "\n">
+{ < "\u235d" (~["\n"])* ["\n"] >
 }
 
 TOKEN : /* OPERATORS */
@@ -185,8 +183,7 @@ TOKEN : /* OPERATORS */
   >
 | < OUTERPROD : "\u2218." >
 | < MONADICOPERATOR: ["/"]|["\\"]|["\u00a8"]|["\u233f"]|["\u2340"] >
-| < STMTSEPARATOR: ";" >
-| < STMTSEP: ["\u22c4"] >
+| < STMTSEPARATOR: ["\u22c4"] | (["\n"])+ | ("\u235d" (~["\n"])* ["\n"]) >
 }
 
 TOKEN :
@@ -202,12 +199,61 @@ TOKEN :
 | < #STRINGCHAR : ~["'"] >
 }
 
+// execute top level expressions one at a time
 void eval_stream() :
 {
   AstNode t;}
-{	(t=expr() < STMTSEPARATOR >	  {
-	    t.eval(context);	  })+
-	  < EOF >
+{
+    (< STMTSEPARATOR >)? t=toplevelexpr()    {
+      t.eval(context);    }	(< STMTSEPARATOR > t=toplevelexpr()	  {
+	    t.eval(context);	  })*
+    (< STMTSEPARATOR >)?
+	< EOF >
+}
+
+// single expression is either monadic/niladic call or dyadic call/array
+AstNode toplevelexpr() :
+{
+  AstNode t;
+}
+{
+ 	t = repeat_expr()
+ 	{
+		return t;
+ 	} 
+|   t = if_expr()
+    {
+      return t;
+    }
+|   t = while_expr()
+	{
+	  return t;
+	}
+|   t = arrayexpr()
+	{
+	  return t;
+	}
+}
+
+AstNode toplevel_expr_list() :
+{
+  AstNode t;
+  AstNode c;
+  List<AstNode> statements = new ArrayList<AstNode>();
+}
+{
+	(< STMTSEPARATOR >)? t = toplevelexpr()
+	(< STMTSEPARATOR > c=toplevelexpr()
+		{
+		  statements.add(c);
+		}
+	)*
+	(< STMTSEPARATOR >)?
+	{
+	  if(statements.size()==0) return t;
+	  statements.add(0, t);
+	  return new StatementListNode(statements);
+	}
 }
 
 // top level expression ends with EOF
@@ -216,49 +262,17 @@ AstNode apl_expr() :
   AstNode t;
 }
 {
-	t = expr() < EOF >
+	t = toplevelexpr() < EOF >
 	{
 	  return t;
 	}
 }
 
 // expression is a single expression or a list of expressions
-AstNode expr() :
-{
-  AstNode t;
-  AstNode c;
-  List<AstNode> statements = new ArrayList<AstNode>();
-}
-{
-	t = singleexpr()
-	(< STMTSEP > c=singleexpr()
-		{
-		  statements.add(c);
-		}
-	)*
-	{
-	  if(statements.size()==0) return t;
-	  statements.add(0, t);
-	  return new StatementListNode(statements);
-	}
-}
 
-// single expression is either monadic/niladic call or dyadic call/array
-AstNode singleexpr() :
-{
-  AstNode t;
+AstNode arrayexpr() :{	AstNode t;
 }
-{
- 	t = repeat_expr()
- 	{		return t;
- 	} 
-|   t = if_expr()
-    {
-      return t;    }
-|   t = while_expr()
-	{
-	  return t;	}
-|   t = monadic_call_or_niladic()
+{   t = monadic_call_or_niladic()
   	{
   	  return t;
   	}
@@ -266,14 +280,14 @@ AstNode singleexpr() :
 	{
 	  return t;
 	}
-|   "(" t = expr() ")"	{
-	  return t;	}  
+|   "(" t = arrayexpr() ")"	{
+	  return t;	}
 }
 
 AstNode if_expr() :
 {  AstNode cond, thenbranch, elsebranch=null;
 }
-{	":If" cond=singleexpr() ":Then" thenbranch=expr() (":Else" elsebranch=expr())? ":EndIf"
+{	":If" cond=arrayexpr() ":Then" thenbranch=toplevel_expr_list() (":Else" elsebranch=toplevel_expr_list())? ":EndIf"
 	{
 	  return new IfNode(cond, thenbranch, elsebranch);	}
 }
@@ -283,7 +297,7 @@ AstNode while_expr() :
   AstNode cond, body;
 }
 {
-	":While" cond=singleexpr() ":Do" body=expr() ":EndWhile"
+	":While" cond=arrayexpr() ":Do" body=toplevel_expr_list() ":EndWhile"
 	{
 	  return new WhileNode(cond, body);
 	}
@@ -293,7 +307,7 @@ AstNode repeat_expr() :
 {
   AstNode count, body;}
 {
-  ":Repeat" count=singleexpr() ":Do" body=expr() ":EndRepeat"
+  ":Repeat" count=arrayexpr() ":Do" body=toplevel_expr_list() ":EndRepeat"
   {
     return new RepeatNode(count, body);  }}
 
@@ -307,7 +321,7 @@ AstNode monadic_call_or_niladic() :
   AstNode axis = null;
 }
 {
-  s=fn_expr() ("[" axis=expr() "]")? (t=singleexpr())?
+  s=fn_expr() ("[" axis=arrayexpr() "]")? (t=arrayexpr())?
   {
     if(t!=null)
     {
@@ -329,7 +343,7 @@ AstNode dyadic_call_or_array() :
   AstNode axis = null;
 }
 {
-  left=array() (op=fn_expr() ("[" axis=expr() "]")? right=singleexpr())?
+  left=array() (op=fn_expr() ("[" axis=arrayexpr() "]")? right=arrayexpr())?
   {
     if(op!=null)
     {
@@ -367,7 +381,7 @@ AstNode array() :
 	  {
 	    nodeList.add(new ConstantAstNode(s.toString(), ConstantAstNode.COMPLEX));
 	  }
-	| "(" idexpr = singleexpr()
+	| "(" idexpr = arrayexpr()
 	  {
 	    nodeList.add(idexpr);
 	    mustEvaluate = true;
@@ -394,7 +408,7 @@ AstNode identifierexpr() :
   Token ident = null;
 }
 {
-  ident = < ID > ("[" e = indexexpr() "]")? ("←" e2=singleexpr())?
+  ident = < ID > ("[" e = indexexpr() "]")? ("←" e2=arrayexpr())?
   {
     if(e2!=null)
     	return new AssignmentNode(ident.toString(), e2);
@@ -409,7 +423,7 @@ IndexExprNode indexexpr() :
   IndexExprNode e2 = null;
 }
 {
-  (e1=singleexpr())? (";" e2=indexexpr())?
+  (e1=arrayexpr())? (";" e2=indexexpr())?
   {
     return new IndexExprNode(e1, e2);
   }
@@ -436,7 +450,7 @@ AstNode userfndef() :
   AstNode fnBody = null;
 }
 {
-  "{" fnBody = expr() "}"
+  "{" fnBody = toplevel_expr_list() "}"
   {
     return fnBody;
   }

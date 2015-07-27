@@ -11,33 +11,31 @@ public interface AplParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int FUNC = 6;
+  int FUNC = 4;
   /** RegularExpression Id. */
-  int OUTERPROD = 7;
+  int OUTERPROD = 5;
   /** RegularExpression Id. */
-  int MONADICOPERATOR = 8;
+  int MONADICOPERATOR = 6;
   /** RegularExpression Id. */
-  int STMTSEPARATOR = 9;
+  int STMTSEPARATOR = 7;
   /** RegularExpression Id. */
-  int STMTSEP = 10;
+  int ID = 8;
   /** RegularExpression Id. */
-  int ID = 11;
+  int CONSTANT = 9;
   /** RegularExpression Id. */
-  int CONSTANT = 12;
+  int CPLXCONSTANT = 10;
   /** RegularExpression Id. */
-  int CPLXCONSTANT = 13;
+  int STRING = 11;
   /** RegularExpression Id. */
-  int STRING = 14;
+  int NUMBER = 12;
   /** RegularExpression Id. */
-  int NUMBER = 15;
+  int SIGN = 13;
   /** RegularExpression Id. */
-  int SIGN = 16;
+  int DIGIT = 14;
   /** RegularExpression Id. */
-  int DIGIT = 17;
+  int STRINGDELIM = 15;
   /** RegularExpression Id. */
-  int STRINGDELIM = 18;
-  /** RegularExpression Id. */
-  int STRINGCHAR = 19;
+  int STRINGCHAR = 16;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -46,15 +44,12 @@ public interface AplParserConstants {
   String[] tokenImage = {
     "<EOF>",
     "\" \"",
-    "\"\\r\"",
     "\"\\t\"",
-    "\"\\n\"",
-    "<token of kind 5>",
+    "<token of kind 3>",
     "<FUNC>",
     "\"\\u2218.\"",
     "<MONADICOPERATOR>",
-    "\";\"",
-    "<STMTSEP>",
+    "<STMTSEPARATOR>",
     "<ID>",
     "<CONSTANT>",
     "<CPLXCONSTANT>",
@@ -78,6 +73,7 @@ public interface AplParserConstants {
     "\"[\"",
     "\"]\"",
     "\"\\u2190\"",
+    "\";\"",
     "\"{\"",
     "\"}\"",
     "\".\"",

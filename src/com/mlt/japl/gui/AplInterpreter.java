@@ -169,7 +169,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 		    int start=editor.getLineStartOffset(offset);
 		    int end=editor.getLineEndOffset(offset);
 
-		    String line = editor.getText(start, (end-start)).trim() + "\n";
+		    String line = editor.getText(start, (end-start)).trim();
 		    if(line.length()>0) {
 			    AplParser parser = new AplParser(new StringReader(line), env);
 			    AstNode ast = parser.apl_expr();
@@ -193,6 +193,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 		    System.out.println(ex.getMessage());
 		  } catch (ParseException e1) {
 			  editor.append("\nPARSE ERROR");
+			  e1.printStackTrace();
 		  } catch(SyntaxError err) {
 			  editor.append("\nSYNTAX ERROR");
 		  } catch(LengthError err) {
