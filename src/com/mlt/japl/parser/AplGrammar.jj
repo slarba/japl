@@ -76,7 +76,6 @@ public class AplParser
 		case "\u2282": return new EncloseFn();
 		case "\u2283": return new DiscloseFn();//		case "\u22a5": return new DecodeFn();//		case "\u222a": return new UnionFn();//		case "/": return new ReplicateFn();
 		default:
-		System.out.println("trying to find function " + name);
 			return context.tryGetFunction(name);
 	}
   }
@@ -186,6 +185,8 @@ TOKEN : /* OPERATORS */
   >
 | < OUTERPROD : "\u2218." >
 | < MONADICOPERATOR: ["/"]|["\\"]|["\u00a8"]|["\u233f"]|["\u2340"] >
+| < STMTSEPARATOR: ";" >
+| < STMTSEP: ["\u22c4"] >
 }
 
 TOKEN :
@@ -204,8 +205,7 @@ TOKEN :
 void eval_stream() :
 {
   AstNode t;}
-{	(t=expr()	  {
-	    System.out.println("evaluating: " + t.print());
+{	(t=expr() < STMTSEPARATOR >	  {
 	    t.eval(context);	  })+
 	  < EOF >
 }
@@ -231,7 +231,7 @@ AstNode expr() :
 }
 {
 	t = singleexpr()
-	("\u22c4" c=singleexpr()
+	(< STMTSEP > c=singleexpr()
 		{
 		  statements.add(c);
 		}

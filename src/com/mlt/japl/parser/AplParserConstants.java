@@ -17,23 +17,27 @@ public interface AplParserConstants {
   /** RegularExpression Id. */
   int MONADICOPERATOR = 8;
   /** RegularExpression Id. */
-  int ID = 9;
+  int STMTSEPARATOR = 9;
   /** RegularExpression Id. */
-  int CONSTANT = 10;
+  int STMTSEP = 10;
   /** RegularExpression Id. */
-  int CPLXCONSTANT = 11;
+  int ID = 11;
   /** RegularExpression Id. */
-  int STRING = 12;
+  int CONSTANT = 12;
   /** RegularExpression Id. */
-  int NUMBER = 13;
+  int CPLXCONSTANT = 13;
   /** RegularExpression Id. */
-  int SIGN = 14;
+  int STRING = 14;
   /** RegularExpression Id. */
-  int DIGIT = 15;
+  int NUMBER = 15;
   /** RegularExpression Id. */
-  int STRINGDELIM = 16;
+  int SIGN = 16;
   /** RegularExpression Id. */
-  int STRINGCHAR = 17;
+  int DIGIT = 17;
+  /** RegularExpression Id. */
+  int STRINGDELIM = 18;
+  /** RegularExpression Id. */
+  int STRINGCHAR = 19;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -49,6 +53,8 @@ public interface AplParserConstants {
     "<FUNC>",
     "\"\\u2218.\"",
     "<MONADICOPERATOR>",
+    "\";\"",
+    "<STMTSEP>",
     "<ID>",
     "<CONSTANT>",
     "<CPLXCONSTANT>",
@@ -58,7 +64,6 @@ public interface AplParserConstants {
     "<DIGIT>",
     "<STRINGDELIM>",
     "<STRINGCHAR>",
-    "\"\\u22c4\"",
     "\"(\"",
     "\")\"",
     "\":If\"",
@@ -73,7 +78,6 @@ public interface AplParserConstants {
     "\"[\"",
     "\"]\"",
     "\"\\u2190\"",
-    "\";\"",
     "\"{\"",
     "\"}\"",
     "\".\"",
