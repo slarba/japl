@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class EvalTestBase {
 
-	protected Interpreter itn = new Interpreter();
+	protected Interpreter itn = new Interpreter(System.out);
 
 	public EvalTestBase() {
 		super();

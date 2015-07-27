@@ -190,7 +190,7 @@ TOKEN : /* OPERATORS */
 
 TOKEN :
 {
-  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"])+ >
+  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"]|["\u2395"])+ >
 | < CONSTANT : < NUMBER > >
 | < CPLXCONSTANT: < NUMBER > "J" < NUMBER > >
 | < STRING : < STRINGDELIM > (< STRINGCHAR >)+ < STRINGDELIM > >

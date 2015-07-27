@@ -10,7 +10,7 @@ import com.mlt.japl.workspace.Interpreter;
 
 public class GameOfLifeTest {
 
-	Interpreter itn = new Interpreter();
+	Interpreter itn = new Interpreter(System.out);
 	
 	@Test
 	public void test() {

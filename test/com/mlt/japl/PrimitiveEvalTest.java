@@ -13,7 +13,7 @@ import com.mlt.japl.workspace.Interpreter;
 
 public class PrimitiveEvalTest {
 
-	Interpreter itn = new Interpreter();
+	Interpreter itn = new Interpreter(System.out);
 	
 	@Test
 	public void testScalarSum() {

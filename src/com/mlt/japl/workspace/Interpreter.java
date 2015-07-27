@@ -1,5 +1,6 @@
 package com.mlt.japl.workspace;
 
+import java.io.OutputStream;
 import java.io.StringReader;
 
 import com.mlt.japl.arrays.CharArray;
@@ -16,8 +17,8 @@ import com.mlt.japl.tools.Dimensions;
 public class Interpreter {
 	private EvalContext context;
 
-	public Interpreter() {
-		context = new EvalContext();
+	public Interpreter(OutputStream out) {
+		context = new EvalContext(out);
 	}
 
 	public void reset() {

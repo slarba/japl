@@ -1,5 +1,8 @@
 package com.mlt.japl.ast;
 
+import java.io.PrintWriter;
+import java.io.Writer;
+
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
@@ -17,6 +20,13 @@ public class AssignmentNode implements AstNode {
 	
 	@Override
 	public Array eval(EvalContext context) {
+		if(id.equals("\u2395")) {
+			Array result = expr.eval(context);
+			PrintWriter w = new PrintWriter(context.getOutputStream());
+			w.println(result.asString(context.printConfig()));
+			w.flush();
+			return result;
+		}
 		if(expr instanceof NiladicCallNode) {
 			NiladicCallNode n = (NiladicCallNode)expr;
 			context.set(id, n.func());

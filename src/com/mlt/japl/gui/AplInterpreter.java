@@ -131,6 +131,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 				  ,"\u2340"  // scan first axis
 				  ,"\u236c"  // zilde
 				  ,"\u235d"  // lamp
+				  ,"\u2395"
 		};
 		for(String s : buttons) {
 			toolbar.add(createButton(s,font));
@@ -158,7 +159,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 	public void keyTyped(KeyEvent e) {
 	}
 
-	private EvalContext env = new EvalContext();
+	private EvalContext env = new EvalContext(System.out);
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

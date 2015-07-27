@@ -1,16 +1,19 @@
 package com.mlt.japl.workspace;
 
+import java.io.OutputStream;
 import java.util.HashMap;
 
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
+import com.mlt.japl.utils.PrintConfig;
 
 public class EvalContext {
 	HashMap<String, Array> valueMap = new HashMap<String,Array>();
 	HashMap<String, Func> functionMap = new HashMap<String,Func>();
 	EvalContext parent;
+	OutputStream out;
 	
 	public Array get(String id) {
 		if(valueMap.containsKey(id)) {
@@ -39,10 +42,23 @@ public class EvalContext {
 		this.parent = parent;
 	}
 	
-	public EvalContext newFrame() {
-		return new EvalContext(this);
+	public EvalContext(OutputStream out) {
+		this.out = out;
 	}
 
+	public EvalContext(EvalContext parent, OutputStream out) {
+		this.parent = parent;
+		this.out = out;
+	}
+	
+	public EvalContext newFrame() {
+		return new EvalContext(this, out);
+	}
+
+	public OutputStream getOutputStream() {
+		return out;
+	}
+	
 	public Func tryGetFunction(String id) {
 		if(!functionMap.containsKey(id))
 			throw new ValueError();
@@ -58,5 +74,9 @@ public class EvalContext {
 				return false;
 		}
 		return true;
+	}
+
+	public PrintConfig printConfig() {
+		return new PrintConfig();
 	}
 }
