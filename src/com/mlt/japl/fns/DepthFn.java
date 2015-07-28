@@ -3,6 +3,7 @@ package com.mlt.japl.fns;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
+import com.mlt.japl.tools.Dimensions;
 
 public class DepthFn extends SpecialBaseFn {
 
@@ -35,6 +36,16 @@ public class DepthFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		throw new ValenceError();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		return Dimensions.EMPTY;  // monadic version returns scalar
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		return Dimensions.EMPTY;
 	}
 
 }

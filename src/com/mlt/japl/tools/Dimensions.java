@@ -202,4 +202,13 @@ public class Dimensions {
 		}
 		return result;
 	}
+
+	public long[] reverseIndex(int idx) {
+		long[] result = new long[dims.length];
+		for(int i=0; i<result.length; i++) {
+			result[i] = 1 + (idx/spans[i]);
+			idx = idx%spans[i];
+		}
+		return result;
+	}
 }

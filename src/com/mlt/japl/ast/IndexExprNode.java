@@ -1,6 +1,7 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class IndexExprNode implements AstNode {
@@ -32,6 +33,18 @@ public class IndexExprNode implements AstNode {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		return 0;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

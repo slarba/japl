@@ -4,6 +4,7 @@ package com.mlt.japl.fns;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.tools.Iterator;
 
 public class ReverseFn extends SpecialBaseFn {
@@ -85,6 +86,18 @@ public class ReverseFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		return b.type();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

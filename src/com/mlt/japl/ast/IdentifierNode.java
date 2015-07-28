@@ -2,6 +2,7 @@ package com.mlt.japl.ast;
 
 import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class IdentifierNode implements AstNode {
@@ -52,6 +53,18 @@ public class IdentifierNode implements AstNode {
 			return b.type();
 		}
 		return Array.NESTED;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

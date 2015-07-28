@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class EvalArrayNode implements AstNode {
@@ -48,5 +49,17 @@ public class EvalArrayNode implements AstNode {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		return Array.NESTED;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

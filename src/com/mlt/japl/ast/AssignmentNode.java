@@ -6,6 +6,7 @@ import java.io.Writer;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class AssignmentNode implements AstNode {
@@ -50,6 +51,18 @@ public class AssignmentNode implements AstNode {
 	public int resultTypeFor(Array a, Array b) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

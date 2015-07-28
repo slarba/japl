@@ -3,6 +3,7 @@ package com.mlt.japl.ast;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class UserFnNode implements AstNode, Func {
@@ -62,6 +63,16 @@ public class UserFnNode implements AstNode, Func {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		return body.resultTypeFor(a,b);
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		return body.resultDimsFor(a,axis);
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		return body.resultDimsFor(a,b,axis);
 	}
 
 }

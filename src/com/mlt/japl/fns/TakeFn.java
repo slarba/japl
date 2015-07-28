@@ -71,4 +71,20 @@ public class TakeFn extends SpecialBaseFn {
 		return b.type();
 	}
 
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		return Dimensions.EMPTY;  // returns a scalar always
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		if(!a.isIntegral()) throw new DomainError();
+		if(a.rank()>1) throw new RankError();
+		if(a.length()>b.rank()) throw new LengthError();
+		int[] lens = new int[a.length()];
+		for(int i=0; i<a.length(); i++) {
+			lens[i] = (int)Math.abs(a.atI(i));
+		}
+		return new Dimensions(lens);
+	}
 }

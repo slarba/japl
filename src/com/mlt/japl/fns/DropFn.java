@@ -62,4 +62,22 @@ public class DropFn extends SpecialBaseFn {
 	public int resultTypeFor(Array a, Array b) {
 		return b.type();
 	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		throw new ValenceError();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		if(!a.isIntegral()) throw new DomainError();
+		if(a.rank()>1) throw new RankError();
+		if(a.length()>b.rank()) throw new LengthError();
+		int[] lens = new int[a.length()];
+		int[] bdims = b.dims().asArray();
+		for(int i=0; i<a.length(); i++) {
+			lens[i] = Math.max(0, bdims[i] - (int)Math.abs(a.atI(i)));
+		}
+		return new Dimensions(lens);
+	}
 }

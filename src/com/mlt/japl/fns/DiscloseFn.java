@@ -2,6 +2,7 @@ package com.mlt.japl.fns;
 
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 
 public class DiscloseFn extends SpecialBaseFn {
 
@@ -24,6 +25,17 @@ public class DiscloseFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		throw new ValenceError();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		if(a.isScalar()) return a.atA(0).dims();
+		return a.dims();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		return null;
 	}
 
 }

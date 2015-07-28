@@ -7,6 +7,7 @@ import com.mlt.japl.scalars.CharScalar;
 import com.mlt.japl.scalars.ComplexScalar;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.scalars.IntScalar;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class ConstantAstNode implements AstNode {
@@ -100,5 +101,17 @@ public class ConstantAstNode implements AstNode {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		return parsedValue.type();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

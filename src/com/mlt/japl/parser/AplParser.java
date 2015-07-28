@@ -72,7 +72,9 @@ public class AplParser implements AplParserConstants {
         {
                 case "/":  return new ReduceFn(arg, false);
                 case "\u005c\u005c": return new ScanFn(arg, false);
-                case "\u00a8": return new EachFn(arg);
+                case "\u00a8":
+                        if(arg instanceof PrimitiveFunc) return arg;  // each does nothing productive with primitive functions
+                        else return new EachFn(arg);
                 case "\u233f": return new ReduceFn(arg, true);
                 case "\u2340": return new ScanFn(arg, true);
                 default:
@@ -775,12 +777,6 @@ public class AplParser implements AplParserConstants {
     finally { jj_save(36, xla); }
   }
 
-  private boolean jj_3_27() {
-    if (jj_scan_token(31)) return true;
-    if (jj_3R_15()) return true;
-    return false;
-  }
-
   private boolean jj_3_30() {
     if (jj_3R_17()) return true;
     Token xsp;
@@ -1151,6 +1147,12 @@ public class AplParser implements AplParserConstants {
   private boolean jj_3_13() {
     if (jj_scan_token(19)) return true;
     if (jj_3R_12()) return true;
+    return false;
+  }
+
+  private boolean jj_3_27() {
+    if (jj_scan_token(31)) return true;
+    if (jj_3R_15()) return true;
     return false;
   }
 

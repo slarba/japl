@@ -32,6 +32,7 @@ public class AndFn extends PrimitiveBaseFn {
 			if(b instanceof BitArray) {
 				return ai.and((BitArray)b);
 			}
+			return super.dyadic(a, b, axis);
 		}
 		if(b instanceof BitArray) {
 			BitArray bi = (BitArray)b;

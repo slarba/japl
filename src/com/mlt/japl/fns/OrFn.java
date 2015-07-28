@@ -32,6 +32,7 @@ public class OrFn extends PrimitiveBaseFn {
 			if(b instanceof BitArray) {
 				return ai.or((BitArray)b);
 			}
+			return super.dyadic(a, b, axis);
 		}
 		if(b instanceof BitArray) {
 			BitArray bi = (BitArray)b;

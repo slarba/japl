@@ -126,4 +126,16 @@ public class ReduceFn extends SpecialBaseFn {
 		return "reduce<" + fn.getName() + ">";
 	}
 
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

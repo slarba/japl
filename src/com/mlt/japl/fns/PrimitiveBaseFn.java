@@ -19,6 +19,7 @@ import com.mlt.japl.scalars.ArrayScalar;
 import com.mlt.japl.scalars.CharScalar;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.scalars.IntScalar;
+import com.mlt.japl.tools.Dimensions;
 
 public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 	ResultTypeMap resultTypes = new ResultTypeMap();
@@ -535,5 +536,20 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 	public Array niladic()
 	{
 		throw new ValenceError();
+	}
+
+	// primitive monadic functions give the same shape out
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		return a.dims();
+	}
+
+	// primitive dyadic functions maintain the shape
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		if(a.isScalar()) return b.dims();
+		if(b.isScalar()) return a.dims();
+		checkEqualDimensionsAndRank(a, b);
+		return a.dims();
 	}
 }

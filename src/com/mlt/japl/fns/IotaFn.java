@@ -5,7 +5,9 @@ import java.util.HashMap;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.arrays.IotaArray;
+import com.mlt.japl.arrays.MultidimIotaArray;
 import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -15,6 +17,13 @@ public class IotaFn extends SpecialBaseFn {
 	@Override
 	public Array monadic(Array a, int axis) {
 		if(!a.isIntegral()) throw new DomainError();
+		if(a.rank()>1) throw new RankError();
+		if(a.length()>1) {
+			int[] ds = new int[a.length()];
+			for(int i=0; i<a.length(); i++)
+				ds[i] = (int)a.atI(i);
+			return new MultidimIotaArray(new Dimensions(ds));
+		}
 		long v = a.atI(0);
 		if(v==0) return new IntArray();
 		return new IotaArray((int)a.atI(0));
@@ -51,6 +60,18 @@ public class IotaFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		throw new ValenceError();
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,21 +1,10 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.arrays.CharArray;
-import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.arrays.NestedArray;
-import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
-import com.mlt.japl.scalars.ArrayScalar;
-import com.mlt.japl.scalars.CharScalar;
-import com.mlt.japl.scalars.DoubleScalar;
-import com.mlt.japl.scalars.IntScalar;
-import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.tools.Iterator;
 
 public abstract class SpecialBaseFn implements Func {
@@ -29,19 +18,6 @@ public abstract class SpecialBaseFn implements Func {
 	public Array dyadic(Array a, Array b, int axis) {
 		throw new ValenceError();
 	}
-
-//	private Array makeScalarOfType(int type) {
-//		switch(type) {
-//		case Array.BIT:
-//		case Array.INTEGER:   return new IntScalar();
-//		case Array.DOUBLE:    return new DoubleScalar();
-//		case Array.CHARACTER: return new CharScalar();
-//		case Array.NESTED:    return new ArrayScalar();
-//		default:
-//			throw new AplError();
-//		}		
-//	}
-
 	
 	public Array createResultArrayFor(Array a, int axis) {
 		if(a.isScalar()) {

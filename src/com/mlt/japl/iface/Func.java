@@ -1,5 +1,7 @@
 package com.mlt.japl.iface;
 
+import com.mlt.japl.tools.Dimensions;
+
 /**
  * Function interface
  * 
@@ -56,4 +58,7 @@ public interface Func {
 	 * @return int result type
 	 */
 	int resultTypeFor(Array a, Array b);
+	
+	Dimensions resultDimsFor(Array a, int axis);
+	Dimensions resultDimsFor(Array a, Array b, int axis);
 }
