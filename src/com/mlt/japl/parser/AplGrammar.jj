@@ -183,7 +183,7 @@ TOKEN : /* OPERATORS */
   >
 | < OUTERPROD : "\u2218." >
 | < MONADICOPERATOR: ["/"]|["\\"]|["\u00a8"]|["\u233f"]|["\u2340"] >
-| < STMTSEPARATOR: ["\u22c4"] | (["\n"])+ | ("\u235d" (~["\n"])* ["\n"]) >
+| < STMTSEPARATOR: ["\u22c4"] | (["\r","\n"])+ | ("\u235d" (~["\n"])* ["\n"]) >
 }
 
 TOKEN :
@@ -280,8 +280,8 @@ AstNode arrayexpr() :{	AstNode t;
 	{
 	  return t;
 	}
-|   "(" t = arrayexpr() ")"	{
-	  return t;	}
+//|   "(" t = arrayexpr() ")"//	{
+//	  return t;//	}
 }
 
 AstNode if_expr() :

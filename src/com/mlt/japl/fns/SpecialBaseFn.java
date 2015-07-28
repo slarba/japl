@@ -30,61 +30,38 @@ public abstract class SpecialBaseFn implements Func {
 		throw new ValenceError();
 	}
 
-	private Array makeScalarOfType(int type) {
-		switch(type) {
-		case Array.BIT:
-		case Array.INTEGER:   return new IntScalar();
-		case Array.DOUBLE:    return new DoubleScalar();
-		case Array.CHARACTER: return new CharScalar();
-		case Array.NESTED:    return new ArrayScalar();
-		default:
-			throw new AplError();
-		}		
-	}
+//	private Array makeScalarOfType(int type) {
+//		switch(type) {
+//		case Array.BIT:
+//		case Array.INTEGER:   return new IntScalar();
+//		case Array.DOUBLE:    return new DoubleScalar();
+//		case Array.CHARACTER: return new CharScalar();
+//		case Array.NESTED:    return new ArrayScalar();
+//		default:
+//			throw new AplError();
+//		}		
+//	}
 
-	private Array makeSimilarArrayOfType(int type, Array a) {
-		switch(type) {
-		case Array.BIT:   		  return new BitArray(a.dims(), true, a.length());
-		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.length());
-		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.length());
-		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.length());
-		case Array.NESTED:		  return new NestedArray(a.dims(), true, a.length());
-		default:
-			throw new AplError();
-		}		
-	}
-
-	public Array makeSimilarArrayOfType(int type, Dimensions d) {
-		switch(type) {
-		case Array.BIT:   		  return new BitArray(d, true, d.length());
-		case Array.INTEGER:		  return new IntArray(d, true, d.length());
-		case Array.DOUBLE:		  return new DoubleArray(d, true, d.length());
-		case Array.CHARACTER:	  return new CharArray(d, true, d.length());
-		case Array.NESTED:		  return new NestedArray(d, true, d.length());
-		default:
-			throw new AplError();
-		}		
-	}
 	
 	public Array createResultArrayFor(Array a, int axis) {
 		if(a.isScalar()) {
-			return makeScalarOfType(resultTypeFor(a));
+			return ArrayFactory.makeScalarOfType(resultTypeFor(a));
 		}
-		return makeSimilarArrayOfType(resultTypeFor(a), a);
+		return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a), a);
 	}
 
 	public Array createResultArrayFor(Array a, Array b, int axis) {
 		if(a.isScalar()) {
 			if(b.isScalar()) {
-				return makeScalarOfType(resultTypeFor(a, b));
+				return ArrayFactory.makeScalarOfType(resultTypeFor(a, b));
 			}
-			return makeSimilarArrayOfType(resultTypeFor(a, b), b);
+			return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), b);
 		}
 		if(b.isScalar()) {
-			return makeSimilarArrayOfType(resultTypeFor(a, b), a);			
+			return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), a);			
 		}
 		checkEqualDimensionsAndRank(a, b);
-		return makeSimilarArrayOfType(resultTypeFor(a, b), a);			
+		return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), a);			
 	}
 
 	public void checkEqualDimensionsAndRank(Array a, Array b) {

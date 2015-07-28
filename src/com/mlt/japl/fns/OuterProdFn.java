@@ -28,7 +28,7 @@ public class OuterProdFn extends SpecialBaseFn {
 		
 		Dimensions resultDims = a.dims().concat(b.dims());
 		
-		Array result = makeSimilarArrayOfType(fn.resultTypeFor(a, b), resultDims);
+		Array result = ArrayFactory.makeArrayOfType(fn.resultTypeFor(a, b), resultDims);
 		Iterator ri = result.dims().linearIterator();
 		Iterator ai = a.dims().linearIterator();
 		Iterator bi = b.dims().linearIterator();

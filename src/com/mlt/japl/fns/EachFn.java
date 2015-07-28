@@ -13,7 +13,7 @@ public class EachFn extends SpecialBaseFn {
 	
 	@Override
 	public Array monadic(Array a, int axis) {
-		Array result = makeSimilarArrayOfType(Array.NESTED, a.dims());
+		Array result = ArrayFactory.makeSimilarArrayOfType(Array.NESTED, a);
 		for(int i=0; i<result.actualLength(); i++) {
 			result.setA(i, fn.monadic(a.atA(i), axis));
 		}
@@ -22,11 +22,8 @@ public class EachFn extends SpecialBaseFn {
 
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
-//		if(b.type()!=Array.NESTED) {
-//			return fn.dyadic(a, b, axis);
-//		}
 		if(b.isScalar()) {
-			Array result = makeSimilarArrayOfType(Array.NESTED, a.dims());
+			Array result = ArrayFactory.makeSimilarArrayOfType(Array.NESTED, a);
 			for(int i=0; i<result.actualLength(); i++) {
 				result.setA(i, fn.dyadic(a.atA(i), b.atA(0), axis));
 			}

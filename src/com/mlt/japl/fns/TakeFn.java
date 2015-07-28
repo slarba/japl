@@ -37,7 +37,7 @@ public class TakeFn extends SpecialBaseFn {
 		}
 
 		Dimensions resultDims = b.dims().offsetBy(lengths);
-		Array result = makeSimilarArrayOfType(b.type(), resultDims);
+		Array result = ArrayFactory.makeArrayOfType(b.type(), resultDims);
 		
 		if(b.dims().fitsInside(resultDims)) {
 			Iterator srcIterator = b.dims().iteratorAlongAxis(b.rank()-1);

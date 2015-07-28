@@ -24,7 +24,7 @@ public class RavelFn extends SpecialBaseFn {
 		}
 
 		Dimensions resultDims = a.dims().laminate(b.dims(), axis);
-		Array result = makeSimilarArrayOfType(resultTypeFor(a,b), resultDims);
+		Array result = ArrayFactory.makeArrayOfType(resultTypeFor(a,b), resultDims);
 		
 		Iterator r = resultDims.iteratorAlongLastAxis();
 		while(!r.isFinished()) {

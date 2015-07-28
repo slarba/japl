@@ -21,8 +21,7 @@ import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.scalars.IntScalar;
 
 public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
-	// intset could be faster
-	HashMap<Integer, Integer> resultTypes = new HashMap<Integer,Integer>();
+	ResultTypeMap resultTypes = new ResultTypeMap();
 	
 	public PrimitiveBaseFn() {
 		// check which have been implemented in base class
@@ -33,103 +32,73 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		try { I_I(0);   resultTypes.put(Array.INTEGER, Array.INTEGER); } catch(AplError e) {}
 		try { I_C(' '); resultTypes.put(Array.CHARACTER, Array.INTEGER); } catch(AplError e) {}
 
-		try { D_DD(0,0);     resultTypes.put(Array.DOUBLE|(Array.DOUBLE<<16), Array.DOUBLE); } catch(AplError e) {}
+		try { D_DD(0,0);     resultTypes.put(Array.DOUBLE,Array.DOUBLE, Array.DOUBLE); } catch(AplError e) {}
 		try { 
 			D_DI(0,0);     
-			resultTypes.put(Array.DOUBLE|(Array.INTEGER<<16), Array.DOUBLE); 
-			resultTypes.put(Array.DOUBLE|(Array.BIT<<16), Array.DOUBLE);
+			resultTypes.put(Array.DOUBLE, Array.INTEGER, Array.DOUBLE); 
+			resultTypes.put(Array.DOUBLE, Array.BIT, Array.DOUBLE);
 			} catch(AplError e) {}
 		try { D_ID(0,0);     
-			resultTypes.put(Array.INTEGER|(Array.DOUBLE<<16), Array.DOUBLE); 
-			resultTypes.put(Array.BIT|(Array.DOUBLE<<16), Array.DOUBLE);
+			resultTypes.put(Array.INTEGER, Array.DOUBLE, Array.DOUBLE); 
+			resultTypes.put(Array.BIT, Array.DOUBLE, Array.DOUBLE);
 			} catch(AplError e) {}
-		try { D_II(0,0);     resultTypes.put(Array.INTEGER|(Array.INTEGER<<16), Array.DOUBLE); } catch(AplError e) {}
+		try { D_II(0,0);     resultTypes.put(Array.INTEGER, Array.INTEGER, Array.DOUBLE); } catch(AplError e) {}
 
-		try { I_CC(' ',' '); resultTypes.put(Array.CHARACTER|(Array.CHARACTER<<16), Array.INTEGER); } catch(AplError e) {}
-		try { I_DD(0,0);     resultTypes.put(Array.DOUBLE|(Array.DOUBLE<<16), Array.INTEGER); } catch(AplError e) {}
-		try { I_DI(0,0);     resultTypes.put(Array.DOUBLE|(Array.INTEGER<<16), Array.INTEGER); } catch(AplError e) {}
-		try { I_ID(0,0);     resultTypes.put(Array.INTEGER|(Array.DOUBLE<<16), Array.INTEGER); } catch(AplError e) {}
+		try { I_CC(' ',' '); resultTypes.put(Array.CHARACTER, Array.CHARACTER, Array.INTEGER); } catch(AplError e) {}
+		try { I_DD(0,0);     resultTypes.put(Array.DOUBLE, Array.DOUBLE, Array.INTEGER); } catch(AplError e) {}
+		try { I_DI(0,0);     resultTypes.put(Array.DOUBLE, Array.INTEGER, Array.INTEGER); } catch(AplError e) {}
+		try { I_ID(0,0);     resultTypes.put(Array.INTEGER, Array.DOUBLE, Array.INTEGER); } catch(AplError e) {}
 		try {
 			I_II(0,0);
-			resultTypes.put(Array.INTEGER|(Array.INTEGER<<16), Array.INTEGER); 
-			resultTypes.put(Array.INTEGER|(Array.BIT<<16), Array.INTEGER);
-			resultTypes.put(Array.BIT|(Array.INTEGER<<16), Array.INTEGER);
-			resultTypes.put(Array.BIT|(Array.BIT<<16), Array.INTEGER);
+			resultTypes.put(Array.INTEGER, Array.INTEGER, Array.INTEGER); 
+			resultTypes.put(Array.INTEGER, Array.BIT, Array.INTEGER);
+			resultTypes.put(Array.BIT, Array.INTEGER, Array.INTEGER);
+			resultTypes.put(Array.BIT, Array.BIT, Array.INTEGER);
 		} catch(AplError e) {}
-		try { I_CI(' ',0);   resultTypes.put(Array.CHARACTER|(Array.INTEGER<<16), Array.INTEGER); } catch(AplError e) {}
-		try { I_IC(0,' ');   resultTypes.put(Array.INTEGER|(Array.CHARACTER<<16), Array.INTEGER); } catch(AplError e) {}
-		try { I_CD(' ',0);   resultTypes.put(Array.CHARACTER|(Array.DOUBLE<<16), Array.INTEGER); } catch(AplError e) {}
-		try { I_DC(0,' ');   resultTypes.put(Array.DOUBLE|(Array.CHARACTER<<16), Array.INTEGER); } catch(AplError e) {}
-	}
-
-	private Array makeScalarOfType(int type) {
-		switch(type) {
-		case Array.BIT:
-		case Array.INTEGER:   return new IntScalar();
-		case Array.DOUBLE:    return new DoubleScalar();
-		case Array.CHARACTER: return new CharScalar();
-		case Array.NESTED:    return new ArrayScalar();
-		default:
-			throw new AplError();
-		}		
-	}
-
-	private Array makeSimilarArrayOfType(int type, Array a) {
-		switch(type) {
-		case Array.BIT:   		  return new BitArray(a.dims(), true, a.actualLength());
-		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.actualLength());
-		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.actualLength());
-		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.actualLength());
-		case Array.NESTED:		  return new NestedArray(a.dims(), true, a.actualLength());
-		default:
-			throw new AplError();
-		}		
+		try { I_CI(' ',0);   resultTypes.put(Array.CHARACTER, Array.INTEGER, Array.INTEGER); } catch(AplError e) {}
+		try { I_IC(0,' ');   resultTypes.put(Array.INTEGER, Array.CHARACTER, Array.INTEGER); } catch(AplError e) {}
+		try { I_CD(' ',0);   resultTypes.put(Array.CHARACTER, Array.DOUBLE, Array.INTEGER); } catch(AplError e) {}
+		try { I_DC(0,' ');   resultTypes.put(Array.DOUBLE, Array.CHARACTER, Array.INTEGER); } catch(AplError e) {}
 	}
 	
 	public Array createResultArrayFor(Array a, int axis) {
 		if(a.isScalar()) {
-			return makeScalarOfType(resultTypeFor(a));
+			return ArrayFactory.makeScalarOfType(resultTypeFor(a));
 		}
-		return makeSimilarArrayOfType(resultTypeFor(a), a);
+		return ArrayFactory.makeSimilarArrayOfTypeWithActualLength(resultTypeFor(a), a);
 	}
 
 	public Array createResultArrayFor(Array a, Array b, int axis) {
 		if(a.isScalar()) {
 			if(b.isScalar()) {
-				return makeScalarOfType(resultTypeFor(a, b));
+				return ArrayFactory.makeScalarOfType(resultTypeFor(a, b));
 			}
-			return makeSimilarArrayOfType(resultTypeFor(a, b), b);
+			return ArrayFactory.makeSimilarArrayOfTypeWithActualLength(resultTypeFor(a, b), b);
 		}
 		if(b.isScalar()) {
-			return makeSimilarArrayOfType(resultTypeFor(a, b), a);			
+			return ArrayFactory.makeSimilarArrayOfTypeWithActualLength(resultTypeFor(a, b), a);			
 		}
 		checkEqualDimensionsAndRank(a, b);
-		return makeSimilarArrayOfType(resultTypeFor(a, b), a);			
+		return ArrayFactory.makeSimilarArrayOfTypeWithActualLength(resultTypeFor(a, b), a);			
 	}
 
 	public void checkEqualDimensionsAndRank(Array a, Array b) {
 		if(a.rank()!=b.rank()) throw new RankError();
 		if(!a.dims().equals(b.dims())) throw new LengthError();
 	}
-	
+
 	@Override
 	public int resultTypeFor(Array a, Array b) {
-		int a1 = a.type();
-		int b1 = b.type();
-		if(a1==Array.NESTED || b1==Array.NESTED) return Array.NESTED;
-		int t = a1|(b1<<16);
-		Integer i = resultTypes.get(t);
-		if(i!=null) return i;
-		throw new DomainError();
+		int t = resultTypes.get(a.type(), b.type());
+		if(t==0) throw new DomainError();
+		return t;
 	}
 	
 	@Override
 	public int resultTypeFor(Array a) {
-		int t = a.type();
-		if(t==Array.NESTED) return t;
-		Integer i = resultTypes.get(t);
-		if(i!=null) return i;
-		throw new DomainError();		
+		int t = resultTypes.get(a.type());
+		if(t==0) throw new DomainError();
+		return t;
 	}
 
 	@Override

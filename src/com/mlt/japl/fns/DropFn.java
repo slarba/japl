@@ -36,7 +36,7 @@ public class DropFn extends SpecialBaseFn {
 		}
 
 		Dimensions resultDims = b.dims().offsetByMinus(lengths);
-		Array result = makeSimilarArrayOfType(b.type(), resultDims);
+		Array result = ArrayFactory.makeArrayOfType(b.type(), resultDims);
 		Iterator srcIterator = b.dims().offsetIterator(offsets, limits);
 		Iterator dstIterator = resultDims.linearIterator();
 

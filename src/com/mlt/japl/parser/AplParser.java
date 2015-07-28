@@ -192,11 +192,6 @@ public class AplParser implements AplParserConstants {
     } else if (jj_2_12(2)) {
       t = dyadic_call_or_array();
           {if (true) return t;}
-    } else if (jj_2_13(2)) {
-      jj_consume_token(17);
-      t = arrayexpr();
-      jj_consume_token(18);
-          {if (true) return t;}
     } else {
       jj_consume_token(-1);
       throw new ParseException();
@@ -206,39 +201,39 @@ public class AplParser implements AplParserConstants {
 
   final public AstNode if_expr() throws ParseException {
   AstNode cond, thenbranch, elsebranch=null;
-    jj_consume_token(19);
+    jj_consume_token(17);
     cond = arrayexpr();
-    jj_consume_token(20);
+    jj_consume_token(18);
     thenbranch = toplevel_expr_list();
-    if (jj_2_14(2)) {
-      jj_consume_token(21);
+    if (jj_2_13(2)) {
+      jj_consume_token(19);
       elsebranch = toplevel_expr_list();
     } else {
       ;
     }
-    jj_consume_token(22);
+    jj_consume_token(20);
           {if (true) return new IfNode(cond, thenbranch, elsebranch);}
     throw new Error("Missing return statement in function");
   }
 
   final public AstNode while_expr() throws ParseException {
   AstNode cond, body;
-    jj_consume_token(23);
+    jj_consume_token(21);
     cond = arrayexpr();
-    jj_consume_token(24);
+    jj_consume_token(22);
     body = toplevel_expr_list();
-    jj_consume_token(25);
+    jj_consume_token(23);
           {if (true) return new WhileNode(cond, body);}
     throw new Error("Missing return statement in function");
   }
 
   final public AstNode repeat_expr() throws ParseException {
   AstNode count, body;
-    jj_consume_token(26);
-    count = arrayexpr();
     jj_consume_token(24);
+    count = arrayexpr();
+    jj_consume_token(22);
     body = toplevel_expr_list();
-    jj_consume_token(27);
+    jj_consume_token(25);
     {if (true) return new RepeatNode(count, body);}
     throw new Error("Missing return statement in function");
   }
@@ -251,14 +246,14 @@ public class AplParser implements AplParserConstants {
   AstNode arg = null;
   AstNode axis = null;
     s = fn_expr();
-    if (jj_2_15(2)) {
-      jj_consume_token(28);
+    if (jj_2_14(2)) {
+      jj_consume_token(26);
       axis = arrayexpr();
-      jj_consume_token(29);
+      jj_consume_token(27);
     } else {
       ;
     }
-    if (jj_2_16(2)) {
+    if (jj_2_15(2)) {
       t = arrayexpr();
     } else {
       ;
@@ -281,12 +276,12 @@ public class AplParser implements AplParserConstants {
   AstNode right = null;
   AstNode axis = null;
     left = array();
-    if (jj_2_18(2)) {
+    if (jj_2_17(2)) {
       op = fn_expr();
-      if (jj_2_17(2)) {
-        jj_consume_token(28);
+      if (jj_2_16(2)) {
+        jj_consume_token(26);
         axis = arrayexpr();
-        jj_consume_token(29);
+        jj_consume_token(27);
       } else {
         ;
       }
@@ -312,30 +307,30 @@ public class AplParser implements AplParserConstants {
   List<AstNode > nodeList = new ArrayList<AstNode>();
     label_3:
     while (true) {
-      if (jj_2_19(2)) {
+      if (jj_2_18(2)) {
         idexpr = identifierexpr();
             nodeList.add(idexpr);
             mustEvaluate = true;
-      } else if (jj_2_20(2)) {
+      } else if (jj_2_19(2)) {
         s = jj_consume_token(CONSTANT);
             nodeList.add(new ConstantAstNode(s.toString()));
-      } else if (jj_2_21(2)) {
+      } else if (jj_2_20(2)) {
         s = jj_consume_token(STRING);
             nodeList.add(new ConstantAstNode(s.toString()));
-      } else if (jj_2_22(2)) {
+      } else if (jj_2_21(2)) {
         s = jj_consume_token(CPLXCONSTANT);
             nodeList.add(new ConstantAstNode(s.toString(), ConstantAstNode.COMPLEX));
-      } else if (jj_2_23(2)) {
-        jj_consume_token(17);
+      } else if (jj_2_22(2)) {
+        jj_consume_token(28);
         idexpr = arrayexpr();
             nodeList.add(idexpr);
             mustEvaluate = true;
-        jj_consume_token(18);
+        jj_consume_token(29);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      if (jj_2_24(2)) {
+      if (jj_2_23(2)) {
         ;
       } else {
         break label_3;
@@ -359,14 +354,14 @@ public class AplParser implements AplParserConstants {
   AstNode e2 = null;
   Token ident = null;
     ident = jj_consume_token(ID);
-    if (jj_2_25(2)) {
-      jj_consume_token(28);
+    if (jj_2_24(2)) {
+      jj_consume_token(26);
       e = indexexpr();
-      jj_consume_token(29);
+      jj_consume_token(27);
     } else {
       ;
     }
-    if (jj_2_26(2)) {
+    if (jj_2_25(2)) {
       jj_consume_token(30);
       e2 = arrayexpr();
     } else {
@@ -382,12 +377,12 @@ public class AplParser implements AplParserConstants {
   final public IndexExprNode indexexpr() throws ParseException {
   AstNode e1 = null;
   IndexExprNode e2 = null;
-    if (jj_2_27(2)) {
+    if (jj_2_26(2)) {
       e1 = arrayexpr();
     } else {
       ;
     }
-    if (jj_2_28(2)) {
+    if (jj_2_27(2)) {
       jj_consume_token(31);
       e2 = indexexpr();
     } else {
@@ -401,12 +396,12 @@ public class AplParser implements AplParserConstants {
   Func s = null;
   AstNode userfn = null;
   Token m = null;
-    if (jj_2_30(2)) {
+    if (jj_2_29(2)) {
       userfn = userfndef();
                            {if (true) return new UserFnNode(userfn, context);}
-    } else if (jj_2_31(2)) {
+    } else if (jj_2_30(2)) {
       s = operatorexpr();
-      if (jj_2_29(2)) {
+      if (jj_2_28(2)) {
         m = jj_consume_token(MONADICOPERATOR);
       } else {
         ;
@@ -433,13 +428,13 @@ public class AplParser implements AplParserConstants {
 
   final public Func operatorexpr() throws ParseException {
   Func right = null;
-    if (jj_2_32(2)) {
+    if (jj_2_31(2)) {
       right = function_or_inner_product();
     {if (true) return right;}
-    } else if (jj_2_33(2)) {
+    } else if (jj_2_32(2)) {
       right = monadic_operator_as_fn();
     {if (true) return right;}
-    } else if (jj_2_34(2)) {
+    } else if (jj_2_33(2)) {
       right = outer_product();
         {if (true) return right;}
     } else {
@@ -467,13 +462,13 @@ public class AplParser implements AplParserConstants {
   final public Func operatorexpr_noinnerprod() throws ParseException {
         Func s = null;
         Token t = null;
-    if (jj_2_35(2)) {
+    if (jj_2_34(2)) {
       s = outer_product();
           {if (true) return s;}
-    } else if (jj_2_36(2)) {
+    } else if (jj_2_35(2)) {
       s = monadic_operator_as_fn();
       {if (true) return s;}
-    } else if (jj_2_37(2)) {
+    } else if (jj_2_36(2)) {
       t = jj_consume_token(FUNC);
       {if (true) return lookupFn(t.toString());}
     } else {
@@ -491,7 +486,7 @@ public class AplParser implements AplParserConstants {
     s = jj_consume_token(FUNC);
     label_4:
     while (true) {
-      if (jj_2_38(2)) {
+      if (jj_2_37(2)) {
         ;
       } else {
         break label_4;
@@ -780,33 +775,26 @@ public class AplParser implements AplParserConstants {
     finally { jj_save(36, xla); }
   }
 
-  private boolean jj_2_38(int xla) {
-    jj_la = xla; jj_lastpos = jj_scanpos = token;
-    try { return !jj_3_38(); }
-    catch(LookaheadSuccess ls) { return true; }
-    finally { jj_save(37, xla); }
-  }
-
-  private boolean jj_3_28() {
+  private boolean jj_3_27() {
     if (jj_scan_token(31)) return true;
     if (jj_3R_15()) return true;
     return false;
   }
 
-  private boolean jj_3_31() {
+  private boolean jj_3_30() {
     if (jj_3R_17()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_29()) jj_scanpos = xsp;
+    if (jj_3_28()) jj_scanpos = xsp;
     return false;
   }
 
   private boolean jj_3R_13() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_30()) {
+    if (jj_3_29()) {
     jj_scanpos = xsp;
-    if (jj_3_31()) return true;
+    if (jj_3_30()) return true;
     }
     return false;
   }
@@ -815,11 +803,11 @@ public class AplParser implements AplParserConstants {
     if (jj_3R_22()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_18()) jj_scanpos = xsp;
+    if (jj_3_17()) jj_scanpos = xsp;
     return false;
   }
 
-  private boolean jj_3_30() {
+  private boolean jj_3_29() {
     if (jj_3R_16()) return true;
     return false;
   }
@@ -829,7 +817,7 @@ public class AplParser implements AplParserConstants {
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_38()) { jj_scanpos = xsp; break; }
+      if (jj_3_37()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -845,8 +833,8 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_15() {
-    if (jj_scan_token(28)) return true;
+  private boolean jj_3_14() {
+    if (jj_scan_token(26)) return true;
     if (jj_3R_9()) return true;
     return false;
   }
@@ -864,14 +852,14 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_25() {
-    if (jj_scan_token(28)) return true;
+  private boolean jj_3_24() {
+    if (jj_scan_token(26)) return true;
     if (jj_3R_15()) return true;
-    if (jj_scan_token(29)) return true;
+    if (jj_scan_token(27)) return true;
     return false;
   }
 
-  private boolean jj_3_27() {
+  private boolean jj_3_26() {
     if (jj_3R_9()) return true;
     return false;
   }
@@ -879,13 +867,13 @@ public class AplParser implements AplParserConstants {
   private boolean jj_3R_15() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_27()) jj_scanpos = xsp;
+    if (jj_3_26()) jj_scanpos = xsp;
     xsp = jj_scanpos;
-    if (jj_3_28()) jj_scanpos = xsp;
+    if (jj_3_27()) jj_scanpos = xsp;
     return false;
   }
 
-  private boolean jj_3_37() {
+  private boolean jj_3_36() {
     if (jj_scan_token(FUNC)) return true;
     return false;
   }
@@ -894,32 +882,32 @@ public class AplParser implements AplParserConstants {
     if (jj_3R_13()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_15()) jj_scanpos = xsp;
+    if (jj_3_14()) jj_scanpos = xsp;
     xsp = jj_scanpos;
-    if (jj_3_16()) jj_scanpos = xsp;
+    if (jj_3_15()) jj_scanpos = xsp;
     return false;
   }
 
   private boolean jj_3R_21() {
     Token xsp;
     xsp = jj_scanpos;
+    if (jj_3_34()) {
+    jj_scanpos = xsp;
     if (jj_3_35()) {
     jj_scanpos = xsp;
-    if (jj_3_36()) {
-    jj_scanpos = xsp;
-    if (jj_3_37()) return true;
+    if (jj_3_36()) return true;
     }
     }
     return false;
   }
 
-  private boolean jj_3_36() {
-    if (jj_3R_19()) return true;
+  private boolean jj_3_34() {
+    if (jj_3R_20()) return true;
     return false;
   }
 
   private boolean jj_3_35() {
-    if (jj_3R_20()) return true;
+    if (jj_3R_19()) return true;
     return false;
   }
 
@@ -932,9 +920,9 @@ public class AplParser implements AplParserConstants {
     if (jj_scan_token(ID)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_25()) jj_scanpos = xsp;
+    if (jj_3_24()) jj_scanpos = xsp;
     xsp = jj_scanpos;
-    if (jj_3_26()) jj_scanpos = xsp;
+    if (jj_3_25()) jj_scanpos = xsp;
     return false;
   }
 
@@ -975,13 +963,13 @@ public class AplParser implements AplParserConstants {
   }
 
   private boolean jj_3R_6() {
-    if (jj_scan_token(26)) return true;
+    if (jj_scan_token(24)) return true;
     if (jj_3R_9()) return true;
     return false;
   }
 
   private boolean jj_3R_8() {
-    if (jj_scan_token(23)) return true;
+    if (jj_scan_token(21)) return true;
     if (jj_3R_9()) return true;
     return false;
   }
@@ -1003,14 +991,14 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_23() {
-    if (jj_scan_token(17)) return true;
+  private boolean jj_3_22() {
+    if (jj_scan_token(28)) return true;
     if (jj_3R_9()) return true;
     return false;
   }
 
   private boolean jj_3R_7() {
-    if (jj_scan_token(19)) return true;
+    if (jj_scan_token(17)) return true;
     if (jj_3R_9()) return true;
     return false;
   }
@@ -1020,49 +1008,49 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_22() {
+  private boolean jj_3_21() {
     if (jj_scan_token(CPLXCONSTANT)) return true;
     return false;
   }
 
-  private boolean jj_3_20() {
+  private boolean jj_3_19() {
     if (jj_scan_token(CONSTANT)) return true;
     return false;
   }
 
-  private boolean jj_3_21() {
+  private boolean jj_3_20() {
     if (jj_scan_token(STRING)) return true;
     return false;
   }
 
-  private boolean jj_3_34() {
+  private boolean jj_3_33() {
     if (jj_3R_20()) return true;
     return false;
   }
 
-  private boolean jj_3_17() {
-    if (jj_scan_token(28)) return true;
+  private boolean jj_3_16() {
+    if (jj_scan_token(26)) return true;
     if (jj_3R_9()) return true;
     return false;
   }
 
-  private boolean jj_3_19() {
+  private boolean jj_3_18() {
     if (jj_3R_14()) return true;
     return false;
   }
 
-  private boolean jj_3_24() {
+  private boolean jj_3_23() {
     Token xsp;
     xsp = jj_scanpos;
+    if (jj_3_18()) {
+    jj_scanpos = xsp;
     if (jj_3_19()) {
     jj_scanpos = xsp;
     if (jj_3_20()) {
     jj_scanpos = xsp;
     if (jj_3_21()) {
     jj_scanpos = xsp;
-    if (jj_3_22()) {
-    jj_scanpos = xsp;
-    if (jj_3_23()) return true;
+    if (jj_3_22()) return true;
     }
     }
     }
@@ -1072,39 +1060,33 @@ public class AplParser implements AplParserConstants {
 
   private boolean jj_3R_22() {
     Token xsp;
-    if (jj_3_24()) return true;
+    if (jj_3_23()) return true;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_24()) { jj_scanpos = xsp; break; }
+      if (jj_3_23()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  private boolean jj_3_33() {
+  private boolean jj_3_32() {
     if (jj_3R_19()) return true;
-    return false;
-  }
-
-  private boolean jj_3_13() {
-    if (jj_scan_token(17)) return true;
-    if (jj_3R_9()) return true;
     return false;
   }
 
   private boolean jj_3R_17() {
     Token xsp;
     xsp = jj_scanpos;
+    if (jj_3_31()) {
+    jj_scanpos = xsp;
     if (jj_3_32()) {
     jj_scanpos = xsp;
-    if (jj_3_33()) {
-    jj_scanpos = xsp;
-    if (jj_3_34()) return true;
+    if (jj_3_33()) return true;
     }
     }
     return false;
   }
 
-  private boolean jj_3_32() {
+  private boolean jj_3_31() {
     if (jj_3R_18()) return true;
     return false;
   }
@@ -1114,12 +1096,12 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_29() {
+  private boolean jj_3_28() {
     if (jj_scan_token(MONADICOPERATOR)) return true;
     return false;
   }
 
-  private boolean jj_3_16() {
+  private boolean jj_3_15() {
     if (jj_3R_9()) return true;
     return false;
   }
@@ -1129,10 +1111,7 @@ public class AplParser implements AplParserConstants {
     xsp = jj_scanpos;
     if (jj_3_11()) {
     jj_scanpos = xsp;
-    if (jj_3_12()) {
-    jj_scanpos = xsp;
-    if (jj_3_13()) return true;
-    }
+    if (jj_3_12()) return true;
     }
     return false;
   }
@@ -1142,16 +1121,16 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_18() {
+  private boolean jj_3_17() {
     if (jj_3R_13()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_17()) jj_scanpos = xsp;
+    if (jj_3_16()) jj_scanpos = xsp;
     if (jj_3R_9()) return true;
     return false;
   }
 
-  private boolean jj_3_26() {
+  private boolean jj_3_25() {
     if (jj_scan_token(30)) return true;
     if (jj_3R_9()) return true;
     return false;
@@ -1163,14 +1142,14 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_38() {
+  private boolean jj_3_37() {
     if (jj_scan_token(34)) return true;
     if (jj_3R_21()) return true;
     return false;
   }
 
-  private boolean jj_3_14() {
-    if (jj_scan_token(21)) return true;
+  private boolean jj_3_13() {
+    if (jj_scan_token(19)) return true;
     if (jj_3R_12()) return true;
     return false;
   }
@@ -1199,7 +1178,7 @@ public class AplParser implements AplParserConstants {
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[38];
+  final private JJCalls[] jj_2_rtns = new JJCalls[37];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -1427,7 +1406,7 @@ public class AplParser implements AplParserConstants {
 
   private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 38; i++) {
+    for (int i = 0; i < 37; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -1471,7 +1450,6 @@ public class AplParser implements AplParserConstants {
             case 34: jj_3_35(); break;
             case 35: jj_3_36(); break;
             case 36: jj_3_37(); break;
-            case 37: jj_3_38(); break;
           }
         }
         p = p.next;
