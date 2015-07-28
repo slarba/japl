@@ -394,7 +394,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                      jjCheckNAdd(3);
                   }
                   else if (curChar == 39)
-                     jjCheckNAdd(6);
+                     jjCheckNAddTwoStates(6, 7);
                   else if (curChar == 47)
                   {
                      if (kind > 6)
@@ -414,7 +414,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                   break;
                case 5:
                   if (curChar == 39)
-                     jjCheckNAdd(6);
+                     jjCheckNAddTwoStates(6, 7);
                   break;
                case 6:
                   if ((0xffffff7fffffffffL & l) != 0L)

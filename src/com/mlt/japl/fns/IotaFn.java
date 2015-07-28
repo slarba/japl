@@ -10,6 +10,7 @@ import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class IotaFn extends SpecialBaseFn {
@@ -35,6 +36,10 @@ public class IotaFn extends SpecialBaseFn {
 		for(int i=0; i<a.length(); i++) {
 			Array key = a.atA(i); 
 			map.putIfAbsent(key, i+1);
+		}
+		
+		if(b.isScalar()) {
+			return new IntArray(map.get(b.atA(0)));
 		}
 		
 		int alen = a.length();

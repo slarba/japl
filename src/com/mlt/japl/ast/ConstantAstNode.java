@@ -52,7 +52,7 @@ public class ConstantAstNode implements AstNode {
 	}
 
 	public boolean isStringConstant() {
-		return value.startsWith("'") && value.endsWith("'") && value.length()>3;
+		return value.startsWith("'") && value.endsWith("'") && (value.length()==2 || value.length()>3);
 	}
 
 	public boolean isInteger() {

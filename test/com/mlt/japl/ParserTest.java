@@ -213,7 +213,7 @@ public class ParserTest {
 	
 	@Test
 	public void testAxisExpression() {
-		assertEquals("reduce<+>[1](2 3 4 5)", doParseAndPrint("+/[1]2 3 4 5"));
+		assertEquals("reduce<+>[+(1,2)](2 3 4 5)", doParseAndPrint("+/[1+2]2 3 4 5"));
 	}
 	
 	@Test
@@ -231,6 +231,11 @@ public class ParserTest {
 		assertEquals("¯2", doParseAndPrint("¯2"));
 	}
 
+	@Test
+	public void testEmptyCharScalar() {
+		assertEquals("''", doParseAndPrint("''"));
+	}
+	
 	@Test
 	public void testNegativeFloat() {
 		assertEquals("¯2.14", doParseAndPrint("¯2.14"));
