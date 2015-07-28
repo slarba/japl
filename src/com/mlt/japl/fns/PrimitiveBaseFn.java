@@ -80,7 +80,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 			return ArrayFactory.makeSimilarArrayOfTypeWithActualLength(resultTypeFor(a, b), a);			
 		}
 		checkEqualDimensionsAndRank(a, b);
-		return ArrayFactory.makeSimilarArrayOfTypeWithActualLength(resultTypeFor(a, b), a);			
+		return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), a);			
 	}
 
 	public void checkEqualDimensionsAndRank(Array a, Array b) {
@@ -223,56 +223,56 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 	
 	Array loop_I_I_I(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_II(a.atI(i), b.atI(i)));
 		return r;
 	}
 
 	Array loop_I_D_I(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_DI(a.atD(i), b.atI(i)));
 		return r;
 	}
 
 	Array loop_I_I_D(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_ID(a.atI(i), b.atD(i)));
 		return r;
 	}
 
 	Array loop_I_D_D(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_DD(a.atD(i), b.atD(i)));
 		return r;
 	}
 
 	Array loop_D_I_I(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, D_II(a.atI(i), b.atI(i)));
 		return r;
 	}
 
 	Array loop_D_D_I(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, D_DI(a.atD(i), b.atI(i)));
 		return r;
 	}
 
 	Array loop_D_I_D(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, D_ID(a.atI(i), b.atD(i)));
 		return r;
 	}
 
 	Array loop_D_D_D(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, D_DD(a.atD(i), b.atD(i)));
 		return r;
 	}
@@ -286,7 +286,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 
 	Array loop_M_A_A(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setA(i, dyadic(a.atA(i),b.atA(i), axis));
 		return r;		
 	}
@@ -307,70 +307,70 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 	
 	Array loop_I_I_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}
 
 	Array loop_D_I_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
 		return r;
 	}
 
 	Array loop_D_D_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
 		return r;
 	}
 	
 	Array loop_I_M_I(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}
 
 	Array loop_D_M_I(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
 		return r;
 	}
 
 	Array loop_D_M_D(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
 		return r;
 	}
 
 	Array loop_D_M_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setD(i, dyadic(a.atA(i), b.atA(i), axis).atD(0));
 		return r;
 	}
 	
 	Array loop_I_D_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}
 
 	Array loop_I_M_D(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}
 
 	Array loop_I_M_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}
@@ -406,49 +406,49 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 
 	Array loop_I_C_C(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_CC(a.atC(i), b.atC(i)));
 		return r;
 	}
 
 	Array loop_I_C_I(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_CI(a.atC(i), b.atI(i)));
 		return r;
 	}
 
 	Array loop_I_C_D(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_CD(a.atC(i), b.atD(i)));
 		return r;
 	}
 
 	Array loop_I_C_M(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}
 
 	Array loop_I_I_C(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_IC(a.atI(i), b.atC(i)));
 		return r;
 	}
 
 	Array loop_I_D_C(Array r, Array a, Array b) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, I_DC(a.atD(i), b.atC(i)));
 		return r;
 	}
 
 	Array loop_I_M_C(Array r, Array a, Array b, int axis) {
 		int i;
-		int rlen = r.actualLength();
+		int rlen = r.length();
 		for(i=0; i<rlen; i++) r.setI(i, dyadic(a.atA(i), b.atA(i), axis).atI(0));
 		return r;
 	}

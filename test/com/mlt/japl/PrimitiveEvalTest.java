@@ -20,7 +20,7 @@ public class PrimitiveEvalTest {
 		Array r = itn.eval("1+2");
 		assertEquals(Array.INTEGER, r.type());
 		assertEquals(0,r.depth());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(0,r.rank());
 		assertEquals(3, r.atI(0));
 	}
@@ -30,7 +30,7 @@ public class PrimitiveEvalTest {
 		Array r = itn.eval("1+2.1");
 		assertEquals(Array.DOUBLE, r.type());
 		assertEquals(0,r.depth());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(0,r.rank());
 		assertTrue(3.1==r.atD(0));
 	}
@@ -40,7 +40,7 @@ public class PrimitiveEvalTest {
 		Array r = itn.eval("1.1+2");
 		assertEquals(Array.DOUBLE, r.type());
 		assertEquals(0,r.depth());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(0,r.rank());
 		assertTrue(3.1==r.atD(0));
 	}
@@ -167,7 +167,7 @@ public class PrimitiveEvalTest {
 		Array r = itn.eval("−2");
 		assertEquals(Array.INTEGER, r.type());
 		assertEquals(0,r.rank());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(1,r.actualLength());
 		assertEquals(0,r.depth());
 		assertTrue(-2==r.atI(0));

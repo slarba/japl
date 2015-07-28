@@ -40,7 +40,7 @@ public class ExistsTest extends EvalTestBase {
 		Array r = itn.eval("'xr'∈'r'");
 		assertTrue(r instanceof BitArray);
 		assertEquals(0, r.atI(0));
-		assertEquals(0, r.atI(1));
+		assertEquals(1, r.atI(1));
 	}
 
 	@Test

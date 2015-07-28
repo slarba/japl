@@ -11,7 +11,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 	@Test
 	public void testIntScalar() {
 		Array r = eval("2");
-		check(r, Array.INTEGER, 0, 0, 1, 0);
+		check(r, Array.INTEGER, 0, 1, 1, 0);
 		assertEquals(2, r.atI(0));
 	}
 
@@ -20,7 +20,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 		Array r = itn.eval("2.1");
 		assertEquals(Array.DOUBLE, r.type());
 		assertEquals(0,r.depth());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(1,r.actualLength());
 		assertEquals(0,r.rank());
 		assertTrue(2.1== r.atD(0));
@@ -31,7 +31,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 		Array r = itn.eval("'c'");
 		assertEquals(Array.CHARACTER, r.type());
 		assertEquals(0,r.depth());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(1,r.actualLength());
 		assertEquals(0,r.rank());
 		assertTrue('c'== r.atC(0));
@@ -42,7 +42,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 		Array r = itn.eval("1");
 		assertEquals(Array.INTEGER, r.type());
 		assertEquals(0,r.depth());
-		assertEquals(0,r.length());
+		assertEquals(1,r.length());
 		assertEquals(1,r.actualLength());
 		assertEquals(0,r.rank());
 		assertTrue(1== r.atI(0));
