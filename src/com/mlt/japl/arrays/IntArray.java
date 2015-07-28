@@ -67,12 +67,18 @@ public class IntArray extends BaseArray {
 
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new IntArray(newShape, data);
+		if(newShape.length()<length()) {
+			return new IntArray(newShape, Arrays.copyOf(data, newShape.length()));
+		}
+		long[] newData = new long[length()];
+		for(int i=0; i<newData.length; i++)
+			newData[i] = atI(i);
+		return new IntArray(newShape, newData);
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		return new IntArray(dims(), new long[data.length]);
+		return new IntArray(dims(), new long[dims.length()]);
 	}
 
 	@Override
@@ -80,12 +86,18 @@ public class IntArray extends BaseArray {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}	
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;
-		if(o instanceof IntArray) {
-			return Arrays.equals(data, ((IntArray)o).data);
+		if(o instanceof Array) {
+			Array a = (Array)o;
+			if(!a.isIntegral()) return false;
+			if(!a.dims().equals(dims)) return false;
+			for(int i=0; i<a.length(); i++) {
+				if(a.atI(i) != atI(i)) return false;
+			}
+			return true;
 		}
 		return false;
 	}

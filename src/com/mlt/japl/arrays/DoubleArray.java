@@ -63,16 +63,22 @@ public class DoubleArray extends BaseArray {
 	
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new DoubleArray(newShape, data);
+		if(newShape.length()<length()) {
+			return new DoubleArray(newShape, Arrays.copyOf(data, newShape.length()));
+		}
+		double[] newData = new double[length()];
+		for(int i=0; i<newData.length; i++)
+			newData[i] = atD(i);
+		return new DoubleArray(newShape, newData);
 	}
-	
+
 	public static Array similarTo(Array a) {
-		return new DoubleArray(a.dims(), new double[a.actualLength()]);
+		return new DoubleArray(a.dims(), new double[a.length()]);
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		return new DoubleArray(dims(), new double[data.length]);
+		return new DoubleArray(dims(), new double[dims().length()]);
 	}
 	
 	@Override
@@ -85,7 +91,12 @@ public class DoubleArray extends BaseArray {
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof DoubleArray) {
-			return Arrays.equals(data, ((DoubleArray)o).data);
+			DoubleArray a = (DoubleArray)o;
+			if(!a.dims().equals(dims)) return false;
+			for(int i=0; i<a.length(); i++) {
+				if(a.atD(i) != atD(i)) return false;
+			}
+			return true;
 		}
 		return false;
 	}

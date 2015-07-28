@@ -37,6 +37,7 @@ public class DimensionTest {
 		assertEquals(d, d);
 		assertNotEquals(d, new Dimensions());
 		assertEquals(d, new Dimensions(3,4,5));
+		assertEquals(new Dimensions(3,4,5), d);
 		assertNotEquals(d, new Dimensions(3,2,5));
 		assertNotEquals(d, new Object());
 	}
@@ -55,4 +56,42 @@ public class DimensionTest {
 		Dimensions f = e.elideAxis(1).elideAxis(0);
 		assertEquals(0, f.rank());
 	}
+	
+	@Test
+	public void testDimensionReverse() {
+		Dimensions d = new Dimensions(3,4,5);
+		assertEquals(new Dimensions(5,4,3), d.reverse());
+		Dimensions e = new Dimensions();
+		assertEquals(new Dimensions(), e.reverse());
+		Dimensions f = new Dimensions(2);
+		assertEquals(new Dimensions(2), f.reverse());
+	}
+	
+	@Test
+	public void testDimensionsConcat() {
+		Dimensions a = new Dimensions(3,4,5);
+		Dimensions b = new Dimensions(2,1);
+		Dimensions c = new Dimensions();
+		assertEquals(new Dimensions(3,4,5,2,1), a.concat(b));
+		assertEquals(a, a.concat(c));
+	}
+	
+	@Test
+	public void testOffsetting() {
+		Dimensions a = new Dimensions(3,4,5);
+		assertEquals(new Dimensions(3,5,7), a.offsetBy(new int[] {0,1,2}));
+	}
+
+	@Test
+	public void testOffsetting2() {
+		Dimensions a = new Dimensions(3,4,5);
+		assertEquals(new Dimensions(3,3,3), a.offsetByMinus(new int[] {0,1,2}));
+	}
+
+	@Test
+	public void testOffsetting3() {
+		Dimensions a = new Dimensions(3,4,5);
+		assertEquals(new Dimensions(0,0,0), a.offsetByMinus(new int[] {5,5,5}));
+	}
+	
 }

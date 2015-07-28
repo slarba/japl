@@ -87,22 +87,19 @@ public class NestedArray extends BaseArray {
 	}
 	
 	@Override
-	public Array reshape(int... newShape) {
-		return new NestedArray(new Dimensions(newShape), depth, data);
-	}
-
-	@Override
 	public Array reshape(Dimensions newShape) {
-		return new NestedArray(newShape, depth, data);
-	}
-
-	public static Array similarTo(Array a) {
-		return new NestedArray(a.dims(), 1, new Array[a.actualLength()]);
+		if(newShape.length()<length()) {
+			return new NestedArray(newShape, depth, Arrays.copyOf(data, newShape.length()));
+		}
+		Array[] newData = new Array[length()];
+		for(int i=0; i<newData.length; i++)
+			newData[i] = atA(i);
+		return new NestedArray(newShape, depth, newData);
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		return new NestedArray(dims(), new Array[data.length]);
+		return new NestedArray(dims(), new Array[dims.length()]);
 	}
 	
 	@Override
@@ -115,7 +112,12 @@ public class NestedArray extends BaseArray {
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof NestedArray) {
-			return Arrays.deepEquals(data, ((NestedArray)o).data);
+			NestedArray a = (NestedArray)o;
+			if(!a.dims().equals(dims)) return false;
+			for(int i=0; i<a.length(); i++) {
+				if(a.atA(i).equals(atA(i))) return false;
+			}
+			return true;
 		}
 		return false;
 	}	

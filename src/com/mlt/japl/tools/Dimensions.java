@@ -76,6 +76,14 @@ public class Dimensions {
 		return dims[i];
 	}
 	
+	public Dimensions offsetBy(Dimensions o) {
+		return offsetBy(o.dims);
+	}
+	
+	public Dimensions offsetByMinus(Dimensions o) {
+		return offsetByMinus(o.dims);
+	}
+
 	public Dimensions offsetBy(int[] offsets) {
 		int[] nds = new int[dims.length];
 		for(int i=0; i<nds.length; i++) {

@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.arrays.IotaArray;
+import com.mlt.japl.arrays.MultidimIotaArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
@@ -19,6 +20,7 @@ public class TestNonEmptyArrays {
 		assertEquals(6, a.length());
 		assertEquals(2, a.rank());
 		assertEquals(1, a.depth());		
+		assertEquals(false, a.isScalar());
 	}
 
 	private void testNonEmptyProperties2(Array a) {
@@ -26,6 +28,7 @@ public class TestNonEmptyArrays {
 		assertEquals(5, a.length());
 		assertEquals(1, a.rank());
 		assertEquals(1, a.depth());		
+		assertEquals(false, a.isScalar());
 	}
 	
 	@Test
@@ -57,5 +60,5 @@ public class TestNonEmptyArrays {
 	public void testIotaArray() {
 		testNonEmptyProperties(new IotaArray(d, 5));
 	}
-
+	
 }

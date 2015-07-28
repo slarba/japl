@@ -5,6 +5,10 @@ import com.mlt.japl.tools.Dimensions;
 
 public class MultidimIotaArray extends BaseArray {
 
+	public MultidimIotaArray() {
+		super();
+	}
+	
 	public MultidimIotaArray(Dimensions d) {
 		super(d);
 	}
@@ -21,18 +25,18 @@ public class MultidimIotaArray extends BaseArray {
 
 	@Override
 	public Array atA(int idx) {
-		return new IntArray(dims.reverseIndex(idx));
+		return new IntArray(dims.reverseIndex(idx%length()));
 	}
 	
 	@Override
 	public int depth() {
-		return 2;
+		return dims.length()==0 ? 1 : 2;
 	}
 	
 	@Override
 	public Array reshape(Dimensions newShape) {
 		Array result = new NestedArray(newShape, new Array[newShape.length()]);
-		for(int i=0; i<length(); i++) {
+		for(int i=0; i<newShape.length(); i++) {
 			result.setA(i, atA(i));
 		}
 		return result;
@@ -40,7 +44,7 @@ public class MultidimIotaArray extends BaseArray {
 
 	@Override
 	public Array unInitializedCopy() {
-		Array result = new NestedArray(dims(), new Array[length()]);
+		Array result = new NestedArray(dims(), new Array[dims.length()]);
 		return result;
 	}
 

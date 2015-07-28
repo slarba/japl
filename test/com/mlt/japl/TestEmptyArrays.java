@@ -5,9 +5,11 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.arrays.IotaArray;
+import com.mlt.japl.arrays.MultidimIotaArray;
 import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -19,6 +21,7 @@ public class TestEmptyArrays {
 		assertEquals(1, d.rank());
 		assertEquals(0, d.actualLength());
 		assertEquals(0, d.length());
+		assertEquals(false, d.isScalar());
 		assertNotNull(d.dims());
 		assertEquals(d.dims(), Dimensions.EMPTY_ARRAY);		
 	}
@@ -34,10 +37,20 @@ public class TestEmptyArrays {
 	}
 
 	@Test
+	public void testEmptyCharArray() {
+		testEmptyProperties(new CharArray());
+	}
+	
+	@Test
 	public void testEmptyIotaArray() {
 		testEmptyProperties(new IotaArray());
 	}
 
+	@Test
+	public void testEmptyMultidimIotaArray() {
+		testEmptyProperties(new MultidimIotaArray());
+	}
+	
 	@Test
 	public void testEmptyMixedArray() {
 		testEmptyProperties(new NestedArray());

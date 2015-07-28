@@ -9,8 +9,11 @@ import com.mlt.japl.tools.Dimensions;
 public class CharArray extends BaseArray {
 	char[] data;
 
+	private static final char[] EMPTY = new char[0];
+	
 	public CharArray() {
 		super();
+		data = EMPTY;
 	}
 
 	public CharArray(String data) {
@@ -50,12 +53,18 @@ public class CharArray extends BaseArray {
 
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new CharArray(newShape, data);
+		if(newShape.length()<length()) {
+			return new CharArray(newShape, Arrays.copyOf(data, newShape.length()));
+		}
+		char[] newData = new char[length()];
+		for(int i=0; i<newData.length; i++)
+			newData[i] = atC(i);
+		return new CharArray(newShape, newData);
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		return new CharArray(dims(), new char[data.length]);
+		return new CharArray(dims(), new char[dims.length()]);
 	}
 
 	@Override
@@ -88,7 +97,12 @@ public class CharArray extends BaseArray {
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof CharArray) {
-			return Arrays.equals(data, ((CharArray)o).data);
+			CharArray a = (CharArray)o;
+			if(!a.dims().equals(dims)) return false;
+			for(int i=0; i<a.length(); i++) {
+				if(a.atC(i) != atC(i)) return false;
+			}
+			return true;
 		}
 		return false;
 	}

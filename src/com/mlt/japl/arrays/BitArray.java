@@ -67,13 +67,22 @@ public class BitArray extends BaseArray {
 
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new BitArray(newShape, true, actualLen, data);
+		// TODO: hugely inefficient copy for now!
+		if(newShape.length()<length()) {
+			Array b = new BitArray(newShape, true, newShape.length());
+			for(int i=0; i<newShape.length(); i++)
+				b.setB(i, atB(i));
+			return b;
+		}
+		Array b = new BitArray(newShape, true, length());
+		for(int i=0; i<length(); i++)
+			b.setB(i, atB(i));
+		return b;
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new BitArray(dims(), true, length(), new long[1+(length()/64)]);
 	}
 
 	@Override
@@ -110,10 +119,6 @@ public class BitArray extends BaseArray {
 	@Override
 	public void setA(int idx, Array val) {
 		setB(idx, val.atI(idx));
-	}
-	
-	public static Array similarTo(Array a) {
-		return new BitArray(a.actualLength(), a.dims());		
 	}
 
 	// integer AND bitarray
@@ -182,7 +187,12 @@ public class BitArray extends BaseArray {
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof BitArray) {
-			return Arrays.equals(data, ((BitArray)o).data);
+			BitArray a = (BitArray)o;
+			if(!a.dims().equals(dims)) return false;
+			for(int i=0; i<a.length(); i++) {
+				if(a.atB(i) != atB(i)) return false;
+			}
+			return true;
 		}
 		return false;
 	}

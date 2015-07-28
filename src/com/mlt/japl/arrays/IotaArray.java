@@ -45,12 +45,21 @@ public class IotaArray extends BaseArray {
 
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new IotaArray(newShape, n);
+		if(newShape.length()<length()) {
+			Array r = new IntArray(newShape, new long[newShape.length()]); 
+			for(int i=0; i<newShape.length(); i++)
+				r.setI(i, atI(i));
+			return r;
+		}
+		long[] newData = new long[length()];
+		for(int i=0; i<newData.length; i++)
+			newData[i] = atI(i);
+		return new IntArray(newShape, newData);
 	}
 
 	@Override
 	public Array unInitializedCopy() {
-		return new IntArray(dims(), new long[n]);
+		return new IntArray(dims(), new long[dims.length()]);
 	}
 
 	@Override
@@ -67,7 +76,17 @@ public class IotaArray extends BaseArray {
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof IotaArray) {
-			return n == ((IotaArray)o).n;
+			IotaArray a = (IotaArray)o;
+			if(!a.dims().equals(dims())) return false;
+			return n == a.n;
+		}
+		if(o instanceof IntArray) {
+			IntArray a = (IntArray)o;
+			if(!a.dims().equals(dims())) return false;
+			for(int i=0; i<a.length(); i++) {
+				if(a.atI(i)!=atI(i)) return false;
+			}
+			return true;
 		}
 		return false;
 	}

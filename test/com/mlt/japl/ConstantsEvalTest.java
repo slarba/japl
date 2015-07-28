@@ -95,6 +95,26 @@ public class ConstantsEvalTest extends EvalTestBase {
 		assertEquals('f', r.atC(0));
 		assertEquals('o', r.atC(1));
 		assertEquals('o', r.atC(2));
-		
+	}
+	
+	@Test
+	public void testMixedArray() {
+		Array r = eval("2 'f' 3.14");
+		assertEquals(Array.NESTED, r.type());
+		assertEquals(1, r.depth());
+		assertEquals(2, r.atA(0).atI(0));
+		assertEquals('f', r.atA(1).atC(0));
+		assertTrue(3.14 == r.atA(2).atD(0));
+	}
+	
+	@Test
+	public void testNestedArray() {
+		Array r = eval("2 ('f' 4) 3.14");		
+		assertEquals(Array.NESTED, r.type());
+		assertEquals(2, r.depth());
+		assertEquals(2, r.atA(0).atI(0));
+		assertEquals('f', r.atA(1).atA(0).atC(0));
+		assertEquals(4, r.atA(1).atA(1).atI(0));
+		assertTrue(3.14 == r.atA(2).atD(0));
 	}
 }
