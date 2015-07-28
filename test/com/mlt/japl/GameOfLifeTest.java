@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.Interpreter;
 
 public class GameOfLifeTest {
@@ -20,12 +21,12 @@ public class GameOfLifeTest {
 		Array result = itn.eval("gol gol gol R");
 		assertEquals(2, result.rank());
 		assertTrue(result instanceof BitArray);
-//		assertEquals(new BitArray(new int[] {
-//				 0, 0, 1, 1, 0, 0, 0,
-//				 0, 0, 1, 1, 1, 0, 0,
-//				 0, 1, 0, 0, 1, 0, 0,
-//				 0, 0, 1, 1, 0, 0, 0,
-//				 0, 0, 1, 1, 0, 0, 0
-//		}, 5, 7)), result);
+		assertEquals(new BitArray(new Dimensions(5,7), new long[] {
+				 0, 0, 1, 1, 0, 0, 0,
+				 0, 0, 1, 1, 1, 0, 0,
+				 0, 1, 0, 0, 1, 0, 0,
+				 0, 0, 1, 1, 0, 0, 0,
+				 0, 0, 1, 1, 0, 0, 0
+		}), result);
 	}
 }
