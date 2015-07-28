@@ -64,7 +64,8 @@ public class AplParser implements AplParserConstants {
                 case "\u2261": return new DepthFn();
                 case "\u2282": return new EncloseFn();
                 case "\u2283": return new DiscloseFn();
-//		case "⊥": return new DecodeFn();//		case "∪": return new UnionFn();//		case "/": return new ReplicateFn();
+//		case "⊥": return new DecodeFn();                case "\u222a": return new UnionFn();
+//		case "/": return new ReplicateFn();
                 default:
                         return context.tryGetFunction(name);
         }
