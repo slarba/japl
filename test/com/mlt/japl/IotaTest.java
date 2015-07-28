@@ -61,5 +61,15 @@ public class IotaTest extends EvalTestBase {
 		assertEquals(1, r.actualLength());
 		assertEquals(3, r.atI(0));
 	}
+
+	@Test
+	public void testDyadicIotaWithNumbers() {
+		Array r = itn.eval("1 3 2 4 5⍳2 7");
+		assertTrue(r instanceof IntArray);
+		assertEquals(2, r.length());
+		assertEquals(2, r.actualLength());
+		assertEquals(3, r.atI(0));
+		assertEquals(6, r.atI(1));
+	}
 	
 }
