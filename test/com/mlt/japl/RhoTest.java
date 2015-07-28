@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -82,5 +83,24 @@ public class RhoTest extends EvalTestBase {
 		assertEquals(1,r.actualLength());
 		assertEquals(1,r.depth());
 		assertEquals(0, r.atI(0));
+	}
+	
+	@Test
+	public void testRhoMixed() {
+		Array r = itn.eval("2 3⍴(4 5) (6 7)");
+		assertEquals(Array.NESTED, r.type());
+		assertEquals(2, r.rank());
+		assertEquals(6, r.length());
+		assertEquals(new Dimensions(2,3), r.dims());
+		assertEquals(new IntArray(4,5), r.atA(0,0));
+		assertEquals(new IntArray(6,7), r.atA(1,0));
+	}
+	
+	@Test
+	public void testScalarRho() {
+		Array r = itn.eval("5⍴10.2");
+		assertTrue(r instanceof DoubleArray);
+		assertEquals(5, r.length());
+		assertEquals(new DoubleArray(10.2,10.2,10.2,10.2,10.2), r);
 	}
 }

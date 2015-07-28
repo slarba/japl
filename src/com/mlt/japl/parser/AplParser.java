@@ -29,13 +29,17 @@ public class AplParser implements AplParserConstants {
   {
         switch(name)
         {
+            case "?": return new RollFn();
                 case "+": return new AddFn();
                 case "\u2212": return new SubFn();
                 case "\u00d7": return new MulFn();
+                case "\u22c6": return new ExpFn();
+                case "\u235f": return new LogFn();
                 case ",": return new RavelFn();
                 case "\u230a": return new FloorFn();
                 case "\u2308": return new CeilFn();
                 case "\u2223": return new AbsFn();
+                case "!": return new FacFn();
                 case "\u00f7": return new DivFn();
                 case "\u2374": return new RhoFn();
                 case "\u2373": return new IotaFn();
@@ -777,37 +781,6 @@ public class AplParser implements AplParserConstants {
     finally { jj_save(36, xla); }
   }
 
-  private boolean jj_3_30() {
-    if (jj_3R_17()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_28()) jj_scanpos = xsp;
-    return false;
-  }
-
-  private boolean jj_3R_13() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_29()) {
-    jj_scanpos = xsp;
-    if (jj_3_30()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3R_11() {
-    if (jj_3R_22()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_17()) jj_scanpos = xsp;
-    return false;
-  }
-
-  private boolean jj_3_29() {
-    if (jj_3R_16()) return true;
-    return false;
-  }
-
   private boolean jj_3R_18() {
     if (jj_scan_token(FUNC)) return true;
     Token xsp;
@@ -1153,6 +1126,37 @@ public class AplParser implements AplParserConstants {
   private boolean jj_3_27() {
     if (jj_scan_token(31)) return true;
     if (jj_3R_15()) return true;
+    return false;
+  }
+
+  private boolean jj_3_30() {
+    if (jj_3R_17()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_28()) jj_scanpos = xsp;
+    return false;
+  }
+
+  private boolean jj_3R_13() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_29()) {
+    jj_scanpos = xsp;
+    if (jj_3_30()) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3R_11() {
+    if (jj_3R_22()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_17()) jj_scanpos = xsp;
+    return false;
+  }
+
+  private boolean jj_3_29() {
+    if (jj_3R_16()) return true;
     return false;
   }
 

@@ -3,12 +3,18 @@ package com.mlt.japl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import com.mlt.japl.errors.IndexError;
 import com.mlt.japl.tools.Dimensions;
 
 public class DimensionTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
 	@Test
 	public void testEmptyDimensions() {
 		Dimensions d = new Dimensions();
@@ -94,4 +100,19 @@ public class DimensionTest {
 		assertEquals(new Dimensions(0,0,0), a.offsetByMinus(new int[] {5,5,5}));
 	}
 	
+	@Test
+	public void testDimensionLaminate() {
+		Dimensions a = new Dimensions(3,4,4);
+		Dimensions b = new Dimensions(3,1,4);
+		assertEquals(new Dimensions(3,5,4), a.laminate(b, 1));
+	}
+
+	@Test
+	public void testDimensionLaminateError() {
+		Dimensions a = new Dimensions(3,4,4);
+		Dimensions b = new Dimensions(3,1,4);
+		thrown.expect(IndexError.class);
+		assertEquals(new Dimensions(3,5,4), a.laminate(b, 2));
+	}
+
 }

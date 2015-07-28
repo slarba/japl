@@ -1,6 +1,7 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.errors.SyntaxError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.tools.Dimensions;
@@ -12,6 +13,7 @@ public class NiladicCallNode implements AstNode {
 
 	public NiladicCallNode(Func fn) {
 		this.fn = fn;
+		if(!(fn instanceof UserFnNode)) throw new SyntaxError();
 	}
 	
 	@Override

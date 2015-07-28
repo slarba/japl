@@ -44,13 +44,17 @@ public class AplParser
   {
 	switch(name)
 	{
+	    case "\u003f": return new RollFn();
 		case "\u002b": return new AddFn();
 		case "\u2212": return new SubFn();
 		case "\u00d7": return new MulFn();
+		case "\u22c6": return new ExpFn();
+		case "\u235f": return new LogFn();
 		case "\u002c": return new RavelFn();
 		case "\u230a": return new FloorFn();
 		case "\u2308": return new CeilFn();
 		case "\u2223": return new AbsFn();
+		case "\u0021": return new FacFn();
 		case "\u00f7": return new DivFn();
 		case "\u2374": return new RhoFn();
 		case "\u2373": return new IotaFn();

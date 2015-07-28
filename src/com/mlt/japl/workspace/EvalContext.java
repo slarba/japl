@@ -39,14 +39,17 @@ public class EvalContext {
 	}
 	
 	public EvalContext(EvalContext parent) {
+		this();
 		this.parent = parent;
 	}
 	
 	public EvalContext(OutputStream out) {
+		this();
 		this.out = out;
 	}
 
 	public EvalContext(EvalContext parent, OutputStream out) {
+		this();
 		this.parent = parent;
 		this.out = out;
 	}
