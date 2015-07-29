@@ -56,6 +56,11 @@ public class NestedArray extends BaseArray {
 	}
 
 	@Override
+	public int hashCode() {
+		return 17*super.hashCode() + 27*depth + 17*Arrays.hashCode(data);
+	}
+
+	@Override
 	public int depth() {
 		return depth;
 	}

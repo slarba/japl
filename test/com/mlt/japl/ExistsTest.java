@@ -49,5 +49,21 @@ public class ExistsTest extends EvalTestBase {
 		assertTrue(r instanceof IntScalar);
 		assertEquals(1, r.atI(0));
 	}
+
+	@Test
+	public void testNestedArrayHashcode() {
+		Array a = itn.eval("(4 5) (9 9)");
+		Array b = itn.eval("(4 5) (9 9)");
+		assertEquals(a,b);
+		assertEquals(a.hashCode(), b.hashCode());
+	}
+	
+	@Test
+	public void testExistsWithNestedArrays() {
+		Array r = itn.eval("(4 5) (9 9)∈(2 3) (4 5) (6 7)");
+		assertTrue(r instanceof BitArray);
+		assertEquals(1, r.atI(0));
+		assertEquals(0, r.atI(1));
+	}
 	
 }

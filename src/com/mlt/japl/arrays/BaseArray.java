@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -149,7 +151,12 @@ public abstract class BaseArray implements Array {
 	public int[] asIntArray() {
 		throw new DomainError();
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return 5*depth + 37*dims.hashCode();
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;

@@ -47,6 +47,11 @@ public class CharArray extends BaseArray {
 	}
 
 	@Override
+	public int hashCode() {
+		return 37*super.hashCode() + 17*Arrays.hashCode(data);
+	}
+
+	@Override
 	public int type() {
 		return CHARACTER;
 	}

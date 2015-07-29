@@ -77,6 +77,11 @@ public class IotaArray extends BaseArray {
 		return new IntScalar(0);
 	}
 
+	@Override
+	public int hashCode() {
+		return 37*super.hashCode() + 17*Long.hashCode(n);
+	}
+
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;

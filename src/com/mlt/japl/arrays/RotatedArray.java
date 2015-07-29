@@ -46,6 +46,11 @@ public class RotatedArray extends BaseArray implements ProxyArray {
 	}
 
 	@Override
+	public int hashCode() {
+		return 1 + 17*array.hashCode();
+	}
+
+	@Override
 	public long atB(int... indx) {
 		return atB(dims.calculateIndex(indx));
 	}

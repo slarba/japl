@@ -188,6 +188,11 @@ public class BitArray extends BaseArray {
 		return new IntScalar(0);
 	}
 
+	@Override
+	public int hashCode() {
+		return 37*super.hashCode() + 17*Arrays.hashCode(data) + 31*Long.hashCode(actualLen);
+	}
+	
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;

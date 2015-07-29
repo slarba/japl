@@ -1,5 +1,7 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
@@ -51,6 +53,11 @@ public class MultidimIotaArray extends BaseArray {
 	@Override
 	public Array prototype() {
 		return new IntArray(new long[rank()]);
+	}
+
+	@Override
+	public int hashCode() {
+		return 37*super.hashCode() + 57*dims.hashCode();
 	}
 
 	@Override

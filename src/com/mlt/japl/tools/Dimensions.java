@@ -212,6 +212,11 @@ public class Dimensions {
 		return result;
 	}
 
+	@Override
+	public int hashCode() {
+		return 53*Arrays.hashCode(dims);
+	}
+	
 	public int[] spans() {
 		return spans;
 	}

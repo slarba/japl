@@ -63,6 +63,11 @@ public class ArrayScalar extends BaseScalar {
 	}
 	
 	@Override
+	public int hashCode() {
+		return 3+57*data.hashCode();
+	}
+	
+	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		return data.equals(o);
