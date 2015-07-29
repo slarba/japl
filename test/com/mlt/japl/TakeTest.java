@@ -2,15 +2,21 @@ package com.mlt.japl;
 
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class TakeTest extends EvalTestBase {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testSimpleTake() {
@@ -23,11 +29,18 @@ public class TakeTest extends EvalTestBase {
 		Array r = itn.eval("3↑2");
 		assertEquals(new IntArray(2,0,0), r);
 	}
+
+	@Test
+	public void testTakeScalarChar() {
+		Array r = itn.eval("3↑'f'");
+		assertEquals(new CharArray("f  "), r);
+	}
 	
 	@Test
 	public void testFirst() {
 		Array r = itn.eval("↑2");
 		assertTrue(r instanceof IntScalar);
+		assertEquals(r, new IntScalar(2));
 	}
 	
 	@Test
@@ -59,6 +72,12 @@ public class TakeTest extends EvalTestBase {
 	public void testMultiDimCharPadding() {
 		Array r = itn.eval("5 5↑3 3⍴'abcdefghijkl'");
 		assertEquals(r, new CharArray(new Dimensions(5,5), "abc  def  ghi            "));
+	}
+
+	@Test
+	public void testRankError() {
+		thrown.expect(RankError.class);
+		itn.eval("5↑3 3⍴'abcdefghijkl'");
 	}
 	
 	@Test

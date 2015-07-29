@@ -179,14 +179,6 @@ public class Dimensions {
 		return new OffsetIterator(dims, spans, offsets, limits);
 	}
 
-	public boolean fitsInside(Dimensions resultDims) {
-		if(resultDims.rank() != rank()) return false;
-		for(int i=0; i<dims.length; i++) {
-			if(dims[i]>resultDims.dims[i]) return false;
-		}
-		return true;
-	}
-
 	public Dimensions laminate(Dimensions dims2, int axis) {
 		int[] rdims = new int[dims.length];
 		for(int i=0; i<dims.length; i++) {

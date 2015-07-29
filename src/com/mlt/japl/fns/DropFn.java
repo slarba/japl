@@ -55,7 +55,7 @@ public class DropFn extends SpecialBaseFn {
 
 	@Override
 	public int resultTypeFor(Array a) {
-		return a.type();
+		throw new ValenceError();
 	}
 
 	@Override

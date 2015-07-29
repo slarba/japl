@@ -78,7 +78,7 @@ public class TakeFn extends SpecialBaseFn {
 	public Dimensions resultDimsFor(Array a, Array b, int axis) {
 		if(!a.isIntegral()) throw new DomainError();
 		if(a.rank()>1) throw new RankError();
-		if(a.length()>b.rank()) throw new LengthError();
+		if(a.length()!=b.rank()) throw new RankError();
 		int[] lens = new int[a.length()];
 		for(int i=0; i<a.length(); i++) {
 			lens[i] = (int)Math.abs(a.atI(i));
