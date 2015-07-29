@@ -50,7 +50,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 		try { I_DI(0,0);     resultTypes.put(Array.DOUBLE, Array.INTEGER, Array.INTEGER); } catch(AplError e) {}
 		try { I_ID(0,0);     resultTypes.put(Array.INTEGER, Array.DOUBLE, Array.INTEGER); } catch(AplError e) {}
 		try {
-			I_II(0,0);
+			I_II(1,0);
 			resultTypes.put(Array.INTEGER, Array.INTEGER, Array.INTEGER); 
 			resultTypes.put(Array.INTEGER, Array.BIT, Array.INTEGER);
 			resultTypes.put(Array.BIT, Array.INTEGER, Array.INTEGER);

@@ -219,4 +219,8 @@ public class Dimensions {
 		}
 		return result;
 	}
+
+	public int[] spans() {
+		return spans;
+	}
 }

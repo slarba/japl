@@ -1,6 +1,7 @@
 package com.mlt.japl.fns;
 
 
+import com.mlt.japl.arrays.RotatedArray;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
@@ -54,25 +55,47 @@ public class ReverseFn extends SpecialBaseFn {
 	 * @see com.mlt.japl.fns.SpecialBaseFn#dyadic(com.mlt.japl.iface.Array, com.mlt.japl.iface.Array, int)
 	 */
 
+//	@Override
+//	public Array dyadic(Array a, Array b, int axis) {
+//		// rotate
+//		if(b.isScalar()) return b;
+//		
+//		if(!a.isScalar()) throw new LengthError();
+//		long offset = a.atI(0);
+//		
+//		if(axis<0) {
+//			if(first) axis = 0;
+//			else axis = b.rank()-1;
+//		}
+//		
+//		Array result = b.unInitializedReshapedCopy(b.dims());
+//		Iterator srcIterator = b.dims().offsetIteratorAlongAxis(axis, offset);
+//		Iterator dstIterator = b.dims().iteratorAlongAxis(axis);
+//		return copyWithIterators(b, result, srcIterator, dstIterator);
+//	}
+
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
 		// rotate
 		if(b.isScalar()) return b;
 		
 		if(!a.isScalar()) throw new LengthError();
-		long offset = a.atI(0);
+		int offset = (int)a.atI(0);
 		
 		if(axis<0) {
 			if(first) axis = 0;
 			else axis = b.rank()-1;
 		}
-		
-		Array result = b.unInitializedReshapedCopy(b.dims());
-		Iterator srcIterator = b.dims().offsetIteratorAlongAxis(axis, offset);
-		Iterator dstIterator = b.dims().iteratorAlongAxis(axis);
-		return copyWithIterators(b, result, srcIterator, dstIterator);
+
+		if(b instanceof RotatedArray) {
+			RotatedArray old = (RotatedArray)b;
+			return old.modifyRotations(axis, offset);
+		}
+		int[] rotations = new int[b.rank()];
+		rotations[axis] = offset;
+		return new RotatedArray(b, rotations);
 	}
-	
+
 	@Override
 	public String getName() {
 		return "reverse";

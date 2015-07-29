@@ -5,6 +5,7 @@ import com.mlt.japl.iface.*;
 import com.mlt.japl.fns.*;
 import com.mlt.japl.ast.*;
 import com.mlt.japl.errors.*;
+import com.mlt.japl.utils.FunctionRegistry;
 import com.mlt.japl.workspace.*;
 import java.util.ArrayList;
 import java.util.List;
