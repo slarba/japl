@@ -65,6 +65,8 @@ public class AplParser implements AplParserConstants {
                 case "\u2282": return new EncloseFn();
                 case "\u2283": return new DiscloseFn();
 //		case "⊥": return new DecodeFn();                case "\u222a": return new UnionFn();
+                case "\u22a3": return new StopFn();
+                case "\u22a2": return new PassFn();
 //		case "/": return new ReplicateFn();
                 default:
                         return context.tryGetFunction(name);
@@ -782,21 +784,6 @@ public class AplParser implements AplParserConstants {
     finally { jj_save(36, xla); }
   }
 
-  private boolean jj_3R_18() {
-    if (jj_scan_token(FUNC)) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_37()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  private boolean jj_3_10() {
-    if (jj_scan_token(STMTSEPARATOR)) return true;
-    return false;
-  }
-
   private boolean jj_3_9() {
     if (jj_scan_token(STMTSEPARATOR)) return true;
     if (jj_3R_5()) return true;
@@ -1158,6 +1145,21 @@ public class AplParser implements AplParserConstants {
 
   private boolean jj_3_29() {
     if (jj_3R_16()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_18() {
+    if (jj_scan_token(FUNC)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_37()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  private boolean jj_3_10() {
+    if (jj_scan_token(STMTSEPARATOR)) return true;
     return false;
   }
 

@@ -132,6 +132,8 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 				  ,"\u236c"  // zilde
 				  ,"\u235d"  // lamp
 				  ,"\u2395"
+				  ,"\u22a3"  // stop
+				  ,"\u22a2"  // pass
 		};
 		for(String s : buttons) {
 			toolbar.add(createButton(s,font));

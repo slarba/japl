@@ -78,7 +78,9 @@ public class AplParser
 		case "\u2193": return new DropFn();
 		case "\u2261": return new DepthFn();
 		case "\u2282": return new EncloseFn();
-		case "\u2283": return new DiscloseFn();//		case "\u22a5": return new DecodeFn();		case "\u222a": return new UnionFn();//		case "/": return new ReplicateFn();
+		case "\u2283": return new DiscloseFn();//		case "\u22a5": return new DecodeFn();		case "\u222a": return new UnionFn();
+		case "\u22a3": return new StopFn();
+		case "\u22a2": return new PassFn();//		case "/": return new ReplicateFn();
 		default:
 			return context.tryGetFunction(name);
 	}
@@ -186,6 +188,8 @@ TOKEN : /* OPERATORS */
   | "\u2282"  // enclose
   | "\u2283"  // disclose
   | "\u222a"  // union
+  | "\u22a3"  // stop
+  | "\u22a2"  // pass
   >
 | < OUTERPROD : "\u2218." >
 | < MONADICOPERATOR: ["/"]|["\\"]|["\u00a8"]|["\u233f"]|["\u2340"] >
