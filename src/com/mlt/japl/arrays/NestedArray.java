@@ -51,6 +51,11 @@ public class NestedArray extends BaseArray {
 	}
 	
 	@Override
+	public Array prototype() {
+		return new NestedArray();
+	}
+
+	@Override
 	public int depth() {
 		return depth;
 	}

@@ -146,6 +146,11 @@ public abstract class BaseArray implements Array {
 	}
 	
 	@Override
+	public int[] asIntArray() {
+		throw new DomainError();
+	}
+	
+	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof Array) {

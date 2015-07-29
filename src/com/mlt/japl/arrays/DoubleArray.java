@@ -87,6 +87,11 @@ public class DoubleArray extends BaseArray {
 		return new DoubleArray(resultDims, new double[resultDims.length()]);
 	}
 	
+	@Override
+	public Array prototype() {
+		return new DoubleScalar(0);
+	}
+
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;

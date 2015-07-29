@@ -195,4 +195,7 @@ public interface Array {
 	Array unInitializedReshapedCopy(Dimensions resultDims);
 
 	String asString(PrintConfig printConfig);
+
+	int[] asIntArray();
+	Array prototype();
 }

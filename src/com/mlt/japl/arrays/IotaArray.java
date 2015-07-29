@@ -72,6 +72,11 @@ public class IotaArray extends BaseArray {
 		return (n*(n+1))/2;
 	}
 	
+	@Override
+	public Array prototype() {
+		return new IntScalar(0);
+	}
+
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;

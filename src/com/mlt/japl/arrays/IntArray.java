@@ -87,6 +87,19 @@ public class IntArray extends BaseArray {
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}	
 
+	@Override
+	public int[] asIntArray() {
+		int[] r = new int[length()];
+		for(int i=0; i<r.length; i++)
+			r[i] = (int)atI(i);
+		return r;
+	}
+
+	@Override
+	public Array prototype() {
+		return new IntScalar(0);
+	}
+
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;

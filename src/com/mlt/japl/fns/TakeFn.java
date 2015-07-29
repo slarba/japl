@@ -4,8 +4,11 @@ import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.tools.Iterator;
+import com.mlt.japl.tools.RangeIterator;
+import com.mlt.japl.tools.TakeArrayAdapter;
 
 public class TakeFn extends SpecialBaseFn {
 
@@ -19,39 +22,32 @@ public class TakeFn extends SpecialBaseFn {
 	@Override
 	public Array dyadic(Array a, Array b, int axis)
 	{
-		if(!a.isIntegral()) throw new DomainError();
-		if(a.rank()>1) throw new RankError();
-		int len;
-		if(a.isScalar()) len = 1; else len = a.length();
-		if(len!=b.rank()) throw new RankError();
-		
-		int[] bdims = b.dims().asArray();
-		int[] offsets = new int[len];
-		int[] limits = new int[len];
-		int[] lengths = new int[len];
-		for(int i=0; i<offsets.length; i++) {
-			int x = (int)a.atI(i);
-			lengths[i] = Math.abs(x)-bdims[i];
-			if(x<0) offsets[i] = Math.max(0, bdims[i]+x);
-			if(x>=0) limits[i] = x;
-		}
+		if(b.isScalar()) b = b.reshape(1);
+		Dimensions resultDims = resultDimsFor(a, b, axis);
 
-		Dimensions resultDims = b.dims().offsetBy(lengths);
-		Array result = ArrayFactory.makeArrayOfType(b.type(), resultDims);
+		Array result = ArrayFactory.makeArrayOfType(resultTypeFor(a, b), resultDims);
+		int[] mins = new int[resultDims.rank()];
+		int[] maxes = new int[resultDims.rank()];
+		int[] as = a.asIntArray();
 		
-		if(b.dims().fitsInside(resultDims)) {
-			Iterator srcIterator = b.dims().iteratorAlongAxis(b.rank()-1);
-	
-			do {
-				result.setA(result.dims().calculateIndex(srcIterator.iter()), b.atA(srcIterator.index()));
-				srcIterator.step();
-			} while(!srcIterator.isFinished());
-		} else {
-			Iterator srcIterator = resultDims.iteratorAlongAxis(b.rank()-1);
-			do {
-				result.setA(srcIterator.index(), b.atA(srcIterator.iter()));
-				srcIterator.step();
-			} while(!srcIterator.isFinished());			
+		for(int i=0; i<mins.length; i++) {
+			if(as[i]==0) return result;
+			if(as[i]<0) {
+				mins[i] = b.dims().axis(i) + as[i];
+				maxes[i] = b.dims().axis(i);
+			} else {
+				mins[i] = 0;
+				maxes[i] = as[i];
+			}
+		}
+		
+		TakeArrayAdapter adapter = new TakeArrayAdapter(b, b.prototype());
+		RangeIterator rangeIterator = new RangeIterator(mins, maxes);
+		Iterator resultIterator = result.dims().linearIterator();
+		while(!resultIterator.isFinished()) {
+			result.setA(resultIterator.index(), adapter.atA(rangeIterator.iter()));
+			resultIterator.step();
+			rangeIterator.step();
 		}
 		return result;
 	}
@@ -63,6 +59,7 @@ public class TakeFn extends SpecialBaseFn {
 
 	@Override
 	public int resultTypeFor(Array a) {
+		if(a.isNested()) return a.atA(0).type();
 		return a.type();
 	}
 
@@ -73,6 +70,7 @@ public class TakeFn extends SpecialBaseFn {
 
 	@Override
 	public Dimensions resultDimsFor(Array a, int axis) {
+		if(a.isNested()) return a.atA(0).dims();
 		return Dimensions.EMPTY;  // returns a scalar always
 	}
 

@@ -183,6 +183,11 @@ public class BitArray extends BaseArray {
 		return new BitArray(dims(), true, actualLen, result);
 	}
 
+	@Override
+	public Array prototype() {
+		return new IntScalar(0);
+	}
+
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;

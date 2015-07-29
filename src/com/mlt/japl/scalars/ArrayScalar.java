@@ -58,6 +58,11 @@ public class ArrayScalar extends BaseScalar {
 	}
 	
 	@Override
+	public Array prototype() {
+		return new NestedArray();
+	}
+	
+	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		return data.equals(o);

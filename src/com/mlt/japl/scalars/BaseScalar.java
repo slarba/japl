@@ -132,4 +132,8 @@ public abstract class BaseScalar implements Array {
 		throw new DomainError();
 	}
 
+	@Override
+	public int[] asIntArray() {
+		throw new DomainError();
+	}
 }

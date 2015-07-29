@@ -1,6 +1,7 @@
 package com.mlt.japl.scalars;
 
 import com.mlt.japl.arrays.CharArray;
+import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
@@ -50,6 +51,11 @@ public class CharScalar extends BaseScalar {
 	@Override
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(data);
+	}
+
+	@Override
+	public Array prototype() {
+		return new CharScalar(' ');
 	}
 
 	@Override

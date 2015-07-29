@@ -49,6 +49,11 @@ public class MultidimIotaArray extends BaseArray {
 	}
 
 	@Override
+	public Array prototype() {
+		return new IntArray(new long[rank()]);
+	}
+
+	@Override
 	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		Array result = new NestedArray(resultDims, new Array[resultDims.length()]);
 		return result;

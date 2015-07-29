@@ -41,6 +41,11 @@ public class RotatedArray extends BaseArray implements ProxyArray {
 	}
 		
 	@Override
+	public Array prototype() {
+		return array.prototype();
+	}
+
+	@Override
 	public long atB(int... indx) {
 		return atB(dims.calculateIndex(indx));
 	}

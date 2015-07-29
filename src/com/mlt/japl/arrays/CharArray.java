@@ -42,6 +42,11 @@ public class CharArray extends BaseArray {
 	}
 	
 	@Override
+	public Array prototype() {
+		return new CharScalar(' ');
+	}
+
+	@Override
 	public int type() {
 		return CHARACTER;
 	}
