@@ -1,6 +1,7 @@
 package com.mlt.japl.fns;
 
 
+import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.RotatedArray;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.ValenceError;
@@ -90,6 +91,13 @@ public class ReverseFn extends SpecialBaseFn {
 		if(b instanceof RotatedArray) {
 			RotatedArray old = (RotatedArray)b;
 			return old.modifyRotations(axis, offset);
+		}
+		if(b instanceof BitArray) {
+			// bitarrays are not lazy rotated for now
+			Array result = b.unInitializedReshapedCopy(b.dims());
+			Iterator srcIterator = b.dims().offsetIteratorAlongAxis(axis, offset);
+			Iterator dstIterator = b.dims().iteratorAlongAxis(axis);
+			return copyWithIterators(b, result, srcIterator, dstIterator);			
 		}
 		int[] rotations = new int[b.rank()];
 		rotations[axis] = offset;

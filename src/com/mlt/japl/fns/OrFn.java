@@ -26,7 +26,7 @@ public class OrFn extends PrimitiveBaseFn {
 	public Array dyadic(Array a, Array b, int axis) {
 		if(a instanceof BitArray) {
 			BitArray ai = (BitArray)a;
-			if(b.isScalar()) {
+			if(b.isScalar() && b.isIntegral()) {
 				return ai.orRight(b.atI(0));
 			}
 			if(b instanceof BitArray) {
@@ -36,7 +36,7 @@ public class OrFn extends PrimitiveBaseFn {
 		}
 		if(b instanceof BitArray) {
 			BitArray bi = (BitArray)b;
-			if(a.isScalar()) {
+			if(a.isScalar() && a.isIntegral()) {
 				return bi.or(a.atI(0));
 			}
 		}

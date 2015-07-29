@@ -21,8 +21,7 @@ public class GameOfLifeTest {
 		itn.eval("R ← ¯1 ⊖ ¯2 ⌽ 5 7 ↑ (3 3 ⍴(⍳9)−1) ∈ 1 2 3 4 7");
 		Array result = itn.eval("gol gol gol R");
 		assertEquals(2, result.rank());
-		// TODO: this assertion does not succeed. equal does not handle array scalars containing bitarrays
-		//assertEquals(Array.BIT, result.type());
+		assertEquals(Array.BIT, result.type());
 		assertEquals(new BitArray(new Dimensions(5,7), new long[] {
 				 0, 0, 1, 1, 0, 0, 0,
 				 0, 0, 1, 1, 1, 0, 0,
