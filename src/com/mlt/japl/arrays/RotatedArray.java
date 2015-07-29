@@ -120,18 +120,18 @@ public class RotatedArray extends BaseArray {
 		return config.print(this);
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof Array) {
-			Array a = (Array)o;
-			if(!a.dims().equals(dims())) return false;
-			for(int i=0; i<a.length(); i++)
-				if(!a.atA(i).equals(atA(i))) return false;
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof Array) {
+//			Array a = (Array)o;
+//			if(!a.dims().equals(dims())) return false;
+//			for(int i=0; i<a.length(); i++)
+//				if(!a.atA(i).equals(atA(i))) return false;
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public Array modifyRotations(int axis, int offset) {
 		int[] newRotations = Arrays.copyOf(rotations, rotations.length);

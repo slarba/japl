@@ -87,18 +87,18 @@ public class DoubleArray extends BaseArray {
 		return new DoubleArray(resultDims, new double[resultDims.length()]);
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof DoubleArray) {
-			DoubleArray a = (DoubleArray)o;
-			if(!a.dims().equals(dims)) return false;
-			for(int i=0; i<a.length(); i++) {
-				if(a.atD(i) != atD(i)) return false;
-			}
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof DoubleArray) {
+//			DoubleArray a = (DoubleArray)o;
+//			if(!a.dims().equals(dims)) return false;
+//			for(int i=0; i<a.length(); i++) {
+//				if(a.atD(i) != atD(i)) return false;
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
 }

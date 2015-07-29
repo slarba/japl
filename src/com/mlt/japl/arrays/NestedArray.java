@@ -108,17 +108,17 @@ public class NestedArray extends BaseArray {
 		return new NestedArray(resultDims, new Array[resultDims.length()]);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof NestedArray) {
-			NestedArray a = (NestedArray)o;
-			if(!a.dims().equals(dims)) return false;
-			for(int i=0; i<a.length(); i++) {
-				if(a.atA(i).equals(atA(i))) return false;
-			}
-			return true;
-		}
-		return false;
-	}	
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof NestedArray) {
+//			NestedArray a = (NestedArray)o;
+//			if(!a.dims().equals(dims)) return false;
+//			for(int i=0; i<a.length(); i++) {
+//				if(a.atA(i).equals(atA(i))) return false;
+//			}
+//			return true;
+//		}
+//		return false;
+//	}	
 }

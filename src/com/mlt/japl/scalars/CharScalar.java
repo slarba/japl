@@ -60,7 +60,7 @@ public class CharScalar extends BaseScalar {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return 1+31*Character.hashCode(data);

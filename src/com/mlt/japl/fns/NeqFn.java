@@ -5,7 +5,7 @@ import com.mlt.japl.iface.Array;
 
 public class NeqFn extends PrimitiveBaseFn {
 	@Override
-	public int I_CC(char a, char b) {
+	public long I_CC(char a, char b) {
 		return a!=b ? 1 : 0;
 	}
 

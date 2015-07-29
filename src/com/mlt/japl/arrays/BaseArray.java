@@ -145,4 +145,16 @@ public abstract class BaseArray implements Array {
 		return printConfig.print(this);
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if(o==this) return true;
+		if(o instanceof Array) {
+			Array a = (Array)o;
+			for(int i=0; i<a.length(); i++) {
+				if(!atA(i).equals(a.atA(i))) return false;
+			}
+			return true;
+		}
+		return false;
+	}
 }

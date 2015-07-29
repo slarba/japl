@@ -72,23 +72,23 @@ public class IotaArray extends BaseArray {
 		return (n*(n+1))/2;
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof IotaArray) {
-			IotaArray a = (IotaArray)o;
-			if(!a.dims().equals(dims())) return false;
-			return n == a.n;
-		}
-		if(o instanceof IntArray) {
-			IntArray a = (IntArray)o;
-			if(!a.dims().equals(dims())) return false;
-			for(int i=0; i<a.length(); i++) {
-				if(a.atI(i)!=atI(i)) return false;
-			}
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof IotaArray) {
+//			IotaArray a = (IotaArray)o;
+//			if(!a.dims().equals(dims())) return false;
+//			return n == a.n;
+//		}
+//		if(o instanceof IntArray) {
+//			IntArray a = (IntArray)o;
+//			if(!a.dims().equals(dims())) return false;
+//			for(int i=0; i<a.length(); i++) {
+//				if(a.atI(i)!=atI(i)) return false;
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
 }

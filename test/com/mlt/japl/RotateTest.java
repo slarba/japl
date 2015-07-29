@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -15,6 +16,7 @@ public class RotateTest extends EvalTestBase {
 	public void testRotations() {
 		//⌽⊖
 		Array result = itn.eval("1⌽3 3⍴'abcdefghi'");
+		assertEquals(Array.CHARACTER, result.type());
 		assertEquals(result, new CharArray(new Dimensions(3,3),"bcaefdhig"));
 	}
 
@@ -22,6 +24,7 @@ public class RotateTest extends EvalTestBase {
 	public void testRotations2() {
 		//⌽⊖
 		Array result = itn.eval("1⊖3 3⍴'abcdefghi'");
+		assertEquals(Array.CHARACTER, result.type());
 		assertEquals(result, new CharArray(new Dimensions(3,3),"defghiabc"));
 	}
 
@@ -29,6 +32,7 @@ public class RotateTest extends EvalTestBase {
 	public void testRotations3() {
 		//⌽⊖
 		Array result = itn.eval("1⌽1⊖3 3⍴'abcdefghi'");
+		assertEquals(Array.CHARACTER, result.type());
 		assertEquals(result, new CharArray(new Dimensions(3,3),"efdhigbca"));
 	}
 
@@ -36,6 +40,7 @@ public class RotateTest extends EvalTestBase {
 	public void testRotations4() {
 		//⌽⊖
 		Array result = itn.eval("0⌽0⊖3 3⍴'abcdefghi'");
+		assertEquals(Array.CHARACTER, result.type());
 		assertEquals(result, new CharArray(new Dimensions(3,3),"abcdefghi"));
 	}
 	
@@ -43,6 +48,7 @@ public class RotateTest extends EvalTestBase {
 	public void testRotations5() {
 		//⌽⊖
 		Array result = itn.eval("¯1⌽1⊖3 3⍴'abcdefghi'");
+		assertEquals(Array.CHARACTER, result.type());
 		assertEquals(result, new CharArray(new Dimensions(3,3),"fdeighcab"));
 	}
 
@@ -50,6 +56,21 @@ public class RotateTest extends EvalTestBase {
 	public void testRotations6() {
 		//⌽⊖
 		Array result = itn.eval("¯1⌽¯1⊖3 3⍴'abcdefghi'");
+		assertEquals(Array.CHARACTER, result.type());
 		assertEquals(result, new CharArray(new Dimensions(3,3),"ighcabfde"));
 	}	
+	
+	@Test
+	public void testBitArrayRotation() {
+		Array result = itn.eval("¯1⌽3 3⍴1 0 1 1 0 0 0 1 0");
+		// 1 0 1
+		// 1 0 0
+		// 0 1 0
+		assertEquals(Array.BIT, result.type());
+		assertEquals(result, new BitArray(new Dimensions(3,3), new long[] {
+			1, 1, 0,
+			0, 1, 0,
+			0, 0, 1
+		}));
+	}
 }

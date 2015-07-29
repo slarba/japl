@@ -35,6 +35,7 @@ import com.mlt.japl.iface.Array;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
 import com.mlt.japl.parser.TokenMgrError;
+import com.mlt.japl.scalars.ArrayScalar;
 import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -181,7 +182,12 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 			    Array evalResult = ast.eval(env);
 			    long stopTime = System.nanoTime();
 				String result = evalResult.asString(new PrintConfig());
-				System.out.println("   result type = " + evalResult.getClass());
+				System.out.println("   result class = " + evalResult.getClass());
+				if(evalResult instanceof ArrayScalar) {
+					ArrayScalar as = (ArrayScalar)evalResult;
+					System.out.println("   array scalar contained type = " + as.atA(0).type());
+				}
+				System.out.println("   result type = " + evalResult.type());
 				System.out.println("   result rank = " + evalResult.rank());
 				System.out.println("   result depth = " + evalResult.depth());
 				System.out.println("   result dims = " + evalResult.dims());

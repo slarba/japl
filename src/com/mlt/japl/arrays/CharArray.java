@@ -93,18 +93,18 @@ public class CharArray extends BaseArray {
 		return new CharArray(resultDims, new char[resultDims.length()]);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof CharArray) {
-			CharArray a = (CharArray)o;
-			if(!a.dims().equals(dims)) return false;
-			for(int i=0; i<a.length(); i++) {
-				if(a.atC(i) != atC(i)) return false;
-			}
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof CharArray) {
+//			CharArray a = (CharArray)o;
+//			if(!a.dims().equals(dims)) return false;
+//			for(int i=0; i<a.length(); i++) {
+//				if(a.atC(i) != atC(i)) return false;
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
 }

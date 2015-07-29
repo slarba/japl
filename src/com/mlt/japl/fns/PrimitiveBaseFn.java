@@ -103,12 +103,12 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 	}
 
 	@Override
-	public int I_C(char c) {		
+	public long I_C(char c) {		
 		throw new AplError();
 	}
 
 	@Override
-	public int I_CC(char a, char b) {		
+	public long I_CC(char a, char b) {		
 		throw new AplError();
 	}
 	

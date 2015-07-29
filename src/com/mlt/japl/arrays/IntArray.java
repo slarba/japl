@@ -87,19 +87,19 @@ public class IntArray extends BaseArray {
 		return new IntArray(resultDims, new long[resultDims.length()]);
 	}	
 
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof Array) {
-			Array a = (Array)o;
-			if(!a.isIntegral()) return false;
-			if(!a.dims().equals(dims)) return false;
-			for(int i=0; i<a.length(); i++) {
-				if(a.atI(i) != atI(i)) return false;
-			}
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof Array) {
+//			Array a = (Array)o;
+//			if(!a.isIntegral()) return false;
+//			if(!a.dims().equals(dims)) return false;
+//			for(int i=0; i<a.length(); i++) {
+//				if(a.atI(i) != atI(i)) return false;
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 
 }

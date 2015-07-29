@@ -59,12 +59,17 @@ public class IntScalar extends BaseScalar {
 	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;
-		if(o instanceof IntScalar) {
-			return ((IntScalar)o).data == data;
+		if(o instanceof Array) {
+			Array a = (Array)o;
+			if(!a.isScalar()) return false;
+			if(a.isIntegral()) {
+				return atI(0) == a.atI(0);
+			}
+			return false;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return 1+17*Long.hashCode(data);

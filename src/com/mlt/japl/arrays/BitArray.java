@@ -183,17 +183,17 @@ public class BitArray extends BaseArray {
 		return new BitArray(dims(), true, actualLen, result);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if(o==this) return true;
-		if(o instanceof BitArray) {
-			BitArray a = (BitArray)o;
-			if(!a.dims().equals(dims)) return false;
-			for(int i=0; i<a.length(); i++) {
-				if(a.atB(i) != atB(i)) return false;
-			}
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if(o==this) return true;
+//		if(o instanceof BitArray) {
+//			BitArray a = (BitArray)o;
+//			if(!a.dims().equals(dims)) return false;
+//			for(int i=0; i<a.length(); i++) {
+//				if(a.atB(i) != atB(i)) return false;
+//			}
+//			return true;
+//		}
+//		return false;
+//	}
 }

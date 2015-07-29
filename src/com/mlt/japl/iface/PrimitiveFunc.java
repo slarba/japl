@@ -7,9 +7,9 @@ package com.mlt.japl.iface;
  *
  */
 public interface PrimitiveFunc {
-	public int I_C(char c);
+	public long I_C(char c);
 
-	public int I_CC(char a, char b);
+	public long I_CC(char a, char b);
 	
 	public double D_D(double d);
 
