@@ -66,6 +66,14 @@ public class BitArray extends BaseArray {
 	}
 
 	@Override
+	public int[] asIntArray() {
+		int[] a = new int[length()];
+		for(int i=0; i<length(); i++)
+			a[i] = (int)atI(i);
+		return a;
+	}
+	
+	@Override
 	public Array reshape(Dimensions newShape) {
 		// TODO: hugely inefficient copy for now!
 		if(newShape.length()<length()) {
