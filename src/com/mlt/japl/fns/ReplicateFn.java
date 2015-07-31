@@ -10,6 +10,12 @@ import com.mlt.japl.tools.Iterator;
 
 public class ReplicateFn extends SpecialBaseFn {
 
+	private boolean first;
+
+	public ReplicateFn(boolean first) {
+		this.first = first;
+	}
+	
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
 		if(axis<0) axis = b.rank()-1;
