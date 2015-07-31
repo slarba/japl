@@ -52,7 +52,7 @@ public class FunctionRegistry {
 		map.put("\u222a", new UnionFn());
 		map.put("\u22a3", new StopFn());
 		map.put("\u22a2", new PassFn());
-//		map.put("/", new ReplicateFn());				
+		map.put("/", new ReplicateFn());				
 	}
 	
 	public Func lookup(String name) {

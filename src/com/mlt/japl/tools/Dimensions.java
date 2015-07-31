@@ -220,4 +220,10 @@ public class Dimensions {
 	public int[] spans() {
 		return spans;
 	}
+
+	public Dimensions replaceAxis(int axis, int sum) {
+		int[] newdims = Arrays.copyOf(dims, dims.length);
+		newdims[axis] = sum;
+		return new Dimensions(newdims);
+	}
 }
