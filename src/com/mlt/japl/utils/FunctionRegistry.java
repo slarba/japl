@@ -19,7 +19,8 @@ public class FunctionRegistry {
 		map.put("\u00d7", new MulFn());
 		map.put("\u22c6", new ExpFn());
 		map.put("\u235f", new LogFn());
-		map.put("\u002c", new RavelFn());
+		map.put("\u002c", new RavelFn(false));
+		map.put("⍪", new RavelFn(true));
 		map.put("\u230a", new FloorFn());
 		map.put("\u2308", new CeilFn());
 		map.put("\u2223", new AbsFn());

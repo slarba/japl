@@ -744,13 +744,13 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_1() {
-    if (jj_scan_token(STMTSEPARATOR)) return true;
+  private boolean jj_3_21() {
+    if (jj_scan_token(CPLXCONSTANT)) return true;
     return false;
   }
 
-  private boolean jj_3_21() {
-    if (jj_scan_token(CPLXCONSTANT)) return true;
+  private boolean jj_3_1() {
+    if (jj_scan_token(STMTSEPARATOR)) return true;
     return false;
   }
 
@@ -947,15 +947,15 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_9() {
-    if (jj_scan_token(STMTSEPARATOR)) return true;
-    if (jj_3R_5()) return true;
-    return false;
-  }
-
   private boolean jj_3_14() {
     if (jj_scan_token(26)) return true;
     if (jj_3R_9()) return true;
+    return false;
+  }
+
+  private boolean jj_3_9() {
+    if (jj_scan_token(STMTSEPARATOR)) return true;
+    if (jj_3R_5()) return true;
     return false;
   }
 

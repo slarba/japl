@@ -9,6 +9,12 @@ import com.mlt.japl.tools.Iterator;
 
 public class RavelFn extends SpecialBaseFn {
 
+	private boolean first;
+
+	public RavelFn(boolean first) {
+		this.first = first;
+	}
+
 	@Override
 	public Array monadic(Array a, int axis) {
 		if(a.isScalar()) return a;
@@ -24,7 +30,8 @@ public class RavelFn extends SpecialBaseFn {
 			return result;
 		}
 		if(axis<0) {
-			axis = b.rank()-1;
+			if(first) axis = 0;
+			else axis = b.rank()-1;
 		}
 
 		if(a.isScalar()) {
