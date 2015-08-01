@@ -137,6 +137,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 				  ,"\u22a3"  // stop
 				  ,"\u22a2"  // pass
 				  ,"⍪"  // laminate first axis
+				  ,"\u2337"  // index
 		};
 		for(String s : buttons) {
 			toolbar.add(createButton(s,font));

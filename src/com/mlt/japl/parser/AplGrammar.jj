@@ -146,6 +146,7 @@ TOKEN : /* OPERATORS */
   | "\u222a"  // union
   | "\u22a3"  // stop
   | "\u22a2"  // pass
+  | "\u2337"  // index
   | "⍪"  // laminate 1st axis
   >
 | < OUTERPROD:
