@@ -738,19 +738,8 @@ public class AplParser implements AplParserConstants {
     finally { jj_save(36, xla); }
   }
 
-  private boolean jj_3R_7() {
-    if (jj_scan_token(17)) return true;
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
   private boolean jj_3_21() {
     if (jj_scan_token(CPLXCONSTANT)) return true;
-    return false;
-  }
-
-  private boolean jj_3_1() {
-    if (jj_scan_token(STMTSEPARATOR)) return true;
     return false;
   }
 
@@ -814,6 +803,11 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
+  private boolean jj_3_12() {
+    if (jj_3R_11()) return true;
+    return false;
+  }
+
   private boolean jj_3R_17() {
     Token xsp;
     xsp = jj_scanpos;
@@ -832,21 +826,6 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_12() {
-    if (jj_3R_11()) return true;
-    return false;
-  }
-
-  private boolean jj_3_28() {
-    if (jj_scan_token(MONADICOPERATOR)) return true;
-    return false;
-  }
-
-  private boolean jj_3_15() {
-    if (jj_3R_9()) return true;
-    return false;
-  }
-
   private boolean jj_3R_9() {
     Token xsp;
     xsp = jj_scanpos;
@@ -859,6 +838,16 @@ public class AplParser implements AplParserConstants {
 
   private boolean jj_3_11() {
     if (jj_3R_10()) return true;
+    return false;
+  }
+
+  private boolean jj_3_28() {
+    if (jj_scan_token(MONADICOPERATOR)) return true;
+    return false;
+  }
+
+  private boolean jj_3_15() {
+    if (jj_3R_9()) return true;
     return false;
   }
 
@@ -927,6 +916,11 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
+  private boolean jj_3_10() {
+    if (jj_scan_token(STMTSEPARATOR)) return true;
+    return false;
+  }
+
   private boolean jj_3_29() {
     if (jj_3R_16()) return true;
     return false;
@@ -939,17 +933,6 @@ public class AplParser implements AplParserConstants {
       xsp = jj_scanpos;
       if (jj_3_37()) { jj_scanpos = xsp; break; }
     }
-    return false;
-  }
-
-  private boolean jj_3_10() {
-    if (jj_scan_token(STMTSEPARATOR)) return true;
-    return false;
-  }
-
-  private boolean jj_3_14() {
-    if (jj_scan_token(26)) return true;
-    if (jj_3R_9()) return true;
     return false;
   }
 
@@ -969,6 +952,12 @@ public class AplParser implements AplParserConstants {
     xsp = jj_scanpos;
     if (jj_3_8()) jj_scanpos = xsp;
     if (jj_3R_5()) return true;
+    return false;
+  }
+
+  private boolean jj_3_14() {
+    if (jj_scan_token(26)) return true;
+    if (jj_3R_9()) return true;
     return false;
   }
 
@@ -1021,6 +1010,11 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
+  private boolean jj_3_7() {
+    if (jj_3R_9()) return true;
+    return false;
+  }
+
   private boolean jj_3_34() {
     if (jj_3R_20()) return true;
     return false;
@@ -1031,8 +1025,8 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
-  private boolean jj_3_7() {
-    if (jj_3R_9()) return true;
+  private boolean jj_3_6() {
+    if (jj_3R_8()) return true;
     return false;
   }
 
@@ -1043,16 +1037,6 @@ public class AplParser implements AplParserConstants {
     if (jj_3_24()) jj_scanpos = xsp;
     xsp = jj_scanpos;
     if (jj_3_25()) jj_scanpos = xsp;
-    return false;
-  }
-
-  private boolean jj_3_6() {
-    if (jj_3R_8()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_19() {
-    if (jj_scan_token(MONADICOPERATOR)) return true;
     return false;
   }
 
@@ -1082,6 +1066,11 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
+  private boolean jj_3R_19() {
+    if (jj_scan_token(MONADICOPERATOR)) return true;
+    return false;
+  }
+
   private boolean jj_3R_6() {
     if (jj_scan_token(24)) return true;
     if (jj_3R_9()) return true;
@@ -1091,12 +1080,6 @@ public class AplParser implements AplParserConstants {
   private boolean jj_3R_8() {
     if (jj_scan_token(21)) return true;
     if (jj_3R_9()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_20() {
-    if (jj_scan_token(OUTERPROD)) return true;
-    if (jj_3R_17()) return true;
     return false;
   }
 
@@ -1111,8 +1094,25 @@ public class AplParser implements AplParserConstants {
     return false;
   }
 
+  private boolean jj_3R_20() {
+    if (jj_scan_token(OUTERPROD)) return true;
+    if (jj_3R_17()) return true;
+    return false;
+  }
+
   private boolean jj_3_22() {
     if (jj_scan_token(28)) return true;
+    if (jj_3R_9()) return true;
+    return false;
+  }
+
+  private boolean jj_3_1() {
+    if (jj_scan_token(STMTSEPARATOR)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_7() {
+    if (jj_scan_token(17)) return true;
     if (jj_3R_9()) return true;
     return false;
   }

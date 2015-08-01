@@ -6,7 +6,6 @@ options
   JDK_VERSION = "1.7";
   UNICODE_INPUT = true;
   LOOKAHEAD = 2;
-//  FORCE_LA_CHECK=true;
   COMMON_TOKEN_ACTION = true;
   TOKEN_MANAGER_USES_PARSER = true;
   static = false;
@@ -93,15 +92,12 @@ SKIP :
 {
   " "
 | "\t"
-}
-
-SKIP:
-{ < "\u235d" (~["\n"])* ["\n"] >
+| < "\u235d" (~["\n"])* ["\n"] >   // comments
 }
 
 TOKEN : /* OPERATORS */
 {
-  < FUNC :
+  < FUNC:
     "\u003f"  // roll ?
   | "\u2308"  // ceil
   | "\u230a"  // floor
@@ -152,9 +148,20 @@ TOKEN : /* OPERATORS */
   | "\u22a2"  // pass
   | "⍪"  // laminate 1st axis
   >
-| < OUTERPROD : "\u2218." >
-| < MONADICOPERATOR: ["/"]|["\\"]|["\u00a8"]|["\u233f"]|["\u2340"] >
-| < STMTSEPARATOR: ["\u22c4"] | (["\r","\n"])+ | ("\u235d" (~["\n"])* ["\n"]) >
+| < OUTERPROD:
+    "\u2218." >
+| < MONADICOPERATOR:
+    "/"
+  | "\\"
+  | "\u00a8"
+  | "\u233f"
+  | "\u2340"
+  >
+| < STMTSEPARATOR:
+    "\u22c4"
+  | (["\r","\n"])+
+  | ("\u235d" (~["\n"])* ["\n"])
+  >
 }
 
 TOKEN :
@@ -251,8 +258,6 @@ AstNode arrayexpr() :{	AstNode t;
 	{
 	  return t;
 	}
-//|   "(" t = arrayexpr() ")"//	{
-//	  return t;//	}
 }
 
 AstNode if_expr() :
