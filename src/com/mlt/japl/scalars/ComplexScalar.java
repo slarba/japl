@@ -2,6 +2,7 @@ package com.mlt.japl.scalars;
 
 import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.errors.AplError;
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
@@ -42,6 +43,11 @@ public class ComplexScalar extends BaseScalar {
 	@Override
 	public String asString(PrintConfig printConfig) {
 		return printConfig.print(re, im);
+	}
+
+	@Override
+	public int compareTo(BaseScalar o) {
+		throw new DomainError();
 	}
 
 }

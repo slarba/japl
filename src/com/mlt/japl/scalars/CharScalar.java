@@ -72,4 +72,15 @@ public class CharScalar extends BaseScalar {
 		return 1+31*Character.hashCode(data);
 	}
 
+	@Override
+	public int compareTo(BaseScalar o) {
+		if(o instanceof CharScalar) {
+			CharScalar a = (CharScalar)o;
+			if(data<a.data) return -1;
+			if(data>a.data) return 1;
+			return 0;
+		}
+		return 0;
+	}
+
 }

@@ -57,6 +57,8 @@ public class FunctionRegistry {
 		map.put("\u233f", new ReplicateFn(true));
 		map.put("\\", new ExpandFn(false));
 		map.put("\u2340", new ExpandFn(true));
+		map.put("\u234b", new GradeUpFn(true));
+		map.put("\u2352", new GradeUpFn(false));
 	}
 	
 	public Func lookup(String name) {

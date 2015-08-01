@@ -5,7 +5,7 @@ import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
-public abstract class BaseScalar implements Array {
+public abstract class BaseScalar implements Array, Comparable<BaseScalar> {
 
 	@Override 
 	public Array unInitializedReshapedCopy(Dimensions resultDims) {

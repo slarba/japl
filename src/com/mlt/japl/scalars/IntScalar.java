@@ -68,6 +68,17 @@ public class IntScalar extends BaseScalar {
 	}
 	
 	@Override
+	public int compareTo(BaseScalar o) {
+		if(o instanceof IntScalar) {
+			IntScalar d = (IntScalar)o;
+			if(data<d.data) return -1;
+			if(data>d.data) return 1;
+			return 0;
+		}
+		return 0;
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		if(o instanceof Array) {

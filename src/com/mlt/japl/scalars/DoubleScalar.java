@@ -73,4 +73,15 @@ public class DoubleScalar extends BaseScalar {
 		return 1+7*Double.hashCode(data);
 	}
 
+	@Override
+	public int compareTo(BaseScalar o) {
+		if(o instanceof DoubleScalar) {
+			DoubleScalar d = (DoubleScalar)o;
+			if(data<d.data) return -1;
+			if(data>d.data) return 1;
+			return 0;
+		}
+		return 0;
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.mlt.japl.scalars;
 
 import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
@@ -71,5 +72,10 @@ public class ArrayScalar extends BaseScalar {
 	public boolean equals(Object o) {
 		if(o==this) return true;
 		return data.equals(o);
+	}
+
+	@Override
+	public int compareTo(BaseScalar o) {
+		throw new DomainError();
 	}
 }
