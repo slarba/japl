@@ -386,7 +386,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 			case Array.BIT:
 			case Array.INTEGER: return loop_I_I(result, a);
 			case Array.DOUBLE:  return loop_I_D(result, a);
-			case Array.NESTED:  return loop_I_M(result, a, axis);
+			case Array.MIXED:  return loop_I_M(result, a, axis);
 			}
 			break;
 		case Array.DOUBLE:
@@ -394,10 +394,10 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 			case Array.BIT:
 			case Array.INTEGER: return loop_D_I(result, a);
 			case Array.DOUBLE:  return loop_D_D(result, a);
-			case Array.NESTED:   return loop_D_M(result, a, axis);
+			case Array.MIXED:   return loop_D_M(result, a, axis);
 			}
 			break;
-		case Array.NESTED:
+		case Array.MIXED:
 			return loop_M_A(result, a, axis);
 		}
 
@@ -467,7 +467,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_I_I_I(result, a, b);
 				case Array.DOUBLE:   return loop_I_I_D(result, a, b);
-				case Array.NESTED:    return loop_I_I_M(result, a, b, axis);
+				case Array.MIXED:    return loop_I_I_M(result, a, b, axis);
 				}
 				break;
 			case Array.DOUBLE:
@@ -475,15 +475,15 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_I_D_I(result, a, b);
 				case Array.DOUBLE:   return loop_I_D_D(result, a, b);
-				case Array.NESTED:    return loop_I_D_M(result, a, b, axis);
+				case Array.MIXED:    return loop_I_D_M(result, a, b, axis);
 				}
 				break;
-			case Array.NESTED:
+			case Array.MIXED:
 				switch(b.type()) {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_I_M_I(result, a, b, axis);
 				case Array.DOUBLE:   return loop_I_M_D(result, a, b, axis);
-				case Array.NESTED:    return loop_I_M_M(result, a, b, axis);
+				case Array.MIXED:    return loop_I_M_M(result, a, b, axis);
 				}
 				break;
 			case Array.CHARACTER:
@@ -491,7 +491,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_I_C_I(result, a, b);
 				case Array.DOUBLE:   return loop_I_C_D(result, a, b);
-				case Array.NESTED:    return loop_I_C_M(result, a, b, axis);
+				case Array.MIXED:    return loop_I_C_M(result, a, b, axis);
 				case Array.CHARACTER:return loop_I_C_C(result, a, b);
 				}
 			}
@@ -504,7 +504,7 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_D_I_I(result, a, b);
 				case Array.DOUBLE:   return loop_D_I_D(result, a, b);
-				case Array.NESTED:    return loop_D_I_M(result, a, b, axis);
+				case Array.MIXED:    return loop_D_I_M(result, a, b, axis);
 				}
 				break;
 			case Array.DOUBLE:
@@ -512,20 +512,20 @@ public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_D_D_I(result, a, b);
 				case Array.DOUBLE:   return loop_D_D_D(result, a, b);
-				case Array.NESTED:    return loop_D_D_M(result, a, b, axis);
+				case Array.MIXED:    return loop_D_D_M(result, a, b, axis);
 				}
 				break;
-			case Array.NESTED:
+			case Array.MIXED:
 				switch(b.type()) {
 				case Array.BIT:
 				case Array.INTEGER:  return loop_D_M_I(result, a, b, axis);
 				case Array.DOUBLE:   return loop_D_M_D(result, a, b, axis);
-				case Array.NESTED:    return loop_D_M_M(result, a, b, axis);
+				case Array.MIXED:    return loop_D_M_M(result, a, b, axis);
 				}
 				break;
 			}
 			break;
-		case Array.NESTED:
+		case Array.MIXED:
 			return loop_M_A_A(result, a, b, axis);
 		}
 	

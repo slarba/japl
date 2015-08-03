@@ -94,7 +94,7 @@ public class ReduceFn extends SpecialBaseFn {
 				if(resultIterator.isFinished()) break;
 			}
 			break;
-		case Array.NESTED:
+		case Array.MIXED:
 			while(true) {
 				Array tmp = a.atA(sourceIterator.index());
 				sourceIterator.step();

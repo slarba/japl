@@ -34,6 +34,11 @@ public class IotaArray extends BaseArray {
 	}
 
 	@Override
+	public double atD(int idx) {
+		return (double)atI(idx);
+	}
+	
+	@Override
 	public int type() {
 		return INTEGER;
 	}

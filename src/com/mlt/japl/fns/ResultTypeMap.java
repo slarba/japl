@@ -9,19 +9,19 @@ public class ResultTypeMap {
 	
 	public ResultTypeMap() {
 		// result type is always nested if either of the arguments is nested
-		put(Array.NESTED, Array.NESTED);
+		put(Array.MIXED, Array.MIXED);
 		
-		put(Array.NESTED, Array.NESTED, Array.NESTED);
+		put(Array.MIXED, Array.MIXED, Array.MIXED);
 
-		put(Array.NESTED, Array.BIT, Array.NESTED);
-		put(Array.NESTED, Array.INTEGER, Array.NESTED);
-		put(Array.NESTED, Array.CHARACTER, Array.NESTED);
-		put(Array.NESTED, Array.DOUBLE, Array.NESTED);
+		put(Array.MIXED, Array.BIT, Array.MIXED);
+		put(Array.MIXED, Array.INTEGER, Array.MIXED);
+		put(Array.MIXED, Array.CHARACTER, Array.MIXED);
+		put(Array.MIXED, Array.DOUBLE, Array.MIXED);
 
-		put(Array.BIT, Array.NESTED, Array.NESTED);
-		put(Array.INTEGER, Array.NESTED, Array.NESTED);
-		put(Array.CHARACTER, Array.NESTED, Array.NESTED);
-		put(Array.DOUBLE, Array.NESTED, Array.NESTED);
+		put(Array.BIT, Array.MIXED, Array.MIXED);
+		put(Array.INTEGER, Array.MIXED, Array.MIXED);
+		put(Array.CHARACTER, Array.MIXED, Array.MIXED);
+		put(Array.DOUBLE, Array.MIXED, Array.MIXED);
 	}
 
 	public void put(int left, int right, int type) {

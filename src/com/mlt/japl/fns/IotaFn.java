@@ -17,7 +17,6 @@ public class IotaFn extends SpecialBaseFn {
 
 	@Override
 	public Array monadic(Array a, int axis) {
-		if(!a.isIntegral()) throw new DomainError();
 		if(a.rank()>1) throw new RankError();
 		if(a.length()>1) {
 			int[] ds = new int[a.length()];
@@ -59,7 +58,7 @@ public class IotaFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a) {
 		if(a.rank()==0) return Array.INTEGER;
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 
 	@Override

@@ -100,7 +100,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 	@Test
 	public void testMixedArray() {
 		Array r = eval("2 'f' 3.14");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1, r.depth());
 		assertEquals(2, r.atA(0).atI(0));
 		assertEquals('f', r.atA(1).atC(0));
@@ -110,7 +110,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 	@Test
 	public void testNestedArray() {
 		Array r = eval("2 ('f' 4) 3.14");		
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(2, r.depth());
 		assertEquals(2, r.atA(0).atI(0));
 		assertEquals('f', r.atA(1).atA(0).atC(0));

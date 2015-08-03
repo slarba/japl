@@ -53,7 +53,7 @@ public class PrintConfig {
 //		}
 		String space = " ";
 		if(a.type()==Array.CHARACTER) space="";
-		if(a.type()==Array.NESTED) space="  ";
+		if(a.type()==Array.MIXED) space="  ";
 		
 		int lastDim = a.dims().lastDim();
 		int[] maxLens = computLastDimMaxWidths(a, lastDim);

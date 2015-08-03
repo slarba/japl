@@ -48,7 +48,7 @@ public class UnionFn extends SpecialBaseFn {
 	
 	@Override
 	public int resultTypeFor(Array a, Array b) {
-		if(a.type()!=b.type()) return Array.NESTED;
+		if(a.type()!=b.type()) return Array.MIXED;
 		return a.type();
 	}
 

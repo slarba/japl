@@ -17,7 +17,7 @@ public class MultidimIotaArray extends BaseArray {
 	
 	@Override
 	public int type() {
-		return NESTED;
+		return MIXED;
 	}
 
 	@Override

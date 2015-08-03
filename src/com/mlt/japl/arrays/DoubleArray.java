@@ -2,6 +2,7 @@ package com.mlt.japl.arrays;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.DoubleScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -52,13 +53,25 @@ public class DoubleArray extends BaseArray {
 	}
 
 	@Override
+	public long atI(int idx) {
+		long d = (long)atD(idx);
+		if(d==atD(idx)) return d;
+		throw new DomainError();
+	}
+	
+	@Override
 	public void setD(int idx, double val) {
 		data[idx] = val;
 	}
 	
 	@Override
 	public void setA(int idx, Array val) {
-		setD(idx, val.atD(idx));
+		setD(idx, val.atD(0));
+	}
+	
+	@Override
+	public void setI(int idx, long val) {
+		data[idx] = val;
 	}
 	
 	@Override

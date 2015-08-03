@@ -44,7 +44,7 @@ public class GradeUpFn extends SpecialBaseFn {
 
 	@Override
 	public Array monadic(Array a, int axis) {
-		if(a.type()==Array.NESTED) throw new DomainError();
+		if(a.type()==Array.MIXED) throw new DomainError();
 		List<CmpOrder> cmp = new ArrayList<CmpOrder>();
 		for(int i=0; i<a.length(); i++) {
 			cmp.add(new CmpOrder((BaseScalar)a.atA(i), i+1));

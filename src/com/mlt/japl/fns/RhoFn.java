@@ -11,7 +11,7 @@ public class RhoFn extends SpecialBaseFn {
 	
 	@Override
 	public Array monadic(Array a, int axis) {
-		if(a.rank()==0) return new IntArray();
+		if(a.rank()==0) return IntArray.ZILDE;
 		int[] adims = a.dims().asArray();
 		long[] dims = new long[adims.length];
 		for(int i=0; i<dims.length; i++)
@@ -21,13 +21,12 @@ public class RhoFn extends SpecialBaseFn {
 
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
-		if(!a.isIntegral()) throw new DomainError();
 		if(a.rank()>1) throw new RankError();
 		if(a.isScalar()) {
 			return b.reshape(new Dimensions((int)a.atI(0)));
 		}
 		int alen = a.length();
-		if(alen==0) return new IntArray();
+		if(alen==0) return IntArray.ZILDE;
 		int[] newDims = new int[alen];
 		for(int i=0; i<newDims.length; i++)
 			newDims[i] = (int)a.atI(i);

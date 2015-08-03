@@ -55,7 +55,7 @@ public class DyadicCallNode implements AstNode {
 
 	@Override
 	public int resultTypeFor(Array a) {
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 
 	@Override

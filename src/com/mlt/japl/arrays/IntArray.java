@@ -2,6 +2,7 @@ package com.mlt.japl.arrays;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -9,10 +10,13 @@ import com.mlt.japl.tools.Dimensions;
 public class IntArray extends BaseArray {
 	long[] data;
 	
-	private static final long[] EMPTY = new long[] {};
+	private static final long[] EMPTYDATA = new long[] {};
+
+	public static final IntArray ZILDE = new IntArray();
 	
 	public IntArray() {
-		data = EMPTY;
+		super();
+		data = EMPTYDATA;
 	}
 	
 	public IntArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
@@ -58,6 +62,17 @@ public class IntArray extends BaseArray {
 	@Override
 	public void setA(int idx, Array val) {
 		setI(idx, val.atI(idx));
+	}
+	
+	@Override
+	public double atD(int idx) {
+		return data[idx % data.length];
+	}
+
+	@Override
+	public void setD(int idx, double val) {
+		if(val==(long)val) data[idx] = (long)val;
+		else throw new DomainError();
 	}
 	
 	@Override

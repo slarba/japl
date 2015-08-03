@@ -21,7 +21,7 @@ public class EncloseFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a) {
 		if(a.isScalar()) return a.type();
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 	
 	@Override

@@ -72,7 +72,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testScalarNested() {
 		Array r = itn.eval("1 + (2 3) 4.2");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(2,r.depth());
 		assertEquals(2,r.length());
 		assertTrue(3==r.atA(0).atI(0));
@@ -83,7 +83,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testNestedScalar() {
 		Array r = itn.eval("(2 3) 4.2+1");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(2,r.depth());
 		assertEquals(2,r.length());
 		assertTrue(3==r.atA(0).atI(0));
@@ -94,7 +94,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testDeeplyNested() {
 		Array r = itn.eval("1 + ((2 3) (4 5)) 4.2");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1,r.rank());
 		assertEquals(2,r.length());
 		assertEquals(3,r.depth());
@@ -108,7 +108,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testDeeplyNested2() {
 		Array r = itn.eval("((2 3) (4 5)) 4.2+1");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1,r.rank());
 		assertEquals(2,r.length());
 		assertEquals(3,r.depth());
@@ -135,7 +135,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testVectorNested() {
 		Array r = itn.eval("1 2 + ((2 3) (4 5)) 4.2");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1,r.rank());
 		assertEquals(2,r.length());
 		assertEquals(2,r.actualLength());
@@ -150,7 +150,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testNestedVector() {
 		Array r = itn.eval("((2 3) (4 5)) 4.2 + 1 2");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1,r.rank());
 		assertEquals(2,r.length());
 		assertEquals(2,r.actualLength());
@@ -188,7 +188,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testNestedMonadic() {
 		Array r = itn.eval("−(2 4) 3");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1,r.rank());
 		assertEquals(2,r.length());
 		assertEquals(2,r.actualLength());
@@ -201,7 +201,7 @@ public class PrimitiveEvalTest {
 	@Test
 	public void testDeeplyMonadic() {
 		Array r = itn.eval("−(2 (4 5)) 3");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(1,r.rank());
 		assertEquals(2,r.length());
 		assertEquals(2,r.actualLength());

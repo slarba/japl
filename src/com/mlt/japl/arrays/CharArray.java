@@ -84,7 +84,7 @@ public class CharArray extends BaseArray {
 
 	@Override
 	public void setA(int idx, Array val) {
-		setC(idx, val.atC(idx));
+		setC(idx, val.atC(0));
 	}
 	
 	@Override
@@ -102,19 +102,5 @@ public class CharArray extends BaseArray {
 		if(resultDims.rank()==0) return new CharScalar();
 		return new CharArray(resultDims, new char[resultDims.length()]);
 	}
-
-//	@Override
-//	public boolean equals(Object o) {
-//		if(o==this) return true;
-//		if(o instanceof CharArray) {
-//			CharArray a = (CharArray)o;
-//			if(!a.dims().equals(dims)) return false;
-//			for(int i=0; i<a.length(); i++) {
-//				if(a.atC(i) != atC(i)) return false;
-//			}
-//			return true;
-//		}
-//		return false;
-//	}
 
 }

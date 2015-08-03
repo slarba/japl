@@ -19,7 +19,6 @@ public class DropFn extends SpecialBaseFn {
 	@Override
 	public Array dyadic(Array a, Array b, int axis)
 	{
-		if(!a.isIntegral()) throw new DomainError();
 		if(a.rank()>1) throw new RankError();
 		int len;
 		if(a.isScalar()) len = 1; else len = a.length();

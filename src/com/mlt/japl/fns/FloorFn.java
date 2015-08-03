@@ -36,7 +36,7 @@ public class FloorFn extends PrimitiveBaseFn {
 
 	@Override
 	public int resultTypeFor(Array a) {
-		if(a.type()==Array.NESTED) return Array.NESTED;
+		if(a.type()==Array.MIXED) return Array.MIXED;
 		return Array.INTEGER;
 	}
 	

@@ -70,7 +70,7 @@ public abstract class SpecialBaseFn implements Func {
 				dstIterator.step();
 			}
 			break;
-		case Array.NESTED:
+		case Array.MIXED:
 			while(!srcIterator.isFinished()) {
 				result.setA(dstIterator.index(), a.atA(srcIterator.index()));
 				srcIterator.step();

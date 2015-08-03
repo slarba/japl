@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.ArrayScalar;
+import com.mlt.japl.scalars.CharScalar;
+import com.mlt.japl.scalars.DoubleScalar;
+import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class NestedArray extends BaseArray {
@@ -67,12 +70,12 @@ public class NestedArray extends BaseArray {
 	
 	@Override
 	public boolean isNested() {
-		return true;
+		return depth>1;
 	}
 
 	@Override
 	public int type() {
-		return NESTED;
+		return MIXED;
 	}
 
 	@Override
@@ -91,9 +94,39 @@ public class NestedArray extends BaseArray {
 	}
 
 	@Override
+	public long atI(int idx) {
+		return data[idx % data.length].atI(0);
+	}
+
+	@Override
+	public double atD(int idx) {
+		return data[idx % data.length].atD(0);
+	}
+
+	@Override
+	public char atC(int idx) {
+		return data[idx % data.length].atC(0);
+	}
+	
+	@Override
 	public void setA(int idx, Array val) {
 		depth = Math.max(val.depth()+1, depth);
 		data[idx] = val;
+	}
+
+	@Override
+	public void setC(int idx, char val) {
+		data[idx] = new CharScalar(val);
+	}
+
+	@Override
+	public void setI(int idx, long val) {
+		data[idx] = new IntScalar(val);
+	}
+
+	@Override
+	public void setD(int idx, double val) {
+		data[idx] = new DoubleScalar(val);
 	}
 	
 	@Override

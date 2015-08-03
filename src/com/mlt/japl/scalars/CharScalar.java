@@ -39,6 +39,11 @@ public class CharScalar extends BaseScalar {
 	}
 	
 	@Override
+	public void setA(int idx, Array val) {
+		data = val.atC(0);
+	}
+	
+	@Override
 	public Array unInitializedCopy() {
 		return new CharScalar();
 	}

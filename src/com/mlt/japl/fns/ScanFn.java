@@ -71,7 +71,7 @@ public class ScanFn extends SpecialBaseFn {
 				}
 			} while(!resultIterator.isFinished());
 			break;
-		case Array.NESTED:
+		case Array.MIXED:
 			do {
 				Array tmp = a.atA(sourceIterator.index());
 				result.setA(resultIterator.index(), tmp);

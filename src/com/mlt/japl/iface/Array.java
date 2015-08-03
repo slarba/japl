@@ -31,9 +31,9 @@ public interface Array {
 	static final int BIT = 8;
 
 	/**
-	 * Nested elements of any other type, including arrays
+	 * Mixed elements of any other type, including arrays
 	 */
-	static final int NESTED = 16;
+	static final int MIXED = 16;
 
 	/**
 	 * Get element type of this array

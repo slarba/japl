@@ -41,7 +41,7 @@ public class IdentifierNode implements AstNode {
 		if(id.equals("\u03c9")) {
 			return a.type();
 		}
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class IdentifierNode implements AstNode {
 		if(id.equals("\u03c9")) {
 			return b.type();
 		}
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 
 	@Override

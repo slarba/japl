@@ -82,7 +82,7 @@ public class RavelFn extends SpecialBaseFn {
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		if(a.type()!=b.type()) {
-			return Array.NESTED;
+			return Array.MIXED;
 		}
 		return a.type();
 	}

@@ -21,7 +21,7 @@ public class ArrayFactory {
 		case Array.INTEGER:   return new IntScalar();
 		case Array.DOUBLE:    return new DoubleScalar();
 		case Array.CHARACTER: return new CharScalar();
-		case Array.NESTED:    return new ArrayScalar();
+		case Array.MIXED:    return new ArrayScalar();
 		default:
 			throw new AplError();
 		}		
@@ -33,7 +33,7 @@ public class ArrayFactory {
 		case Array.INTEGER:		  return new IntArray(d, true, d.length());
 		case Array.DOUBLE:		  return new DoubleArray(d, true, d.length());
 		case Array.CHARACTER:	  return new CharArray(d, true, d.length());
-		case Array.NESTED:		  return new NestedArray(d, true, d.length());
+		case Array.MIXED:		  return new NestedArray(d, true, d.length());
 		default:
 			throw new AplError();
 		}		
@@ -45,7 +45,7 @@ public class ArrayFactory {
 		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.length());
 		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.length());
 		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.length());
-		case Array.NESTED:		  return new NestedArray(a.dims(), true, a.length());
+		case Array.MIXED:		  return new NestedArray(a.dims(), true, a.length());
 		default:
 			throw new AplError();
 		}		
@@ -57,7 +57,7 @@ public class ArrayFactory {
 		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.actualLength());
 		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.actualLength());
 		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.actualLength());
-		case Array.NESTED:		  return new NestedArray(a.dims(), true, a.actualLength());
+		case Array.MIXED:		  return new NestedArray(a.dims(), true, a.actualLength());
 		default:
 			throw new AplError();
 		}		

@@ -88,7 +88,7 @@ public class RhoTest extends EvalTestBase {
 	@Test
 	public void testRhoMixed() {
 		Array r = itn.eval("2 3⍴(4 5) (6 7)");
-		assertEquals(Array.NESTED, r.type());
+		assertEquals(Array.MIXED, r.type());
 		assertEquals(2, r.rank());
 		assertEquals(6, r.length());
 		assertEquals(new Dimensions(2,3), r.dims());

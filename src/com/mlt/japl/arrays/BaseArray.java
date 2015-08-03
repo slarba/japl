@@ -89,7 +89,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public boolean isScalar() {
-		return false;
+		return dims.rank()==0;
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public boolean isNested() {
-		return false;
+		return depth>1;
 	}
 
 	@Override

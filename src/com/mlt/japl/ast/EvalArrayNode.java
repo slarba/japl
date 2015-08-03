@@ -43,12 +43,12 @@ public class EvalArrayNode implements AstNode {
 
 	@Override
 	public int resultTypeFor(Array a) {
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 
 	@Override
 	public int resultTypeFor(Array a, Array b) {
-		return Array.NESTED;
+		return Array.MIXED;
 	}
 
 	@Override
