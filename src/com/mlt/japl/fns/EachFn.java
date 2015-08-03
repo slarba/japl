@@ -20,7 +20,7 @@ public class EachFn extends SpecialBaseFn {
 		if(primitive) {
 			return fn.monadic(a, axis);
 		}
-		Array result = ArrayFactory.makeSimilarArrayOfType(Array.MIXED, a);
+		Array result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.MIXED, a, a.actualLength());
 		for(int i=0; i<result.actualLength(); i++) {
 			result.setA(i, fn.monadic(a.atA(i), axis));
 		}
@@ -33,7 +33,7 @@ public class EachFn extends SpecialBaseFn {
 			return fn.dyadic(a, b, axis);
 		}
 		if(b.isScalar()) {
-			Array result = ArrayFactory.makeSimilarArrayOfType(Array.MIXED, a);
+			Array result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.MIXED, a, a.actualLength());
 			for(int i=0; i<result.actualLength(); i++) {
 				result.setA(i, fn.dyadic(a.atA(i), b.atA(0), axis));
 			}

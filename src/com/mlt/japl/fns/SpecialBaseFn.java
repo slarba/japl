@@ -18,27 +18,6 @@ public abstract class SpecialBaseFn implements Func {
 	public Array dyadic(Array a, Array b, int axis) {
 		throw new ValenceError();
 	}
-	
-	public Array createResultArrayFor(Array a, int axis) {
-		if(a.isScalar()) {
-			return ArrayFactory.makeScalarOfType(resultTypeFor(a));
-		}
-		return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a), a);
-	}
-
-	public Array createResultArrayFor(Array a, Array b, int axis) {
-		if(a.isScalar()) {
-			if(b.isScalar()) {
-				return ArrayFactory.makeScalarOfType(resultTypeFor(a, b));
-			}
-			return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), b);
-		}
-		if(b.isScalar()) {
-			return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), a);			
-		}
-		checkEqualDimensionsAndRank(a, b);
-		return ArrayFactory.makeSimilarArrayOfType(resultTypeFor(a, b), a);			
-	}
 
 	public void checkEqualDimensionsAndRank(Array a, Array b) {
 		if(a.rank()!=b.rank()) throw new RankError();

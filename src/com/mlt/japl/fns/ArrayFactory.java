@@ -39,25 +39,25 @@ public class ArrayFactory {
 		}		
 	}
 	
-	public static Array makeSimilarArrayOfType(int type, Array a) {
-		switch(type) {
-		case Array.BIT:   		  return new BitArray(a.dims(), true, a.length());
-		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.length());
-		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.length());
-		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.length());
-		case Array.MIXED:		  return new NestedArray(a.dims(), true, a.length());
-		default:
-			throw new AplError();
-		}		
-	}
+//	public static Array makeSimilarArrayOfType(int type, Array a) {
+//		switch(type) {
+//		case Array.BIT:   		  return new BitArray(a.dims(), true, a.length());
+//		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.length());
+//		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.length());
+//		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.length());
+//		case Array.MIXED:		  return new NestedArray(a.dims(), true, a.length());
+//		default:
+//			throw new AplError();
+//		}		
+//	}
 
-	public static Array makeSimilarArrayOfTypeWithActualLength(int type, Array a) {
+	public static Array makeSimilarArrayOfTypeWithActualLength(int type, Array a, int len) {
 		switch(type) {
-		case Array.BIT:   		  return new BitArray(a.dims(), true, a.actualLength());
-		case Array.INTEGER:		  return new IntArray(a.dims(), true, a.actualLength());
-		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, a.actualLength());
-		case Array.CHARACTER:	  return new CharArray(a.dims(), true, a.actualLength());
-		case Array.MIXED:		  return new NestedArray(a.dims(), true, a.actualLength());
+		case Array.BIT:   		  return new BitArray(a.dims(), true, len);
+		case Array.INTEGER:		  return new IntArray(a.dims(), true, len);
+		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, len);
+		case Array.CHARACTER:	  return new CharArray(a.dims(), true, len);
+		case Array.MIXED:		  return new NestedArray(a.dims(), true, len);
 		default:
 			throw new AplError();
 		}		

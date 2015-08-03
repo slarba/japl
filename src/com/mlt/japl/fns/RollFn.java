@@ -31,8 +31,8 @@ public class RollFn extends PrimitiveBaseFn {
 		if(a.isScalar()) {
 			return new IntScalar(I_I(a.atI(0)));
 		}
-		Array result = ArrayFactory.makeSimilarArrayOfType(Array.INTEGER, a);
-		for(int i=0; i<result.length(); i++) {
+		Array result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.INTEGER, a, a.length());
+		for(int i=0; i<result.actualLength(); i++) {
 			result.setI(i, I_I(a.atI(i)));
 		}
 		return result;
