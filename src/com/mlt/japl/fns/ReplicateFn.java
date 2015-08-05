@@ -29,7 +29,7 @@ public class ReplicateFn extends SpecialBaseFn {
 		Iterator resultIterator = result.dims().iteratorAlongAxis(axis);
 		Iterator biterator = b.dims().iteratorAlongAxis(axis);
 
-		if(a.isScalar() && a.isIntegral()) {
+		if(a.isScalar()) {
 			while(!resultIterator.isFinished()) {
 				long repl = a.atI(0);
 				int i = 0;

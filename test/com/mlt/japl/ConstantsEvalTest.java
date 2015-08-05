@@ -40,7 +40,7 @@ public class ConstantsEvalTest extends EvalTestBase {
 	@Test
 	public void testBitScalar() {
 		Array r = itn.eval("1");
-		assertEquals(Array.INTEGER, r.type());
+		assertEquals(Array.BIT, r.type());
 		assertEquals(0,r.depth());
 		assertEquals(1,r.length());
 		assertEquals(1,r.actualLength());

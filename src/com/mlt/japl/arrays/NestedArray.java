@@ -20,6 +20,14 @@ public class NestedArray extends BaseArray {
 		this.depth = 1;
 	}
 	
+	public int[] asIntArray() {
+		int[] result = new int[length()];
+		for(int i=0; i<result.length; i++) {
+			result[i] = (int)atI(i);
+		}
+		return result;
+	}
+	
 	public NestedArray(Dimensions dims, boolean allocateEmpty, int actualLength) {
 		super(dims);
 		this.depth = 1;

@@ -2,6 +2,7 @@ package com.mlt.japl.scalars;
 
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
@@ -24,7 +25,7 @@ public class IntScalar extends BaseScalar {
 	
 	@Override
 	public int type() {
-		return INTEGER;
+		return (data==0 || data==1) ? BIT : INTEGER;
 	}
 
 	@Override
@@ -33,6 +34,11 @@ public class IntScalar extends BaseScalar {
 	}
 
 	@Override
+	public double atD(int idx) {
+		return data;
+	}
+	
+	@Override
 	public long atI(int idx) {
 		return data;
 	}
@@ -40,6 +46,12 @@ public class IntScalar extends BaseScalar {
 	@Override
 	public void setI(int idx, long val) {
 		data = val;
+	}
+	
+	@Override
+	public void setD(int idx, double val) {
+		if(val!=(long)val) throw new DomainError();
+		data = (long)val;
 	}
 	
 	@Override

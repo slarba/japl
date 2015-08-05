@@ -33,14 +33,19 @@ public class EachFn extends SpecialBaseFn {
 			return fn.dyadic(a, b, axis);
 		}
 		if(b.isScalar()) {
-			Array result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.MIXED, a, a.actualLength());
-			for(int i=0; i<result.actualLength(); i++) {
+			Array result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.MIXED, a, a.length());
+			for(int i=0; i<result.length(); i++) {
 				result.setA(i, fn.dyadic(a.atA(i), b.atA(0), axis));
 			}
 			return result;
 		}
-		Array result = b.unInitializedReshapedCopy(b.dims());
-		for(int i=0; i<result.actualLength(); i++) {
+		Array result;
+		if(a.isScalar()) {
+			result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.MIXED, b, b.length());
+		} else
+			result = ArrayFactory.makeSimilarArrayOfTypeWithActualLength(Array.MIXED, a, a.length());
+		//Array result = b.unInitializedReshapedCopy(b.dims());
+		for(int i=0; i<result.length(); i++) {
 			result.setA(i, fn.dyadic(a.atA(i), b.atA(i), axis));
 		}
 		return result;

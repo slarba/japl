@@ -6,7 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
+import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.errors.IndexError;
@@ -32,6 +34,18 @@ public class RavelTest extends EvalTestBase {
 		assertTrue(r instanceof IntArray);
 		assertEquals(new Dimensions(6), r.dims());
 		assertEquals(new IntArray(1,2,3,4,5,6), r);
+	}
+	
+	@Test
+	public void testBitArrayRavel() {
+		Array r = itn.eval("1 0 1, 1");
+		assertTrue(r instanceof BitArray);
+	}
+	
+	@Test
+	public void testLaminateIntAndDoubles() {
+		Array r = itn.eval("1 2 3, 4.0");
+		assertTrue(r instanceof DoubleArray);
 	}
 	
 	@Test

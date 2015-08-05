@@ -4,12 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mlt.japl.arrays.BitArray;
+import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.iface.Array;
+
 public class DiscloseTest extends EvalTestBase {
 
 	@Test
 	public void testDisclose() {
 		itn.eval("box ← {ω⌿ ω/ ω ω⍴⍳ω⋆2}");
-		itn.eval("{(⍳ω),¨ box ⊃ω⋆÷2} 4 4");
+		itn.eval("rcb ← {(⍳ω),¨ box ⊃ω⋆÷2}");
+		Array result = itn.eval("{1 ∈¨ ω = ⊂3 3 4} rcb 4 4");
+	
+		assertTrue(result instanceof NestedArray);
 	}
 
 }

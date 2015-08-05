@@ -81,7 +81,60 @@ public class RavelFn extends SpecialBaseFn {
 
 	@Override
 	public int resultTypeFor(Array a, Array b) {
-		if(a.type()!=b.type()) {
+		switch(a.type()) {
+		case Array.BIT:
+			switch(b.type()) {
+			case Array.BIT:
+				return Array.BIT;
+			case Array.INTEGER:
+				return Array.INTEGER;
+			case Array.DOUBLE:
+				return Array.DOUBLE;
+			case Array.CHARACTER:
+				return Array.MIXED;
+			case Array.MIXED:		
+				return Array.MIXED;
+			}
+		case Array.INTEGER:
+			switch(b.type()) {
+			case Array.BIT:
+				return Array.INTEGER;
+			case Array.INTEGER:
+				return Array.INTEGER;
+			case Array.DOUBLE:
+				return Array.DOUBLE;
+			case Array.CHARACTER:
+				return Array.MIXED;
+			case Array.MIXED:		
+				return Array.MIXED;
+			}
+		case Array.DOUBLE:
+			switch(b.type()) {
+			case Array.BIT:
+				return Array.DOUBLE;
+			case Array.INTEGER:
+				return Array.DOUBLE;
+			case Array.DOUBLE:
+				return Array.DOUBLE;
+			case Array.CHARACTER:
+				return Array.MIXED;
+			case Array.MIXED:		
+				return Array.MIXED;
+			}
+		case Array.CHARACTER:
+			switch(b.type()) {
+			case Array.BIT:
+				return Array.MIXED;
+			case Array.INTEGER:
+				return Array.MIXED;
+			case Array.DOUBLE:
+				return Array.MIXED;
+			case Array.CHARACTER:
+				return Array.CHARACTER;
+			case Array.MIXED:			
+				return Array.MIXED;
+			}
+		case Array.MIXED:
 			return Array.MIXED;
 		}
 		return a.type();
