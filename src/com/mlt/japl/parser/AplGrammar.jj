@@ -3,7 +3,7 @@
  */
 options
 {
-  JDK_VERSION = "1.7";
+  JDK_VERSION = "1.8";
   UNICODE_INPUT = true;
   LOOKAHEAD = 2;
   COMMON_TOKEN_ACTION = true;

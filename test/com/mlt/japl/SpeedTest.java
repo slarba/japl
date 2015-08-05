@@ -2,6 +2,8 @@ package com.mlt.japl;
 
 import static org.junit.Assert.*;
 
+import java.util.Random;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -15,12 +17,19 @@ import com.mlt.japl.scalars.IntScalar;
 
 @Ignore
 public class SpeedTest {
-
+	Random random = new Random(System.currentTimeMillis());
+	
+	private long[] newRandomArray(int length) {
+		long[] arr = new long[length];
+		for(int i=0; i<arr.length; i++) arr[i] = random.nextLong();
+		return arr;
+	}
+	
 	@Test
 	public void test() {
-		Array r = new NestedArray(new Array[10000]);
-		Array a = new IntArray(new long[10000]);
-		Array b = new IntArray(new long[10000]);
+		Array r = new NestedArray(new Array[1000000]);
+		Array a = new IntArray(newRandomArray(1000000));
+		Array b = new IntArray(newRandomArray(1000000));
 
 		PrimitiveFunc fn = new AddFn();
 
@@ -32,14 +41,50 @@ public class SpeedTest {
 		}
 		long stopTime = System.currentTimeMillis();
 		
-		System.out.println("Time elapsed: " + (stopTime - startTime));
+		System.out.println("dynamic with scalar construction: " + (stopTime - startTime));
 	}
 
 	@Test
+	public void test6() {
+		Array r;
+		Array a = new IntArray(newRandomArray(1000000));
+		Array b = new IntArray(newRandomArray(1000000));
+
+		Func fn = new AddFn();
+
+		long startTime = System.currentTimeMillis();
+		for(int x = 0; x<1000; x++) {
+			r = fn.dyadic(a, b, -1);
+		}
+		long stopTime = System.currentTimeMillis();
+		
+		System.out.println("with dispatch: " + (stopTime - startTime));
+	}
+	
+	@Test
+	public void test5() {
+		Array r = new IntArray(new long[1000000]);
+		Array a = new IntArray(newRandomArray(1000000));
+		Array b = new IntArray(newRandomArray(1000000));
+
+		PrimitiveFunc fn = new AddFn();
+
+		long startTime = System.currentTimeMillis();
+		for(int x = 0; x<1000; x++) {
+			for(int i=0; i<r.length(); i++) {
+				r.setA(i, new IntScalar(fn.I_II(a.atI(i), b.atI(i))));
+			}			
+		}
+		long stopTime = System.currentTimeMillis();
+		
+		System.out.println("int result with scalar construction: " + (stopTime - startTime));
+	}
+	
+	@Test
 	public void test2() {
-		Array r = new IntArray(new long[10000]);
-		Array a = new IntArray(new long[10000]);
-		Array b = new IntArray(new long[10000]);
+		Array r = new IntArray(newRandomArray(1000000));
+		Array a = new IntArray(newRandomArray(1000000));
+		Array b = new IntArray(newRandomArray(1000000));
 
 		PrimitiveFunc fn = new AddFn();
 
@@ -56,9 +101,9 @@ public class SpeedTest {
 
 	@Test
 	public void test3() {
-		Array r = new IntArray(new long[10000]);
-		Array a = new IntArray(new long[10000]);
-		Array b = new IntArray(new long[10000]);
+		Array r = new IntArray(newRandomArray(1000000));
+		Array a = new IntArray(newRandomArray(1000000));
+		Array b = new IntArray(newRandomArray(1000000));
 
 		long startTime = System.currentTimeMillis();
 		for(int x = 0; x<1000; x++) {
@@ -73,14 +118,14 @@ public class SpeedTest {
 
 	@Test
 	public void test3_fastest() {
-		long[] r = new long[100000];
-		long[] a = new long[100000];
-		long[] b = new long[100000];
+		long[] r = newRandomArray(1000000);
+		long[] a = newRandomArray(1000000);
+		long[] b = newRandomArray(1000000);
 		
 		long startTime = System.currentTimeMillis();
 		for(int x = 0; x<1000; x++) {
 			for(int i=0; i<r.length; i++) {
-				r[i] = a[i]+b[i];
+				r[i] = a[i%a.length]+b[i%b.length];
 			}			
 		}
 		long stopTime = System.currentTimeMillis();
@@ -91,9 +136,9 @@ public class SpeedTest {
 	
 	@Test
 	public void test4() {
-		Array r = new IntArray(new long[10000]);
-		Array a = new IntArray(new long[10000]);
-		Array b = new IntArray(new long[10000]);
+		Array r = new IntArray(newRandomArray(1000000));
+		Array a = new IntArray(newRandomArray(1000000));
+		Array b = new IntArray(newRandomArray(1000000));
 
 		Func fn = new AddFn();
 

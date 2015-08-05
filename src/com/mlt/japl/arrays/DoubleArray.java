@@ -17,6 +17,14 @@ public class DoubleArray extends BaseArray {
 		data = EMPTY;
 	}
 	
+	public int[] asIntArray() {
+		int[] result = new int[length()];
+		for(int i=0; i<length(); i++) {
+			result[i] = (int)atI(i);
+		}
+		return result;
+	}
+	
 	public DoubleArray(double... data) {
 		super(new Dimensions(data.length));
 		this.data = data;
