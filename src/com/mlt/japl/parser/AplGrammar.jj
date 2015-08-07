@@ -7,7 +7,7 @@ options
   UNICODE_INPUT = true;
   LOOKAHEAD = 2;
   COMMON_TOKEN_ACTION = true;
-  TOKEN_MANAGER_USES_PARSER = true;
+  //TOKEN_MANAGER_USES_PARSER = true;
   static = false;
 }
 
@@ -33,6 +33,7 @@ public class AplParser
   public AplParser(Reader reader, EvalContext context)
   {
     this(reader);
+    token_source.ctx = context;
     this.context = context;
     this.fnRegistry = new FunctionRegistry();
   }
@@ -73,11 +74,13 @@ PARSER_END(AplParser)
 
 TOKEN_MGR_DECLS:
 {
+  public EvalContext ctx;
+
   // trick: check identifier if it is bound to function and make it a FUNC token
   // in effect modifies the parser dynamically
   public void CommonTokenAction(Token t)
   {
-	EvalContext ctx = parser.getContext();
+	//EvalContext ctx = parser.getContext();
 	if(t.kind==AplParserConstants.ID)
 	{
 		if(ctx.isBoundToFunction(t.image))
@@ -85,7 +88,7 @@ TOKEN_MGR_DECLS:
 		  t.kind = AplParserConstants.FUNC;
 		}
 	}
-  }
+ }
 }
 
 SKIP :
