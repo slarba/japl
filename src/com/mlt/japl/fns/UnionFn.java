@@ -15,9 +15,22 @@ public class UnionFn extends SpecialBaseFn {
 
 	@Override
 	public int resultTypeFor(Array a) {
-		throw new ValenceError();
+		return a.type();
 	}
 
+	@Override
+	public Array monadic(Array a, int axis) {
+		HashSet<Array> set = new HashSet<Array>();
+		for(int i=0; i<a.actualLength(); i++)
+			set.add(a.atA(i));
+		Array result = ArrayFactory.makeArrayOfType(resultTypeFor(a), new Dimensions(set.size()));
+		int i=0;
+		for(Array x : set) {
+			result.setA(i++, x);
+		}
+		return result;
+	}
+	
 	@Override
 	public Array dyadic(Array a, Array b, int axis) {
 		HashSet<Array> set = new HashSet<Array>();
@@ -45,7 +58,7 @@ public class UnionFn extends SpecialBaseFn {
 		}
 		return result;
 	}
-	
+		
 	@Override
 	public int resultTypeFor(Array a, Array b) {
 		if(a.type()!=b.type()) return Array.MIXED;
