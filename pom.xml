@@ -11,7 +11,23 @@
       <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
       <maven.compiler.testSource>1.8</maven.compiler.testSource>
    </properties>
+   
+  <distributionManagement>
+    <repository>
+      <id>ssh-repository</id>
+      <url>scpexe://www.sissipaska.com/repository</url>
+    </repository>
+  </distributionManagement>
+   
   <build>
+    <extensions>
+      <!-- Enabling the use of SSH -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+         <artifactId>wagon-ssh-external</artifactId>
+         <version>1.0-beta-6</version>
+      </extension>
+    </extensions>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
     <resources>
