@@ -155,11 +155,7 @@ TOKEN : /* OPERATORS */
 | < OUTERPROD:
     "\u2218." >
 | < MONADICOPERATOR:
-    "/"
-  | "\\"
-  | "\u00a8"
-  | "\u233f"
-  | "\u2340"
+   ( "/" | "\\" | "\u00a8" | "\u233f" | "\u2340" )+
   >
 | < STMTSEPARATOR:
     "\u22c4"

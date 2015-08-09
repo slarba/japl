@@ -70,12 +70,16 @@ public class FunctionRegistry {
 		switch(n)
 		{
 			case "/":  return new ReduceFn(arg, false);
+			case "/¨":  return new EachFn(new ReduceFn(arg, false));
 			case "\\": return new ScanFn(arg, false);
+			case "\\¨": return new EachFn(new ScanFn(arg, false));
 			case "¨":
 				if(arg instanceof PrimitiveFunc) return arg;  // each does nothing productive with primitive functions
 				else return new EachFn(arg);
 			case "\u233f": return new ReduceFn(arg, true);
 			case "\u2340": return new ScanFn(arg, true);
+			case "\u233f¨": return new EachFn(new ReduceFn(arg, true));
+			case "\u2340¨": return new EachFn(new ScanFn(arg, true));
 			default:
 				return null;
 		}
