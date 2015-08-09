@@ -1,5 +1,5 @@
 CLEAR_CONSOLE=false
-JAVACC_OPTIONS=-LOOKAHEAD\=2 -JDK_VERSION\=1.8 -OUTPUT_DIRECTORY\=/Users/markolau/git/japl/target/generated-sources/javacc2/com/mlt/japl/parser
+JAVACC_OPTIONS=-LOOKAHEAD\=2 -JDK_VERSION\=1.8
 JJDOC_OPTIONS=
 JJTREE_OPTIONS=
 JJ_NATURE=true
