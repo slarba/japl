@@ -4,9 +4,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
@@ -21,11 +30,26 @@ public class JaplRepl extends JTextPane implements KeyListener {
 	private Style resultStyle;
 	private ArrayList<String> lineHistory = new ArrayList<String>();
 	private int lineHistoryPosition = 0;
+	private PipedOutputStream lineOutputStream;
+	private PipedInputStream resultInputStream;
+	private PipedInputStream pipedInput;
+	private PipedOutputStream pipedOutput;
 	
 	public JaplRepl(Font aplFont) {
 		setFont(aplFont);
 		
 		addKeyListener(this);
+
+		lineOutputStream = new PipedOutputStream();
+		resultInputStream = new PipedInputStream();
+		
+		try {
+			pipedInput = new PipedInputStream(lineOutputStream);
+			pipedOutput = new PipedOutputStream(resultInputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		styleContext = new StyleContext();
 		exprStyle = styleContext.addStyle("expr", null);
@@ -35,8 +59,36 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		
 		insertResult("*** JAPL Interpreter v0.1 ***\n(c) Marko Lauronen 2015");
 		insertExpr("\n\t");
+		
+		startOutputThread();
 	}
 	
+	private void startOutputThread() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(resultInputStream));
+				while(true) {
+					try {
+						String l = reader.readLine();
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								replaceCurrentLine("");
+								insertResult(l);
+								setCaretPosition(getLastPosition()-1);
+								insertExpr("\n\t");
+							}
+						});
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		t.start();
+	}
+
 	private int getLastPosition() {
 		return getStyledDocument().getEndPosition().getOffset();
 	}
@@ -158,9 +210,20 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		lineHistory.add(trimmed);
 		lineHistoryPosition = lineHistory.size();
 		System.out.println("line entered: " + trimmed);
-		insertResult("\n" + trimmed);
+		//insertResult("\n" + trimmed);
+		PrintWriter p = new PrintWriter(lineOutputStream);
+		p.println(trimmed);
+		p.flush();
 	}
 
+	public InputStream getInputStream() {
+		return pipedInput;
+	}
+
+	public OutputStream getOutputStream() {
+		return pipedOutput;
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}

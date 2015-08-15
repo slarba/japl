@@ -3,11 +3,18 @@ package com.mlt.japl.gui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import com.mlt.japl.iface.Array;
+import com.mlt.japl.utils.PrintConfig;
+import com.mlt.japl.workspace.Interpreter;
 
 public class JaplMain {
 	private static Font createFont(String resourcePath) {
@@ -27,6 +34,7 @@ public class JaplMain {
 
 		Font aplFont = createFont("/com/mlt/japl/gui/SImPL.ttf");
 		JaplRepl repl = new JaplRepl(aplFont);
+		Interpreter i = new Interpreter(repl.getOutputStream());
 		JaplInterpreter interpreter = new JaplInterpreter(repl, aplFont);
 		interpreter.setPreferredSize(new Dimension(1024,768));
 
@@ -34,6 +42,26 @@ public class JaplMain {
 		frame.pack();
 		frame.setVisible(true);
 		repl.requestFocus();
+		
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(repl.getInputStream()));
+				PrintStream ps = new PrintStream(repl.getOutputStream());
+				while(true) {
+					try {
+						String line = reader.readLine();
+						Array result = i.eval(line);
+						ps.println(result.asString(new PrintConfig()));
+						ps.flush();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		});
+		t.start();
 	}
 	
 	public static void main(String[] args) {
