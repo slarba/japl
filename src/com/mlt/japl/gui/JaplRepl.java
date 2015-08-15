@@ -75,9 +75,15 @@ public class JaplRepl extends JTextPane implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_ENTER:
-			handleEnter(getCurrentLine());
-			insertExpr("\n\t");
-			setCaretPosition(getLastPosition()-1);
+			if(isCaretOnEditLine()) {
+				handleEnter(getCurrentLine());
+				insertExpr("\n\t");
+				setCaretPosition(getLastPosition()-1);				
+			} else {
+				String lineCursorWasOn = getCurrentLine().trim();
+				setCaretPosition(getLastPosition()-1);
+				replaceCurrentLine("\t" + lineCursorWasOn);
+			}
 			e.consume();
 			break;
 		case KeyEvent.VK_UP:
@@ -90,6 +96,14 @@ public class JaplRepl extends JTextPane implements KeyListener {
 			break;
 		default:
 			lineHistoryPosition = lineHistory.size();
+			if(e.getKeyChar()!=KeyEvent.CHAR_UNDEFINED && e.getModifiers()!=0) {
+				if(e.getModifiers()==1) {
+					System.out.println("Pelkkä shift");
+					break;
+				}
+				System.out.println(KeyEvent.getKeyModifiersText(e.getModifiers()) + KeyEvent.getKeyText(e.getKeyCode()));
+			}
+			e.consume();
 			break;
 		}
 	}
@@ -116,6 +130,17 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		replaceCurrentLine("\t" + lineHistory.get(lineHistoryPosition));
 	}
 
+	private boolean isCaretOnEditLine() {
+		try {
+			int caretPos = getCaretPosition();
+			int lastPos = getLastPosition();
+			int lastLineStart = Utilities.getRowStart(this, lastPos-1);
+			return caretPos>=lastLineStart && caretPos<=lastPos;
+		} catch(BadLocationException e) {
+			throw new RuntimeException("bad location", e);			
+		}
+	}
+	
 	private void replaceCurrentLine(String string) {
 		try {
 			int caretPos = getCaretPosition();
