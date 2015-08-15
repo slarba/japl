@@ -102,8 +102,8 @@ public class JaplRepl extends JTextPane implements KeyListener {
 					break;
 				}
 				System.out.println(KeyEvent.getKeyModifiersText(e.getModifiers()) + KeyEvent.getKeyText(e.getKeyCode()));
+				e.consume();
 			}
-			e.consume();
 			break;
 		}
 	}

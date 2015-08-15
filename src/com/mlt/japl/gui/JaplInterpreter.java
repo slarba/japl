@@ -27,7 +27,6 @@ public class JaplInterpreter extends JPanel implements ActionListener {
 		
 		JScrollPane scroll = new JScrollPane(repl);		
 		add(scroll, BorderLayout.CENTER);
-		
 	}
 
 	private JToolBar createToolbar() {
@@ -123,7 +122,8 @@ public class JaplInterpreter extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		repl.insertExpr(e.getActionCommand());
+		repl.requestFocus();
 	}
 
 }
