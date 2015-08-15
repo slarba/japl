@@ -28,12 +28,16 @@ public class JaplRepl extends JTextPane implements KeyListener {
 	private StyleContext styleContext;
 	private Style exprStyle;
 	private Style resultStyle;
+	private Style errorStyle;
 	private ArrayList<String> lineHistory = new ArrayList<String>();
 	private int lineHistoryPosition = 0;
 	private PipedOutputStream lineOutputStream;
 	private PipedInputStream resultInputStream;
 	private PipedInputStream pipedInput;
 	private PipedOutputStream pipedOutput;
+	
+	private PipedOutputStream pipedError;
+	private PipedInputStream errorInputStream;
 	
 	public JaplRepl(Font aplFont) {
 		setFont(aplFont);
@@ -42,10 +46,12 @@ public class JaplRepl extends JTextPane implements KeyListener {
 
 		lineOutputStream = new PipedOutputStream();
 		resultInputStream = new PipedInputStream();
+		errorInputStream = new PipedInputStream();
 		
 		try {
 			pipedInput = new PipedInputStream(lineOutputStream);
 			pipedOutput = new PipedOutputStream(resultInputStream);
+			pipedError = new PipedOutputStream(errorInputStream);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,11 +62,14 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		StyleConstants.setForeground(exprStyle, Color.BLACK);
 		resultStyle = styleContext.addStyle("result", null);
 		StyleConstants.setForeground(resultStyle, Color.BLUE);
+		errorStyle = styleContext.addStyle("error", null);
+		StyleConstants.setForeground(errorStyle, Color.RED);
 		
 		insertResult("*** JAPL Interpreter v0.1 ***\n(c) Marko Lauronen 2015");
 		insertExpr("\n\t");
 		
 		startOutputThread();
+		startErrorThread();
 	}
 	
 	private void startOutputThread() {
@@ -89,6 +98,32 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		t.start();
 	}
 
+	private void startErrorThread() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(errorInputStream));
+				while(true) {
+					try {
+						String l = reader.readLine();
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								replaceCurrentLine("");
+								insertError(l);
+								setCaretPosition(getLastPosition()-1);
+								insertExpr("\n\t");
+							}
+						});
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		t.start();
+	}
+	
 	private int getLastPosition() {
 		return getStyledDocument().getEndPosition().getOffset();
 	}
@@ -109,6 +144,10 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		insert(s, exprStyle);
 	}
 
+	public void insertError(String s) {
+		insert(s, errorStyle);
+	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
@@ -222,6 +261,10 @@ public class JaplRepl extends JTextPane implements KeyListener {
 
 	public OutputStream getOutputStream() {
 		return pipedOutput;
+	}
+	
+	public OutputStream getErrorStream() {
+		return pipedError;
 	}
 	
 	@Override

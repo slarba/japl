@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.Interpreter;
@@ -42,22 +43,25 @@ public class JaplMain {
 		frame.pack();
 		frame.setVisible(true);
 		repl.requestFocus();
-		
+
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(repl.getInputStream()));
 				PrintStream ps = new PrintStream(repl.getOutputStream());
+				PrintStream es = new PrintStream(repl.getErrorStream());
 				while(true) {
 					try {
 						String line = reader.readLine();
 						Array result = i.eval(line);
 						ps.println(result.asString(new PrintConfig()));
-						ps.flush();
-					} catch (IOException e) {
-						e.printStackTrace();
+						ps.flush();					
+					} catch(AplError e) {
+						es.println(e.getMessage());
+					} catch (Exception e) {
+						e.printStackTrace(es);
+						es.flush();
 					}
-					
 				}
 			}
 		});
