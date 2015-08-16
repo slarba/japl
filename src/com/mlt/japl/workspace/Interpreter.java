@@ -6,11 +6,13 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.CharsetDecoder;
+import java.util.ArrayList;
 
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.ast.AstNode;
+import com.mlt.japl.gui.JaplInterpreter;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
@@ -21,7 +23,8 @@ import com.mlt.japl.tools.Dimensions;
 
 public class Interpreter {
 	private EvalContext context;
-
+	private ArrayList<AplBusyListener> listeners = new ArrayList<AplBusyListener>();
+	
 	public Interpreter(OutputStream out) {
 		context = new EvalContext(out);
 	}
@@ -31,7 +34,12 @@ public class Interpreter {
 	}
 	
 	public Array eval(String s) {
-		return parse(s).eval(context);
+		for(AplBusyListener listener : listeners) listener.evaluationStarted();
+		try {
+			return parse(s).eval(context);
+		} finally {
+			for(AplBusyListener listener : listeners) listener.evaluationEnded();			
+		}
 	}
 	
 	public void eval(InputStream s) {
@@ -94,5 +102,9 @@ public class Interpreter {
 
 	public static void main(String[] args) {
 		new Interpreter(System.out).eval(System.in);
+	}
+
+	public void addBusyListener(AplBusyListener listener) {
+		listeners.add(listener);
 	}
 }

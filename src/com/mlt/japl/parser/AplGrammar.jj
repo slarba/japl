@@ -385,7 +385,7 @@ AstNode identifierexpr() :
   Token ident = null;
 }
 {
-  ident = < ID > ("[" e = indexexpr() "]")? ("←" e2=arrayexpr())?
+  ident = < ID > ("[" e = indexexpr() "]")? ("\u2190" e2=arrayexpr())?
   {
     if(e2!=null)
     	return new AssignmentNode(ident.toString(), e2);

@@ -34,6 +34,7 @@ public class UserFnNode implements AstNode, Func {
 	public Array monadic(Array a, int axis) {
 		EvalContext derived = frame.newFrame();
 		derived.set("\u03c9", a);
+		derived.set("\u2375", a);
 		return body.eval(derived);
 	}
 

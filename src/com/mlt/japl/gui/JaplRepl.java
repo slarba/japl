@@ -65,7 +65,7 @@ public class JaplRepl extends JTextPane implements KeyListener {
 		StyleConstants.setForeground(errorStyle, Color.RED);
 		
 		insertResult("*** JAPL Interpreter v0.1 ***\n(c) Marko Lauronen 2015");
-		insertExpr("\n\t");
+		insertExpr("\n\n\t");
 		
 		startOutputThread();
 		startErrorThread();

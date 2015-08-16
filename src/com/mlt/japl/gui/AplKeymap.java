@@ -53,7 +53,7 @@ public class AplKeymap {
 			  ,"\u2227"  // logical and
 			  ,"\u2371"  // nor
 			  ,"\u2372"  // nand
-			  ,"←"  // assign
+			  ,"\u2190"  // assign
 			  ,"\u2218." // outer product
 			  ,"\u22a5"  // decode
 			  ,"\u22c4"  // statement separator
