@@ -16,14 +16,13 @@ import java.util.ArrayList;
 
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
-import javax.swing.text.StyledDocument;
 import javax.swing.text.Utilities;
 
+@SuppressWarnings("serial")
 public class JaplRepl extends JTextPane implements KeyListener {
 	private StyleContext styleContext;
 	private Style exprStyle;
@@ -35,15 +34,15 @@ public class JaplRepl extends JTextPane implements KeyListener {
 	private PipedInputStream resultInputStream;
 	private PipedInputStream pipedInput;
 	private PipedOutputStream pipedOutput;
-	
+
 	private PipedOutputStream pipedError;
 	private PipedInputStream errorInputStream;
-	
+		
 	public JaplRepl(Font aplFont) {
 		setFont(aplFont);
 		
 		addKeyListener(this);
-
+		
 		lineOutputStream = new PipedOutputStream();
 		resultInputStream = new PipedInputStream();
 		errorInputStream = new PipedInputStream();
@@ -187,14 +186,6 @@ public class JaplRepl extends JTextPane implements KeyListener {
 			break;
 		default:
 			lineHistoryPosition = lineHistory.size();
-			if(e.getKeyChar()!=KeyEvent.CHAR_UNDEFINED && e.getModifiers()!=0) {
-				if(e.getModifiers()==1) {
-					System.out.println("Pelkkä shift");
-					break;
-				}
-				System.out.println(KeyEvent.getKeyModifiersText(e.getModifiers()) + KeyEvent.getKeyText(e.getKeyCode()));
-				e.consume();
-			}
 			break;
 		}
 	}

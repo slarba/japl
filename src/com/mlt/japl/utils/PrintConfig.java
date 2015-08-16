@@ -22,12 +22,14 @@ public class PrintConfig {
 	}
 
 	public String print(long data) {
-		return Long.toString(data);
+		String sign = data<0 ? "¯" : "";
+		return sign+Long.toString(Math.abs(data));
 	}
 	
 	public String print(double data) {
-		if(data==(long)data) return Long.toString((long)data);
-		return String.format(Locale.US, getDoubleFormatString(), data);
+		if(data==(long)data) return print((long)data);
+		String sign = data<0 ? "¯" : "";
+		return sign+String.format(Locale.US, getDoubleFormatString(), Math.abs(data));
 	}
 
 	public String print(char data) {

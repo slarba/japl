@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.parser.TokenMgrError;
 import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.Interpreter;
 
@@ -58,6 +59,9 @@ public class JaplMain {
 						ps.flush();					
 					} catch(AplError e) {
 						es.println(e.getMessage());
+					} catch(TokenMgrError e) {
+						e.printStackTrace(es);
+						es.flush();
 					} catch (Exception e) {
 						e.printStackTrace(es);
 						es.flush();

@@ -108,6 +108,7 @@ TOKEN : /* OPERATORS */
   | "\u223c"  // tilde (not)
   | "\u2223"  // abs
   | "\u2373"  // iota
+  | "*"       // exponential
   | "\u22c6"  // exponential
   | "\u2212"  // negation/sub
   | "\u002b"  // identity/add
@@ -166,7 +167,7 @@ TOKEN : /* OPERATORS */
 
 TOKEN :
 {
-  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"]|["\u2395"])+ >
+  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"]|["\u2395"]|["\u237a"]|["\u2375"])+ >
 | < CONSTANT : < NUMBER > >
 | < CPLXCONSTANT: < NUMBER > "J" < NUMBER > >
 | < STRING : < STRINGDELIM > (< STRINGCHAR >)* < STRINGDELIM > >

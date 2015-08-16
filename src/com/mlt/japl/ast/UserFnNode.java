@@ -42,6 +42,8 @@ public class UserFnNode implements AstNode, Func {
 		EvalContext derived = frame.newFrame();
 		derived.set("\u03b1", a);
 		derived.set("\u03c9", b);
+		derived.set("\u237a", a);
+		derived.set("\u2375", b);
 		return body.eval(derived);
 	}
 
