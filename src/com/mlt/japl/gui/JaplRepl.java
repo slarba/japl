@@ -16,14 +16,18 @@ import java.util.ArrayList;
 
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 import javax.swing.text.Utilities;
 
 @SuppressWarnings("serial")
-public class JaplRepl extends JTextPane implements KeyListener {
+public class JaplRepl extends JTextPane implements KeyListener, DocumentListener {
 	private StyleContext styleContext;
 	private Style exprStyle;
 	private Style resultStyle;
@@ -38,10 +42,13 @@ public class JaplRepl extends JTextPane implements KeyListener {
 	private PipedOutputStream pipedError;
 	private PipedInputStream errorInputStream;
 		
+	private AplSyntaxHighlighter highlighter = new AplSyntaxHighlighter();
+	
 	public JaplRepl(Font aplFont) {
 		setFont(aplFont);
 		
 		addKeyListener(this);
+		getStyledDocument().addDocumentListener(this);
 		
 		lineOutputStream = new PipedOutputStream();
 		resultInputStream = new PipedInputStream();
@@ -260,6 +267,42 @@ public class JaplRepl extends JTextPane implements KeyListener {
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
+	}
+
+	private void highlightEditLine()
+	{
+		JaplRepl self = this;
+		StyledDocument doc = getStyledDocument();
+		doc.removeDocumentListener(this);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					int lineStart = Utilities.getRowStart(self, getLastPosition()-1);
+					int lineEnd = getLastPosition();
+					highlighter.syntaxHighlight(doc, lineStart, lineEnd);
+					doc.addDocumentListener(self);
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});			
+		
+	}
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		highlightEditLine();
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		highlightEditLine();
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		highlightEditLine();
 	}
 
 }
