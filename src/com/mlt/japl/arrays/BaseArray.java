@@ -2,7 +2,9 @@ package com.mlt.japl.arrays;
 
 import java.util.Arrays;
 
+import com.mlt.japl.dispatch.DyadicVisitor;
 import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
@@ -155,6 +157,11 @@ public abstract class BaseArray implements Array {
 	@Override
 	public int hashCode() {
 		return 5*depth + 37*dims.hashCode();
+	}
+
+	@Override
+	public Array accept_dyadic(DyadicVisitor visitor, Array b) {
+		throw new ValueError();
 	}
 
 	@Override

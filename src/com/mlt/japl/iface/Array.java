@@ -1,5 +1,6 @@
 package com.mlt.japl.iface;
 
+import com.mlt.japl.dispatch.DyadicAcceptor;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -9,7 +10,7 @@ import com.mlt.japl.utils.PrintConfig;
  * @author mtl
  *
  */
-public interface Array {
+public interface Array extends DyadicAcceptor {
 	/**
 	 * Integer elements
 	 */

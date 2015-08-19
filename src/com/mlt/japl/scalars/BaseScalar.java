@@ -1,7 +1,15 @@
 package com.mlt.japl.scalars;
 
+import com.mlt.japl.arrays.BitArray;
+import com.mlt.japl.arrays.CharArray;
+import com.mlt.japl.arrays.DoubleArray;
+import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IotaArray;
+import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.dispatch.DyadicVisitor;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
@@ -136,4 +144,34 @@ public abstract class BaseScalar implements Array, Comparable<BaseScalar> {
 	public int[] asIntArray() {
 		throw new DomainError();
 	}
+	
+	@Override
+	public Array accept_dyadic(DyadicVisitor visitor, Array b) {
+		throw new ValueError();
+	}
+
+	public Array accept_dyadic(IntArray a, DyadicVisitor visitor) {
+		throw new ValueError();
+	}
+	
+	public Array accept_dyadic(DoubleArray a, DyadicVisitor visitor) {
+		throw new ValueError();
+	}
+	
+	public Array accept_dyadic(CharArray a, DyadicVisitor visitor) {
+		throw new ValueError();
+	}
+	
+	public Array accept_dyadic(BitArray a, DyadicVisitor visitor) {
+		throw new ValueError();
+	}
+	
+	public Array accept_dyadic(NestedArray a, DyadicVisitor visitor) {
+		throw new ValueError();
+	}
+	
+	public Array accept_dyadic(IotaArray a, DyadicVisitor visitor) {
+		throw new ValueError();
+	}
+
 }
