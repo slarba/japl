@@ -1,14 +1,12 @@
 package com.mlt.japl;
 
-import static org.junit.Assert.*;
-
 import java.util.Random;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.IntArrayImpl;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.fns.AddFn;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
@@ -27,9 +25,9 @@ public class SpeedTest {
 	
 	@Test
 	public void test() {
-		Array r = new NestedArray(new Array[1000000]);
-		Array a = new IntArray(newRandomArray(1000000));
-		Array b = new IntArray(newRandomArray(1000000));
+		Array r = new NestedArrayImpl(new Array[1000000]);
+		Array a = new IntArrayImpl(newRandomArray(1000000));
+		Array b = new IntArrayImpl(newRandomArray(1000000));
 
 		PrimitiveFunc fn = new AddFn();
 
@@ -47,8 +45,8 @@ public class SpeedTest {
 	@Test
 	public void test6() {
 		Array r;
-		Array a = new IntArray(newRandomArray(1000000));
-		Array b = new IntArray(newRandomArray(1000000));
+		Array a = new IntArrayImpl(newRandomArray(1000000));
+		Array b = new IntArrayImpl(newRandomArray(1000000));
 
 		Func fn = new AddFn();
 
@@ -63,9 +61,9 @@ public class SpeedTest {
 	
 	@Test
 	public void test5() {
-		Array r = new IntArray(new long[1000000]);
-		Array a = new IntArray(newRandomArray(1000000));
-		Array b = new IntArray(newRandomArray(1000000));
+		Array r = new IntArrayImpl(new long[1000000]);
+		Array a = new IntArrayImpl(newRandomArray(1000000));
+		Array b = new IntArrayImpl(newRandomArray(1000000));
 
 		PrimitiveFunc fn = new AddFn();
 
@@ -82,9 +80,9 @@ public class SpeedTest {
 	
 	@Test
 	public void test2() {
-		Array r = new IntArray(newRandomArray(1000000));
-		Array a = new IntArray(newRandomArray(1000000));
-		Array b = new IntArray(newRandomArray(1000000));
+		Array r = new IntArrayImpl(newRandomArray(1000000));
+		Array a = new IntArrayImpl(newRandomArray(1000000));
+		Array b = new IntArrayImpl(newRandomArray(1000000));
 
 		PrimitiveFunc fn = new AddFn();
 
@@ -101,9 +99,9 @@ public class SpeedTest {
 
 	@Test
 	public void test3() {
-		Array r = new IntArray(newRandomArray(1000000));
-		Array a = new IntArray(newRandomArray(1000000));
-		Array b = new IntArray(newRandomArray(1000000));
+		Array r = new IntArrayImpl(newRandomArray(1000000));
+		Array a = new IntArrayImpl(newRandomArray(1000000));
+		Array b = new IntArrayImpl(newRandomArray(1000000));
 
 		long startTime = System.currentTimeMillis();
 		for(int x = 0; x<1000; x++) {
@@ -136,9 +134,9 @@ public class SpeedTest {
 	
 	@Test
 	public void test4() {
-		Array r = new IntArray(newRandomArray(1000000));
-		Array a = new IntArray(newRandomArray(1000000));
-		Array b = new IntArray(newRandomArray(1000000));
+		Array r = new IntArrayImpl(newRandomArray(1000000));
+		Array a = new IntArrayImpl(newRandomArray(1000000));
+		Array b = new IntArrayImpl(newRandomArray(1000000));
 
 		Func fn = new AddFn();
 

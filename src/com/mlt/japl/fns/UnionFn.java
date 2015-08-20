@@ -2,7 +2,6 @@ package com.mlt.japl.fns;
 
 import java.util.HashSet;
 
-import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 

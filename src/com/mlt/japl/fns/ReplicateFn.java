@@ -1,6 +1,5 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;

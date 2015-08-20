@@ -1,6 +1,11 @@
 package com.mlt.japl.dispatch;
 
-import com.mlt.japl.arrays.*;
+import com.mlt.japl.arrays.BitArray;
+import com.mlt.japl.arrays.CharArray;
+import com.mlt.japl.arrays.DoubleArray;
+import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IotaArray;
+import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.iface.Array;
 
 public interface DyadicAcceptor {

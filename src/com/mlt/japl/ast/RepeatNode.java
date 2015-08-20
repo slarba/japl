@@ -1,6 +1,6 @@
 package com.mlt.japl.ast;
 
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -25,7 +25,7 @@ public class RepeatNode implements AstNode {
 		for(long i=0; i<c.atI(0); i++) {
 			body.eval(context);
 		}
-		return new IntArray();
+		return new IntArrayImpl();
 	}
 
 	@Override

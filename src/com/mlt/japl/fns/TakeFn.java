@@ -1,10 +1,8 @@
 package com.mlt.japl.fns;
 
 import com.mlt.japl.errors.DomainError;
-import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.tools.Iterator;
 import com.mlt.japl.tools.RangeIterator;

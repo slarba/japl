@@ -1,15 +1,12 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.BaseArray;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
 import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.arrays.IotaArray;
 import com.mlt.japl.arrays.NestedArray;
-import com.mlt.japl.arrays.SpecialArray;
 import com.mlt.japl.dispatch.DyadicVisitor;
-import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 
 public class NewDispatchFn implements DyadicVisitor {
@@ -264,90 +261,6 @@ public class NewDispatchFn implements DyadicVisitor {
 
 	public Array dyadic(Array a, Array b) {
 		return a.accept_dyadic(this, b);
-	}
-
-	@Override
-	public Array visit_first(SpecialArray a, Array b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(IntArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(DoubleArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(CharArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(NestedArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(BitArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(IotaArray a, SpecialArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, IntArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, DoubleArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, CharArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, NestedArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, BitArray b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Array visit_dyadic(SpecialArray a, IotaArray b) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

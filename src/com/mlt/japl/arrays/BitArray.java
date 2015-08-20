@@ -8,7 +8,7 @@ import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
-public class BitArray extends BaseArray {
+public class BitArray extends BaseArray implements IntArray {
 	long[] data;
 	int actualLen;  // in bits
 	

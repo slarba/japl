@@ -5,9 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.arrays.IotaArray;
-import com.mlt.japl.arrays.MultidimIotaArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
@@ -33,7 +32,7 @@ public class TestNonEmptyArrays {
 	
 	@Test
 	public void testIntArray() {
-		testNonEmptyProperties(new IntArray(d, 1, 2, 3, 4, 5));
+		testNonEmptyProperties(new IntArrayImpl(d, 1, 2, 3, 4, 5));
 	}
 
 	@Test
@@ -43,7 +42,7 @@ public class TestNonEmptyArrays {
 
 	@Test
 	public void testIntArray2() {
-		testNonEmptyProperties2(new IntArray(1, 2, 3, 4, 5));
+		testNonEmptyProperties2(new IntArrayImpl(1, 2, 3, 4, 5));
 	}
 
 	@Test

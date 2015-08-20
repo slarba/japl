@@ -1,7 +1,6 @@
 package com.mlt.japl.fns;
 
 
-import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;

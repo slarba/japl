@@ -1,59 +1,96 @@
 package com.mlt.japl.arrays;
 
+import java.util.Arrays;
+
 import com.mlt.japl.dispatch.DyadicVisitor;
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
-public class IotaArray extends BaseArray implements IntArray {
-	private int n;
+public class IntArrayImpl extends BaseArray implements IntArray {
+	long[] data;
+	
+	private static final long[] EMPTYDATA = new long[] {};
 
-	public IotaArray() {
-		this.n = 0;
+	public static final IntArrayImpl ZILDE = new IntArrayImpl();
+	
+	public IntArrayImpl() {
+		super();
+		data = EMPTYDATA;
 	}
 	
-	public IotaArray(Dimensions dims, int n) {
+	public IntArrayImpl(Dimensions dims, boolean allocateEmpty, int actualLength) {
 		super(dims);
-		this.n = n;
+		data = new long[actualLength];
 	}
 	
-	public IotaArray(int n) {
-		super(new Dimensions(n));
-		this.n = n;
+	public IntArrayImpl(long... data) {
+		super(new Dimensions(data.length));
+		this.data = data;
 	}
 	
-	@Override
-	public long atI(int idx) {
-		return (idx%n)+1;
-	}
-
-	@Override
-	public Array atA(int idx) {
-		return new IntScalar(atI(idx));
-	}
-
-	@Override
-	public double atD(int idx) {
-		return (double)atI(idx);
+	public IntArrayImpl(Dimensions dims, long... data) {
+		super(dims);
+		this.data = data;
 	}
 	
 	@Override
 	public int type() {
 		return INTEGER;
 	}
-	
+
 	@Override
 	public int actualLength() {
-		return n;
+		return data.length;
+	}
+
+	@Override
+	public Array atA(int idx) {
+		return new IntScalar(atI(idx));
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.mlt.japl.arrays.IIntArray#atI(int)
+	 */
+	@Override
+	public long atI(int idx) {
+		return data[idx % data.length];		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mlt.japl.arrays.IIntArray#setI(int, long)
+	 */
+	@Override
+	public void setI(int idx, long val) {
+		data[idx] = val;
+	}
+	
+	@Override
+	public void setA(int idx, Array val) {
+		setI(idx, val.atI(idx));
+	}
+	
+	@Override
+	public double atD(int idx) {
+		return data[idx % data.length];
+	}
+
+	@Override
+	public void setD(int idx, double val) {
+		if(val==(long)val) data[idx] = (long)val;
+		else throw new DomainError();
+	}
+	
+	@Override
+	public Array reshape(int... newShape) {
+		return new IntArrayImpl(new Dimensions(newShape), data);
 	}
 
 	@Override
 	public Array reshape(Dimensions newShape) {
 		if(newShape.length()<length()) {
-			Array r = new IntArrayImpl(newShape, new long[newShape.length()]); 
-			for(int i=0; i<newShape.length(); i++)
-				r.setI(i, atI(i));
-			return r;
+			return new IntArrayImpl(newShape, Arrays.copyOf(data, newShape.length()));
 		}
 		long[] newData = new long[length()];
 		for(int i=0; i<newData.length; i++)
@@ -70,12 +107,16 @@ public class IotaArray extends BaseArray implements IntArray {
 	public Array unInitializedReshapedCopy(Dimensions resultDims) {
 		if(resultDims.rank()==0) return new IntScalar();
 		return new IntArrayImpl(resultDims, new long[resultDims.length()]);
+	}	
+
+	@Override
+	public int[] asIntArray() {
+		int[] r = new int[length()];
+		for(int i=0; i<r.length; i++)
+			r[i] = (int)atI(i);
+		return r;
 	}
 
-	public long sum() {
-		return (n*(n+1))/2;
-	}
-	
 	@Override
 	public Array prototype() {
 		return new IntScalar(0);
@@ -83,7 +124,7 @@ public class IotaArray extends BaseArray implements IntArray {
 
 	@Override
 	public int hashCode() {
-		return 37*super.hashCode() + 17*Long.hashCode(n);
+		return 37*super.hashCode() + 17*Arrays.hashCode(data);
 	}
 
 	@Override
@@ -117,16 +158,12 @@ public class IotaArray extends BaseArray implements IntArray {
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o==this) return true;
-//		if(o instanceof IotaArray) {
-//			IotaArray a = (IotaArray)o;
-//			if(!a.dims().equals(dims())) return false;
-//			return n == a.n;
-//		}
-//		if(o instanceof IntArray) {
-//			IntArray a = (IntArray)o;
-//			if(!a.dims().equals(dims())) return false;
+//		if(o instanceof Array) {
+//			Array a = (Array)o;
+//			if(!a.isIntegral()) return false;
+//			if(!a.dims().equals(dims)) return false;
 //			for(int i=0; i<a.length(); i++) {
-//				if(a.atI(i)!=atI(i)) return false;
+//				if(a.atI(i) != atI(i)) return false;
 //			}
 //			return true;
 //		}

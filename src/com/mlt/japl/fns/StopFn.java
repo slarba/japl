@@ -1,6 +1,6 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
@@ -8,7 +8,7 @@ public class StopFn extends SpecialBaseFn {
 
 	@Override
 	public Array monadic(Array a, int axis) {
-		return new IntArray();
+		return new IntArrayImpl();
 	}
 	
 	@Override

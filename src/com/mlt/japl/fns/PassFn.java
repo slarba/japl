@@ -1,6 +1,5 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 

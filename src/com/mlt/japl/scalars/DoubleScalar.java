@@ -1,7 +1,6 @@
 package com.mlt.japl.scalars;
 
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;

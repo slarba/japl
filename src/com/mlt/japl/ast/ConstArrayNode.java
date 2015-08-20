@@ -5,8 +5,8 @@ import java.util.List;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.IntArrayImpl;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.CharScalar;
 import com.mlt.japl.scalars.DoubleScalar;
@@ -63,7 +63,7 @@ public class ConstArrayNode implements AstNode {
 			for(AstNode n : nodes) {
 				data[i++] = ((ConstantAstNode)n).getInt();
 			}
-			value = new IntArray(data);
+			value = new IntArrayImpl(data);
 		} else if(totalLen == (doubleNodes + intNodes)) {   // contains only int and double tokens -> doublearray
 			double[] data = new double[totalLen];
 			int i=0;
@@ -95,7 +95,7 @@ public class ConstArrayNode implements AstNode {
 				if(x.isStringConstant()) cell = new CharArray(x.getString());
 				data[i++] = cell;
 			}
-			value = new NestedArray(data);			
+			value = new NestedArrayImpl(data);			
 		}
 	}
 	

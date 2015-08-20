@@ -1,11 +1,9 @@
 package com.mlt.japl.fns;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValueError;
@@ -60,7 +58,7 @@ public class RollFn extends PrimitiveBaseFn {
 			result[i++] = n;
 		}
 		// should shuffle the array.... too ordered after taking from set!
-		return new IntArray(result);
+		return new IntArrayImpl(result);
 	}
 	
 	@Override

@@ -1,7 +1,5 @@
 package com.mlt.japl.arrays;
 
-import java.util.Arrays;
-
 import com.mlt.japl.dispatch.DyadicVisitor;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.ValueError;

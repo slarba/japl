@@ -2,15 +2,12 @@ package com.mlt.japl.fns;
 
 import java.util.HashMap;
 
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.arrays.IotaArray;
 import com.mlt.japl.arrays.MultidimIotaArray;
-import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class IotaFn extends SpecialBaseFn {
@@ -25,7 +22,7 @@ public class IotaFn extends SpecialBaseFn {
 			return new MultidimIotaArray(new Dimensions(ds));
 		}
 		long v = a.atI(0);
-		if(v==0) return new IntArray();
+		if(v==0) return new IntArrayImpl();
 		return new IotaArray((int)a.atI(0));
 	}
 
@@ -38,11 +35,11 @@ public class IotaFn extends SpecialBaseFn {
 		}
 		
 		if(b.isScalar()) {
-			return new IntArray(map.get(b.atA(0)));
+			return new IntArrayImpl(map.get(b.atA(0)));
 		}
 		
 		int alen = a.length();
-		Array result = new IntArray(new Dimensions(b.length()), new long[b.length()]);
+		Array result = new IntArrayImpl(new Dimensions(b.length()), new long[b.length()]);
 		
 		for(int i=0; i<b.length(); i++) {
 			result.setI(i, map.getOrDefault(b.atA(i), alen+1));

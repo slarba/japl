@@ -3,8 +3,8 @@ package com.mlt.japl.fns;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.IntArrayImpl;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.ArrayScalar;
@@ -30,10 +30,10 @@ public class ArrayFactory {
 	public static Array makeArrayOfType(int type, Dimensions d) {
 		switch(type) {
 		case Array.BIT:   		  return new BitArray(d, true, d.length());
-		case Array.INTEGER:		  return new IntArray(d, true, d.length());
+		case Array.INTEGER:		  return new IntArrayImpl(d, true, d.length());
 		case Array.DOUBLE:		  return new DoubleArray(d, true, d.length());
 		case Array.CHARACTER:	  return new CharArray(d, true, d.length());
-		case Array.MIXED:		  return new NestedArray(d, true, d.length());
+		case Array.MIXED:		  return new NestedArrayImpl(d, true, d.length());
 		default:
 			throw new AplError();
 		}		
@@ -54,10 +54,10 @@ public class ArrayFactory {
 	public static Array makeSimilarArrayOfTypeWithActualLength(int type, Array a, int len) {
 		switch(type) {
 		case Array.BIT:   		  return new BitArray(a.dims(), true, len);
-		case Array.INTEGER:		  return new IntArray(a.dims(), true, len);
+		case Array.INTEGER:		  return new IntArrayImpl(a.dims(), true, len);
 		case Array.DOUBLE:		  return new DoubleArray(a.dims(), true, len);
 		case Array.CHARACTER:	  return new CharArray(a.dims(), true, len);
-		case Array.MIXED:		  return new NestedArray(a.dims(), true, len);
+		case Array.MIXED:		  return new NestedArrayImpl(a.dims(), true, len);
 		default:
 			throw new AplError();
 		}		

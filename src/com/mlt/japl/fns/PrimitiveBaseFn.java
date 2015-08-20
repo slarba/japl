@@ -1,12 +1,5 @@
 package com.mlt.japl.fns;
 
-import java.util.HashMap;
-
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.arrays.CharArray;
-import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.arrays.NestedArray;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
@@ -15,10 +8,6 @@ import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.iface.PrimitiveFunc;
-import com.mlt.japl.scalars.ArrayScalar;
-import com.mlt.japl.scalars.CharScalar;
-import com.mlt.japl.scalars.DoubleScalar;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public abstract class PrimitiveBaseFn implements Func, PrimitiveFunc {

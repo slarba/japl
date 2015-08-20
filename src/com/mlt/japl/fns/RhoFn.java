@@ -1,7 +1,6 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -11,12 +10,12 @@ public class RhoFn extends SpecialBaseFn {
 	
 	@Override
 	public Array monadic(Array a, int axis) {
-		if(a.rank()==0) return IntArray.ZILDE;
+		if(a.rank()==0) return IntArrayImpl.ZILDE;
 		int[] adims = a.dims().asArray();
 		long[] dims = new long[adims.length];
 		for(int i=0; i<dims.length; i++)
 			dims[i] = adims[i];
-		return new IntArray(dims);
+		return new IntArrayImpl(dims);
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class RhoFn extends SpecialBaseFn {
 			return b.reshape(new Dimensions((int)a.atI(0)));
 		}
 		int alen = a.length();
-		if(alen==0) return IntArray.ZILDE;
+		if(alen==0) return IntArrayImpl.ZILDE;
 		int[] newDims = new int[alen];
 		for(int i=0; i<newDims.length; i++)
 			newDims[i] = (int)a.atI(i);

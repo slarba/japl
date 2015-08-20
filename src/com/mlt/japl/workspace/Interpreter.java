@@ -5,14 +5,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.ast.AstNode;
-import com.mlt.japl.gui.JaplInterpreter;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
@@ -61,11 +59,11 @@ public class Interpreter {
 	}
 	
 	public void define(String id, long... data) {
-		context.set(id, new IntArray(data));
+		context.set(id, new IntArrayImpl(data));
 	}
 
 	public void define(String id, long[] data, int... dims) {
-		context.set(id, new IntArray(new Dimensions(dims), data));
+		context.set(id, new IntArrayImpl(new Dimensions(dims), data));
 	}
 
 	public void define(String id, double... data) {

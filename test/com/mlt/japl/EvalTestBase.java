@@ -1,8 +1,9 @@
 package com.mlt.japl;
 
+import static org.junit.Assert.assertEquals;
+
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.workspace.Interpreter;
-import static org.junit.Assert.*;
 
 public class EvalTestBase {
 

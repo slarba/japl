@@ -5,10 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.mlt.japl.arrays.IntArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.ArrayScalar;
-import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.Interpreter;
 
 public class PrimitiveEvalTest {

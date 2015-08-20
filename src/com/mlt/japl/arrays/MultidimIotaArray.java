@@ -1,12 +1,10 @@
 package com.mlt.japl.arrays;
 
-import java.util.Arrays;
-
 import com.mlt.japl.dispatch.DyadicVisitor;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
-public class MultidimIotaArray extends SpecialArray {
+public class MultidimIotaArray extends BaseArray implements NestedArray {
 
 	public MultidimIotaArray() {
 		super();
@@ -28,7 +26,7 @@ public class MultidimIotaArray extends SpecialArray {
 
 	@Override
 	public Array atA(int idx) {
-		return new IntArray(dims.reverseIndex(idx%length()));
+		return new IntArrayImpl(dims.reverseIndex(idx%length()));
 	}
 	
 	@Override
@@ -38,7 +36,7 @@ public class MultidimIotaArray extends SpecialArray {
 	
 	@Override
 	public Array reshape(Dimensions newShape) {
-		Array result = new NestedArray(newShape, new Array[newShape.length()]);
+		Array result = new NestedArrayImpl(newShape, new Array[newShape.length()]);
 		for(int i=0; i<newShape.length(); i++) {
 			result.setA(i, atA(i));
 		}
@@ -47,13 +45,13 @@ public class MultidimIotaArray extends SpecialArray {
 
 	@Override
 	public Array unInitializedCopy() {
-		Array result = new NestedArray(dims(), new Array[dims.length()]);
+		Array result = new NestedArrayImpl(dims(), new Array[dims.length()]);
 		return result;
 	}
 
 	@Override
 	public Array prototype() {
-		return new IntArray(new long[rank()]);
+		return new IntArrayImpl(new long[rank()]);
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public class MultidimIotaArray extends SpecialArray {
 
 	@Override
 	public Array unInitializedReshapedCopy(Dimensions resultDims) {
-		Array result = new NestedArray(resultDims, new Array[resultDims.length()]);
+		Array result = new NestedArrayImpl(resultDims, new Array[resultDims.length()]);
 		return result;
 	}
 	@Override

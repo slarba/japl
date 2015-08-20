@@ -1,6 +1,6 @@
 package com.mlt.japl.scalars;
 
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -50,7 +50,7 @@ public class ArrayScalar extends BaseScalar {
 	
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new NestedArray(newShape, new Array[] { data });
+		return new NestedArrayImpl(newShape, new Array[] { data });
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ArrayScalar extends BaseScalar {
 	
 	@Override
 	public Array prototype() {
-		return new NestedArray();
+		return new NestedArrayImpl();
 	}
 	
 	@Override

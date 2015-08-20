@@ -21,7 +21,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.ast.AssignmentNode;
 import com.mlt.japl.ast.AstNode;
 import com.mlt.japl.errors.AxisError;
@@ -190,7 +190,7 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 					ArrayScalar as = (ArrayScalar)evalResult;
 					System.out.println("   array scalar contained type = " + as.atA(0).type());
 				}
-				if(evalResult instanceof NestedArray) {
+				if(evalResult instanceof NestedArrayImpl) {
 					for(int i=0; i<evalResult.length(); i++)
 						System.out.println("   " + i + " array scalar contained type = " + evalResult.atA(i).type());
 				}

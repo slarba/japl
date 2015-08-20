@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.arrays.IotaArray;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -22,27 +22,27 @@ public class ReshapeTest {
 
 	@Test
 	public void testIntArrayReshape() {
-		Array a = new IntArray(d, 1, 2, 3, 4, 5);
+		Array a = new IntArrayImpl(d, 1, 2, 3, 4, 5);
 		assertEquals(2, a.rank());
 		assertEquals(1, a.depth());
 		assertEquals(2*3, a.length());
 		assertEquals(5, a.actualLength());
 		assertEquals(new Dimensions(2,3), a.dims());
-		assertEquals(new IntArray(new Dimensions(2,3), new long[] {
+		assertEquals(new IntArrayImpl(new Dimensions(2,3), new long[] {
 			1,2,3,
 			4,5,1
 		}), a);
 
 		// reshape bigger
 		Array b = a.reshape(newShape);
-		assertTrue(b instanceof IntArray);
+		assertTrue(b instanceof IntArrayImpl);
 		assertEquals(2, b.rank());
 		assertEquals(1, b.depth());
 		assertEquals(4*5, b.length());
 		assertEquals(6, b.actualLength());   // was reshaped bigger, actual length stays the same
 		assertEquals(new Dimensions(4,5), b.dims());
 		System.out.println(b.asString(new PrintConfig()));
-		assertEquals(new IntArray(new Dimensions(4,5), new long[] {
+		assertEquals(new IntArrayImpl(new Dimensions(4,5), new long[] {
 			1,2,3,4,5,
 			1,1,2,3,4,
 			5,1,1,2,3,
@@ -51,13 +51,13 @@ public class ReshapeTest {
 		
 		// reshape smaller
 		Array c = b.reshape(d2);
-		assertTrue(c instanceof IntArray);
+		assertTrue(c instanceof IntArrayImpl);
 		assertEquals(2, c.rank());
 		assertEquals(1, c.depth());
 		assertEquals(2*2, c.length());
 		assertEquals(2*2, c.actualLength());
 		assertEquals(new Dimensions(2,2), c.dims());
-		assertEquals(new IntArray(new Dimensions(2,2), new long[] {
+		assertEquals(new IntArrayImpl(new Dimensions(2,2), new long[] {
 			1,2,
 			3,4
 		}), c);
@@ -201,21 +201,21 @@ public class ReshapeTest {
 		assertEquals(5, a.actualLength());
 		assertEquals(new Dimensions(2,3), a.dims());
 		System.out.println(a.asString(new PrintConfig()));
-		assertEquals(new IntArray(new Dimensions(2,3), new long[] {
+		assertEquals(new IntArrayImpl(new Dimensions(2,3), new long[] {
 			1,2,3,
 			4,5,1
 		}), a);
 
 		// reshape bigger
 		Array b = a.reshape(newShape);
-		assertTrue(b instanceof IntArray);
+		assertTrue(b instanceof IntArrayImpl);
 		assertEquals(2, b.rank());
 		assertEquals(1, b.depth());
 		assertEquals(4*5, b.length());
 		assertEquals(6, b.actualLength());   // was reshaped bigger, actual length stays the same
 		assertEquals(new Dimensions(4,5), b.dims());
 		System.out.println(b.asString(new PrintConfig()));
-		assertEquals(new IntArray(new Dimensions(4,5), new long[] {
+		assertEquals(new IntArrayImpl(new Dimensions(4,5), new long[] {
 			1,2,3,4,5,
 			1,1,2,3,4,
 			5,1,1,2,3,
@@ -224,13 +224,13 @@ public class ReshapeTest {
 		
 		// reshape smaller
 		Array c = b.reshape(d2);
-		assertTrue(c instanceof IntArray);
+		assertTrue(c instanceof IntArrayImpl);
 		assertEquals(2, c.rank());
 		assertEquals(1, c.depth());
 		assertEquals(2*2, c.length());
 		assertEquals(2*2, c.actualLength());
 		assertEquals(new Dimensions(2,2), c.dims());
-		assertEquals(new IntArray(new Dimensions(2,2), new long[] {
+		assertEquals(new IntArrayImpl(new Dimensions(2,2), new long[] {
 			1, 2,
 			3, 4
 		}), c);

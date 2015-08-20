@@ -2,7 +2,7 @@ package com.mlt.japl.ast;
 
 import java.util.List;
 
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
@@ -24,7 +24,7 @@ public class EvalArrayNode implements AstNode {
 		for(int j=nodes.size()-1; j>=0; j--) {
 			result[j] = nodes.get(j).eval(context);
 		}
-		return new NestedArray(result);
+		return new NestedArrayImpl(result);
 	}
 
 	@Override

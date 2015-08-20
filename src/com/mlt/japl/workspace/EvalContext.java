@@ -3,7 +3,7 @@ package com.mlt.japl.workspace;
 import java.io.OutputStream;
 import java.util.HashMap;
 
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
@@ -35,7 +35,7 @@ public class EvalContext {
 	}
 	
 	public EvalContext() {
-		valueMap.put("\u236c", new IntArray());
+		valueMap.put("\u236c", new IntArrayImpl());
 	}
 	
 	public EvalContext(EvalContext parent) {

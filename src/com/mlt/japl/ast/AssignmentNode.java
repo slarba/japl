@@ -1,11 +1,9 @@
 package com.mlt.japl.ast;
 
 import java.io.PrintWriter;
-import java.io.Writer;
 
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.iface.Func;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -31,7 +29,7 @@ public class AssignmentNode implements AstNode {
 		if(expr instanceof NiladicCallNode) {
 			NiladicCallNode n = (NiladicCallNode)expr;
 			context.set(id, n.func());
-			return new IntArray();
+			return new IntArrayImpl();
 		}
 		return context.set(id, expr.eval(context));
 	}

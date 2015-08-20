@@ -1,7 +1,5 @@
 package com.mlt.japl.fns;
 
-import java.util.Arrays;
-
 import com.mlt.japl.iface.Array;
 
 public class ResultTypeMap {

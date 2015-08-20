@@ -1,6 +1,6 @@
 package com.mlt.japl.ast;
 
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
@@ -28,7 +28,7 @@ public class IfNode implements AstNode {
 		if(elseBranch!=null)
 			return elseBranch.eval(context);
 		else
-			return new IntArray();
+			return new IntArrayImpl();
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.mlt.japl.scalars;
 
-import com.mlt.japl.arrays.IntArray;
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
@@ -56,7 +55,7 @@ public class IntScalar extends BaseScalar {
 	
 	@Override
 	public Array reshape(Dimensions newShape) {
-		return new IntArray(newShape, new long[] { data });
+		return new IntArrayImpl(newShape, new long[] { data });
 	}
 
 	@Override

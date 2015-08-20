@@ -1,11 +1,10 @@
 package com.mlt.japl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.iface.Array;
 
 public class DiscloseTest extends EvalTestBase {
@@ -16,7 +15,7 @@ public class DiscloseTest extends EvalTestBase {
 		itn.eval("rcb ← {(⍳ω),¨ box ⊃ω⋆÷2}");
 		Array result = itn.eval("{1 ∈¨ ω = ⊂3 3 4} rcb 4 4");
 	
-		assertTrue(result instanceof NestedArray);
+		assertTrue(result instanceof NestedArrayImpl);
 	}
 
 }

@@ -4,7 +4,6 @@ package com.mlt.japl.fns;
 import com.mlt.japl.arrays.BitArray;
 import com.mlt.japl.arrays.RotatedArray;
 import com.mlt.japl.errors.LengthError;
-import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.tools.Iterator;

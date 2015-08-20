@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.arrays.IotaArray;
 import com.mlt.japl.arrays.MultidimIotaArray;
-import com.mlt.japl.arrays.NestedArray;
+import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 
@@ -33,7 +33,7 @@ public class TestEmptyArrays {
 
 	@Test
 	public void testEmptyIntArray() {
-		testEmptyProperties(new IntArray());
+		testEmptyProperties(new IntArrayImpl());
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class TestEmptyArrays {
 	
 	@Test
 	public void testEmptyMixedArray() {
-		testEmptyProperties(new NestedArray());
+		testEmptyProperties(new NestedArrayImpl());
 	}
 	
 }

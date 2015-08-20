@@ -1,13 +1,14 @@
 package com.mlt.japl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.mlt.japl.arrays.CharArray;
-import com.mlt.japl.arrays.IntArray;
+import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.scalars.IntScalar;
@@ -21,13 +22,13 @@ public class TakeTest extends EvalTestBase {
 	@Test
 	public void testSimpleTake() {
 		Array r = itn.eval("2↑4 5 6 7 8");
-		assertEquals(new IntArray(4,5), r);
+		assertEquals(new IntArrayImpl(4,5), r);
 	}
 
 	@Test
 	public void testTakeScalar() {
 		Array r = itn.eval("3↑2");
-		assertEquals(new IntArray(2,0,0), r);
+		assertEquals(new IntArrayImpl(2,0,0), r);
 	}
 
 	@Test
@@ -55,7 +56,7 @@ public class TakeTest extends EvalTestBase {
 		Array r = itn.eval("4 4↑2 2⍴1 2 3 4");
 		assertEquals(r.dims(), new Dimensions(4,4));
 		assertEquals(r.actualLength(), 16);
-		assertEquals(r, new IntArray(new Dimensions(4,4), 
+		assertEquals(r, new IntArrayImpl(new Dimensions(4,4), 
 				1, 2, 0, 0,
 				3, 4, 0, 0,
 				0, 0, 0, 0,
@@ -85,7 +86,7 @@ public class TakeTest extends EvalTestBase {
 		Array r = itn.eval("2 ¯2↑4 4⍴1 2 3 4 5");
 		assertEquals(r.dims(), new Dimensions(2,2));
 		assertEquals(r.actualLength(), 4);
-		assertEquals(r, new IntArray(new Dimensions(2,2), 
+		assertEquals(r, new IntArrayImpl(new Dimensions(2,2), 
 				3, 4,
 				2, 3));
 	}

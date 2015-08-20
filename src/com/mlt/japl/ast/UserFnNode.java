@@ -1,6 +1,5 @@
 package com.mlt.japl.ast;
 
-import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.iface.Func;
 import com.mlt.japl.tools.Dimensions;
