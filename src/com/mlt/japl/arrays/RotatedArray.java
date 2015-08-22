@@ -7,7 +7,7 @@ import com.mlt.japl.iface.Array;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
-public class RotatedArray extends BaseArray implements ProxyArray {
+public class RotatedArray extends BaseArray {
 	Array array;
 	private int[] rotations;
 	
@@ -135,11 +135,6 @@ public class RotatedArray extends BaseArray implements ProxyArray {
 		int[] newRotations = Arrays.copyOf(rotations, rotations.length);
 		newRotations[axis] += offset;
 		return new RotatedArray(array, newRotations);
-	}
-
-	@Override
-	public Array getConcreteArray() {
-		return array;
 	}
 	
 	@Override
