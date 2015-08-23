@@ -12,27 +12,27 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 
 public class DivFn extends BaseFn {
 	@Override
-	public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
+	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
 		return new DoubleScalar((double)a.get() / b.get());
 	}
 
 	@Override
-	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b) {
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
 		return new DoubleScalar(a.get() / b.get());
 	}
 
 	@Override
-	public IValue visit_dyadic(IIntScalar a, IDoubleScalar b) {
+	public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
 		return new DoubleScalar(a.get() / b.get());
 	}
 
 	@Override
-	public IValue visit_dyadic(IDoubleScalar a, IIntScalar b) {
+	public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
 		return new DoubleScalar(a.get() / b.get());
 	}
 
 	@Override
-	public IValue visit_dyadic(IIntArray a, IIntArray b) {
+	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
 		return new LazyMonadicDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -42,7 +42,7 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
+	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
 		return new LazyMonadicDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -52,7 +52,7 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_dyadic(IDoubleArray a, IIntArray b) {
+	public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
 		return new LazyMonadicDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -62,7 +62,7 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_dyadic(IDoubleArray a, IDoubleArray b) {
+	public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
 		return new LazyMonadicDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -72,7 +72,7 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_monadic(IIntArray a) {
+	public IValue visit_monadic(IIntArray a, int axis) {
 		return new LazyMonadicDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -82,7 +82,7 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_monadic(IDoubleArray a) {
+	public IValue visit_monadic(IDoubleArray a, int axis) {
 		return new LazyMonadicDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
