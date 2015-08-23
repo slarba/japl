@@ -9,6 +9,7 @@ public interface ArrayAcceptor {
 	IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor, int axis);
 	IValue accept_dyadic(ICharArray a, ArrayVisitor visitor, int axis);
 	IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor, int axis);
+	IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis);
 	
 	IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis);
 	IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor, int axis);

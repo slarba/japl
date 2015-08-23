@@ -28,4 +28,9 @@ public abstract class ArrayBase implements IValue {
 	public int length() {
 		return dims.length();
 	}
+	
+	@Override
+	public IValue force() {
+		return this;
+	}
 }

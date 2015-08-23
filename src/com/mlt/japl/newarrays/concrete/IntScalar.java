@@ -3,6 +3,7 @@ package com.mlt.japl.newarrays.concrete;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.ScalarBase;
+import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
@@ -22,6 +23,11 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 	@Override
 	public long get() {
 		return val;
+	}
+
+	@Override
+	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+		return visitor.visit_dyadic(a, this, axis);
 	}
 
 	@Override

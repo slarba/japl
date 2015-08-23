@@ -3,6 +3,7 @@ package com.mlt.japl.newarrays.concrete;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
@@ -51,6 +52,11 @@ public class CharArray extends ArrayBase implements ICharArray {
 		return visitor.visit_dyadic(a, this, axis);
 	}
 
+	@Override
+	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+		return visitor.visit_dyadic(a, this, axis);
+	}
+	
 	@Override
 	public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);

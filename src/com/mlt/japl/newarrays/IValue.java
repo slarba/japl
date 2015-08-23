@@ -7,4 +7,6 @@ public interface IValue extends ArrayAcceptor {
 	int rank();
 	int depth();
 	int length();
+	
+	IValue force();   // realize lazy array into concrete array
 }

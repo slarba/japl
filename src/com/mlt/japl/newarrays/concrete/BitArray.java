@@ -1,5 +1,8 @@
-package com.mlt.japl.newarrays.generated;
+package com.mlt.japl.newarrays.concrete;
 
+import com.mlt.japl.newarrays.ArrayBase;
+import com.mlt.japl.newarrays.ArrayVisitor;
+import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -9,32 +12,24 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
-import com.mlt.japl.newarrays.ArrayBase;
-import com.mlt.japl.newarrays.ArrayVisitor;
-import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.tools.Dimensions;
 
-public class IotaArray extends ArrayBase implements IIntArray {
-	long val;
-	
-	public IotaArray(Dimensions dims, long val) {
-		super(dims);
-		this.val = val;
-	}
+public abstract class BitArray extends ArrayBase implements IBitArray {
+	long[] data;
 
+	public BitArray(Dimensions dims, long[] data) {
+		super(dims);
+		this.data = data;
+	}
+	
 	@Override
 	public long get(int index) {
-		return 1+(index % val);
+		return 0;
 	}
 
-	@Override 
-	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
-		return visitor.visit_monadic(this, axis);
-	}
-	
 	@Override
-	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
+	public long getBits(int index) {
+		return data[index%data.length];
 	}
 
 	@Override
@@ -63,6 +58,11 @@ public class IotaArray extends ArrayBase implements IIntArray {
 	}
 
 	@Override
+	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+		return visitor.visit_dyadic(a, this, axis);
+	}
+	
+	@Override
 	public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
 	}
@@ -82,4 +82,9 @@ public class IotaArray extends ArrayBase implements IIntArray {
 		return visitor.visit_dyadic(a, this, axis);
 	}
 
+	@Override
+	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
+		return visitor.visit_monadic(this, axis);
+	}
+	
 }

@@ -3,6 +3,9 @@ package com.mlt.japl.newarrays.generated;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.DoubleArray;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
@@ -20,6 +23,18 @@ public abstract class LazyMonadicIntArray extends ArrayBase implements IIntArray
 	}
 	
 	@Override
+	public IValue force() {
+		long[] data = new long[dims().length()];
+		for(int i=0; i<data.length; i++) data[i] = get(i);
+		return new IntArray(dims(), data);
+	}
+
+	@Override
+	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+		return visitor.visit_dyadic(a, this, axis);
+	}
+	
+ 	@Override
 	public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
 		return visitor.visit_first(this, b, axis);
 	}

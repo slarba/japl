@@ -24,4 +24,9 @@ public abstract class ScalarBase implements IValue {
 		return 0;
 	}
 
+	@Override
+	public IValue force() {
+		return this;
+	}
+
 }

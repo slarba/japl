@@ -3,6 +3,7 @@ package com.mlt.japl.newfns;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
@@ -13,6 +14,11 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 
 public class BaseFn implements ArrayVisitor, Func {
+
+	@Override
+	public IValue visit_first(IBitArray a, IValue b, int axis) {
+		return b.accept_dyadic(a, this, axis);
+	}
 
 	@Override
 	public IValue visit_first(IIntArray a, IValue b, int axis) {
@@ -437,4 +443,95 @@ public class BaseFn implements ArrayVisitor, Func {
 	public IValue applyNiladic(int axis) {
 		return null;
 	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleArray a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharArray a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedArray a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IDoubleArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, ICharArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IDoubleScalar b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, ICharScalar b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IMixedScalar b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedScalar a, IBitArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
+	@Override
+	public IValue visit_monadic(IBitArray a, int axis) {
+		return generic_monadic(a);
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IMixedArray b, int axis) {
+		return generic_dyadic(a, b);
+	}
+
 }
