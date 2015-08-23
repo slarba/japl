@@ -11,24 +11,14 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
-import com.mlt.japl.newfns.Prim;
+import com.mlt.japl.tools.Dimensions;
 
-public class LazyMonadicIntArray extends ArrayBase implements IIntArray {
+public abstract class LazyMonadicIntArray extends ArrayBase implements IIntArray {
 
-	private IIntArray array;
-	private Prim fn;
-
-	public LazyMonadicIntArray(IIntArray array, Prim fn) {
-		super(array.dims());
-		this.array = array;
-		this.fn = fn;
+	public LazyMonadicIntArray(Dimensions dims) {
+		super(dims);
 	}
 	
-	@Override
-	public long get(int index) {
-		return fn.call(array.get(index));
-	}
-
 	@Override
 	public IValue accept_dyadic(ArrayVisitor visitor, IValue b) {
 		return visitor.visit_first(this, b);

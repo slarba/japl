@@ -12,7 +12,7 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 
-public class BaseFn implements ArrayVisitor {
+public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_first(IIntArray a, IValue b) {
@@ -421,5 +421,20 @@ public class BaseFn implements ArrayVisitor {
 	@Override
 	public IValue visit_monadic(IMixedScalar a) {
 		return generic_monadic(a);
+	}
+
+	@Override
+	public IValue applyDyadic(IValue a, IValue b, int axis) {
+		return a.accept_dyadic(this,  b);
+	}
+
+	@Override
+	public IValue applyMonadic(IValue a, int axis) {
+		return a.accept_monadic(this);
+	}
+
+	@Override
+	public IValue applyNiladic(int axis) {
+		return null;
 	}
 }
