@@ -27,6 +27,13 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 		return data[index%data.length];
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);

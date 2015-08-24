@@ -7,11 +7,12 @@ public interface ArrayVisitor {
 	IValue visit_first(IDoubleArray a, IValue b, int axis);
 	IValue visit_first(ICharArray a, IValue b, int axis);
 	IValue visit_first(IMixedArray a, IValue b, int axis);
+	IValue visit_first(IBitArray a, IValue b, int axis);
+
 	IValue visit_first(IIntScalar a, IValue b, int axis);
 	IValue visit_first(IDoubleScalar a, IValue b, int axis);
 	IValue visit_first(ICharScalar a, IValue b, int axis);
 	IValue visit_first(IMixedScalar a, IValue b, int axis);
-	IValue visit_first(IBitArray a, IValue b, int axis);
 	
 	IValue visit_dyadic(IIntArray a, IIntArray b, int axis);
 	IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis);

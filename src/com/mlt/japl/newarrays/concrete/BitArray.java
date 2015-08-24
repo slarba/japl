@@ -24,7 +24,10 @@ public abstract class BitArray extends ArrayBase implements IBitArray {
 	
 	@Override
 	public long get(int index) {
-		return 0;
+		int i = index % data.length;
+		int whole = i / 64;
+		int part = i % 64;
+		return (data[whole]>>>part)&1;
 	}
 
 	@Override
@@ -32,6 +35,7 @@ public abstract class BitArray extends ArrayBase implements IBitArray {
 		return data[index%data.length];
 	}
 
+	// region Kuvaus
 	@Override
 	public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
 		return visitor.visit_first(this, b, axis);
@@ -86,5 +90,5 @@ public abstract class BitArray extends ArrayBase implements IBitArray {
 	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
 		return visitor.visit_monadic(this, axis);
 	}
-	
+	// endregion
 }

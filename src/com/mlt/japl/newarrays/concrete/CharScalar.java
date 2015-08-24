@@ -25,6 +25,13 @@ public class CharScalar extends ScalarBase implements ICharScalar {
 		return val;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
