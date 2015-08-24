@@ -28,5 +28,4 @@ public abstract class ScalarBase implements IValue {
 	public IValue force() {
 		return this;
 	}
-
 }

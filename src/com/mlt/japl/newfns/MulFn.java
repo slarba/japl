@@ -101,4 +101,8 @@ public class MulFn extends BaseFn {
 		return new DoubleScalar(Math.signum(a.get()));
 	}
 
+	@Override
+	public String getName() {
+		return "*";
+	}
 }

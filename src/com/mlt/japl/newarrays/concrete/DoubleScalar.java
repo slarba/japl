@@ -86,4 +86,29 @@ public class DoubleScalar extends ScalarBase implements IDoubleScalar {
 		return Double.toString(val);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(val);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DoubleScalar other = (DoubleScalar) obj;
+		if (Double.doubleToLongBits(val) != Double.doubleToLongBits(other.val))
+			return false;
+		return true;
+	}
+
+	
 }

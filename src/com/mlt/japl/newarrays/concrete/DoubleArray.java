@@ -1,5 +1,7 @@
 package com.mlt.japl.newarrays.concrete;
 
+import java.util.Arrays;
+
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
@@ -89,4 +91,27 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 		return visitor.visit_monadic(this, axis);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Arrays.hashCode(data);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DoubleArray other = (DoubleArray) obj;
+		if (!Arrays.equals(data, other.data))
+			return false;
+		return true;
+	}
+
+	
 }

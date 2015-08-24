@@ -4,7 +4,12 @@ import com.mlt.japl.newarrays.IValue;
 
 public class InnerProdFn implements Func {
 
+	private Func left;
+	private Func right;
+
 	public InnerProdFn(Func left, Func right) {
+		this.left = left;
+		this.right = right;
 		
 	}
 	
@@ -28,8 +33,7 @@ public class InnerProdFn implements Func {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "innerprod<" + left.getName() + "," + right.getName() + ">";
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.mlt.japl.newarrays.concrete;
 
+import java.util.Arrays;
+
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
@@ -103,4 +105,28 @@ public class BitArray extends ArrayBase implements IBitArray {
 		return visitor.visit_monadic(this, axis);
 	}
 	// endregion
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Arrays.hashCode(data);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BitArray other = (BitArray) obj;
+		if (!Arrays.equals(data, other.data))
+			return false;
+		return true;
+	}
+
+
 }

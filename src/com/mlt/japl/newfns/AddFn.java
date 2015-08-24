@@ -172,4 +172,8 @@ public class AddFn extends BaseFn {
 		return a;
 	}
 
+	@Override
+	public String getName() {
+		return "+";
+	}
 }

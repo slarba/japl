@@ -2,15 +2,12 @@ package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
 
-public class OuterProdFn implements Func {
+public class EachFn implements Func {
 
-	private Func fn;
-
-	public OuterProdFn(Func fn) {
-		this.fn = fn;
-		
+	public EachFn(Func reduceFn) {
+		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public IValue applyDyadic(IValue a, IValue b, int axis) {
 		// TODO Auto-generated method stub
@@ -31,7 +28,8 @@ public class OuterProdFn implements Func {
 
 	@Override
 	public String getName() {
-		return "outerprod<" + fn.getName() + ">";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

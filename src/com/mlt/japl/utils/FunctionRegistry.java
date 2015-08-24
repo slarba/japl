@@ -5,9 +5,12 @@ import java.util.HashMap;
 import com.mlt.japl.newfns.AddFn;
 import com.mlt.japl.newfns.CeilFn;
 import com.mlt.japl.newfns.DivFn;
+import com.mlt.japl.newfns.EachFn;
 import com.mlt.japl.newfns.FloorFn;
 import com.mlt.japl.newfns.Func;
 import com.mlt.japl.newfns.MulFn;
+import com.mlt.japl.newfns.ReduceFn;
+import com.mlt.japl.newfns.ScanFn;
 import com.mlt.japl.newfns.SubFn;
 
 public class FunctionRegistry {
@@ -74,17 +77,15 @@ public class FunctionRegistry {
 	public Func buildMonadicOperator(String n, Func arg) {
 		switch(n)
 		{
-//			case "/":  return new ReduceFn(arg, false);
-//			case "/¨":  return new EachFn(new ReduceFn(arg, false));
-//			case "\\": return new ScanFn(arg, false);
-//			case "\\¨": return new EachFn(new ScanFn(arg, false));
-//			case "¨":
-//				if(arg instanceof PrimitiveFunc) return arg;  // each does nothing productive with primitive functions
-//				else return new EachFn(arg);
-//			case "\u233f": return new ReduceFn(arg, true);
-//			case "\u2340": return new ScanFn(arg, true);
-//			case "\u233f¨": return new EachFn(new ReduceFn(arg, true));
-//			case "\u2340¨": return new EachFn(new ScanFn(arg, true));
+			case "/":  return new ReduceFn(arg, false);
+			case "/¨":  return new EachFn(new ReduceFn(arg, false));
+			case "\\": return new ScanFn(arg, false);
+			case "\\¨": return new EachFn(new ScanFn(arg, false));
+			case "¨": return new EachFn(arg);
+			case "\u233f": return new ReduceFn(arg, true);
+			case "\u2340": return new ScanFn(arg, true);
+			case "\u233f¨": return new EachFn(new ReduceFn(arg, true));
+			case "\u2340¨": return new EachFn(new ScanFn(arg, true));
 			default:
 				return null;
 		}

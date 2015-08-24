@@ -205,4 +205,9 @@ public class SubFn extends BaseFn {
 	public IValue visit_monadic(IMixedScalar a, int axis) {
 		return new MixedScalar(a.get().accept_monadic(this, axis));
 	}
+	
+	@Override
+	public String getName() {
+		return "-";
+	}
 }
