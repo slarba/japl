@@ -15,6 +15,7 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class IntArray extends ArrayBase implements IIntArray {
 	long[] data;
@@ -106,5 +107,8 @@ public class IntArray extends ArrayBase implements IIntArray {
 		return true;
 	}
 
-	
+	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
+	}
 }

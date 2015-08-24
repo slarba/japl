@@ -55,7 +55,7 @@ public class ArrayScalar extends BaseScalar {
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return printConfig.print(data);
+		return ""; // printConfig.print(data);
 	}
 	
 	@Override

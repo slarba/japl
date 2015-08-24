@@ -128,7 +128,7 @@ public class RotatedArray extends BaseArray {
 
 	@Override
 	public String asString(PrintConfig config) {
-		return config.print(this);
+		return ""; // config.print(this);
 	}
 	
 	public Array modifyRotations(int axis, int offset) {

@@ -15,9 +15,9 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
 
-public abstract class LazyMonadicCharArray extends ArrayBase implements ICharArray {
+public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 
-	public LazyMonadicCharArray(Dimensions dims) {
+	public LazyCharArray(Dimensions dims) {
 		super(dims);
 	}
 	

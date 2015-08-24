@@ -144,7 +144,7 @@ public abstract class BaseArray implements Array {
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return printConfig.print(this);
+		return ""; // printConfig.print(this);
 	}
 	
 	@Override

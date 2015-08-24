@@ -16,9 +16,9 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
 
-public abstract class LazyMonadicDoubleArray extends ArrayBase implements IDoubleArray {
+public abstract class LazyDoubleArray extends ArrayBase implements IDoubleArray {
 
-	public LazyMonadicDoubleArray(Dimensions dims) {
+	public LazyDoubleArray(Dimensions dims) {
 		super(dims);
 	}
 	

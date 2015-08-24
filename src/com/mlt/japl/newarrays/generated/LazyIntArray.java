@@ -15,10 +15,11 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
-public abstract class LazyMonadicIntArray extends ArrayBase implements IIntArray {
+public abstract class LazyIntArray extends ArrayBase implements IIntArray {
 
-	public LazyMonadicIntArray(Dimensions dims) {
+	public LazyIntArray(Dimensions dims) {
 		super(dims);
 	}
 	
@@ -27,6 +28,11 @@ public abstract class LazyMonadicIntArray extends ArrayBase implements IIntArray
 		long[] data = new long[dims().length()];
 		for(int i=0; i<data.length; i++) data[i] = get(i);
 		return new IntArray(dims(), data);
+	}
+
+	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
 	}
 
 	@Override
