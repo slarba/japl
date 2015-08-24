@@ -1,8 +1,9 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.errors.AxisError;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.iface.Func;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newfns.Func;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -18,15 +19,15 @@ public class MonadicCallNode implements AstNode {
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
+	public IValue eval(EvalContext context) {
 		int axis = -1;
 		if(axisExpr!=null) {
-			Array ax = axisExpr.eval(context);
+			IValue ax = axisExpr.eval(context);
 			if(ax.rank()>0) throw new AxisError();
-			axis = (int)ax.atI(0)-1;
+			axis = (int)((IIntScalar)ax).get()-1;
 			if(axis<0) throw new AxisError();
 		}
-		return fn.monadic(right.eval(context), axis);
+		return fn.applyMonadic(right.eval(context), axis);
 	}
 
 	@Override
@@ -42,26 +43,26 @@ public class MonadicCallNode implements AstNode {
 		return right;
 	}
 
-	@Override
-	public int resultTypeFor(Array a) {
-		return fn.resultTypeFor(a);
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		return fn.resultTypeFor(a, b);
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//	@Override
+//	public int resultTypeFor(Array a) {
+//		return fn.resultTypeFor(a);
+//	}
+//
+//	@Override
+//	public int resultTypeFor(Array a, Array b) {
+//		return fn.resultTypeFor(a, b);
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 }

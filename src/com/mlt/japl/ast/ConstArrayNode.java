@@ -2,21 +2,22 @@ package com.mlt.japl.ast;
 
 import java.util.List;
 
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.arrays.CharArray;
-import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArrayImpl;
-import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.CharScalar;
-import com.mlt.japl.scalars.DoubleScalar;
-import com.mlt.japl.scalars.IntScalar;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.BitArray;
+import com.mlt.japl.newarrays.concrete.CharArray;
+import com.mlt.japl.newarrays.concrete.CharScalar;
+import com.mlt.japl.newarrays.concrete.DoubleArray;
+import com.mlt.japl.newarrays.concrete.DoubleScalar;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.concrete.MixedArray;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class ConstArrayNode implements AstNode {	
 	private List<AstNode> nodes;
-	private Array value;
+	private IValue value;
 
 	public ConstArrayNode(List<AstNode> nodes) {
 		this.nodes = nodes;
@@ -51,10 +52,10 @@ public class ConstArrayNode implements AstNode {
 		}
 
 		if(totalLen == totalIntZerosOnes) {
-			Array b = new BitArray(totalIntZerosOnes, new Dimensions(totalIntZerosOnes));
+			BitArray b = new BitArray(new Dimensions(totalIntZerosOnes));
 			int i=0;
 			for(AstNode n : nodes) {
-				b.setB(i++, ((ConstantAstNode)n).getInt());
+				b.setBit(i++, ((ConstantAstNode)n).getInt());
 			}
 			value = b;
 		} else if(totalLen == intNodes) {  // contains only int tokens -> intarray
@@ -63,27 +64,27 @@ public class ConstArrayNode implements AstNode {
 			for(AstNode n : nodes) {
 				data[i++] = ((ConstantAstNode)n).getInt();
 			}
-			value = new IntArrayImpl(data);
+			value = new IntArray(new Dimensions(data.length), data);
 		} else if(totalLen == (doubleNodes + intNodes)) {   // contains only int and double tokens -> doublearray
 			double[] data = new double[totalLen];
 			int i=0;
 			for(AstNode n : nodes) {
 				data[i++] = ((ConstantAstNode)n).getDouble();
 			}
-			value = new DoubleArray(data);
+			value = new DoubleArray(new Dimensions(data.length), data);
 		} else if(totalLen == charNodes) {   // only charnodes -> char array
 			char[] data = new char[totalLen];
 			int i=0;
 			for(AstNode n : nodes) {
 				data[i++] = ((ConstantAstNode)n).getChar();
 			}
-			value = new CharArray(data);
+			value = new CharArray(new Dimensions(data.length), data);
 		} else {   // mixed array
-			Array[] data = new Array[totalLen];
+			IValue[] data = new IValue[totalLen];
 			int i=0;
 			for(AstNode n : nodes) {
 				ConstantAstNode x = (ConstantAstNode)n;
-				Array cell = null;
+				IValue cell = null;
 				if(x.isDouble()) cell = new DoubleScalar(x.getDouble());
 				else
 				if(x.isInteger()) cell = new IntScalar(x.getInt());
@@ -95,12 +96,12 @@ public class ConstArrayNode implements AstNode {
 				if(x.isStringConstant()) cell = new CharArray(x.getString());
 				data[i++] = cell;
 			}
-			value = new NestedArrayImpl(data);			
+			value = new MixedArray(new Dimensions(data.length), data);			
 		}
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
+	public IValue eval(EvalContext context) {
 		return value;
 	}
 
@@ -118,26 +119,26 @@ public class ConstArrayNode implements AstNode {
 		return builder.toString();
 	}
 
-	@Override
-	public int resultTypeFor(Array a) {
-		return value.type();
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		return value.type();
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public int resultTypeFor(Array a) {
+//		return value.type();
+//	}
+//
+//	@Override
+//	public int resultTypeFor(Array a, Array b) {
+//		return value.type();
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

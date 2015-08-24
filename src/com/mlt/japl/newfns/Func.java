@@ -6,4 +6,5 @@ public interface Func {
 	public IValue applyDyadic(IValue a, IValue b, int axis);
 	public IValue applyMonadic(IValue a, int axis);
 	public IValue applyNiladic(int axis);
+	public String getName();
 }

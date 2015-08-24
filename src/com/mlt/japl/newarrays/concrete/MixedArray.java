@@ -16,10 +16,18 @@ import com.mlt.japl.tools.Dimensions;
 
 public class MixedArray extends ArrayBase implements IMixedArray {
 	IValue[] data;
-
+	int depth;
+	
 	public MixedArray(Dimensions dims, IValue[] data) {
 		super(dims);
 		this.data = data;
+		depth = 1;
+		for(int i=0; i<data.length; i++) depth = Math.max(depth, 1+data[i].depth());
+	}
+
+	@Override
+	public int depth() {
+		return depth;
 	}
 	
 	@Override

@@ -14,17 +14,22 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
 
-public abstract class BitArray extends ArrayBase implements IBitArray {
+public class BitArray extends ArrayBase implements IBitArray {
 	long[] data;
 
+	public BitArray(Dimensions dims) {
+		super(dims);
+		this.data = new long[1+(dims.length()/64)];
+	}
+	
 	public BitArray(Dimensions dims, long[] data) {
 		super(dims);
 		this.data = data;
 	}
 	
 	@Override
-	public long get(int index) {
-		int i = index % data.length;
+	public long get(int idx) {
+		int i = idx % dims().length();
 		int whole = i / 64;
 		int part = i % 64;
 		return (data[whole]>>>part)&1;
@@ -33,6 +38,13 @@ public abstract class BitArray extends ArrayBase implements IBitArray {
 	@Override
 	public long getBits(int index) {
 		return data[index%data.length];
+	}
+
+	public void setBit(int idx, int val) {
+		int i = idx % dims().length();
+		int whole = i / 64;
+		int part = i % 64;
+		data[whole] |= val<<part;
 	}
 
 	// region Kuvaus

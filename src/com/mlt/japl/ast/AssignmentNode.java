@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 
 import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -18,9 +20,9 @@ public class AssignmentNode implements AstNode {
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
+	public IValue eval(EvalContext context) {
 		if(id.equals("\u2395")) {
-			Array result = expr.eval(context);
+			IValue result = expr.eval(context);
 			PrintWriter w = new PrintWriter(context.getOutputStream());
 			w.println(result.asString(context.printConfig()));
 			w.flush();
@@ -29,7 +31,7 @@ public class AssignmentNode implements AstNode {
 		if(expr instanceof NiladicCallNode) {
 			NiladicCallNode n = (NiladicCallNode)expr;
 			context.set(id, n.func());
-			return new IntArrayImpl();
+			return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
 		}
 		return context.set(id, expr.eval(context));
 	}
@@ -39,28 +41,28 @@ public class AssignmentNode implements AstNode {
 		return id + " <- " + expr.print();
 	}
 
-	@Override
-	public int resultTypeFor(Array a) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//	@Override
+//	public int resultTypeFor(Array a) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public int resultTypeFor(Array a, Array b) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 }

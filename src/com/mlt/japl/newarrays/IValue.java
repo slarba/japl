@@ -1,6 +1,7 @@
 package com.mlt.japl.newarrays;
 
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public interface IValue extends ArrayAcceptor {
 	Dimensions dims();
@@ -9,4 +10,5 @@ public interface IValue extends ArrayAcceptor {
 	int length();
 	
 	IValue force();   // realize lazy array into concrete array
+	String asString(PrintConfig printConfig);
 }

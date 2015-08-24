@@ -1,7 +1,7 @@
 package com.mlt.japl.ast;
 
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.iface.Func;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newfns.Func;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -20,7 +20,7 @@ public class UserFnNode implements AstNode, Func {
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
+	public IValue eval(EvalContext context) {
 		throw new RuntimeException("foo");
 	}
 
@@ -30,7 +30,7 @@ public class UserFnNode implements AstNode, Func {
 	}
 
 	@Override
-	public Array monadic(Array a, int axis) {
+	public IValue applyMonadic(IValue a, int axis) {
 		EvalContext derived = frame.newFrame();
 		derived.set("\u03c9", a);
 		derived.set("\u2375", a);
@@ -38,7 +38,7 @@ public class UserFnNode implements AstNode, Func {
 	}
 
 	@Override
-	public Array dyadic(Array a, Array b, int axis) {
+	public IValue applyDyadic(IValue a, IValue b, int axis) {
 		EvalContext derived = frame.newFrame();
 		derived.set("\u03b1", a);
 		derived.set("\u03c9", b);
@@ -48,7 +48,7 @@ public class UserFnNode implements AstNode, Func {
 	}
 
 	@Override
-	public Array niladic() {
+	public IValue applyNiladic(int axis) {
 		return body.eval(frame);
 	}
 
@@ -57,24 +57,24 @@ public class UserFnNode implements AstNode, Func {
 		return print();
 	}
 
-	@Override
-	public int resultTypeFor(Array a) {
-		return body.resultTypeFor(a);
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		return body.resultTypeFor(a,b);
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		return body.resultDimsFor(a,axis);
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		return body.resultDimsFor(a,b,axis);
-	}
-
+//	@Override
+//	public int resultTypeFor(Array a) {
+//		return body.resultTypeFor(a);
+//	}
+//
+//	@Override
+//	public int resultTypeFor(Array a, Array b) {
+//		return body.resultTypeFor(a,b);
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, int axis) {
+//		return body.resultDimsFor(a,axis);
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+//		return body.resultDimsFor(a,b,axis);
+//	}
+//
 }

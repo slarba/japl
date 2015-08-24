@@ -15,8 +15,7 @@ PARSER_BEGIN(AplParser)
 package com.mlt.japl.parser;
 
 import java.io.Reader;
-import com.mlt.japl.iface.*;
-import com.mlt.japl.fns.*;
+import com.mlt.japl.newfns.*;
 import com.mlt.japl.ast.*;
 import com.mlt.japl.errors.*;
 import com.mlt.japl.utils.FunctionRegistry;
@@ -354,10 +353,10 @@ AstNode array() :
       {
 	    nodeList.add(new ConstantAstNode(s.toString()));
       }
-    | s = < CPLXCONSTANT >
+   /* | s = < CPLXCONSTANT >
 	  {
 	    nodeList.add(new ConstantAstNode(s.toString(), ConstantAstNode.COMPLEX));
-	  }
+	  } */
 	| "(" idexpr = arrayexpr()
 	  {
 	    nodeList.add(idexpr);

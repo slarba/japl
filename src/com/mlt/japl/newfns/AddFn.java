@@ -71,6 +71,87 @@ public class AddFn extends BaseFn {
 		};
 	}
 
+	// scalar/array
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+		return new LazyMonadicIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get() + b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+		return new LazyMonadicDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get() + b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IIntArray b, int axis) {
+		return new LazyMonadicDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get() + b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b, int axis) {
+		return new LazyMonadicDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get() + b.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntArray a, IIntScalar b, int axis) {
+		return new LazyMonadicIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) + b.get();
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleArray a, IIntScalar b, int axis) {
+		return new LazyMonadicDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) + b.get();
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntArray a, IDoubleScalar b, int axis) {
+		return new LazyMonadicDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) + b.get();
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleArray a, IDoubleScalar b, int axis) {
+		return new LazyMonadicDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) + b.get();
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_monadic(IIntArray a, int axis) {
 		return a;

@@ -3,19 +3,20 @@ package com.mlt.japl.workspace;
 import java.io.OutputStream;
 import java.util.HashMap;
 
-import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.ValueError;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.iface.Func;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newfns.Func;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class EvalContext {
-	HashMap<String, Array> valueMap = new HashMap<String,Array>();
+	HashMap<String, IValue> valueMap = new HashMap<String,IValue>();
 	HashMap<String, Func> functionMap = new HashMap<String,Func>();
 	EvalContext parent;
 	OutputStream out;
 	
-	public Array get(String id) {
+	public IValue get(String id) {
 		if(valueMap.containsKey(id)) {
 			return valueMap.get(id);
 		} else if(parent!=null) {
@@ -24,7 +25,7 @@ public class EvalContext {
 			throw new ValueError();
 	}
 
-	public Array set(String id, Array eval) {
+	public IValue set(String id, IValue eval) {
 		valueMap.put(id, eval);
 		return eval;
 	}
@@ -35,7 +36,7 @@ public class EvalContext {
 	}
 	
 	public EvalContext() {
-		valueMap.put("\u236c", new IntArrayImpl());
+		valueMap.put("\u236c", new IntArray(Dimensions.EMPTY_ARRAY, new long[0]));
 	}
 	
 	public EvalContext(EvalContext parent) {

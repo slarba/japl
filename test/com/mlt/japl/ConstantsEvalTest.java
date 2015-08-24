@@ -5,117 +5,107 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.interf.IBitArray;
+import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
+import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IDoubleScalar;
+import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 
 public class ConstantsEvalTest extends EvalTestBase {
 
 	@Test
 	public void testIntScalar() {
-		Array r = eval("2");
-		check(r, Array.INTEGER, 0, 1, 1, 0);
-		assertEquals(2, r.atI(0));
+		IIntScalar r = (IIntScalar)eval("2");
+		assertEquals(2, r.get());
 	}
 
 	@Test
 	public void testDoubleScalar() {
-		Array r = itn.eval("2.1");
-		assertEquals(Array.DOUBLE, r.type());
+		IDoubleScalar r = (IDoubleScalar)itn.eval("2.1");
 		assertEquals(0,r.depth());
-		assertEquals(1,r.length());
-		assertEquals(1,r.actualLength());
+		assertEquals(0,r.length());
 		assertEquals(0,r.rank());
-		assertTrue(2.1== r.atD(0));
+		assertTrue(2.1== r.get());
 	}
 	
 	@Test
 	public void testCharScalar() {
-		Array r = itn.eval("'c'");
-		assertEquals(Array.CHARACTER, r.type());
+		ICharScalar r = (ICharScalar)itn.eval("'c'");
 		assertEquals(0,r.depth());
-		assertEquals(1,r.length());
-		assertEquals(1,r.actualLength());
+		assertEquals(0,r.length());
 		assertEquals(0,r.rank());
-		assertTrue('c'== r.atC(0));
+		assertTrue('c'== r.get());
 	}
 
 	@Test
 	public void testBitScalar() {
-		Array r = itn.eval("1");
-		assertEquals(Array.BIT, r.type());
+		IIntScalar r = (IIntScalar)itn.eval("1");
 		assertEquals(0,r.depth());
-		assertEquals(1,r.length());
-		assertEquals(1,r.actualLength());
+		assertEquals(0,r.length());
 		assertEquals(0,r.rank());
-		assertTrue(1== r.atI(0));
+		assertTrue(1== r.get());
 	}
 
 	@Test
 	public void testIntArray() {
-		Array r = itn.eval("2 3 4");
-		assertEquals(Array.INTEGER, r.type());
+		IIntArray r = (IIntArray)itn.eval("2 3 4");
 		assertEquals(1,r.depth());
 		assertEquals(3,r.length());
-		assertEquals(3,r.actualLength());
 		assertEquals(1,r.rank());
-		assertEquals(2, r.atI(0));
+		assertEquals(2, r.get(0));
 	}
 
 	@Test
 	public void testDoubleArray() {
-		Array r = itn.eval("2 3.14 4");
-		assertEquals(Array.DOUBLE, r.type());
+		IDoubleArray r = (IDoubleArray)itn.eval("2 3.14 4");
 		assertEquals(1,r.depth());
 		assertEquals(3,r.length());
-		assertEquals(3,r.actualLength());
 		assertEquals(1,r.rank());
-		assertTrue(3.14==r.atD(1));
+		assertTrue(3.14==r.get(1));
 	}
 	
 	@Test
 	public void testBitArray() {
-		Array r = itn.eval("1 0 1 1 0 0 0 1 1 0 1");
-		assertEquals(Array.BIT, r.type());
+		IBitArray r = (IBitArray)itn.eval("1 0 1 1 0 0 0 1 1 0 1");
 		assertEquals(1,r.depth());
 		assertEquals(11,r.length());
-		assertEquals(11,r.actualLength());
 		assertEquals(1,r.rank());
-		assertEquals(1, r.atB(0));
-		assertEquals(0, r.atB(1));
-		assertEquals(1, r.atB(2));
-		assertEquals(1, r.atB(3));
+		assertEquals(1, r.get(0));
+		assertEquals(0, r.get(1));
+		assertEquals(1, r.get(2));
+		assertEquals(1, r.get(3));
 	}
 
 	@Test
 	public void testCharArray() {
-		Array r = itn.eval("'foo'");
-		assertEquals(Array.CHARACTER, r.type());
+		ICharArray r = (ICharArray)itn.eval("'foo'");
 		assertEquals(1,r.depth());
 		assertEquals(3,r.length());
-		assertEquals(3,r.actualLength());
 		assertEquals(1,r.rank());
-		assertEquals('f', r.atC(0));
-		assertEquals('o', r.atC(1));
-		assertEquals('o', r.atC(2));
+		assertEquals('f', r.get(0));
+		assertEquals('o', r.get(1));
+		assertEquals('o', r.get(2));
 	}
 	
 	@Test
 	public void testMixedArray() {
-		Array r = eval("2 'f' 3.14");
-		assertEquals(Array.MIXED, r.type());
+		IMixedArray r = (IMixedArray)eval("2 'f' 3.14");
 		assertEquals(1, r.depth());
-		assertEquals(2, r.atA(0).atI(0));
-		assertEquals('f', r.atA(1).atC(0));
-		assertTrue(3.14 == r.atA(2).atD(0));
+		assertEquals(2, ((IIntScalar)r.get(0)).get());
+		assertEquals('f', ((ICharScalar)r.get(1)).get());
+		assertTrue(3.14 == ((IDoubleScalar)r.get(2)).get());
 	}
 	
 	@Test
 	public void testNestedArray() {
-		Array r = eval("2 ('f' 4) 3.14");		
-		assertEquals(Array.MIXED, r.type());
+		IMixedArray r = (IMixedArray)eval("2 ('f' 4) 3.14");		
 		assertEquals(2, r.depth());
-		assertEquals(2, r.atA(0).atI(0));
-		assertEquals('f', r.atA(1).atA(0).atC(0));
-		assertEquals(4, r.atA(1).atA(1).atI(0));
-		assertTrue(3.14 == r.atA(2).atD(0));
+		assertEquals(2, ((IIntScalar)r.get(0)).get());
+		assertEquals('f', ((ICharScalar)((IMixedArray)r.get(1)).get(0)).get());
+		//assertEquals(4, r.atA(1).atA(1).atI(0));
+		assertTrue(3.14 == ((IDoubleScalar)r.get(2)).get());
 	}
 }

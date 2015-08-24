@@ -1,7 +1,7 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.errors.ValueError;
-import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -20,7 +20,7 @@ public class IdentifierNode implements AstNode {
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
+	public IValue eval(EvalContext context) {
 		if(context==null) {
 			throw new ValueError();
 		}
@@ -36,35 +36,35 @@ public class IdentifierNode implements AstNode {
 		return expr;
 	}
 
-	@Override
-	public int resultTypeFor(Array a) {
-		if(id.equals("\u03c9")) {
-			return a.type();
-		}
-		return Array.MIXED;
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		if(id.equals("\u03b1")) {
-			return a.type();
-		}
-		if(id.equals("\u03c9")) {
-			return b.type();
-		}
-		return Array.MIXED;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//	@Override
+//	public int resultTypeFor(Array a) {
+//		if(id.equals("\u03c9")) {
+//			return a.type();
+//		}
+//		return Array.MIXED;
+//	}
+//
+//	@Override
+//	public int resultTypeFor(Array a, Array b) {
+//		if(id.equals("\u03b1")) {
+//			return a.type();
+//		}
+//		if(id.equals("\u03c9")) {
+//			return b.type();
+//		}
+//		return Array.MIXED;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 }

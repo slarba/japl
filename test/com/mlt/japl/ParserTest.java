@@ -18,9 +18,9 @@ import com.mlt.japl.ast.IdentifierNode;
 import com.mlt.japl.ast.IndexExprNode;
 import com.mlt.japl.ast.MonadicCallNode;
 import com.mlt.japl.errors.SyntaxError;
-import com.mlt.japl.fns.AddFn;
+import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newfns.AddFn;
 import com.mlt.japl.parser.AplParser;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.workspace.EvalContext;
 
 public class ParserTest {

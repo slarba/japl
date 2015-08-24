@@ -2,8 +2,9 @@ package com.mlt.japl.ast;
 
 import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.errors.SyntaxError;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.iface.Func;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newfns.Func;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -17,8 +18,8 @@ public class NiladicCallNode implements AstNode {
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
-		return new IntArrayImpl();
+	public IValue eval(EvalContext context) {
+		return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
 	}
 
 	@Override
@@ -30,26 +31,26 @@ public class NiladicCallNode implements AstNode {
 		return fn;
 	}
 
-	@Override
-	public int resultTypeFor(Array a) {
-		return 0;
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		return 0;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//	@Override
+//	public int resultTypeFor(Array a) {
+//		return 0;
+//	}
+//
+//	@Override
+//	public int resultTypeFor(Array a, Array b) {
+//		return 0;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 }

@@ -12,6 +12,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.utils.PrintConfig;
 
 public class IntScalar extends ScalarBase implements IIntScalar {
 	private long val;
@@ -78,6 +79,11 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 	@Override
 	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
 		return visitor.visit_monadic(this, axis);
+	}
+
+	@Override
+	public String asString(PrintConfig printConfig) {
+		return Long.toString(val);
 	}
 
 }

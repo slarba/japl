@@ -2,7 +2,7 @@ package com.mlt.japl;
 
 import static org.junit.Assert.assertEquals;
 
-import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.Interpreter;
 
 public class EvalTestBase {
@@ -13,15 +13,13 @@ public class EvalTestBase {
 		super();
 	}
 
-	public Array eval(String s) {
+	public IValue eval(String s) {
 		return itn.eval(s);
 	}
 	
-	public void check(Array a, int type, int rank, int length, int actualLength, int depth) {
-		assertEquals(type, a.type());
+	public void check(IValue a, int type, int rank, int length, int actualLength, int depth) {
 		assertEquals(rank, a.rank());
 		assertEquals(length, a.length());
-		assertEquals(actualLength, a.actualLength());
 		assertEquals(depth, a.depth());
 	}
 }

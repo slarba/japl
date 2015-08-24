@@ -20,6 +20,7 @@ import javax.swing.SwingUtilities;
 
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.parser.TokenMgrError;
 import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.Interpreter;
@@ -76,7 +77,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 				while(true) {
 					try {
 						String line = reader.readLine();
-						Array result = i.eval(line);
+						IValue result = i.eval(line);
 						ps.println(result.asString(new PrintConfig()));
 						ps.flush();					
 					} catch(AplError e) {

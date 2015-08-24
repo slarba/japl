@@ -21,7 +21,6 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
-import com.mlt.japl.arrays.NestedArrayImpl;
 import com.mlt.japl.ast.AssignmentNode;
 import com.mlt.japl.ast.AstNode;
 import com.mlt.japl.errors.AxisError;
@@ -32,11 +31,12 @@ import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.SyntaxError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.errors.ValueError;
-import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IMixedArray;
+import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
 import com.mlt.japl.parser.TokenMgrError;
-import com.mlt.japl.scalars.ArrayScalar;
 import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -182,19 +182,20 @@ public class AplInterpreter extends JPanel implements ActionListener, KeyListene
 			    System.out.println("AST: " + ast.print());
 			    
 			    long startTime = System.nanoTime();
-			    Array evalResult = ast.eval(env);
+			    IValue evalResult = ast.eval(env);
 			    long stopTime = System.nanoTime();
 				String result = evalResult.asString(new PrintConfig());
 				System.out.println("   result class = " + evalResult.getClass());
-				if(evalResult instanceof ArrayScalar) {
-					ArrayScalar as = (ArrayScalar)evalResult;
-					System.out.println("   array scalar contained type = " + as.atA(0).type());
+				if(evalResult instanceof IMixedScalar) {
+					IMixedScalar as = (IMixedScalar)evalResult;
+					System.out.println("   array scalar contained type = " + as.get().getClass().getName());
 				}
-				if(evalResult instanceof NestedArrayImpl) {
+				if(evalResult instanceof IMixedArray) {
+					IMixedArray mixed = (IMixedArray)evalResult;
 					for(int i=0; i<evalResult.length(); i++)
-						System.out.println("   " + i + " array scalar contained type = " + evalResult.atA(i).type());
+						System.out.println("   " + i + " array scalar contained type = " + mixed.get(i).getClass().getName());
 				}
-				System.out.println("   result type = " + evalResult.type());
+				System.out.println("   result type = " + evalResult.getClass().getName());
 				System.out.println("   result rank = " + evalResult.rank());
 				System.out.println("   result depth = " + evalResult.depth());
 				System.out.println("   result dims = " + evalResult.dims());

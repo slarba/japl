@@ -7,16 +7,16 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import com.mlt.japl.arrays.CharArray;
-import com.mlt.japl.arrays.DoubleArray;
-import com.mlt.japl.arrays.IntArrayImpl;
 import com.mlt.japl.ast.AstNode;
-import com.mlt.japl.iface.Array;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.CharArray;
+import com.mlt.japl.newarrays.concrete.CharScalar;
+import com.mlt.japl.newarrays.concrete.DoubleArray;
+import com.mlt.japl.newarrays.concrete.DoubleScalar;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
-import com.mlt.japl.scalars.CharScalar;
-import com.mlt.japl.scalars.DoubleScalar;
-import com.mlt.japl.scalars.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 
 public class Interpreter {
@@ -31,7 +31,7 @@ public class Interpreter {
 		context = new EvalContext();
 	}
 	
-	public Array eval(String s) {
+	public IValue eval(String s) {
 		for(AplBusyListener listener : listeners) listener.evaluationStarted();
 		try {
 			return parse(s).eval(context);
@@ -59,15 +59,15 @@ public class Interpreter {
 	}
 	
 	public void define(String id, long... data) {
-		context.set(id, new IntArrayImpl(data));
+		context.set(id, new IntArray(new Dimensions(data.length), data));
 	}
 
 	public void define(String id, long[] data, int... dims) {
-		context.set(id, new IntArrayImpl(new Dimensions(dims), data));
+		context.set(id, new IntArray(new Dimensions(dims), data));
 	}
 
 	public void define(String id, double... data) {
-		context.set(id, new DoubleArray(data));
+		context.set(id, new DoubleArray(new Dimensions(data.length), data));
 	}
 
 	public void define(String id, double[] data, int... dims) {
@@ -75,7 +75,7 @@ public class Interpreter {
 	}
 
 	public void define(String id, String data, int... dims) {
-		context.set(id, new CharArray(new Dimensions(dims), data));
+		context.set(id, new CharArray(new Dimensions(dims), data.toCharArray()));
 	}
 
 	public void define(String id, String data) {

@@ -1,12 +1,11 @@
 package com.mlt.japl.ast;
 
-import com.mlt.japl.arrays.CharArray;
 import com.mlt.japl.errors.SyntaxError;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.scalars.CharScalar;
-import com.mlt.japl.scalars.ComplexScalar;
-import com.mlt.japl.scalars.DoubleScalar;
-import com.mlt.japl.scalars.IntScalar;
+import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.CharArray;
+import com.mlt.japl.newarrays.concrete.CharScalar;
+import com.mlt.japl.newarrays.concrete.DoubleScalar;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -16,16 +15,16 @@ public class ConstantAstNode implements AstNode {
 
 	private int type;
 	private String value;
-	private Array parsedValue;
+	private IValue parsedValue;
 
-	public ConstantAstNode(String c, int type) {
-		this.value = c;
-		this.type = type;
-		String[] re_im = c.split("J");
-		double re = parseNumber(re_im[0]);
-		double im = parseNumber(re_im[1]);
-		parsedValue = new ComplexScalar(re, im);
-	}
+//	public ConstantAstNode(String c, int type) {
+//		this.value = c;
+//		this.type = type;
+//		String[] re_im = c.split("J");
+//		double re = parseNumber(re_im[0]);
+//		double im = parseNumber(re_im[1]);
+//		parsedValue = new ComplexScalar(re, im);
+//	}
 
 	private double parseNumber(String string) {
 		if(string.startsWith("¯")) return -Double.parseDouble(string.substring(1));
@@ -42,7 +41,7 @@ public class ConstantAstNode implements AstNode {
 	}
 	
 	@Override
-	public Array eval(EvalContext context) {
+	public IValue eval(EvalContext context) {
 		return parsedValue;
 	}
 
@@ -89,29 +88,7 @@ public class ConstantAstNode implements AstNode {
 		return type==COMPLEX;
 	}
 
-	public Array getAsCell() {
+	public IValue getAsCell() {
 		return parsedValue;
-	}
-
-	@Override
-	public int resultTypeFor(Array a) {
-		return parsedValue.type();
-	}
-
-	@Override
-	public int resultTypeFor(Array a, Array b) {
-		return parsedValue.type();
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

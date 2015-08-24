@@ -1,6 +1,7 @@
 package com.mlt.japl.newarrays;
 
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public abstract class ArrayBase implements IValue {
 	Dimensions dims;
@@ -32,5 +33,10 @@ public abstract class ArrayBase implements IValue {
 	@Override
 	public IValue force() {
 		return this;
+	}
+	
+	@Override
+	public String asString(PrintConfig config) {
+		return "array";
 	}
 }

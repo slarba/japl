@@ -534,4 +534,9 @@ public class BaseFn implements ArrayVisitor, Func {
 		return generic_dyadic(a, b);
 	}
 
+	@Override
+	public String getName() {
+		return "<func>";
+	}
+
 }

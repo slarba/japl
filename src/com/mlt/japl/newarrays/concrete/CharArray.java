@@ -22,6 +22,11 @@ public class CharArray extends ArrayBase implements ICharArray {
 		this.data = data;
 	}
 	
+	public CharArray(String string) {
+		super(new Dimensions(string.length()));
+		this.data = string.toCharArray();
+	}
+
 	@Override
 	public char get(int index) {
 		return data[index%data.length];
