@@ -84,4 +84,15 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 		return visitor.visit_monadic(this, axis);
 	}
 
+	@Override
+	public IValue reshape(int[] newShape) {
+		IMixedArray self = this;
+		return new LazyMixedArray(new Dimensions(newShape)) {
+			@Override
+			public IValue get(int index) {
+				return self.get(index);
+			}
+		};
+	}
+
 }

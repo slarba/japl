@@ -34,27 +34,4 @@ public class StatementListNode implements AstNode {
 		}
 		return "statementlist[" +stmts.toString() + "]";
 	}
-
-//	@Override
-//	public int resultTypeFor(Array a) {
-//		return 0;
-//	}
-//
-//	@Override
-//	public int resultTypeFor(Array a, Array b) {
-//		return 0;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
 }

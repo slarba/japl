@@ -128,5 +128,8 @@ public class BitArray extends ArrayBase implements IBitArray {
 		return true;
 	}
 
-
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new BitArray(new Dimensions(newShape), data);
+	}
 }

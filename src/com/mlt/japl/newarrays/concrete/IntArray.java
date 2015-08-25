@@ -111,4 +111,14 @@ public class IntArray extends ArrayBase implements IIntArray {
 	public String asString(PrintConfig config) {
 		return config.print(this);
 	}
+	
+	public long[] data() {
+		return data;
+	}
+	
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new IntArray(new Dimensions(newShape), data);
+	}
+
 }

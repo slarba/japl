@@ -8,9 +8,4 @@ import com.mlt.japl.workspace.EvalContext;
 public interface AstNode {
 	IValue eval(EvalContext context);
 	String print();
-//
-//	int resultTypeFor(Array a);
-//	int resultTypeFor(Array a, Array b);
-//	Dimensions resultDimsFor(Array a, int axis);
-//	Dimensions resultDimsFor(Array a, Array b, int axis);
 }

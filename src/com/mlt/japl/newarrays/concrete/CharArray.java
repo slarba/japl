@@ -15,6 +15,7 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class CharArray extends ArrayBase implements ICharArray {
 	char[] data;
@@ -111,5 +112,13 @@ public class CharArray extends ArrayBase implements ICharArray {
 		return true;
 	}
 
-	
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new CharArray(new Dimensions(newShape), data);
+	}
+
+	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
+	}
 }

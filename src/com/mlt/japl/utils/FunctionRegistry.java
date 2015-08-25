@@ -10,6 +10,7 @@ import com.mlt.japl.newfns.FloorFn;
 import com.mlt.japl.newfns.Func;
 import com.mlt.japl.newfns.MulFn;
 import com.mlt.japl.newfns.ReduceFn;
+import com.mlt.japl.newfns.RhoFn;
 import com.mlt.japl.newfns.ScanFn;
 import com.mlt.japl.newfns.SubFn;
 
@@ -34,7 +35,7 @@ public class FunctionRegistry {
 //		map.put("\u2223", new AbsFn());
 //		map.put("\u0021", new FacFn());
 		map.put("\u00f7", new DivFn());
-//		map.put("\u2374", new RhoFn());
+		map.put("\u2374", new RhoFn());
 //		map.put("\u2373", new IotaFn());
 //		map.put("\u25cb", new TrigFn());
 //		map.put("\u2208", new ExistsFn());

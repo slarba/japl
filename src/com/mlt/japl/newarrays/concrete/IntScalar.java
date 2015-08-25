@@ -12,6 +12,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class IntScalar extends ScalarBase implements IIntScalar {
@@ -83,7 +84,7 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return Long.toString(val);
+		return printConfig.print(this);
 	}
 
 	@Override
@@ -108,5 +109,9 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 		return true;
 	}
 
-	
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new IntArray(new Dimensions(newShape), new long[] { val });
+	}
+
 }

@@ -25,27 +25,4 @@ public class IndexExprNode implements AstNode {
 	public String print() {
 		return (first!=null ? first.print() : "") + (rest!=null ? ";" + rest.print() : "");
 	}
-
-//	@Override
-//	public int resultTypeFor(Array a) {
-//		return 0;
-//	}
-//
-//	@Override
-//	public int resultTypeFor(Array a, Array b) {
-//		return 0;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
 }

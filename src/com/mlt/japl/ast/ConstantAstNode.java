@@ -17,20 +17,6 @@ public class ConstantAstNode implements AstNode {
 	private String value;
 	private IValue parsedValue;
 
-//	public ConstantAstNode(String c, int type) {
-//		this.value = c;
-//		this.type = type;
-//		String[] re_im = c.split("J");
-//		double re = parseNumber(re_im[0]);
-//		double im = parseNumber(re_im[1]);
-//		parsedValue = new ComplexScalar(re, im);
-//	}
-
-	private double parseNumber(String string) {
-		if(string.startsWith("¯")) return -Double.parseDouble(string.substring(1));
-		return Double.parseDouble(string);
-	}
-
 	public ConstantAstNode(String c) {
 		this.value = c;
 		if(isStringConstant()) parsedValue = new CharArray(getString());

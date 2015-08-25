@@ -83,4 +83,15 @@ public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 		return visitor.visit_monadic(this, axis);
 	}
 
+	@Override
+	public IValue reshape(int[] newShape) {
+		ICharArray self = this;
+		return new LazyCharArray(new Dimensions(newShape)) {
+			@Override
+			public char get(int index) {
+				return self.get(index);
+			}
+		};
+	}
+
 }

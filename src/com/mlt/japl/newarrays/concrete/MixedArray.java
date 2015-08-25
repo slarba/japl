@@ -15,6 +15,7 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class MixedArray extends ArrayBase implements IMixedArray {
 	IValue[] data;
@@ -117,5 +118,13 @@ public class MixedArray extends ArrayBase implements IMixedArray {
 		return true;
 	}
 
-	
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new MixedArray(new Dimensions(newShape), data);
+	}
+
+	@Override
+	public String asString(PrintConfig conf) {
+		return conf.print(this);
+	}
 }

@@ -64,9 +64,9 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 		
 		styleContext = new StyleContext();
 		exprStyle = styleContext.addStyle("expr", null);
-		StyleConstants.setForeground(exprStyle, Color.BLACK);
+		StyleConstants.setForeground(exprStyle, Color.BLUE);
 		resultStyle = styleContext.addStyle("result", null);
-		StyleConstants.setForeground(resultStyle, Color.BLUE);
+		StyleConstants.setForeground(resultStyle, Color.BLACK);
 		errorStyle = styleContext.addStyle("error", null);
 		StyleConstants.setForeground(errorStyle, Color.RED);
 		

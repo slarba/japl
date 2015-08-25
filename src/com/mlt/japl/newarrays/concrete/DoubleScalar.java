@@ -12,6 +12,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class DoubleScalar extends ScalarBase implements IDoubleScalar {
@@ -83,7 +84,7 @@ public class DoubleScalar extends ScalarBase implements IDoubleScalar {
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return Double.toString(val);
+		return printConfig.print(this);
 	}
 
 	@Override
@@ -110,5 +111,9 @@ public class DoubleScalar extends ScalarBase implements IDoubleScalar {
 		return true;
 	}
 
-	
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new DoubleArray(new Dimensions(newShape), new double[] { val });
+	}
+
 }

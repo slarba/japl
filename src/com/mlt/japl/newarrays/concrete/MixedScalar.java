@@ -12,6 +12,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class MixedScalar extends ScalarBase implements IMixedScalar {
@@ -83,7 +84,7 @@ public class MixedScalar extends ScalarBase implements IMixedScalar {
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return "mixed";
+		return printConfig.print(this);
 	}
 
 	@Override
@@ -109,6 +110,11 @@ public class MixedScalar extends ScalarBase implements IMixedScalar {
 		} else if (!val.equals(other.val))
 			return false;
 		return true;
+	}
+
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new MixedArray(new Dimensions(newShape), new IValue[] { val });
 	}
 
 }

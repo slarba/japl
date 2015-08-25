@@ -41,12 +41,13 @@ public class OffsetIterator implements Iterator {
 	}
 
 	@Override
-	public void step() {
+	public int step() {
 		for(int i=iter.length-1; i>=0; i--) {
 			iter[i]++;
-			if(iter[i]<(dims[i]-limits[i])) return; else iter[i] = offsets[i];
+			if(iter[i]<(dims[i]-limits[i])) return 0; else iter[i] = offsets[i];
 		}
 		finished = true;
+		return 0;
 	}
 
 	@Override

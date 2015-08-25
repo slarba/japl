@@ -90,4 +90,15 @@ public abstract class LazyIntArray extends ArrayBase implements IIntArray {
 		return visitor.visit_monadic(this, axis);
 	}
 
+	@Override
+	public IValue reshape(int[] newShape) {
+		IIntArray self = this;
+		return new LazyIntArray(new Dimensions(newShape)) {
+			@Override
+			public long get(int index) {
+				return self.get(index);
+			}
+		};
+	}
+
 }

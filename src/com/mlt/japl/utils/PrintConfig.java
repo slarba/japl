@@ -6,7 +6,16 @@ import java.util.Locale;
 
 import com.mlt.japl.iface.Array;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.ScalarBase;
+import com.mlt.japl.newarrays.concrete.MixedArray;
+import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
+import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
+import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Iterator;
 
 public class PrintConfig {
@@ -23,19 +32,56 @@ public class PrintConfig {
 		return "%.2f";
 	}
 
-	public String print(long data) {
-		String sign = data<0 ? "¯" : "";
-		return sign+Long.toString(Math.abs(data));
-	}
-	
-	public String print(double data) {
-		if(data==(long)data) return print((long)data);
-		String sign = data<0 ? "¯" : "";
-		return sign+String.format(Locale.US, getDoubleFormatString(), Math.abs(data));
+	private int[] computeLastDimMaxWidths(String[] a, int lastDim) {
+		int[] maxLens = new int[lastDim];
+		for(int i=0; i<a.length; i++) {
+			int s = i%lastDim;
+			maxLens[s] = Math.max(stringWidth(a[i]), maxLens[s]);
+		}
+		return maxLens;
 	}
 
-	public String print(char data) {
-		return Character.toString(data);
+	public String print(IMixedArray a) {
+		StringBuilder buffer = new StringBuilder();
+		String[] arr = new String[a.dims().length()];
+		for(int i=0; i<arr.length; i++) {
+			IValue v = a.get(i);
+			if(v.rank()<=1)
+				arr[i] = v.asString(this);
+			else
+				arr[i] = " " + v.asString(this);
+		}
+		int lastDim = a.dims().lastDim();
+		int[] maxLens = computeLastDimMaxWidths(arr, lastDim);
+		Iterator indexer = a.dims().iteratorAlongLastAxis();
+
+		for(int i=0; i<arr.length; i+=lastDim) {
+			// splitataan tulostettavan rivin elementit riveiksi
+			List<String[]> rivi = new ArrayList<String[]>();
+			for(int j=0; j<lastDim; j++) rivi.add(arr[i+j].split("\n"));
+			int maxSubRows=0;
+			int newLines = 1;
+			for(int j=0; j<lastDim; j++) {
+				maxSubRows = Math.max(maxSubRows, rivi.get(j).length);
+				newLines = indexer.step();
+			}
+			for(int subRow=0; subRow<maxSubRows; subRow++) {
+				for(int j=0; j<lastDim; j++) {
+					String[] sr = rivi.get(j);
+					buffer.append(' ');
+					if(subRow<sr.length) {
+						String r = sr[subRow];
+						buffer.append(padToMaxLength(maxLens[j], r.length()));
+						buffer.append(r);
+					} else {
+						buffer.append(padToMaxLength(maxLens[j], 0));
+					}
+				}
+				for(int k=0; k<newLines-1; k++)
+					buffer.append('\n');
+			}
+		}
+		return buffer.toString();
 	}
 
 	public String print(double re, double im) {
@@ -51,123 +97,122 @@ public class PrintConfig {
 		return len;
 	}
 	
+	public String print(IIntScalar a) {
+		long val = a.get();
+		if(val<0) return "¯" + (-val);
+		return Long.toString(val);
+	}
+
+	public String print(IDoubleScalar a) {
+		double val = a.get();
+		if(val<0) return "¯" + String.format(Locale.US, getDoubleFormatString(), -val);
+		return String.format(Locale.US, getDoubleFormatString(), val);
+	}
+
+	public String print(ICharScalar a) {
+		char val = a.get();
+		return Character.toString(val);
+	}
+
+	public String print(IMixedScalar a) {
+		return a.asString(this);
+	}
+
+	public String print(long val) {
+		if(val<0) return "¯" + (-val);
+		return Long.toString(val);
+	}
+
+	public String print(double val) {
+		if(val<0) return "¯" + String.format(Locale.US, getDoubleFormatString(), -val);
+		return String.format(Locale.US, getDoubleFormatString(), val);
+	}
+
 	public String print(IIntArray a) {
-		String space = " ";
-		
+		// compute column widths
 		int lastDim = a.dims().lastDim();
 		int[] maxLens = computLastDimMaxWidths(a, lastDim);
-
-		int totalRowLen = 0;
-		for(int i=0; i<maxLens.length; i++) totalRowLen += maxLens[i];
 		
 		StringBuilder builder = new StringBuilder();
 		Iterator indexer = a.dims().iteratorAlongLastAxis();
 		
-		for(int i=0; i<a.length(); i+=lastDim) {
-			int maxSubRowHeight = 0;
-			List<String[]> row = new ArrayList<String[]>();
-			
+		for(int i=0; i<a.length(); i+=lastDim) {			
+			int newLines = 0;
 			for(int j=0; j<lastDim; j++) {
-				String s = Long.toString(a.get(i+j));
-				String[] subrows = s.split("\n");
-				maxSubRowHeight = Math.max(maxSubRowHeight, subrows.length);
-				row.add(subrows);
+				String s = print(a.get(i+j));
+				builder.append(padToMaxLength(maxLens[j], s.length()));
+				builder.append(s);
+				if(j!=lastDim-1)
+					builder.append(' ');
+				newLines = indexer.step();
 			}
-			for(int n=0; n<maxSubRowHeight; n++) {
-				for(int j=0; j<lastDim; j++) {
-					String[] rowPart = row.get(j);
-					String spacer = rowPart.length>1 ? "|" : space;
-					boolean last = j==lastDim-1;
-					boolean outputNewLine = rowPart.length>1;
-					if(n>=rowPart.length) {
-						builder.append(padToMaxLength(maxLens[j], 0));
-						if(!last) builder.append(spacer); else if(outputNewLine) builder.append('\n');
-						continue;
-					} else {
-						String s = rowPart[n];
-						builder.append(padToMaxLength(maxLens[j], s.length()));   // pad to maxLength
-						builder.append(s);										
-						if(!last) builder.append(spacer); else if(outputNewLine) builder.append('\n');
-					}
-				}
-			}
-			int newLines = 1;
-			for(int j=0; j<lastDim; j++) {
-				indexer.step();
-			}			
-			for(int k=0; k<newLines; k++) {
-				if(maxSubRowHeight>1) {
-					for(int x=0; x<totalRowLen+(lastDim-1); x++) builder.append('-');
-				}
+			for(int k=0; k<newLines-1; k++) {
 				builder.append('\n');		
 			}
 		}
 		return builder.toString();		
 	}
 
-//	public String print(Array a) {
-//		String space = " ";
-//		if(a.type()==Array.CHARACTER) space="";
-//		if(a.type()==Array.MIXED) space="  ";
-//		
-//		int lastDim = a.dims().lastDim();
-//		int[] maxLens = computLastDimMaxWidths(a, lastDim);
-//
-//		int totalRowLen = 0;
-//		for(int i=0; i<maxLens.length; i++) totalRowLen += maxLens[i];
-//		
-//		StringBuilder builder = new StringBuilder();
-//		Iterator indexer = a.dims().iteratorAlongLastAxis();
-//		
-//		for(int i=0; i<a.length(); i+=lastDim) {
-//			int maxSubRowHeight = 0;
-//			List<String[]> row = new ArrayList<String[]>();
-//			
-//			for(int j=0; j<lastDim; j++) {
-//				String s = a.atA(i+j).asString(this).trim();
-//				String[] subrows = s.split("\n");
-//				maxSubRowHeight = Math.max(maxSubRowHeight, subrows.length);
-//				row.add(subrows);
-//			}
-//			for(int n=0; n<maxSubRowHeight; n++) {
-//				for(int j=0; j<lastDim; j++) {
-//					String[] rowPart = row.get(j);
-//					String spacer = rowPart.length>1 ? "|" : space;
-//					boolean last = j==lastDim-1;
-//					boolean outputNewLine = rowPart.length>1;
-//					if(n>=rowPart.length) {
-//						builder.append(padToMaxLength(maxLens[j], 0));
-//						if(!last) builder.append(spacer); else if(outputNewLine) builder.append('\n');
-//						continue;
-//					} else {
-//						String s = rowPart[n];
-//						builder.append(padToMaxLength(maxLens[j], s.length()));   // pad to maxLength
-//						builder.append(s);										
-//						if(!last) builder.append(spacer); else if(outputNewLine) builder.append('\n');
-//					}
-//				}
-//			}
-//			int newLines = 1;
-//			for(int j=0; j<lastDim; j++) {
-//				indexer.step();
-//			}			
-//			for(int k=0; k<newLines; k++) {
-//				if(maxSubRowHeight>1) {
-//					for(int x=0; x<totalRowLen+(lastDim-1); x++) builder.append('-');
-//				}
-//				builder.append('\n');		
-//			}
-//		}
-//		return builder.toString();
-//	}
-
 	private int[] computLastDimMaxWidths(IIntArray a, int lastDim) {
 		int[] maxLens = new int[lastDim];
 		for(int i=0; i<a.length(); i++) {
 			int s = i%lastDim;
-			maxLens[s] = Math.max(Long.toString(a.get(i)).length(), maxLens[s]);
+			maxLens[s] = Math.max(print(a.get(i)).length(), maxLens[s]);
 		}
 		return maxLens;
+	}
+	
+	public String print(IDoubleArray a) {
+		// compute column widths
+		int lastDim = a.dims().lastDim();
+		int[] maxLens = computLastDimMaxWidths(a, lastDim);
+		
+		StringBuilder builder = new StringBuilder();
+		Iterator indexer = a.dims().iteratorAlongLastAxis();
+		
+		for(int i=0; i<a.length(); i+=lastDim) {			
+			int newLines = 1;
+			for(int j=0; j<lastDim; j++) {
+				String s = print(a.get(i+j));
+				builder.append(padToMaxLength(maxLens[j], s.length()));
+				builder.append(s);
+				if(j!=lastDim-1)
+					builder.append(' ');
+				newLines = indexer.step();
+			}
+			for(int k=0; k<newLines-1; k++) {
+				builder.append('\n');		
+			}
+		}
+		return builder.toString();		
+	}
+
+	private int[] computLastDimMaxWidths(IDoubleArray a, int lastDim) {
+		int[] maxLens = new int[lastDim];
+		for(int i=0; i<a.length(); i++) {
+			int s = i%lastDim;
+			maxLens[s] = Math.max(print(a.get(i)).length(), maxLens[s]);
+		}
+		return maxLens;
+	}
+
+	public String print(ICharArray a) {
+		int lastDim = a.dims().lastDim();
+
+		StringBuilder builder = new StringBuilder();
+		Iterator indexer = a.dims().iteratorAlongLastAxis();
+		
+		for(int i=0; i<a.length(); i+=lastDim) {			
+			int newLines = 1;
+			for(int j=0; j<lastDim; j++) {
+				builder.append(a.get(i+j));
+				newLines = indexer.step();
+			}
+			for(int k=0; k<newLines-1; k++) {
+				builder.append('\n');		
+			}
+		}
+		return builder.toString();		
 	}
 	
 }

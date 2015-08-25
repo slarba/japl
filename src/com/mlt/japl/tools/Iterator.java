@@ -2,7 +2,7 @@ package com.mlt.japl.tools;
 
 public interface Iterator {
 	boolean isFinished();
-	void step();
+	int step();
 	int index();
 	int axis(int axis);
 	void reset();

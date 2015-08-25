@@ -56,25 +56,4 @@ public class UserFnNode implements AstNode, Func {
 	public String getName() {
 		return print();
 	}
-
-//	@Override
-//	public int resultTypeFor(Array a) {
-//		return body.resultTypeFor(a);
-//	}
-//
-//	@Override
-//	public int resultTypeFor(Array a, Array b) {
-//		return body.resultTypeFor(a,b);
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, int axis) {
-//		return body.resultDimsFor(a,axis);
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-//		return body.resultDimsFor(a,b,axis);
-//	}
-//
 }

@@ -22,13 +22,14 @@ public class RangeIterator implements Iterator {
 	}
 
 	@Override
-	public void step() {
+	public int step() {
 		for(int i=iter.length-1; i>=0; i--) {
 			iter[i]++;
-			if(iter[i]<maxes[i]) return;
+			if(iter[i]<maxes[i]) return 0;
 			iter[i] = mins[i];
 		}
 		finished = true;
+		return 0;
 	}
 
 	@Override

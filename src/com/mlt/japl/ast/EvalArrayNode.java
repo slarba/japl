@@ -40,26 +40,4 @@ public class EvalArrayNode implements AstNode {
 		}
 		return "evalarray[" + builder.toString() + "]";
 	}
-
-//	@Override
-//	public int resultTypeFor(Array a) {
-//		return Array.MIXED;
-//	}
-//
-//	@Override
-//	public int resultTypeFor(Array a, Array b) {
-//		return Array.MIXED;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

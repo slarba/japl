@@ -12,6 +12,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class CharScalar extends ScalarBase implements ICharScalar {
@@ -90,7 +91,7 @@ public class CharScalar extends ScalarBase implements ICharScalar {
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return Character.toString(val);
+		return printConfig.print(this);
 	}
 
 	@Override
@@ -115,5 +116,9 @@ public class CharScalar extends ScalarBase implements ICharScalar {
 		return true;
 	}
 
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new CharArray(new Dimensions(newShape), new char[] { val });
+	}
 	
 }

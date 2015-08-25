@@ -7,17 +7,18 @@ public class AxisIterator extends IteratorBase {
 	}
 
 	@Override
-	public void step() {
+	public int step() {
 		iter[axis]++;
 		if(iter[axis]>=dims[axis]) {
 			iter[axis] = 0;
 			for(int i=iter.length-1; i>=0; i--) {
 				if(i==axis) continue;
 				iter[i]++;
-				if(iter[i]<dims[i]) return; else iter[i] = 0;
+				if(iter[i]<dims[i]) return iter.length-i; else iter[i] = 0;
 			}
 			finished = true;
 		}
+		return 0;
 	}
 
 	@Override

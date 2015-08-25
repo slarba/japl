@@ -12,6 +12,7 @@ import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.tools.Dimensions;
 
 public class IotaArray extends ArrayBase implements IIntArray {
@@ -80,6 +81,11 @@ public class IotaArray extends ArrayBase implements IIntArray {
 	@Override
 	public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
+	}
+
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new IotaArray(new Dimensions(newShape), val);
 	}
 
 }

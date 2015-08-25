@@ -15,8 +15,9 @@ public class LinearIterator implements Iterator {
 	}
 
 	@Override
-	public void step() {
+	public int step() {
 		iter++;
+		return 0;
 	}
 
 	@Override

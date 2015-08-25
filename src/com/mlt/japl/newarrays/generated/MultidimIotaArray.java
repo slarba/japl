@@ -3,6 +3,7 @@ package com.mlt.japl.newarrays.generated;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
+import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
@@ -90,6 +91,11 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 	@Override
 	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
 		return visitor.visit_monadic(this, axis);
+	}
+
+	@Override
+	public IValue reshape(int[] newShape) {
+		return new MultidimIotaArray(new Dimensions(newShape), val);
 	}
 
 }

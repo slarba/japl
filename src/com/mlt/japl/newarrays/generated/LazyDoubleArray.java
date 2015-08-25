@@ -84,4 +84,15 @@ public abstract class LazyDoubleArray extends ArrayBase implements IDoubleArray 
 		return visitor.visit_monadic(this, axis);
 	}
 
+	@Override
+	public IValue reshape(int[] newShape) {
+		IDoubleArray self = this;
+		return new LazyDoubleArray(new Dimensions(newShape)) {
+			@Override
+			public double get(int index) {
+				return self.get(index);
+			}
+		};
+	}
+
 }

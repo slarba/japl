@@ -119,26 +119,4 @@ public class ConstArrayNode implements AstNode {
 		return builder.toString();
 	}
 
-//	@Override
-//	public int resultTypeFor(Array a) {
-//		return value.type();
-//	}
-//
-//	@Override
-//	public int resultTypeFor(Array a, Array b) {
-//		return value.type();
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Dimensions resultDimsFor(Array a, Array b, int axis) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 }
