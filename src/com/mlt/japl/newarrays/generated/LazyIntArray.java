@@ -96,7 +96,7 @@ public abstract class LazyIntArray extends ArrayBase implements IIntArray {
 		return new LazyIntArray(new Dimensions(newShape)) {
 			@Override
 			public long get(int index) {
-				return self.get(index);
+				return self.get(index%dims().length());
 			}
 		};
 	}

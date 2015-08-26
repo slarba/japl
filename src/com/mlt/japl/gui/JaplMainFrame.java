@@ -82,6 +82,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 						ps.flush();					
 					} catch(AplError e) {
 						es.println(e.getMessage());
+						es.flush();
 					} catch(TokenMgrError e) {
 						e.printStackTrace(es);
 						es.flush();

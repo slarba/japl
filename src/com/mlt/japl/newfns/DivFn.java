@@ -90,4 +90,10 @@ public class DivFn extends BaseFn {
 			}
 		};
 	}
+	
+	@Override
+	public String getName() {
+		return "/";
+	}
+
 }

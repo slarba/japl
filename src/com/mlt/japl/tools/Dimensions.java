@@ -212,6 +212,15 @@ public class Dimensions {
 		return result;
 	}
 
+	public int[] reverseIndexInt(int idx) {
+		int[] result = new int[dims.length];
+		for(int i=0; i<result.length; i++) {
+			result[i] = (idx/spans[i]);
+			idx = idx%spans[i];
+		}
+		return result;
+	}
+	
 	@Override
 	public int hashCode() {
 		return 53*Arrays.hashCode(dims);

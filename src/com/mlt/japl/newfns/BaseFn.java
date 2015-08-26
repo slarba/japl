@@ -1,8 +1,10 @@
 package com.mlt.japl.newfns;
 
 import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -439,6 +441,10 @@ public class BaseFn implements ArrayVisitor, Func {
 		return a.accept_monadic(this, axis);
 	}
 
+	public void checkLengths(IArray a, IArray b) {
+		if(!a.dims().equals(b.dims())) throw new LengthError();
+	}
+	
 	@Override
 	public IValue applyNiladic(int axis) {
 		return null;

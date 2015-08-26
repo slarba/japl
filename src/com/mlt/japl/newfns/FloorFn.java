@@ -158,10 +158,10 @@ public class FloorFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IDoubleArray a, int axis) {
-		return new LazyDoubleArray(a.dims()) {
+		return new LazyIntArray(a.dims()) {
 			@Override
-			public double get(int index) {
-				return Math.floor(a.get(index));
+			public long get(int index) {
+				return (long)Math.floor(a.get(index));
 			}
 		};
 	}
@@ -173,6 +173,12 @@ public class FloorFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IDoubleScalar a, int axis) {
-		return new DoubleScalar(Math.floor(a.get()));
+		return new IntScalar((long)Math.floor(a.get()));
 	}
+
+	@Override
+	public String getName() {
+		return "floot";
+	}
+
 }

@@ -161,7 +161,8 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 		try {
 			int caretPos = getCaretPosition();
 			int lineStart = Utilities.getRowStart(this, caretPos);
-			return getStyledDocument().getText(lineStart, caretPos-lineStart);
+			int lineEnd = Utilities.getRowEnd(this, caretPos);
+			return getStyledDocument().getText(lineStart, lineEnd-lineStart);
 		} catch (BadLocationException e) {
 			throw new RuntimeException("bad document position getting current line", e);
 		}
@@ -172,6 +173,7 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_ENTER:
 			if(isCaretOnEditLine()) {
+				setCaretPosition(getLastPosition()-1);
 				handleEnter(getCurrentLine());
 				insertExpr("\n\t");
 				setCaretPosition(getLastPosition()-1);				

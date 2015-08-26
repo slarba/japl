@@ -1,9 +1,10 @@
 package com.mlt.japl.newarrays;
 
+import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
-public abstract class ArrayBase implements IValue {
+public abstract class ArrayBase implements IValue, IArray {
 	Dimensions dims;
 	
 	protected ArrayBase(Dimensions dims) {

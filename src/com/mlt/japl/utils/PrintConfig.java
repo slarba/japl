@@ -46,7 +46,7 @@ public class PrintConfig {
 		String[] arr = new String[a.dims().length()];
 		for(int i=0; i<arr.length; i++) {
 			IValue v = a.get(i);
-			if(v.rank()<=1)
+			if(v instanceof ScalarBase || v instanceof ICharArray || v instanceof IMixedArray)
 				arr[i] = v.asString(this);
 			else
 				arr[i] = " " + v.asString(this);
@@ -77,9 +77,10 @@ public class PrintConfig {
 						buffer.append(padToMaxLength(maxLens[j], 0));
 					}
 				}
-				for(int k=0; k<newLines-1; k++)
-					buffer.append('\n');
+				buffer.append('\n');
 			}
+			for(int k=0; k<newLines-2; k++)
+				buffer.append('\n');
 		}
 		return buffer.toString();
 	}

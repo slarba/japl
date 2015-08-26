@@ -14,6 +14,7 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 
@@ -84,12 +85,17 @@ public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 	}
 
 	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
+	}
+
+	@Override
 	public IValue reshape(int[] newShape) {
 		ICharArray self = this;
 		return new LazyCharArray(new Dimensions(newShape)) {
 			@Override
 			public char get(int index) {
-				return self.get(index);
+				return self.get(index%dims().length());
 			}
 		};
 	}

@@ -15,6 +15,7 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 
@@ -85,12 +86,17 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 	}
 
 	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
+	}
+
+	@Override
 	public IValue reshape(int[] newShape) {
 		IMixedArray self = this;
 		return new LazyMixedArray(new Dimensions(newShape)) {
 			@Override
 			public IValue get(int index) {
-				return self.get(index);
+				return self.get(index%dims().length());
 			}
 		};
 	}

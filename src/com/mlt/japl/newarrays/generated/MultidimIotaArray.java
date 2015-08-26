@@ -15,12 +15,13 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class MultidimIotaArray extends ArrayBase implements IMixedArray {
-	IntArray val;
+	IIntArray val;
 	Dimensions itemDimensions;
 	
-	public MultidimIotaArray(Dimensions dims, IntArray val) {
+	public MultidimIotaArray(Dimensions dims, IIntArray val) {
 		super(dims);
 		this.val = val;
 		itemDimensions = new Dimensions(val.length());
@@ -40,7 +41,7 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 
 	@Override
 	public IValue get(int index) {
-		return new IntArray(itemDimensions, new long[val.length()]);
+		return new IntArray(itemDimensions, dims().reverseIndex(index));
 	}
 
 	@Override
@@ -98,4 +99,8 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 		return new MultidimIotaArray(new Dimensions(newShape), val);
 	}
 
+	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
+	}
 }

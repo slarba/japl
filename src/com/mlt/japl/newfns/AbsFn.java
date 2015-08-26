@@ -1,42 +1,49 @@
 package com.mlt.japl.newfns;
 
+import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.concrete.MixedScalar;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
+import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
+import com.mlt.japl.newarrays.interf.IMixedScalar;
 
-public class CeilFn extends BaseFn {
+public class AbsFn extends BaseFn {
+	// scalars
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
-		return new IntScalar(Math.max(a.get(), b.get()));
+		return new IntScalar(a.get() % b.get());
 	}
 
 	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
-		return new DoubleScalar(Math.max(a.get(), b.get()));
+		return new DoubleScalar(a.get() % b.get());
 	}
 
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
-		return new DoubleScalar(Math.max(a.get(), b.get()));
+		return new DoubleScalar(a.get() % b.get());
 	}
 
 	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
-		return new DoubleScalar(Math.max(a.get(), b.get()));
+		return new DoubleScalar(a.get() % b.get());
 	}
-	
+
+	// arrays
 	@Override
 	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
 		return new LazyIntArray(a.dims()) {
 			@Override
 			public long get(int index) {
-				return Math.max(a.get(index), b.get(index));
+				return a.get(index) % b.get(index);
 			}
 		};
 	}
@@ -46,7 +53,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(index), b.get(index));
+				return a.get(index) % b.get(index);
 			}
 		};
 	}
@@ -56,7 +63,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(index), b.get(index));
+				return a.get(index) % b.get(index);
 			}
 		};
 	}
@@ -66,17 +73,18 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(index), b.get(index));
+				return a.get(index) % b.get(index);
 			}
 		};
 	}
 
+	// scalar/array
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
 		return new LazyIntArray(a.dims()) {
 			@Override
 			public long get(int index) {
-				return Math.max(a.get(), b.get(index));
+				return a.get() % b.get(index);
 			}
 		};
 	}
@@ -86,7 +94,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(), b.get(index));
+				return a.get() % b.get(index);
 			}
 		};
 	}
@@ -96,7 +104,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(), b.get(index));
+				return a.get() % b.get(index);
 			}
 		};
 	}
@@ -106,7 +114,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(), b.get(index));
+				return a.get() % b.get(index);
 			}
 		};
 	}
@@ -116,7 +124,7 @@ public class CeilFn extends BaseFn {
 		return new LazyIntArray(a.dims()) {
 			@Override
 			public long get(int index) {
-				return Math.max(a.get(index), b.get());
+				return a.get(index) % b.get();
 			}
 		};
 	}
@@ -126,7 +134,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(index), b.get());
+				return a.get(index) % b.get();
 			}
 		};
 	}
@@ -136,7 +144,7 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.max(a.get(index), b.get());
+				return a.get(index) % b.get();
 			}
 		};
 	}
@@ -146,38 +154,60 @@ public class CeilFn extends BaseFn {
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
-				return Math.min(a.get(index), b.get());
+				return a.get(index) % b.get();
+			}
+		};
+	}
+	
+	// monadic
+	@Override
+	public IValue visit_monadic(IIntArray a, int axis) {
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return Math.abs(a.get(index));
 			}
 		};
 	}
 
 	@Override
-	public IValue visit_monadic(IIntArray a, int axis) {
-		return a;
-	}
-
-	@Override
 	public IValue visit_monadic(IDoubleArray a, int axis) {
-		return new LazyIntArray(a.dims()) {
+		return new LazyDoubleArray(a.dims()) {
 			@Override
-			public long get(int index) {
-				return (long)Math.ceil(a.get(index));
+			public double get(int index) {
+				return Math.abs(a.get(index));
+			}
+		};
+	}
+	
+	@Override
+	public IValue visit_monadic(IMixedArray a, int axis) {
+		final ArrayVisitor self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return a.get(index).accept_monadic(self, axis);
 			}
 		};
 	}
 	
 	@Override
 	public IValue visit_monadic(IIntScalar a, int axis) {
-		return a;
+		return new IntScalar((long)Math.abs(a.get()));
 	}
 
 	@Override
 	public IValue visit_monadic(IDoubleScalar a, int axis) {
-		return new IntScalar((long)Math.ceil(a.get()));
+		return new DoubleScalar(Math.abs(a.get()));
+	}
+
+	@Override
+	public IValue visit_monadic(IMixedScalar a, int axis) {
+		return new MixedScalar(a.get().accept_monadic(this, axis));
 	}
 	
 	@Override
 	public String getName() {
-		return "ceil";
+		return "abs";
 	}
 }

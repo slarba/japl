@@ -14,6 +14,7 @@ import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class IotaArray extends ArrayBase implements IIntArray {
 	long val;
@@ -85,7 +86,12 @@ public class IotaArray extends ArrayBase implements IIntArray {
 
 	@Override
 	public IValue reshape(int[] newShape) {
-		return new IotaArray(new Dimensions(newShape), val);
+		Dimensions newDims = new Dimensions(newShape);
+		return new IotaArray(newDims, Math.min(newDims.length(), val));
 	}
 
+	@Override
+	public String asString(PrintConfig config) {
+		return config.print(this);
+	}
 }
