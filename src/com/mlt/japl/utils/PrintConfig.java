@@ -116,7 +116,7 @@ public class PrintConfig {
 	}
 
 	public String print(IMixedScalar a) {
-		return a.asString(this);
+		return a.get().asString(this);
 	}
 
 	public String print(long val) {

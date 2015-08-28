@@ -27,13 +27,6 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 		itemDimensions = new Dimensions(val.length());
 	}
 
-//	@Override
-//	public IValue force() {
-//		IValue[] data = new IValue[dims().length()];
-//		for(int i=0; i<data.length; i++) data[i] = get(i);
-//		return new MixedArray(dims(), data);
-//	}
-
 	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
@@ -103,4 +96,37 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 	public String asString(PrintConfig config) {
 		return config.print(this);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((itemDimensions == null) ? 0 : itemDimensions.hashCode());
+		result = prime * result + ((val == null) ? 0 : val.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MultidimIotaArray other = (MultidimIotaArray) obj;
+		if (itemDimensions == null) {
+			if (other.itemDimensions != null)
+				return false;
+		} else if (!itemDimensions.equals(other.itemDimensions))
+			return false;
+		if (val == null) {
+			if (other.val != null)
+				return false;
+		} else if (!val.equals(other.val))
+			return false;
+		return true;
+	}
+	
+	
 }

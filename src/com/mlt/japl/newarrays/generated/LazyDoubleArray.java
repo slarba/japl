@@ -5,6 +5,7 @@ import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
+import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -101,4 +102,45 @@ public abstract class LazyDoubleArray extends ArrayBase implements IDoubleArray 
 		};
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(o==null) return false;
+		if(o instanceof IArray) {
+			if(!((IArray)o).dims().equals(dims()))
+				return false;
+		}
+		if(o instanceof IIntArray) {
+			IIntArray a = (IIntArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		if(o instanceof IDoubleArray) {
+			IDoubleArray a = (IDoubleArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		if(o instanceof IBitArray) {
+			IBitArray a = (IBitArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		long prime = 17;
+		long result = super.hashCode();
+		for(int i=0; i<length(); i++) {
+			result = prime * result + Double.hashCode(get(i));			
+		}
+		return (int)result;
+	}
+	
 }

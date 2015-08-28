@@ -94,4 +94,27 @@ public class IotaArray extends ArrayBase implements IIntArray {
 	public String asString(PrintConfig config) {
 		return config.print(this);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (val ^ (val >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IotaArray other = (IotaArray) obj;
+		if (val != other.val)
+			return false;
+		return true;
+	}
+
 }

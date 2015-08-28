@@ -23,6 +23,11 @@ public class MixedScalar extends ScalarBase implements IMixedScalar {
 	}
 	
 	@Override
+	public int depth() {
+		return val.depth()+1;
+	}
+	
+	@Override
 	public IValue get() {
 		return val;
 	}

@@ -4,6 +4,7 @@ import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
+import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -98,6 +99,33 @@ public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 				return self.get(index%dims().length());
 			}
 		};
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(o==null) return false;
+		if(o instanceof IArray) {
+			if(!((IArray)o).dims().equals(dims()))
+				return false;
+		}
+		if(o instanceof IIntArray) {
+			ICharArray a = (ICharArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		int prime = 17;
+		int result = super.hashCode();
+		for(int i=0; i<length(); i++) {
+			result = prime * result + Character.hashCode(get(i));			
+		}
+		return (int)result;
 	}
 
 }

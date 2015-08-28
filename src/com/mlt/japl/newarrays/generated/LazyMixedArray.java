@@ -5,6 +5,7 @@ import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
 import com.mlt.japl.newarrays.concrete.MixedArray;
+import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -99,6 +100,33 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 				return self.get(index%dims().length());
 			}
 		};
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(o==null) return false;
+		if(o instanceof IArray) {
+			if(!((IArray)o).dims().equals(dims()))
+				return false;
+		}
+		if(o instanceof IMixedArray) {
+			IMixedArray a = (IMixedArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(!a.get(i).equals(get(i))) return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		long prime = 17;
+		long result = super.hashCode();
+		for(int i=0; i<length(); i++) {
+			result = prime * result + get(i).hashCode();			
+		}
+		return (int)result;
 	}
 
 }
