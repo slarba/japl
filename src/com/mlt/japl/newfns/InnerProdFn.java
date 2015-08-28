@@ -2,7 +2,7 @@ package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
 
-public class InnerProdFn implements Func {
+public class InnerProdFn extends BaseFn {
 
 	private Func left;
 	private Func right;

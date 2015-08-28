@@ -1,5 +1,6 @@
 package com.mlt.japl.newfns;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.newarrays.ArrayVisitor;
@@ -539,10 +540,35 @@ public class BaseFn implements ArrayVisitor, Func {
 	public IValue visit_dyadic(IBitArray a, IMixedArray b, int axis) {
 		return generic_dyadic(a, b);
 	}
-
+	
 	@Override
 	public String getName() {
 		return "<func>";
+	}
+
+	@Override
+	public IValue reduce(IIntArray a, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue reduce(IDoubleArray a, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue reduce(ICharArray a, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue reduce(IMixedArray a, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue reduce(IBitArray a, int axis) {
+		throw new AplError();
 	}
 
 }

@@ -1,8 +1,16 @@
 package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
+import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IDoubleScalar;
+import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
+import com.mlt.japl.newarrays.interf.IMixedScalar;
 
-public class ReduceFn implements Func {
+public class ReduceFn extends BaseFn {
 
 	private Func fn;
 
@@ -11,26 +19,47 @@ public class ReduceFn implements Func {
 	}
 
 	@Override
-	public IValue applyDyadic(IValue a, IValue b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IValue applyMonadic(IValue a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IValue applyNiladic(int axis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getName() {
 		return "reduce<" + fn.getName() + ">";
 	}
 
+	@Override
+	public IValue visit_monadic(IIntScalar a, int axis) {
+		return a;
+	}
+
+	@Override
+	public IValue visit_monadic(IDoubleScalar a, int axis) {
+		return a;
+	}
+	
+	@Override
+	public IValue visit_monadic(ICharScalar a, int axis) {
+		return a;
+	}
+
+	@Override
+	public IValue visit_monadic(IMixedScalar a, int axis) {
+		return a;
+	}
+
+	@Override
+	public IValue visit_monadic(IIntArray a, int axis) {
+		return fn.reduce(a, axis);
+	}
+
+	@Override
+	public IValue visit_monadic(IDoubleArray a, int axis) {
+		return fn.reduce(a, axis);
+	}
+
+	@Override
+	public IValue visit_monadic(ICharArray a, int axis) {
+		return fn.reduce(a, axis);
+	}
+	
+	@Override
+	public IValue visit_monadic(IMixedArray a, int axis) {
+		return fn.reduce(a, axis);
+	}
 }

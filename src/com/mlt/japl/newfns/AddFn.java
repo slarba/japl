@@ -1,15 +1,23 @@
 package com.mlt.japl.newfns;
 
+import com.mlt.japl.errors.RankError;
+import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
+import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
+import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class AddFn extends BaseFn {
 	@Override
@@ -32,6 +40,46 @@ public class AddFn extends BaseFn {
 		return new DoubleScalar(a.get() + b.get());
 	}
 
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get() + b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) + b.get();
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IBitArray b, int axis) {
+		return new LazyDoubleArray(b.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get() + b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IDoubleScalar b, int axis) {
+		return new LazyDoubleArray(b.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) + b.get();
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
 		checkLengths(a, b);
@@ -220,7 +268,29 @@ public class AddFn extends BaseFn {
 	public IValue visit_monadic(IDoubleScalar a, int axis) {
 		return a;
 	}
-
+	
+	@Override
+	public IValue reduce(IIntArray a, int ax) {
+		if(a.rank()==1) {
+			long result = 0;
+			for(int i=0; i<a.length(); i++) result += a.get(i);
+			return new IntScalar(result);
+		}
+		int axis = ax<0 ? a.rank()-1 : ax;
+		IntReducer reducer = new IntReducer(0, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a+b;
+			}
+		};
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+	
 	@Override
 	public String getName() {
 		return "+";

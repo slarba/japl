@@ -1,10 +1,14 @@
-package com.mlt.japl.newarrays.concrete;
+package com.mlt.japl.newarrays.generated;
 
-import java.util.Arrays;
+import java.nio.channels.SelectableChannel;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.BitArray;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -17,41 +21,39 @@ import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
-public class BitArray extends ArrayBase implements IBitArray {
-	long[] data;
+public abstract class LazyBitArray extends ArrayBase implements IBitArray {
 
-	public BitArray(Dimensions dims) {
+	public LazyBitArray(Dimensions dims) {
 		super(dims);
-		this.data = new long[1+(dims.length()/64)];
-	}
-	
-	public BitArray(Dimensions dims, long[] data) {
-		super(dims);
-		this.data = data;
 	}
 	
 	@Override
-	public long get(int idx) {
-		int i = idx % dims().length();
-		int whole = i / 64;
-		int part = i % 64;
-		return (data[whole]>>>part)&1;
+	public long getBits(int idx) {
+		throw new AplError();
+	}
+	
+	@Override
+	public IValue force() {
+		long[] data = new long[1 + dims().length()/64];
+		for(int i=0; i<dims().length(); i++) {
+			int w = i/64;
+			int p = i%64;
+			data[w] |= get(i)<<p;
+		}
+		return new BitArray(dims(), data);
 	}
 
 	@Override
-	public long getBits(int index) {
-		return data[index%data.length];
+	public String asString(PrintConfig config) {
+		return config.print(this);
 	}
 
-	public void setBit(int idx, int val) {
-		int i = idx % dims().length();
-		int whole = i / 64;
-		int part = i % 64;
-		data[whole] |= val<<part;
-	}
-
-	// region Kuvaus
 	@Override
+	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+		return visitor.visit_dyadic(a, this, axis);
+	}
+	
+ 	@Override
 	public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
 		return visitor.visit_first(this, b, axis);
 	}
@@ -77,11 +79,6 @@ public class BitArray extends ArrayBase implements IBitArray {
 	}
 
 	@Override
-	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-	
-	@Override
 	public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
 	}
@@ -105,37 +102,61 @@ public class BitArray extends ArrayBase implements IBitArray {
 	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
 		return visitor.visit_monadic(this, axis);
 	}
-	// endregion
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Arrays.hashCode(data);
-		return result;
-	}
-	
-	@Override
-	public String asString(PrintConfig config) {
-		return config.print(this);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BitArray other = (BitArray) obj;
-		if (!Arrays.equals(data, other.data))
-			return false;
-		return true;
-	}
 
 	@Override
 	public IValue reshape(int[] newShape) {
-		return new BitArray(new Dimensions(newShape), data);
+		IBitArray self = this;
+		return new LazyBitArray(new Dimensions(newShape)) {
+			@Override
+			public long get(int index) {
+				return self.get(index%dims().length());
+			}
+
+			@Override
+			public long getBits(int index) {
+				throw new AplError();
+			}
+		};
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(o==null) return false;
+		if(o instanceof IArray) {
+			if(!((IArray)o).dims().equals(dims()))
+				return false;
+		}
+		if(o instanceof IIntArray) {
+			IIntArray a = (IIntArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		if(o instanceof IDoubleArray) {
+			IDoubleArray a = (IDoubleArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		if(o instanceof IBitArray) {
+			IBitArray a = (IBitArray)o;
+			for(int i=0; i<a.length(); i++) {
+				if(a.get(i)!=get(i)) return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		long prime = 17;
+		long result = super.hashCode();
+		for(int i=0; i<length(); i++) {
+			result = prime * result + Long.hashCode(get(i));			
+		}
+		return (int)result;
 	}
 }

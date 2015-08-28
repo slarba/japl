@@ -8,6 +8,7 @@ import com.mlt.japl.iface.Array;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.ScalarBase;
 import com.mlt.japl.newarrays.concrete.MixedArray;
+import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
@@ -41,6 +42,29 @@ public class PrintConfig {
 		return maxLens;
 	}
 
+	public String print(IBitArray a) {
+		// compute column widths
+		int lastDim = a.dims().lastDim();
+		
+		StringBuilder builder = new StringBuilder();
+		Iterator indexer = a.dims().iteratorAlongLastAxis();
+		
+		for(int i=0; i<a.length(); i+=lastDim) {			
+			int newLines = 0;
+			for(int j=0; j<lastDim; j++) {
+				String s = print(a.get(i+j));
+				builder.append(s);
+				if(j!=lastDim-1)
+					builder.append(' ');
+				newLines = indexer.step();
+			}
+			for(int k=0; k<newLines-1; k++) {
+				builder.append('\n');		
+			}
+		}
+		return builder.toString();		
+	}
+	
 	public String print(IMixedArray a) {
 		StringBuilder buffer = new StringBuilder();
 		String[] arr = new String[a.dims().length()];

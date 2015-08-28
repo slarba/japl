@@ -24,6 +24,7 @@ import com.mlt.japl.newfns.ReverseFn;
 import com.mlt.japl.newfns.RhoFn;
 import com.mlt.japl.newfns.ScanFn;
 import com.mlt.japl.newfns.SubFn;
+import com.mlt.japl.newfns.TakeFn;
 
 public class FunctionRegistry {
 
@@ -64,7 +65,7 @@ public class FunctionRegistry {
 		//map.put("\u2349", new ReverseFn());
 		map.put("\u233d", new ReverseFn(false));
 		map.put("\u2296", new ReverseFn(true));
-//		map.put("\u2191", new TakeFn());
+		map.put("\u2191", new TakeFn());
 //		map.put("\u2193", new DropFn());
 		map.put("\u2261", new DepthFn());
 		map.put("\u2282", new EncloseFn());

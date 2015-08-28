@@ -2,7 +2,7 @@ package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
 
-public class ScanFn implements Func {
+public class ScanFn extends BaseFn {
 
 	private Func fn;
 
@@ -32,5 +32,4 @@ public class ScanFn implements Func {
 	public String getName() {
 		return "scan<" + fn.getName() + ">";
 	}
-
 }

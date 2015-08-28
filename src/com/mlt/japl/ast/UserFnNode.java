@@ -1,6 +1,11 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IBitArray;
+import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newfns.Func;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
@@ -55,5 +60,35 @@ public class UserFnNode implements AstNode, Func {
 	@Override
 	public String getName() {
 		return print();
+	}
+
+	@Override
+	public IValue reduce(IIntArray a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue reduce(IDoubleArray a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue reduce(ICharArray a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue reduce(IMixedArray a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue reduce(IBitArray a, int axis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
