@@ -44,12 +44,17 @@ public class PrintConfig {
 	public String print(IMixedArray a) {
 		StringBuilder buffer = new StringBuilder();
 		String[] arr = new String[a.dims().length()];
+		boolean space = false;
 		for(int i=0; i<arr.length; i++) {
+			boolean firstCol = i % a.dims().axis(a.rank()-1) == 0;
 			IValue v = a.get(i);
-			if(v instanceof ScalarBase || v instanceof ICharArray || v instanceof IMixedArray)
-				arr[i] = v.asString(this);
-			else
-				arr[i] = " " + v.asString(this);
+			if(v instanceof ICharScalar) {
+				arr[i] = (space ? " " : "") + v.asString(this);
+				space = false;
+			} else {
+				arr[i] = (firstCol ? "": " ") + (space ? " " : "") + v.asString(this);
+				space = true;
+			}
 		}
 		int lastDim = a.dims().lastDim();
 		int[] maxLens = computeLastDimMaxWidths(arr, lastDim);
@@ -66,9 +71,9 @@ public class PrintConfig {
 				newLines = indexer.step();
 			}
 			for(int subRow=0; subRow<maxSubRows; subRow++) {
+				buffer.append(' ');
 				for(int j=0; j<lastDim; j++) {
 					String[] sr = rivi.get(j);
-					buffer.append(' ');
 					if(subRow<sr.length) {
 						String r = sr[subRow];
 						buffer.append(padToMaxLength(maxLens[j], r.length()));
@@ -79,7 +84,7 @@ public class PrintConfig {
 				}
 				buffer.append('\n');
 			}
-			for(int k=0; k<newLines-2; k++)
+			for(int k=0; k<newLines-1; k++)
 				buffer.append('\n');
 		}
 		return buffer.toString();
