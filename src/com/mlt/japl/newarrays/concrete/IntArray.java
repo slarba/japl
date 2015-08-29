@@ -18,6 +18,8 @@ import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class IntArray extends ArrayBase implements IIntArray {
+	public static final IValue EMPTY = new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
+	
 	long[] data;
 
 	public IntArray(Dimensions dims, long[] data) {

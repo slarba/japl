@@ -18,21 +18,26 @@ import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class CharArray extends ArrayBase implements ICharArray {
-	char[] data;
+	String data;
 
 	public CharArray(Dimensions dims, char[] data) {
 		super(dims);
-		this.data = data;
+		this.data = new String(data);
 	}
 	
+	public CharArray(Dimensions dims, String data) {
+		super(dims);
+		this.data = data;
+	}
+
 	public CharArray(String string) {
 		super(new Dimensions(string.length()));
-		this.data = string.toCharArray();
+		this.data = string;
 	}
 
 	@Override
 	public char get(int index) {
-		return data[index%data.length];
+		return data.charAt(index%data.length());
 	}
 
 	@Override
@@ -94,7 +99,7 @@ public class CharArray extends ArrayBase implements ICharArray {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Arrays.hashCode(data);
+		result = prime * result + data.hashCode();
 		return result;
 	}
 
@@ -107,7 +112,7 @@ public class CharArray extends ArrayBase implements ICharArray {
 		if (getClass() != obj.getClass())
 			return false;
 		CharArray other = (CharArray) obj;
-		if (!Arrays.equals(data, other.data))
+		if (!data.equals(other.data))
 			return false;
 		return true;
 	}

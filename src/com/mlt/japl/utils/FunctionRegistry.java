@@ -12,6 +12,7 @@ import com.mlt.japl.newfns.CeilFn;
 import com.mlt.japl.newfns.DepthFn;
 import com.mlt.japl.newfns.DiscloseFn;
 import com.mlt.japl.newfns.DivFn;
+import com.mlt.japl.newfns.DropFn;
 import com.mlt.japl.newfns.EachFn;
 import com.mlt.japl.newfns.EncloseFn;
 import com.mlt.japl.newfns.EqFn;
@@ -29,15 +30,19 @@ import com.mlt.japl.newfns.LteFn;
 import com.mlt.japl.newfns.MulFn;
 import com.mlt.japl.newfns.NandFn;
 import com.mlt.japl.newfns.NeqFn;
+import com.mlt.japl.newfns.NorFn;
 import com.mlt.japl.newfns.RavelFn;
 import com.mlt.japl.newfns.ReduceFn;
 import com.mlt.japl.newfns.ReverseFn;
 import com.mlt.japl.newfns.RotateFn;
 import com.mlt.japl.newfns.RhoFn;
+import com.mlt.japl.newfns.RollFn;
 import com.mlt.japl.newfns.ScanFn;
+import com.mlt.japl.newfns.StopFn;
 import com.mlt.japl.newfns.SubFn;
 import com.mlt.japl.newfns.TakeFn;
 import com.mlt.japl.newfns.TrigFn;
+import com.mlt.japl.newfns.UnionFn;
 
 public class FunctionRegistry {
 
@@ -46,12 +51,12 @@ public class FunctionRegistry {
 	public FunctionRegistry() {
 		map = new HashMap<String,Func>();
 		
-//	    map.put("\u003f", new RollFn());
+	    map.put("\u003f", new RollFn());
 		map.put("\u002b", new AddFn());
 		map.put("\u2212", new SubFn());
 		map.put("\u00d7", new MulFn());
 		map.put("\u22c6", new ExpFn());
-//		map.put("*", new ExpFn());
+		map.put("*", new ExpFn());
 		map.put("\u235f", new LogFn());
 		map.put("\u002c", new RavelFn(false));
 		map.put("⍪", new RavelFn(true));
@@ -73,19 +78,19 @@ public class FunctionRegistry {
 		map.put("\u2260", new NeqFn());
 		map.put("\u2228", new OrFn());  // logical or
 		map.put("\u2227", new AndFn());  // logical and
-//		map.put("\u2371", new NorFn());  // nor
+		map.put("\u2371", new NorFn());  // nor
 		map.put("\u2372", new NandFn());  // nand
 		map.put("\u2349", new ReverseFn());
 		map.put("\u233d", new RotateFn(false));
 		map.put("\u2296", new RotateFn(true));
 		map.put("\u2191", new TakeFn());
-//		map.put("\u2193", new DropFn());
+		map.put("\u2193", new DropFn());
 		map.put("\u2261", new DepthFn());
 		map.put("\u2282", new EncloseFn());
 		map.put("\u2283", new DiscloseFn());
 //		map.put("\u22a5", new DecodeFn());
-//		map.put("\u222a", new UnionFn());
-//		map.put("\u22a3", new StopFn());
+		map.put("\u222a", new UnionFn());
+		map.put("\u22a3", new StopFn());
 		map.put("\u22a2", new PassFn());
 //		map.put("/", new ReplicateFn(false));	
 //		map.put("\u233f", new ReplicateFn(true));
