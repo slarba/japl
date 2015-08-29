@@ -23,6 +23,7 @@ import com.mlt.japl.newfns.Func;
 import com.mlt.japl.newfns.GtFn;
 import com.mlt.japl.newfns.GteFn;
 import com.mlt.japl.newfns.IotaFn;
+import com.mlt.japl.newfns.LogFn;
 import com.mlt.japl.newfns.LtFn;
 import com.mlt.japl.newfns.LteFn;
 import com.mlt.japl.newfns.MulFn;
@@ -36,6 +37,7 @@ import com.mlt.japl.newfns.RhoFn;
 import com.mlt.japl.newfns.ScanFn;
 import com.mlt.japl.newfns.SubFn;
 import com.mlt.japl.newfns.TakeFn;
+import com.mlt.japl.newfns.TrigFn;
 
 public class FunctionRegistry {
 
@@ -50,7 +52,7 @@ public class FunctionRegistry {
 		map.put("\u00d7", new MulFn());
 		map.put("\u22c6", new ExpFn());
 //		map.put("*", new ExpFn());
-//		map.put("\u235f", new LogFn());
+		map.put("\u235f", new LogFn());
 		map.put("\u002c", new RavelFn(false));
 		map.put("⍪", new RavelFn(true));
 		map.put("\u230a", new FloorFn());
@@ -60,7 +62,7 @@ public class FunctionRegistry {
 		map.put("\u00f7", new DivFn());
 		map.put("\u2374", new RhoFn());
 		map.put("\u2373", new IotaFn());
-//		map.put("\u25cb", new TrigFn());
+		map.put("\u25cb", new TrigFn());
 		map.put("\u2208", new ExistsFn());
 		map.put("\u003c", new LtFn());
 		map.put("\u003e", new GtFn());
