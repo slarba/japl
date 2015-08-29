@@ -290,7 +290,7 @@ public class AddFn extends BaseFn {
 			}
 		};
 	}
-	
+
 	@Override
 	public String getName() {
 		return "+";

@@ -193,12 +193,12 @@ public class SubFn extends BaseFn {
 	
 	@Override
 	public IValue visit_monadic(IIntScalar a, int axis) {
-		return new IntScalar((long)Math.signum(a.get()));
+		return new IntScalar(-a.get());
 	}
 
 	@Override
 	public IValue visit_monadic(IDoubleScalar a, int axis) {
-		return new DoubleScalar(Math.signum(a.get()));
+		return new DoubleScalar(-a.get());
 	}
 
 	@Override

@@ -100,7 +100,7 @@ public class RavelFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IIntArray b, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
 		if(axis>a.rank()) throw new AxisError();
 		Dimensions result = a.dims().laminate(b.dims(), axis);
 		return new LazyIntArray(result) {
@@ -117,7 +117,7 @@ public class RavelFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IIntArray b, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
 		if(axis>a.rank()) throw new AxisError();
 		Dimensions result = a.dims().laminate(b.dims(), axis);
 		return new LazyDoubleArray(result) {
@@ -134,7 +134,7 @@ public class RavelFn extends BaseFn {
 	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
 		if(axis>a.rank()) throw new AxisError();
 		Dimensions result = a.dims().laminate(b.dims(), axis);
 		return new LazyDoubleArray(result) {
@@ -151,7 +151,7 @@ public class RavelFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
 		if(axis>a.rank()) throw new AxisError();
 		Dimensions result = a.dims().laminate(b.dims(), axis);
 		return new LazyDoubleArray(result) {
@@ -168,7 +168,7 @@ public class RavelFn extends BaseFn {
 	
 	@Override
 	public IValue visit_dyadic(ICharArray a, ICharArray b, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
 		if(axis>a.rank()) throw new AxisError();
 		Dimensions result = a.dims().laminate(b.dims(), axis);
 		return new LazyCharArray(result) {
@@ -185,7 +185,7 @@ public class RavelFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IMixedArray b, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
 		if(axis>a.rank()) throw new AxisError();
 		Dimensions result = a.dims().laminate(b.dims(), axis);
 		return new LazyMixedArray(result) {

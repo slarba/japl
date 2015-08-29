@@ -8,4 +8,10 @@ public class DepthFn extends BaseFn {
 	public IValue applyMonadic(IValue a, int axis) {
 		return new IntScalar(a.depth());
 	}
+
+	@Override
+	public IValue applyDyadic(IValue a, IValue b, int axis) {
+		return new IntScalar(a.equals(b) ? 1 : 0);
+	}
+
 }
