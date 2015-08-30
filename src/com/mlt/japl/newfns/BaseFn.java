@@ -5,6 +5,11 @@ import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.CharScalar;
+import com.mlt.japl.newarrays.concrete.DoubleScalar;
+import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.concrete.MixedScalar;
+import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
@@ -81,7 +86,14 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		checkLengths(a, b);
+		Func self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -101,7 +113,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(applyDyadic(a.get(), b.get(), axis));
 	}
 
 	@Override
@@ -116,7 +128,14 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		checkLengths(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new IntScalar(a.get(index)), b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -136,7 +155,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new IntScalar(a.get(index)), b, axis);
+			}
+		};
 	}
 
 	@Override
@@ -151,7 +176,14 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		checkLengths(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new DoubleScalar(a.get(index)), b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -171,7 +203,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new DoubleScalar(a.get(index)), b, axis);
+			}
+		};
 	}
 
 	@Override
@@ -186,7 +224,14 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(ICharArray a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		checkLengths(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new CharScalar(a.get(index)), b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -206,42 +251,90 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(ICharArray a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new CharScalar(a.get(index)), b, axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IIntArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), new IntScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IDoubleArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), new DoubleScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, ICharArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), new CharScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IIntScalar b, int axis) {
-		return generic_dyadic(a,b);
+		Func self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), b, axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IDoubleScalar b, int axis) {
-		return generic_dyadic(a,b);
+		Func self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), b, axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, ICharScalar b, int axis) {
-		return generic_dyadic(a,b);
+		Func self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), b, axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		Func self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), b, axis);
+			}
+		};
 	}
 
 	@Override
@@ -261,7 +354,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(a, b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -276,7 +375,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(visit_first(a, b.get(), axis));
 	}
 
 	@Override
@@ -296,7 +395,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(a, b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -311,7 +416,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(visit_first(a, b.get(), axis));
 	}
 
 	@Override
@@ -331,7 +436,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(ICharScalar a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(a, b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
@@ -346,42 +457,66 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(ICharScalar a, IMixedScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(visit_first(a, b.get(), axis));
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IIntArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a, new IntScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IDoubleArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a, new DoubleScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, ICharArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a, new CharScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IMixedArray b, int axis) {
-		return generic_dyadic(a,b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a, b.get(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IIntScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(applyDyadic(a.get(), b, axis));
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IDoubleScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(applyDyadic(a.get(), b, axis));
 	}
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, ICharScalar b, int axis) {
-		return generic_dyadic(a,b);
+		return new MixedScalar(applyDyadic(a.get(), b, axis));
 	}
 
 	public IValue generic_monadic(IValue a) {
@@ -409,7 +544,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_monadic(IMixedArray a, int axis) {
-		return generic_monadic(a);
+		final ArrayVisitor self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return a.get(index).accept_monadic(self, axis);
+			}
+		};
 	}
 
 	@Override
@@ -429,7 +570,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_monadic(IMixedScalar a, int axis) {
-		return generic_monadic(a);
+		return new MixedScalar(a.get().accept_monadic(this, axis));
 	}
 
 	@Override
@@ -473,7 +614,14 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IBitArray b, int axis) {
-		return generic_dyadic(a, b);
+		checkLengths(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a.get(index), new IntScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
@@ -508,7 +656,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IBitArray a, IMixedScalar b, int axis) {
-		return generic_dyadic(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new IntScalar(a.get(index)), b, axis);
+			}
+		};
 	}
 
 	@Override
@@ -528,7 +682,13 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedScalar a, IBitArray b, int axis) {
-		return generic_dyadic(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.applyDyadic(a, new IntScalar(b.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
@@ -538,7 +698,14 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IBitArray a, IMixedArray b, int axis) {
-		return generic_dyadic(a, b);
+		checkLengths(a, b);
+		BaseFn self = this;
+		return new LazyMixedArray(b.dims()) {
+			@Override
+			public IValue get(int index) {
+				return self.visit_first(new IntScalar(a.get(index)), b.get(index), axis);
+			}
+		};
 	}
 	
 	@Override

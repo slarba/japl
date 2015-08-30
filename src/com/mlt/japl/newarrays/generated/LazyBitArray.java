@@ -34,13 +34,15 @@ public abstract class LazyBitArray extends ArrayBase implements IBitArray {
 	
 	@Override
 	public IValue force() {
-		long[] data = new long[1 + dims().length()/64];
+		int whole = dims().length()/64;
+		int part = dims().length()%64;
+		long[] data = new long[(part>0 ? 1 : 0) + whole];
 		for(int i=0; i<dims().length(); i++) {
 			int w = i/64;
 			int p = i%64;
 			data[w] |= get(i)<<p;
 		}
-		return new BitArray(dims(), data);
+		return new BitArray(dims().length(), dims(), data);
 	}
 
 	@Override

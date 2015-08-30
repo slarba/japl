@@ -19,20 +19,25 @@ import com.mlt.japl.utils.PrintConfig;
 
 public class BitArray extends ArrayBase implements IBitArray {
 	long[] data;
-
+	int actualLength;
+	
 	public BitArray(Dimensions dims) {
 		super(dims);
-		this.data = new long[1+(dims.length()/64)];
+		actualLength = dims.length();
+		int whole = dims.length()/64;
+		int part = dims.length()%64;
+		this.data = new long[(part>0 ? 1 : 0)+whole];
 	}
 	
-	public BitArray(Dimensions dims, long[] data) {
+	public BitArray(int actualLength, Dimensions dims, long[] data) {
 		super(dims);
+		this.actualLength = actualLength;
 		this.data = data;
 	}
 	
 	@Override
 	public long get(int idx) {
-		int i = idx % dims().length();
+		int i = idx % actualLength;
 		int whole = i / 64;
 		int part = i % 64;
 		return (data[whole]>>>part)&1;
@@ -44,7 +49,7 @@ public class BitArray extends ArrayBase implements IBitArray {
 	}
 
 	public void setBit(int idx, int val) {
-		int i = idx % dims().length();
+		int i = idx % actualLength;
 		int whole = i / 64;
 		int part = i % 64;
 		data[whole] |= val<<part;
@@ -136,6 +141,6 @@ public class BitArray extends ArrayBase implements IBitArray {
 
 	@Override
 	public IValue reshape(int[] newShape) {
-		return new BitArray(new Dimensions(newShape), data);
+		return new BitArray(actualLength, new Dimensions(newShape), data);
 	}
 }

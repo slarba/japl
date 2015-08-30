@@ -135,6 +135,7 @@ public class PrintConfig {
 
 	public String print(IDoubleScalar a) {
 		double val = a.get();
+		if(val==(long)val) return print((long)val);
 		if(val<0) return "¯" + String.format(Locale.US, getDoubleFormatString(), -val);
 		return String.format(Locale.US, getDoubleFormatString(), val);
 	}
@@ -145,7 +146,15 @@ public class PrintConfig {
 	}
 
 	public String print(IMixedScalar a) {
-		return a.get().asString(this);
+		String s = a.get().asString(this);
+		String[] ss = s.split("\n");
+		StringBuilder b = new StringBuilder();
+		for(String x : ss) {
+			b.append(' ');
+			b.append(x);
+			b.append('\n');
+		}
+		return " " + b.toString().trim();
 	}
 
 	public String print(long val) {
@@ -154,6 +163,7 @@ public class PrintConfig {
 	}
 
 	public String print(double val) {
+		if(val==(long)val) return print((long)val);
 		if(val<0) return "¯" + String.format(Locale.US, getDoubleFormatString(), -val);
 		return String.format(Locale.US, getDoubleFormatString(), val);
 	}
