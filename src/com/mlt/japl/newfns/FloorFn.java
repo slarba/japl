@@ -178,8 +178,7 @@ public class FloorFn extends BaseFn {
 	}
 
 	@Override
-	public IValue reduce(IIntArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+	public IValue reduce(IIntArray a, int axis) {
 		IntReducer reducer = new IntReducer(0, a, axis) {
 			@Override
 			public long op(long a, long b) {
@@ -196,8 +195,7 @@ public class FloorFn extends BaseFn {
 	}
 
 	@Override
-	public IValue reduce(IBitArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+	public IValue reduce(IBitArray a, int axis) {
 		BitReducer reducer = new BitReducer(0, a, axis) {
 			@Override
 			public long op(long a, long b) {
@@ -214,8 +212,7 @@ public class FloorFn extends BaseFn {
 	}
 	
 	@Override
-	public IValue reduce(IDoubleArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+	public IValue reduce(IDoubleArray a, int axis) {
 		DoubleReducer reducer = new DoubleReducer(0, a, axis) {
 			@Override
 			public double op(double a, double b) {

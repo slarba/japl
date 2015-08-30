@@ -73,7 +73,12 @@ public class TrigFn extends BaseFn {
 			}
 		};
 	}
-	
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+		return new DoubleScalar(trig((int)a.get(), b.get()));
+	}
+
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
 		return new LazyDoubleArray(b.dims()) {

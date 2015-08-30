@@ -104,6 +104,40 @@ public class OrFn extends BaseFn {
 	}
 	
 	@Override
+	public IValue reduce(IIntArray a, int axis) {
+		IntReducer reducer = new IntReducer(0, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a | b;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue reduce(IBitArray a, int axis) {
+		BitReducerCondition reducer = new BitReducerCondition(0, 1, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a | b;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
+	@Override
 	public IValue applyMonadic(IValue a, int axis) {
 		throw new ValenceError();
 	}

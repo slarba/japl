@@ -58,6 +58,16 @@ public class SubFn extends BaseFn {
 			}
 		};
 	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) - b.get();
+			}
+		};
+	}
 	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
@@ -212,8 +222,7 @@ public class SubFn extends BaseFn {
 	}
 
 	@Override
-	public IValue reduce(IIntArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+	public IValue reduce(IIntArray a, int axis) {
 		IntReducer reducer = new IntReducer(0, a, axis) {
 			@Override
 			public long op(long a, long b) {
@@ -230,8 +239,7 @@ public class SubFn extends BaseFn {
 	}
 
 	@Override
-	public IValue reduce(IBitArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+	public IValue reduce(IBitArray a, int axis) {
 		BitReducer reducer = new BitReducer(0, a, axis) {
 			@Override
 			public long op(long a, long b) {
@@ -248,8 +256,7 @@ public class SubFn extends BaseFn {
 	}
 	
 	@Override
-	public IValue reduce(IDoubleArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
+	public IValue reduce(IDoubleArray a, int axis) {
 		DoubleReducer reducer = new DoubleReducer(0, a, axis) {
 			@Override
 			public double op(double a, double b) {

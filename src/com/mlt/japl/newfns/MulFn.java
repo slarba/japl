@@ -201,9 +201,8 @@ public class MulFn extends BaseFn {
 	}
 
 	@Override
-	public IValue reduce(IIntArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
-		IntReducer reducer = new IntReducer(1, a, axis) {
+	public IValue reduce(IIntArray a, int axis) {
+		IntReducerCondition reducer = new IntReducerCondition(1, 0, a, axis) {
 			@Override
 			public long op(long a, long b) {
 				return a*b;
@@ -219,9 +218,8 @@ public class MulFn extends BaseFn {
 	}
 
 	@Override
-	public IValue reduce(IBitArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
-		BitReducer reducer = new BitReducer(1, a, axis) {
+	public IValue reduce(IBitArray a, int axis) {
+		BitReducerCondition reducer = new BitReducerCondition(1, 0, a, axis) {
 			@Override
 			public long op(long a, long b) {
 				return a*b;
@@ -237,9 +235,8 @@ public class MulFn extends BaseFn {
 	}
 	
 	@Override
-	public IValue reduce(IDoubleArray a, int ax) {
-		int axis = ax<0 ? a.rank()-1 : ax;
-		DoubleReducer reducer = new DoubleReducer(1, a, axis) {
+	public IValue reduce(IDoubleArray a, int axis) {
+		DoubleReducerCondition reducer = new DoubleReducerCondition(1, 0, a, axis) {
 			@Override
 			public double op(double a, double b) {
 				return a*b;
