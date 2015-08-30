@@ -168,6 +168,39 @@ public class AbsFn extends BaseFn {
 	}
 
 	@Override
+	public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return b.get(index) % a.get(index);
+			}
+		};		
+	}
+	
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return b.get(index) % a.get(index);
+			}
+		};		
+	}
+	
+	@Override
+	public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return b.get(index) % a.get(index);
+			}
+		};
+	}
+	
+	@Override
 	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
 		return new LazyIntArray(a.dims()) {
 			@Override

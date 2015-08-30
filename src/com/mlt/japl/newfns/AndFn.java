@@ -2,7 +2,6 @@ package com.mlt.japl.newfns;
 
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.newarrays.concrete.BitArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.ConstBitArray;
 import com.mlt.japl.newarrays.generated.LazyBitArray;

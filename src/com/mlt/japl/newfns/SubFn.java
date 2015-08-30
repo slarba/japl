@@ -8,6 +8,7 @@ import com.mlt.japl.newarrays.concrete.MixedScalar;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.generated.LazyMixedArray;
+import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
@@ -48,6 +49,16 @@ public class SubFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) - b.get(index);
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
 		return new LazyDoubleArray(a.dims()) {
@@ -170,6 +181,16 @@ public class SubFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public IValue visit_monadic(IBitArray a, int axis) {
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return -a.get(index);
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_monadic(IDoubleArray a, int axis) {
 		return new LazyDoubleArray(a.dims()) {

@@ -83,6 +83,9 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 					} catch(AplError e) {
 						es.println(e.getMessage());
 						es.flush();
+					} catch(ArithmeticException e) {
+						es.println("DIVBYZERO");
+						es.flush();
 					} catch(TokenMgrError e) {
 						e.printStackTrace(es);
 						es.flush();

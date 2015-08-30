@@ -51,6 +51,17 @@ public class AddFn extends BaseFn {
 	}
 
 	@Override
+	public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) + b.get(index);
+			}
+		};
+	}
+	
+	@Override
 	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
 		return new LazyIntArray(b.dims()) {
 			@Override

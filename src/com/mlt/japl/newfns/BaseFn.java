@@ -3,6 +3,7 @@ package com.mlt.japl.newfns;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
+import com.mlt.japl.errors.RankError;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharScalar;
@@ -262,6 +263,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IIntArray b, int axis) {
+		checkLengths(a, b);
 		BaseFn self = this;
 		return new LazyMixedArray(a.dims()) {
 			@Override
@@ -273,6 +275,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, IDoubleArray b, int axis) {
+		checkLengths(a, b);
 		BaseFn self = this;
 		return new LazyMixedArray(a.dims()) {
 			@Override
@@ -284,6 +287,7 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue visit_dyadic(IMixedArray a, ICharArray b, int axis) {
+		checkLengths(a, b);
 		BaseFn self = this;
 		return new LazyMixedArray(a.dims()) {
 			@Override
@@ -332,7 +336,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(a.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.applyDyadic(a.get(index), b, axis);
+				return self.applyDyadic(a.get(index), b.get(), axis);
 			}
 		};
 	}
@@ -499,7 +503,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(b.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.applyDyadic(a, b.get(index), axis);
+				return self.applyDyadic(a.get(), b.get(index), axis);
 			}
 		};
 	}
@@ -584,6 +588,7 @@ public class BaseFn implements ArrayVisitor, Func {
 	}
 
 	public void checkLengths(IArray a, IArray b) {
+		if(a.dims().rank()!=b.dims().rank()) throw new RankError();
 		if(!a.dims().equals(b.dims())) throw new LengthError();
 	}
 	
