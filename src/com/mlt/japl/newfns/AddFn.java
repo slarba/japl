@@ -282,11 +282,6 @@ public class AddFn extends BaseFn {
 	
 	@Override
 	public IValue reduce(IIntArray a, int ax) {
-		if(a.rank()==1) {
-			long result = 0;
-			for(int i=0; i<a.length(); i++) result += a.get(i);
-			return new IntScalar(result);
-		}
 		int axis = ax<0 ? a.rank()-1 : ax;
 		IntReducer reducer = new IntReducer(0, a, axis) {
 			@Override
@@ -294,6 +289,7 @@ public class AddFn extends BaseFn {
 				return a+b;
 			}
 		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
 		return new LazyIntArray(a.dims().elideAxis(axis)) {
 			@Override
 			public long get(int index) {
@@ -302,6 +298,42 @@ public class AddFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public IValue reduce(IBitArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		BitReducer reducer = new BitReducer(0, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a*b;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue reduce(IDoubleArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		DoubleReducer reducer = new DoubleReducer(0, a, axis) {
+			@Override
+			public double op(double a, double b) {
+				return a*b;
+			}
+		};
+		if(a.rank()==1) return new DoubleScalar(reducer.rank1case());
+		return new LazyDoubleArray(a.dims().elideAxis(axis)) {
+			@Override
+			public double get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+	
 	@Override
 	public String getName() {
 		return "+";

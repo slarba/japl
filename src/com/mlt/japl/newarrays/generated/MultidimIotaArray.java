@@ -28,6 +28,11 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 	}
 
 	@Override
+	public int depth() {
+		return 2;
+	}
+	
+	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
 	}

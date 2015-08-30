@@ -300,6 +300,61 @@ public class EqFn extends BaseFn {
 	}
 
 	@Override
+	public IValue reduce(IIntArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		IntReducer reducer = new IntReducer(1, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a==b ? 1 : 0;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
+	// reduce for = ?
+	@Override
+	public IValue reduce(IBitArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		BitReducer reducer = new BitReducer(1, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a==b ? 1 : 0;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue reduce(IDoubleArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		DoubleReducer reducer = new DoubleReducer(1, a, axis) {
+			@Override
+			public double op(double a, double b) {
+				return a==b ? 1 : 0;
+			}
+		};
+		if(a.rank()==1) return new DoubleScalar(reducer.rank1case());
+		return new LazyDoubleArray(a.dims().elideAxis(axis)) {
+			@Override
+			public double get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
+	@Override
 	public String getName() {
 		return "=";
 	}

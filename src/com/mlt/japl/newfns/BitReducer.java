@@ -1,15 +1,15 @@
 package com.mlt.japl.newfns;
 
-import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IBitArray;
 
-public abstract class IntReducer {
-	private IIntArray array;
+public abstract class BitReducer {
+	private IBitArray array;
 	private int axis;
 	private long initval;
 	private int mspan;
 	private int[] spans;
 	
-	public IntReducer(long initval, IIntArray array, int axis) {
+	public BitReducer(long initval, IBitArray array, int axis) {
 		this.array = array;
 		this.axis = axis;
 		this.initval = initval;
@@ -26,7 +26,7 @@ public abstract class IntReducer {
 			result = op(array.get(i), result);
 		return result;
 	}
-	
+
 	public long get(int index) {
 		long result = initval;
 		for(int i=array.dims().axis(axis)-1; i>=0; i--)

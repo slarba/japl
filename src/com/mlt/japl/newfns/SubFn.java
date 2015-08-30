@@ -202,17 +202,6 @@ public class SubFn extends BaseFn {
 	}
 	
 	@Override
-	public IValue visit_monadic(IMixedArray a, int axis) {
-		final ArrayVisitor self = this;
-		return new LazyMixedArray(a.dims()) {
-			@Override
-			public IValue get(int index) {
-				return a.get(index).accept_monadic(self, axis);
-			}
-		};
-	}
-	
-	@Override
 	public IValue visit_monadic(IIntScalar a, int axis) {
 		return new IntScalar(-a.get());
 	}
@@ -223,10 +212,59 @@ public class SubFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_monadic(IMixedScalar a, int axis) {
-		return new MixedScalar(a.get().accept_monadic(this, axis));
+	public IValue reduce(IIntArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		IntReducer reducer = new IntReducer(0, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a-b;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue reduce(IBitArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		BitReducer reducer = new BitReducer(0, a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return a-b;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
 	}
 	
+	@Override
+	public IValue reduce(IDoubleArray a, int ax) {
+		int axis = ax<0 ? a.rank()-1 : ax;
+		DoubleReducer reducer = new DoubleReducer(0, a, axis) {
+			@Override
+			public double op(double a, double b) {
+				return a-b;
+			}
+		};
+		if(a.rank()==1) return new DoubleScalar(reducer.rank1case());
+		return new LazyDoubleArray(a.dims().elideAxis(axis)) {
+			@Override
+			public double get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
 	@Override
 	public String getName() {
 		return "-";
