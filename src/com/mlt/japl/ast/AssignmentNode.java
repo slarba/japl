@@ -24,7 +24,7 @@ public class AssignmentNode implements AstNode {
 		if(id.equals("\u2395")) {
 			IValue result = expr.eval(context);
 			PrintWriter w = new PrintWriter(context.getOutputStream());
-			w.println(result.asString(context.printConfig()));
+			w.print(result.asString(context.printConfig()));
 			w.flush();
 			return result;
 		}

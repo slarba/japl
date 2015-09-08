@@ -37,8 +37,8 @@ public class UserFnNode implements AstNode, Func {
 	@Override
 	public IValue applyMonadic(IValue a, int axis) {
 		EvalContext derived = frame.newFrame();
-		derived.set("\u03c9", a);
-		derived.set("\u2375", a);
+		derived.set("\u03b1", a);
+		derived.set("\u237a", a);
 		return body.eval(derived);
 	}
 

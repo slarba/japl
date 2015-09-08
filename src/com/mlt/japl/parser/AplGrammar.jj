@@ -64,6 +64,12 @@ public class AplParser
     if(!(n instanceof AssignmentNode))
       printToOutputStream(val.asString(new PrintConfig()));
   }
+
+  public void executeCommand(String cmd)  {	System.out.println("interpreter command: " + cmd);
+	if(cmd.equals(")CLEAR"))	{	  context.reset();
+	  printToOutputStream("CLEAR WS");
+	}
+  }
   
   public EvalContext getContext()
   {
@@ -187,9 +193,11 @@ TOKEN : /* OPERATORS */
   >
 | < STMTSEPARATOR:
     "\u22c4"
-  | (["\r","\n"])
+  | < NEWLINE >
   | ("\u235d" (~["\n"])* ["\n"])
   >
+| < INTERPRETERCOMMAND: ")CLEAR" >
+| < NEWLINE: "\r" | "\n" >
 }
 
 TOKEN :
@@ -208,13 +216,20 @@ TOKEN :
 // execute top level expressions one at a time
 void eval_stream() :
 {
+  Token command;
   AstNode t;}
 {
 	(
-      t=toplevelexpr() 
-	  {
-	    eval(t);
-	  }
+	  (		  command = < INTERPRETERCOMMAND >		  {
+		    executeCommand(command.image);
+		    getNextToken();		  }
+	  )
+    | (	      t=toplevelexpr() 
+		  {
+		    System.out.println(t.print());
+		    eval(t);
+		  }
+	  )
 	  (< STMTSEPARATOR >)+
 	)+
 	< EOF >
@@ -255,6 +270,23 @@ AstNode toplevel_expr_list() :
 		  statements.add(c);
 		}
 	(< STMTSEPARATOR >)+ )+
+	{
+	  if(statements.size()==1) return statements.get(0);
+	  return new StatementListNode(statements);
+	}
+}
+
+AstNode userfn_expr_list() :
+{
+  AstNode c;
+  List<AstNode> statements = new ArrayList<AstNode>();
+}
+{
+	(c=toplevelexpr()
+		{
+		  statements.add(c);
+		}
+	(< STMTSEPARATOR >)* )+
 	{
 	  if(statements.size()==1) return statements.get(0);
 	  return new StatementListNode(statements);
@@ -453,7 +485,7 @@ AstNode userfndef() :
   AstNode fnBody = null;
 }
 {
-  "{" fnBody = toplevel_expr_list() "}"
+  "{" (< STMTSEPARATOR >)* fnBody = userfn_expr_list() "}"
   {
     return fnBody;
   }

@@ -35,7 +35,7 @@ public class Interpreter {
 	}
 
 	public void reset() {
-		context = new EvalContext();
+		context = new EvalContext(context.getOutputStream(), context.getErrorStream());
 	}
 	
 	public void eval(String s) {

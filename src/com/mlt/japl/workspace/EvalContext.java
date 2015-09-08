@@ -17,6 +17,11 @@ public class EvalContext {
 	OutputStream out;
 	private OutputStream error;
 	
+	public void reset() {
+		valueMap = new HashMap<String,IValue>();
+		functionMap = new HashMap<String,Func>();		
+	}
+	
 	public IValue get(String id) {
 		if(valueMap.containsKey(id)) {
 			return valueMap.get(id);

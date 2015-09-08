@@ -266,6 +266,10 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 		return pipedError;
 	}
 	
+	public OutputStream getLineOutputStream() {
+		return lineOutputStream;
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}

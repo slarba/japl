@@ -28,6 +28,8 @@ import com.mlt.japl.workspace.Interpreter;
 @SuppressWarnings("serial")
 public class JaplMainFrame extends JFrame implements ActionListener {
 	Font aplFont;
+	JaplInterpreter interpreter;
+	JaplRepl repl;
 	
 	public JaplMainFrame() {
 		super("APL Interpreter");
@@ -55,9 +57,9 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		aplFont = createFont("/com/mlt/japl/gui/SImPL.ttf");
-		JaplRepl repl = new JaplRepl(aplFont);
+		repl = new JaplRepl(aplFont);
 		Interpreter i = new Interpreter(repl.getOutputStream(), repl.getErrorStream());
-		JaplInterpreter interpreter = new JaplInterpreter(repl, aplFont);
+		interpreter = new JaplInterpreter(repl, aplFont);
 		i.addBusyListener(interpreter);
 		interpreter.setPreferredSize(new Dimension(1024,768));
 		
@@ -109,7 +111,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
 		case "newFile":
-			new JaplEditorFrame(aplFont);
+			new JaplEditorFrame(aplFont, repl.getLineOutputStream());
 			break;
 		case "quit":
 			System.exit(0);
@@ -117,7 +119,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 		case "openFile":
 			JFileChooser chooser = new JFileChooser();
 			if(chooser.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
-				new JaplEditorFrame(aplFont, chooser.getSelectedFile());
+				new JaplEditorFrame(aplFont, chooser.getSelectedFile(), repl.getLineOutputStream());
 			}
 		}
 	}

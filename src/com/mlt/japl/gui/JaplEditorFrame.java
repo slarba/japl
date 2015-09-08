@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -31,10 +33,12 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 	JaplEditor editor;
 	private File file;
 	private boolean changed;
+	private OutputStream replOutput;
 	
-	public JaplEditorFrame(Font font) {
+	public JaplEditorFrame(Font font, OutputStream replOutput) {
 		super();
-
+		this.replOutput = replOutput;
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		
@@ -58,8 +62,8 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		setVisible(true);
 	}
 	
-	public JaplEditorFrame(Font aplFont, File file) {
-		this(aplFont);
+	public JaplEditorFrame(Font aplFont, File file, OutputStream replOutput) {
+		this(aplFont, replOutput);
 
 		setTitle(file.getAbsolutePath());
 		this.file = file;
@@ -84,6 +88,14 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		fileMenu.add(saveAsFile);
 		fileMenu.add(quitItem);		
 		menuBar.add(fileMenu);
+		
+		JMenu evalMenu = new JMenu("Repl");
+		JMenuItem evalMenuItem = new JMenuItem("Evaluate buffer");
+		evalMenuItem.setAccelerator(KeyStroke.getKeyStroke("meta E"));
+		evalMenuItem.setActionCommand("eval");
+		evalMenuItem.addActionListener(this);
+		evalMenu.add(evalMenuItem);
+		menuBar.add(evalMenu);
 		return menuBar;
 	}
 
@@ -154,10 +166,21 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		case "save":
 			if(file!=null) save(file); else saveAs();
 			break;
+		case "eval":
+			evaluateBuffer();
+			break;
 		default:
 			editor.insert(e.getActionCommand());
 			break;
 		}
+	}
+
+	private void evaluateBuffer() {
+		System.out.println("evaluating buffer");
+		String code = editor.getText();
+		PrintWriter writer = new PrintWriter(replOutput);
+		writer.println(code);
+		writer.flush();
 	}
 
 	public void setChanged() {
