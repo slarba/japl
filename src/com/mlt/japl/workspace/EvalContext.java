@@ -15,6 +15,7 @@ public class EvalContext {
 	HashMap<String, Func> functionMap = new HashMap<String,Func>();
 	EvalContext parent;
 	OutputStream out;
+	private OutputStream error;
 	
 	public IValue get(String id) {
 		if(valueMap.containsKey(id)) {
@@ -55,12 +56,22 @@ public class EvalContext {
 		this.out = out;
 	}
 	
+	public EvalContext(OutputStream out, OutputStream error) {
+		this();
+		this.out = out;
+		this.error = error;
+	}
+
 	public EvalContext newFrame() {
 		return new EvalContext(this, out);
 	}
 
 	public OutputStream getOutputStream() {
 		return out;
+	}
+
+	public OutputStream getErrorStream() {
+		return error;
 	}
 	
 	public Func tryGetFunction(String id) {

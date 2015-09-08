@@ -56,4 +56,9 @@ public class DropFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public String getName() {
+		return "drop";
+	}
+
 }

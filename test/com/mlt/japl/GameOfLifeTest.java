@@ -11,7 +11,7 @@ import com.mlt.japl.workspace.Interpreter;
 
 public class GameOfLifeTest {
 
-	Interpreter itn = new Interpreter(System.out);
+	Interpreter itn = new Interpreter(System.out, System.err);
 //	
 //	@Test
 //	public void test() {

@@ -44,4 +44,10 @@ public class RollFn extends BaseFn {
 		}
 		return new IntArray(new Dimensions(result.length), result);
 	}
+	
+	@Override
+	public String getName() {
+		return "roll";
+	}
+
 }

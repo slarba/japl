@@ -100,4 +100,10 @@ public class ExpFn extends BaseFn {
 	public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
 		return new DoubleScalar(Math.pow(a.get(), b.get()));
 	}
+	
+	@Override
+	public String getName() {
+		return "exp";
+	}
+
 }

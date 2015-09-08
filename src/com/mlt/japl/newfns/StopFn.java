@@ -9,4 +9,9 @@ public class StopFn extends BaseFn {
 		return IntArray.EMPTY;
 	}
 
+	@Override
+	public String getName() {
+		return "stop";
+	}
+
 }

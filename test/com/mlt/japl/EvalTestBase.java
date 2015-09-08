@@ -7,14 +7,15 @@ import com.mlt.japl.workspace.Interpreter;
 
 public class EvalTestBase {
 
-	protected Interpreter itn = new Interpreter(System.out);
+	protected Interpreter itn = new Interpreter(System.out, System.err);
 
 	public EvalTestBase() {
 		super();
 	}
 
 	public IValue eval(String s) {
-		return itn.eval(s);
+		//return itn.eval(s);
+		return null;
 	}
 	
 	public void check(IValue a, int type, int rank, int length, int actualLength, int depth) {

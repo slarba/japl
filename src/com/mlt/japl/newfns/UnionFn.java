@@ -171,4 +171,9 @@ public class UnionFn extends BaseFn {
 		return new MixedArray(new Dimensions(result.length), result);
 	}
 
+	@Override
+	public String getName() {
+		return "union";
+	}
+
 }

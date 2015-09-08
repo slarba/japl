@@ -42,4 +42,9 @@ public class TakeFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public String getName() {
+		return "take";
+	}
+
 }

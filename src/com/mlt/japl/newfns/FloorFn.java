@@ -230,7 +230,7 @@ public class FloorFn extends BaseFn {
 
 	@Override
 	public String getName() {
-		return "floot";
+		return "floor";
 	}
 
 }

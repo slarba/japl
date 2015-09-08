@@ -7,4 +7,10 @@ public class PassFn extends BaseFn {
 	public IValue applyMonadic(IValue a, int axis) {
 		return a.force();
 	}
+
+	@Override
+	public String getName() {
+		return "pass";
+	}
+
 }

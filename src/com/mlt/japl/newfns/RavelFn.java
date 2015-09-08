@@ -200,4 +200,9 @@ public class RavelFn extends BaseFn {
 		};
 	}
 	
+	@Override
+	public String getName() {
+		return "ravel";
+	}
+
 }

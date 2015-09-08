@@ -46,4 +46,10 @@ public class DiscloseFn extends BaseFn {
 		if(a.length()==0) return a;
 		return a.get(0);
 	}
+
+	@Override
+	public String getName() {
+		return "disclose";
+	}
+
 }

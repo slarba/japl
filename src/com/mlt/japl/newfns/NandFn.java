@@ -109,6 +109,6 @@ public class NandFn extends BaseFn {
 
 	@Override
 	public String getName() {
-		return "and";
+		return "nand";
 	}
 }

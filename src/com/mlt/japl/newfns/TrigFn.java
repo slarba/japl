@@ -139,4 +139,9 @@ public class TrigFn extends BaseFn {
 		};
 	}
 	
+	@Override
+	public String getName() {
+		return "trig";
+	}
+
 }

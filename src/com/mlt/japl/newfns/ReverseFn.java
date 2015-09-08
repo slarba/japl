@@ -79,4 +79,9 @@ public class ReverseFn extends BaseFn {
 		};
 	}	
 
+	@Override
+	public String getName() {
+		return "reverse";
+	}
+
 }

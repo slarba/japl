@@ -14,4 +14,8 @@ public class DepthFn extends BaseFn {
 		return new IntScalar(a.equals(b) ? 1 : 0);
 	}
 
+	@Override
+	public String getName() {
+		return "depth";
+	}
 }

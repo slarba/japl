@@ -173,4 +173,9 @@ public class LogFn extends BaseFn {
 		};
 	}
 	
+	@Override
+	public String getName() {
+		return "log";
+	}
+
 }

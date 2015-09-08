@@ -109,6 +109,6 @@ public class NorFn extends BaseFn {
 
 	@Override
 	public String getName() {
-		return "and";
+		return "nor";
 	}
 }

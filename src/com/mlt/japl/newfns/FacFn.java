@@ -74,4 +74,10 @@ public class FacFn extends BaseFn {
 			}
     	};
     }
+    
+	@Override
+	public String getName() {
+		return "fac";
+	}
+
 }

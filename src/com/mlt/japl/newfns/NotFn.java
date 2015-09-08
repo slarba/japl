@@ -27,4 +27,9 @@ public class NotFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public String getName() {
+		return "not";
+	}
+
 }

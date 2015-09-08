@@ -59,4 +59,9 @@ public class EncloseFn extends BaseFn {
 		return new MixedScalar(a);
 	}
 
+	@Override
+	public String getName() {
+		return "enclose";
+	}
+
 }

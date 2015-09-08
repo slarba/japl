@@ -56,7 +56,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 
 		aplFont = createFont("/com/mlt/japl/gui/SImPL.ttf");
 		JaplRepl repl = new JaplRepl(aplFont);
-		Interpreter i = new Interpreter(repl.getOutputStream());
+		Interpreter i = new Interpreter(repl.getOutputStream(), repl.getErrorStream());
 		JaplInterpreter interpreter = new JaplInterpreter(repl, aplFont);
 		i.addBusyListener(interpreter);
 		interpreter.setPreferredSize(new Dimension(1024,768));
@@ -71,29 +71,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(repl.getInputStream()));
-				PrintStream ps = new PrintStream(repl.getOutputStream());
-				PrintStream es = new PrintStream(repl.getErrorStream());
-				while(true) {
-					try {
-						String line = reader.readLine();
-						IValue result = i.eval(line);
-						ps.println(result.asString(new PrintConfig()));
-						ps.flush();					
-					} catch(AplError e) {
-						es.println(e.getMessage());
-						es.flush();
-					} catch(ArithmeticException e) {
-						es.println("DIVBYZERO");
-						es.flush();
-					} catch(TokenMgrError e) {
-						e.printStackTrace(es);
-						es.flush();
-					} catch (Exception e) {
-						e.printStackTrace(es);
-						es.flush();
-					}
-				}
+				i.eval(repl.getInputStream());
 			}
 		});
 		t.start();

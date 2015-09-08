@@ -95,4 +95,9 @@ public class ExistsFn extends BaseFn {
 		};
 	}
 	
+	@Override
+	public String getName() {
+		return "exists";
+	}
+
 }

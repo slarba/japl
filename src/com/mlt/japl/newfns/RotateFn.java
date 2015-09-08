@@ -192,4 +192,9 @@ public class RotateFn extends BaseFn {
 		};
 	}
 	
+	@Override
+	public String getName() {
+		return "rotate";
+	}
+
 }

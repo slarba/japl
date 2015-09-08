@@ -3,11 +3,14 @@ package com.mlt.japl.workspace;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import com.mlt.japl.ast.AstNode;
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.newarrays.concrete.CharScalar;
@@ -17,24 +20,31 @@ import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.ParseException;
+import com.mlt.japl.parser.TokenMgrError;
 import com.mlt.japl.tools.Dimensions;
+import com.mlt.japl.utils.PrintConfig;
 
 public class Interpreter {
 	private EvalContext context;
 	private ArrayList<AplBusyListener> listeners = new ArrayList<AplBusyListener>();
+	private PrintConfig printConfig;
 	
-	public Interpreter(OutputStream out) {
-		context = new EvalContext(out);
+	public Interpreter(OutputStream out, OutputStream error) {
+		context = new EvalContext(out, error);
+		printConfig = new PrintConfig();
 	}
 
 	public void reset() {
 		context = new EvalContext();
 	}
 	
-	public IValue eval(String s) {
+	public void eval(String s) {
+		PrintWriter w = new PrintWriter(context.getOutputStream());
 		for(AplBusyListener listener : listeners) listener.evaluationStarted();
 		try {
-			return parse(s).eval(context);
+			IValue rval = parse(s).eval(context);
+			w.println(rval.asString(printConfig));
+			w.flush();
 		} finally {
 			for(AplBusyListener listener : listeners) listener.evaluationEnded();			
 		}
@@ -44,11 +54,26 @@ public class Interpreter {
 		AplParser parser;
 		try {
 			parser = new AplParser(new InputStreamReader(s, "UTF-8"), context);
-			parser.eval_stream();
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
+			PrintStream errorStream = new PrintStream(context.getErrorStream());
+			while(true) {
+				try {
+					parser.eval_stream();
+				} catch (ParseException e) {
+					errorStream.println("PARSE ERROR");
+					parser.skipTo(parser.STMTSEPARATOR);
+					errorStream.flush();
+				} catch(TokenMgrError tme) {
+					errorStream.println("LEXICAL ERROR");
+					parser.skipTo(parser.STMTSEPARATOR);
+					errorStream.flush();
+				} catch(AplError aple) {
+					errorStream.println(aple.getMessage());
+					errorStream.flush();
+					parser.skipTo(parser.STMTSEPARATOR);
+				}
+			}
+		} catch (UnsupportedEncodingException e2) {
+			e2.printStackTrace();
 		}
 	}
 	
@@ -99,7 +124,7 @@ public class Interpreter {
 	}
 
 	public static void main(String[] args) {
-		new Interpreter(System.out).eval(System.in);
+		new Interpreter(System.out, System.err).eval(System.in);
 	}
 
 	public void addBusyListener(AplBusyListener listener) {
