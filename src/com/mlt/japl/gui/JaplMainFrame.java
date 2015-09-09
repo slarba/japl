@@ -73,7 +73,8 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				i.eval(repl.getInputStream());
+				while(true)
+					i.eval(repl.getInputStream());
 			}
 		});
 		t.start();

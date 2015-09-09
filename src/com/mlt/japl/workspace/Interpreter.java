@@ -55,22 +55,20 @@ public class Interpreter {
 		try {
 			parser = new AplParser(new InputStreamReader(s, "UTF-8"), context);
 			PrintStream errorStream = new PrintStream(context.getErrorStream());
-			while(true) {
-				try {
-					parser.eval_stream();
-				} catch (ParseException e) {
-					errorStream.println("PARSE ERROR");
-					parser.skipTo(parser.STMTSEPARATOR);
-					errorStream.flush();
-				} catch(TokenMgrError tme) {
-					errorStream.println("LEXICAL ERROR");
-					parser.skipTo(parser.STMTSEPARATOR);
-					errorStream.flush();
-				} catch(AplError aple) {
-					errorStream.println(aple.getMessage());
-					errorStream.flush();
-					parser.skipTo(parser.STMTSEPARATOR);
-				}
+			try {
+				parser.eval_stream();
+			} catch (ParseException e) {
+				errorStream.println("PARSE ERROR");
+				parser.skipTo(parser.STMTSEPARATOR);
+				errorStream.flush();
+			} catch(TokenMgrError tme) {
+				errorStream.println("LEXICAL ERROR");
+				parser.skipTo(parser.STMTSEPARATOR);
+				errorStream.flush();
+			} catch(AplError aple) {
+				errorStream.println(aple.getMessage());
+				errorStream.flush();
+				parser.skipTo(parser.STMTSEPARATOR);
 			}
 		} catch (UnsupportedEncodingException e2) {
 			e2.printStackTrace();
