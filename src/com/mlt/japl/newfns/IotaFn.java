@@ -3,8 +3,15 @@ package com.mlt.japl.newfns;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.IotaArray;
+import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.generated.MultidimIotaArray;
+import com.mlt.japl.newarrays.interf.IBitArray;
+import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
+import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
@@ -25,6 +32,130 @@ public class IotaFn extends BaseFn {
 		return new MultidimIotaArray(new Dimensions(shape), a);
 	}
 
+	@Override
+	public IValue visit_dyadic(IIntArray a, IIntScalar b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		for(int i=0; i<a.length(); i++) {
+			if(a.get(i) == b.get()) return new IntScalar(i+1);
+		}
+		return new IntScalar(a.length()+1);
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				for(int i=0; i<b.length(); i++) {
+					if(a.get() == b.get(index)) return 1;
+				}
+				return 2;
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, ICharArray b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				for(int i=0; i<b.length(); i++) {
+					if(a.get() == b.get(index)) return 1;
+				}
+				return 2;
+			}
+		};
+	}
+	
+	@Override
+	public IValue visit_dyadic(ICharArray a, ICharScalar b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		for(int i=0; i<a.length(); i++) {
+			if(a.get(i) == b.get()) return new IntScalar(i+1);
+		}
+		return new IntScalar(a.length()+1);
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		if(b.rank()>1) throw new RankError();
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				for(int i=0; i<a.length(); i++) {
+					if(a.get(i) == b.get(index)) return i+1;
+				}
+				return a.length()+1;
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		if(b.rank()>1) throw new RankError();
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				for(int i=0; i<a.length(); i++) {
+					if(a.get(i) == b.get(index)) return i+1;
+				}
+				return a.length()+1;
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		if(b.rank()>1) throw new RankError();
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				for(int i=0; i<a.length(); i++) {
+					if(a.get(i) == b.get(index)) return i+1;
+				}
+				return a.length()+1;
+			}
+		};
+	}
+	
+	@Override
+	public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
+		if(a.rank()>1) throw new RankError();
+		if(b.rank()>1) throw new RankError();
+		return new LazyIntArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				for(int i=0; i<a.length(); i++) {
+					if(a.get(i) == b.get(index)) return i+1;
+				}
+				return a.length()+1;
+			}
+		};
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+		if(a.get()==b.get()) return new IntScalar(1);
+		else return new IntScalar(2);
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+		if(a.get()==b.get()) return new IntScalar(1);
+		else return new IntScalar(2);
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+		if(a.get()==b.get()) return new IntScalar(1);
+		else return new IntScalar(2);
+	}
+	
 	@Override
 	public IValue visit_monadic(IMixedArray a, int axis) {
 		throw new DomainError();
