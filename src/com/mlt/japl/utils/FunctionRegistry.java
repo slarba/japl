@@ -33,6 +33,7 @@ import com.mlt.japl.newfns.NeqFn;
 import com.mlt.japl.newfns.NorFn;
 import com.mlt.japl.newfns.RavelFn;
 import com.mlt.japl.newfns.ReduceFn;
+import com.mlt.japl.newfns.ReplicateFn;
 import com.mlt.japl.newfns.ReverseFn;
 import com.mlt.japl.newfns.RotateFn;
 import com.mlt.japl.newfns.RhoFn;
@@ -92,7 +93,7 @@ public class FunctionRegistry {
 		map.put("\u222a", new UnionFn());
 		map.put("\u22a3", new StopFn());
 		map.put("\u22a2", new PassFn());
-//		map.put("/", new ReplicateFn(false));	
+		map.put("/", new ReplicateFn(false));	
 //		map.put("\u233f", new ReplicateFn(true));
 //		map.put("\\", new ExpandFn(false));
 //		map.put("\u2340", new ExpandFn(true));
