@@ -6,6 +6,7 @@ import com.mlt.japl.newarrays.concrete.BitArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.LazyBitArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
+import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -13,6 +14,7 @@ import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 
 public class NeqFn extends BaseFn {
 	@Override
@@ -35,6 +37,16 @@ public class NeqFn extends BaseFn {
 		return new IntScalar(a.get() != b.get() ? 1 : 0);
 	}
 
+	@Override
+	public IValue visit_dyadic(IIntScalar a, ICharArray b, int axis) {
+		return new BitArray(1, b.dims(), new long[] { 1 });
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharArray a, IIntScalar b, int axis) {
+		return new BitArray(1, a.dims(), new long[] { 1 });
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
 		checkLengths(a, b);
@@ -284,6 +296,17 @@ public class NeqFn extends BaseFn {
 			public long get(int index) {
 				return a.get(index)!=b.get(index) ? 1 : 0;
 			}
+		};
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntArray a, IMixedArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return visit_first(new IntScalar(a.get(index)), b.get(index), axis);
+			}			
 		};
 	}
 	

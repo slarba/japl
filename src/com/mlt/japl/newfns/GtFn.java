@@ -214,6 +214,45 @@ public class GtFn extends BaseFn {
 	}
 
 	@Override
+	public IValue visit_dyadic(ICharArray a, ICharScalar b, int axis) {
+		return new LazyBitArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) > b.get() ? 1 : 0;
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, ICharArray b, int axis) {
+		return new LazyBitArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get() > b.get(index) ? 1 : 0;
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+		return new LazyBitArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get() > b.get(index) ? 1 : 0;
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
+		return new LazyBitArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) > b.get() ? 1 : 0;
+			}
+		};
+	}	
+	@Override
 	public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
 		return new IntScalar(a.get()>b.get() ? 1 : 0);
 	}

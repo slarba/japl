@@ -54,7 +54,7 @@ public class OpTest {
 			out.flush();
 			String[] result = out.toString("UTF-8").split("\n");
 			for(String s : result) {
-				assertEquals("on line " + linenum, testInput.readLine(), s);
+				assertEquals("on line " + linenum + ", file " + file.getName(), testInput.readLine(), s);
 				linenum++;
 			}
 			linenum++;
