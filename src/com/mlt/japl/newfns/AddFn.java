@@ -63,7 +63,7 @@ public class AddFn extends BaseFn {
 	
 	@Override
 	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
-		return new LazyIntArray(b.dims()) {
+		return new LazyIntArray(a.dims()) {
 			@Override
 			public long get(int index) {
 				return a.get(index) + b.get();
@@ -83,7 +83,7 @@ public class AddFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IBitArray a, IDoubleScalar b, int axis) {
-		return new LazyDoubleArray(b.dims()) {
+		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
 				return a.get(index) + b.get();
@@ -270,6 +270,11 @@ public class AddFn extends BaseFn {
 		return a;
 	}
 
+	@Override
+	public IValue visit_monadic(IBitArray a, int axis) {
+		return a;
+	}
+	
 	@Override
 	public IValue visit_monadic(IIntScalar a, int axis) {
 		return a;
