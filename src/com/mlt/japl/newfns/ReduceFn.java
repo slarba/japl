@@ -1,5 +1,6 @@
 package com.mlt.japl.newfns;
 
+import com.mlt.japl.errors.AxisError;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
@@ -47,27 +48,37 @@ public class ReduceFn extends BaseFn {
 	}
 
 	@Override
-	public IValue visit_monadic(IBitArray a, int axis) {
-		return fn.reduce(a, axis<0 ? (firstAxis ? 0 : a.rank()-1) : axis);
+	public IValue visit_monadic(IBitArray a, int ax) {
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
+		if(axis>=a.rank()) throw new AxisError();
+		return fn.reduce(a, axis);
 	}
 	
 	@Override
-	public IValue visit_monadic(IIntArray a, int axis) {
+	public IValue visit_monadic(IIntArray a, int ax) {
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
+		if(axis>=a.rank()) throw new AxisError();
 		return fn.reduce(a, axis<0 ? (firstAxis ? 0 : a.rank()-1) : axis);
 	}
 
 	@Override
-	public IValue visit_monadic(IDoubleArray a, int axis) {
+	public IValue visit_monadic(IDoubleArray a, int ax) {
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
+		if(axis>=a.rank()) throw new AxisError();
 		return fn.reduce(a, axis<0 ? (firstAxis ? 0 : a.rank()-1) : axis);
 	}
 
 	@Override
-	public IValue visit_monadic(ICharArray a, int axis) {
+	public IValue visit_monadic(ICharArray a, int ax) {
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
+		if(axis>=a.rank()) throw new AxisError();
 		return fn.reduce(a, axis<0 ? (firstAxis ? 0 : a.rank()-1) : axis);
 	}
 	
 	@Override
-	public IValue visit_monadic(IMixedArray a, int axis) {
+	public IValue visit_monadic(IMixedArray a, int ax) {
+		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
+		if(axis>=a.rank()) throw new AxisError();
 		return fn.reduce(a, axis<0 ? (firstAxis ? 0 : a.rank()-1) : axis);
 	}
 }
