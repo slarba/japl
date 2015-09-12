@@ -307,7 +307,7 @@ public class AddFn extends BaseFn {
 		BitReducer reducer = new BitReducer(0, a, axis) {
 			@Override
 			public long op(long a, long b) {
-				return a*b;
+				return a+b;
 			}
 		};
 		if(a.rank()==1) return new IntScalar(reducer.rank1case());
@@ -324,7 +324,7 @@ public class AddFn extends BaseFn {
 		DoubleReducer reducer = new DoubleReducer(0, a, axis) {
 			@Override
 			public double op(double a, double b) {
-				return a*b;
+				return a+b;
 			}
 		};
 		if(a.rank()==1) return new DoubleScalar(reducer.rank1case());

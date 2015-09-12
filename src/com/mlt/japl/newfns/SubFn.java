@@ -17,7 +17,6 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 
 public class SubFn extends BaseFn {
-	// scalars
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
 		return new IntScalar(a.get() - b.get());
@@ -38,19 +37,19 @@ public class SubFn extends BaseFn {
 		return new DoubleScalar(a.get() - b.get());
 	}
 
-	// arrays
 	@Override
-	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
-		return new LazyIntArray(a.dims()) {
+	public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+		return new LazyIntArray(b.dims()) {
 			@Override
 			public long get(int index) {
-				return a.get(index) - b.get(index);
+				return a.get() - b.get(index);
 			}
 		};
 	}
 
 	@Override
 	public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+		checkLengths(a, b);
 		return new LazyIntArray(a.dims()) {
 			@Override
 			public long get(int index) {
@@ -58,7 +57,7 @@ public class SubFn extends BaseFn {
 			}
 		};
 	}
-
+	
 	@Override
 	public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
 		return new LazyIntArray(a.dims()) {
@@ -68,9 +67,85 @@ public class SubFn extends BaseFn {
 			}
 		};
 	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IBitArray b, int axis) {
+		return new LazyDoubleArray(b.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get() - b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IDoubleScalar b, int axis) {
+		return new LazyDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) - b.get();
+			}
+		};
+	}
 	
 	@Override
+	public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) - b.get(index);
+			}
+		};		
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IIntArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) - b.get(index);
+			}
+		};		
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleArray a, IBitArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) - b.get(index);
+			}
+		};		
+	}
+
+	@Override
+	public IValue visit_dyadic(IBitArray a, IDoubleArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get(index) - b.get(index);
+			}
+		};		
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+		checkLengths(a, b);
+		return new LazyIntArray(a.dims()) {
+			@Override
+			public long get(int index) {
+				return a.get(index) - b.get(index);
+			}
+		};
+	}
+
+	@Override
 	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+		checkLengths(a, b);
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -81,6 +156,7 @@ public class SubFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
+		checkLengths(a, b);
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -91,6 +167,7 @@ public class SubFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
+		checkLengths(a, b);
 		return new LazyDoubleArray(a.dims()) {
 			@Override
 			public double get(int index) {
@@ -102,7 +179,7 @@ public class SubFn extends BaseFn {
 	// scalar/array
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
-		return new LazyIntArray(a.dims()) {
+		return new LazyIntArray(b.dims()) {
 			@Override
 			public long get(int index) {
 				return a.get() - b.get(index);
@@ -112,7 +189,7 @@ public class SubFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
-		return new LazyDoubleArray(a.dims()) {
+		return new LazyDoubleArray(b.dims()) {
 			@Override
 			public double get(int index) {
 				return a.get() - b.get(index);
@@ -122,7 +199,7 @@ public class SubFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IIntArray b, int axis) {
-		return new LazyDoubleArray(a.dims()) {
+		return new LazyDoubleArray(b.dims()) {
 			@Override
 			public double get(int index) {
 				return a.get() - b.get(index);
@@ -132,7 +209,7 @@ public class SubFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b, int axis) {
-		return new LazyDoubleArray(a.dims()) {
+		return new LazyDoubleArray(b.dims()) {
 			@Override
 			public double get(int index) {
 				return a.get() - b.get(index);
@@ -180,12 +257,21 @@ public class SubFn extends BaseFn {
 		};
 	}
 	
-	// monadic
 	@Override
 	public IValue visit_monadic(IIntArray a, int axis) {
 		return new LazyIntArray(a.dims()) {
 			@Override
 			public long get(int index) {
+				return -a.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_monadic(IDoubleArray a, int axis) {
+		return new LazyDoubleArray(a.dims()) {
+			@Override
+			public double get(int index) {
 				return -a.get(index);
 			}
 		};
@@ -202,16 +288,6 @@ public class SubFn extends BaseFn {
 	}
 	
 	@Override
-	public IValue visit_monadic(IDoubleArray a, int axis) {
-		return new LazyDoubleArray(a.dims()) {
-			@Override
-			public double get(int index) {
-				return -a.get(index);
-			}
-		};
-	}
-	
-	@Override
 	public IValue visit_monadic(IIntScalar a, int axis) {
 		return new IntScalar(-a.get());
 	}
@@ -220,7 +296,7 @@ public class SubFn extends BaseFn {
 	public IValue visit_monadic(IDoubleScalar a, int axis) {
 		return new DoubleScalar(-a.get());
 	}
-
+	
 	@Override
 	public IValue reduce(IIntArray a, int axis) {
 		IntReducer reducer = new IntReducer(0, a, axis) {
@@ -271,7 +347,7 @@ public class SubFn extends BaseFn {
 			}
 		};
 	}
-
+	
 	@Override
 	public String getName() {
 		return "-";
