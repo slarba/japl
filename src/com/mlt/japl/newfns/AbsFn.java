@@ -277,6 +277,57 @@ public class AbsFn extends BaseFn {
 	}
 	
 	@Override
+	public IValue reduce(IIntArray a, int axis) {
+		IntReducer reducer = new IntReducer(a.get(0), a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return b%a;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue reduce(IBitArray a, int axis) {
+		BitReducer reducer = new BitReducer(a.get(0), a, axis) {
+			@Override
+			public long op(long a, long b) {
+				return b%a;
+			}
+		};
+		if(a.rank()==1) return new IntScalar(reducer.rank1case());
+		return new LazyIntArray(a.dims().elideAxis(axis)) {
+			@Override
+			public long get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue reduce(IDoubleArray a, int axis) {
+		DoubleReducer reducer = new DoubleReducer(a.get(0), a, axis) {
+			@Override
+			public double op(double a, double b) {
+				return b%a;
+			}
+		};
+		if(a.rank()==1) return new DoubleScalar(reducer.rank1case());
+		return new LazyDoubleArray(a.dims().elideAxis(axis)) {
+			@Override
+			public double get(int index) {
+				return reducer.get(index);
+			}
+		};
+	}
+	
+	@Override
 	public String getName() {
 		return "abs";
 	}

@@ -4,6 +4,7 @@ import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
+import com.mlt.japl.newarrays.concrete.CharScalar;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
@@ -29,7 +30,19 @@ public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 		for(int i=0; i<data.length; i++) data[i] = get(i);
 		return new CharArray(dims(), data);
 	}
-	
+
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new CharScalar(get(indexForSingle(i.get(0))));
+		return new LazyCharArray(new Dimensions(finalDims)) {
+			@Override
+			public char get(int index) {
+				return 'a';
+			}
+		};
+	}	
+
 	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);

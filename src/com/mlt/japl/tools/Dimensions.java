@@ -3,6 +3,7 @@ package com.mlt.japl.tools;
 import java.util.Arrays;
 
 import com.mlt.japl.errors.IndexError;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 
 public class Dimensions {
 	int[] dims;
@@ -234,5 +235,15 @@ public class Dimensions {
 		int[] newdims = Arrays.copyOf(dims, dims.length);
 		newdims[axis] = sum;
 		return new Dimensions(newdims);
+	}
+
+	public int calculateIndexWithAxes(int[] indx, int[] axes) {
+		int i;
+		int result = 0;
+		int[] spans = this.spans;
+		for(i=0; i<indx.length; i++) {
+			result += spans[axes[i]] * indx[i];
+		}
+		return result;
 	}
 }

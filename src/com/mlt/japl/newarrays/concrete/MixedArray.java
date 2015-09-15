@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.generated.LazyDoubleArray;
+import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -33,6 +35,18 @@ public class MixedArray extends ArrayBase implements IMixedArray {
 		return depth;
 	}
 	
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return get(indexForSingle(i.get(0)));
+		return new LazyMixedArray(new Dimensions(finalDims)) {
+			@Override
+			public IValue get(int index) {
+				return IntArray.EMPTY;
+			}
+		};
+	}	
+
 	@Override
 	public IValue get(int index) {
 		return data[index%data.length];

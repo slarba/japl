@@ -9,10 +9,13 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
+import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -24,6 +27,19 @@ public class IotaArray extends ArrayBase implements IIntArray {
 		this.val = val;
 	}
 
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
+		throw new AplError();
+//		return new LazyMixedArray(new Dimensions(finalDims)) {
+//			@Override
+//			public IValue get(int index) {
+//				return IntArray.EMPTY;
+//			}
+//		};
+	}
+	
 	@Override
 	public long get(int index) {
 		return 1+(index % val);

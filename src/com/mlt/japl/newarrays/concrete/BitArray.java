@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.generated.LazyBitArray;
+import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -34,7 +36,19 @@ public class BitArray extends ArrayBase implements IBitArray {
 		this.actualLength = actualLength;
 		this.data = data;
 	}
-	
+
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
+		return new LazyBitArray(new Dimensions(finalDims)) {
+			@Override
+			public long get(int index) {
+				return 1;
+			}
+		};
+	}
+
 	@Override
 	public long get(int idx) {
 		int i = idx % actualLength;

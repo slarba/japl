@@ -2,9 +2,12 @@ package com.mlt.japl.newarrays.concrete;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.IndexError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.generated.LazyBitArray;
+import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -27,6 +30,18 @@ public class IntArray extends ArrayBase implements IIntArray {
 		this.data = data;
 	}
 	
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
+		return new LazyIntArray(new Dimensions(finalDims)) {
+			@Override
+			public long get(int index) {
+				return 1;
+			}
+		};
+	}
+
 	@Override
 	public long get(int index) {
 		return data[index%data.length];

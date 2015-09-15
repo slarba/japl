@@ -54,8 +54,8 @@ public class AplParser
   public void skipTo(int token)  {    Token x;
     do
     {
-      x = getNextToken();
-      System.out.println("Skippaan tokenin: " + x.kind + " str=" + x.toString());
+      try      {        x = getNextToken();      }      catch(TokenMgrError e)      {
+        return;      }
     } while(x.kind != token);
   }
   
@@ -454,13 +454,23 @@ AstNode identifierexpr() :
 
 IndexExprNode indexexpr() :
 {
-  AstNode e1 = null;
-  IndexExprNode e2 = null;
+  List<AstNode> chain = new ArrayList<AstNode>();  
+  AstNode e = null;
 }
 {
-  (e1=arrayexpr())? (";" e2=indexexpr())?
+  (e=arrayexpr())?
   {
-    return new IndexExprNode(e1, e2);
+    chain.add(e);
+    e = null;
+  }
+  (";" (e=arrayexpr())?
+		  {
+		    chain.add(e);
+		    e = null;
+		  }
+  )*
+  {
+    return new IndexExprNode(chain);
   }
 }
 
@@ -471,7 +481,11 @@ Func fn_expr() :
   Token m = null;
 }
 {
-    userfn = userfndef() { return new UserFnNode(userfn, context); }
+    userfn = userfndef() (m = < MONADICOPERATOR >)? {
+      if(m!=null)      {
+        return buildMonadicOperator(m.toString(), new UserFnNode(userfn, context));      } else      {         return new UserFnNode(userfn, context);
+      }
+    }
   | s = operatorexpr() (m = < MONADICOPERATOR >)? {
        if(m!=null)
          return buildMonadicOperator(m.toString(), s);

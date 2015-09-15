@@ -1,7 +1,9 @@
 package com.mlt.japl.ast;
 
+import com.mlt.japl.errors.IndexError;
 import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -24,7 +26,12 @@ public class IdentifierNode implements AstNode {
 		if(context==null) {
 			throw new ValueError();
 		}
-		return context.get(id);
+		IValue val = context.get(id);
+		if(expr!=null) {
+			IMixedArray i = (IMixedArray)expr.eval(context);
+			return val.get(i);
+		}
+		return val;
 	}
 
 	@Override

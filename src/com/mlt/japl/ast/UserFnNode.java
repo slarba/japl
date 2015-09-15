@@ -1,12 +1,18 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.DoubleScalar;
+import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.generated.LazyDoubleArray;
+import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IMixedArray;
+import com.mlt.japl.newfns.DoubleReducer;
 import com.mlt.japl.newfns.Func;
+import com.mlt.japl.newfns.UserFnReducer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -37,7 +43,7 @@ public class UserFnNode implements AstNode, Func {
 	@Override
 	public IValue applyMonadic(IValue a, int axis) {
 		EvalContext derived = frame.newFrame();
-		derived.set("\u03b1", a);
+		derived.set("\u03c9", a);
 		derived.set("\u237a", a);
 		return body.eval(derived);
 	}
@@ -64,8 +70,19 @@ public class UserFnNode implements AstNode, Func {
 
 	@Override
 	public IValue reduce(IIntArray a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		UserFnReducer reducer = new UserFnReducer(new IntScalar(a.get(0)), a, axis) {
+			@Override
+			public IValue op(IValue a, IValue b) {
+				return applyDyadic(a, b, axis);
+			}
+		};
+		if(a.rank()==1) return reducer.rank1case();
+		return new LazyMixedArray(a.dims().elideAxis(axis)) {
+			@Override
+			public IValue get(int index) {
+				return reducer.get(index);
+			}
+		};
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.generated.LazyDoubleArray;
+import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -31,11 +33,17 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 	}
 
 	
-	
-	
-	
-	
-	
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new DoubleScalar(get(indexForSingle(i.get(0))));
+		return new LazyDoubleArray(new Dimensions(finalDims)) {
+			@Override
+			public double get(int index) {
+				return 1;
+			}
+		};
+	}	
 	
 	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {

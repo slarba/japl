@@ -1,0 +1,5 @@
+eachfn depth handling
+unionfn bitarray case
+
+todo:
+identifierexpr indexing with complex indices

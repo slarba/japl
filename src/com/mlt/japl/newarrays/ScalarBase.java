@@ -1,5 +1,7 @@
 package com.mlt.japl.newarrays;
 
+import com.mlt.japl.errors.IndexError;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.tools.Dimensions;
 
 public abstract class ScalarBase implements IValue {
@@ -9,6 +11,11 @@ public abstract class ScalarBase implements IValue {
 		return Dimensions.EMPTY;
 	}
 
+	@Override
+	public IValue get(IMixedArray i) {
+		throw new IndexError();
+	}
+	
 	@Override
 	public int rank() {
 		return 0;

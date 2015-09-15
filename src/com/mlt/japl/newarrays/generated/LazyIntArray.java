@@ -5,6 +5,7 @@ import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
 import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
@@ -29,6 +30,18 @@ public abstract class LazyIntArray extends ArrayBase implements IIntArray {
 		long[] data = new long[dims().length()];
 		for(int i=0; i<data.length; i++) data[i] = get(i);
 		return new IntArray(dims(), data);
+	}
+
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
+		return new LazyIntArray(new Dimensions(finalDims)) {
+			@Override
+			public long get(int index) {
+				return 1;
+			}
+		};
 	}
 
 	@Override

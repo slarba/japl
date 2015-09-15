@@ -32,8 +32,21 @@ public class EvalContext {
 	}
 
 	public IValue set(String id, IValue eval) {
-		valueMap.put(id, eval);
+		if(parent!=null && parent.tryReplace(id, eval)) {
+			return eval;
+		} else
+			valueMap.put(id, eval);
 		return eval;
+	}
+
+	protected boolean tryReplace(String id, IValue eval) {
+		if(valueMap.containsKey(id)) {
+			valueMap.put(id, eval);
+			return true;
+		} else {
+			if(parent!=null) return parent.tryReplace(id, eval);
+		}
+		return false;
 	}
 
 	public Func set(String id, Func eval) {

@@ -65,6 +65,9 @@ public class Interpreter {
 				errorStream.println("LEXICAL ERROR");
 				parser.skipTo(parser.STMTSEPARATOR);
 				errorStream.flush();
+			} catch(ArithmeticException ae) {
+				errorStream.println("DIVBYZERO");
+				errorStream.flush();
 			} catch(AplError aple) {
 				errorStream.println(aple.getMessage());
 				errorStream.flush();

@@ -4,6 +4,7 @@ import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
+import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.MixedArray;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
@@ -23,6 +24,18 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 	public LazyMixedArray(Dimensions dims) {
 		super(dims);
 	}
+		
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return get(indexForSingle(i.get(0)));
+		return new LazyMixedArray(new Dimensions(finalDims)) {
+			@Override
+			public IValue get(int index) {
+				return IntArray.EMPTY;
+			}
+		};
+	}	
 
 	@Override
 	public IValue force() {

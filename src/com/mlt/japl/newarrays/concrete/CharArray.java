@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.generated.LazyCharArray;
+import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -34,6 +36,18 @@ public class CharArray extends ArrayBase implements ICharArray {
 		super(new Dimensions(string.length()));
 		this.data = string;
 	}
+
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new CharScalar(get(indexForSingle(i.get(0))));
+		return new LazyCharArray(new Dimensions(finalDims)) {
+			@Override
+			public char get(int index) {
+				return 'a';
+			}
+		};
+	}	
 
 	@Override
 	public char get(int index) {

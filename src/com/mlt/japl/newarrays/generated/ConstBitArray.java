@@ -4,6 +4,7 @@ import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
@@ -24,6 +25,18 @@ public class ConstBitArray extends ArrayBase implements IBitArray {
 	public ConstBitArray(Dimensions dims, long val) {
 		super(dims);
 		this.val = val;
+	}
+
+	@Override
+	public IValue get(IMixedArray i) {
+		int[] finalDims = dimsForIndexed(i);
+		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
+		return new LazyBitArray(new Dimensions(finalDims)) {
+			@Override
+			public long get(int index) {
+				return val;
+			}
+		};
 	}
 
 	@Override
