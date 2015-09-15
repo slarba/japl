@@ -22,6 +22,7 @@ public class RollFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IIntArray a, int axis) {
+		if(a.rank()==1 && a.length()==1) return new IntScalar(1 + Math.abs(rand.nextLong() % a.get(0)));
 		long[] result = new long[a.length()];
 		for(int i=0; i<result.length; i++)
 			result[i] = 1 + Math.abs(rand.nextLong() % a.get(i));

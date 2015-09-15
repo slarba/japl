@@ -72,6 +72,9 @@ public class Interpreter {
 				errorStream.println(aple.getMessage());
 				errorStream.flush();
 				parser.skipTo(parser.STMTSEPARATOR);
+			} catch(Exception e) {
+				e.printStackTrace(errorStream);
+				errorStream.flush();
 			}
 		} catch (UnsupportedEncodingException e2) {
 			e2.printStackTrace();

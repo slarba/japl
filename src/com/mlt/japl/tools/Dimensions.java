@@ -2,7 +2,9 @@ package com.mlt.japl.tools;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.AxisError;
 import com.mlt.japl.errors.IndexError;
+import com.mlt.japl.errors.RankError;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 
 public class Dimensions {
@@ -181,6 +183,7 @@ public class Dimensions {
 	}
 
 	public Dimensions laminate(Dimensions dims2, int axis) {
+		if(dims2.dims.length != dims.length) throw new RankError();
 		int[] rdims = new int[dims.length];
 		for(int i=0; i<dims.length; i++) {
 			if(i==axis) {

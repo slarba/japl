@@ -131,7 +131,7 @@ public class AndFn extends BaseFn {
 			}
 		};
 		if(a.rank()==1) return new IntScalar(reducer.rank1case());
-		return new LazyIntArray(a.dims().elideAxis(axis)) {
+		return new LazyBitArray(a.dims().elideAxis(axis)) {
 			@Override
 			public long get(int index) {
 				return reducer.get(index);

@@ -20,6 +20,8 @@ import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class MixedArray extends ArrayBase implements IMixedArray {
+	public static final IValue EMPTY = new MixedArray(Dimensions.EMPTY_ARRAY, new IValue[0]);
+	
 	IValue[] data;
 	int depth;
 	

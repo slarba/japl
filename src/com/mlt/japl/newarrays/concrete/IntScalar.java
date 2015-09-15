@@ -3,6 +3,7 @@ package com.mlt.japl.newarrays.concrete;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.ScalarBase;
+import com.mlt.japl.newarrays.generated.ConstBitArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -111,6 +112,7 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 
 	@Override
 	public IValue reshape(int[] newShape) {
+		if(val==1 || val==0) return new ConstBitArray(new Dimensions(newShape), val);
 		return new IntArray(new Dimensions(newShape), new long[] { val });
 	}
 

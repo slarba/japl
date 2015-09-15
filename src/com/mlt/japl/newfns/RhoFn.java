@@ -1,10 +1,12 @@
 package com.mlt.japl.newfns;
 
+import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
+import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.tools.Dimensions;
 
 public class RhoFn extends BaseFn implements Func {
@@ -27,6 +29,18 @@ public class RhoFn extends BaseFn implements Func {
 		return b.reshape(newShape);
 	}
 
+	@Override
+	public IValue visit_first(IMixedArray a, IValue b, int axis) {
+		if(a.rank()!=1) throw new RankError();
+		int[] newShape = new int[a.length()];
+		for(int i=0; i<newShape.length; i++) {
+			IValue v = a.get(i);
+			if(!(v instanceof IIntScalar)) throw new DomainError();
+			newShape[i] = (int) ((IIntScalar)v).get();
+		}
+		return b.reshape(newShape);
+	}
+	
 	@Override
 	public IValue visit_first(IIntScalar a, IValue b, int axis) {
 		return b.reshape(new int[] { (int)a.get() });
