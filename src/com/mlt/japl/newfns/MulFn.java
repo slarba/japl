@@ -1,9 +1,11 @@
 package com.mlt.japl.newfns;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
 import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.generated.LazyBitArray;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
@@ -340,6 +342,105 @@ public class MulFn extends BaseFn {
 			@Override
 			public double get(int index) {
 				return reducer.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
+		return new LazyBitArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IIntArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IBitArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) * b.get(index);
 			}
 		};
 	}

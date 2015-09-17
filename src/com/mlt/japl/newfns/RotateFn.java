@@ -1,6 +1,7 @@
 package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.LazyCharArray;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
@@ -117,6 +118,11 @@ public class RotateFn extends BaseFn {
 	}
 	
 	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int ax) {
+		return b;
+	}
+	
+	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntArray b, int ax) {
 		int axis;
 		if(ax<0) {
@@ -188,6 +194,17 @@ public class RotateFn extends BaseFn {
 				int limit = b.dims().axis(axis);
 				rindex[axis] = clamp(limit, rindex[axis] + (int)a.get());
 				return b.get(b.dims().calculateIndex(rindex));
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
+		return new LazyMixedArray(a.dims().concat(b.dims())) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return visit_dyadic(new IntScalar(a.get(idx)), new IntScalar(b.get(index)), axis);
 			}
 		};
 	}

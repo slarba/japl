@@ -21,6 +21,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.tools.Dimensions;
 
 public class BaseFn implements ArrayVisitor, Func {
 
@@ -743,4 +744,52 @@ public class BaseFn implements ArrayVisitor, Func {
 		throw new AplError();
 	}
 
+	@Override
+	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
+		return null;
+	}
+
+	protected Dimensions outerProdDims(IArray a, IArray b, int axis) {
+		return a.dims().concat(b.dims());
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IDoubleArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IIntArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IBitArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
+		return null;
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
+		return null;
+	}
 }

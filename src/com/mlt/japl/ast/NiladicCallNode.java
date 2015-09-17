@@ -19,12 +19,12 @@ public class NiladicCallNode implements AstNode {
 	
 	@Override
 	public IValue eval(EvalContext context) {
-		return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
+		return fn.applyNiladic(0);
 	}
 
 	@Override
 	public String print() {
-		return fn.getName() + "()";
+		return fn.getName() + "(<niladic>)";
 	}
 
 	public Func func() {

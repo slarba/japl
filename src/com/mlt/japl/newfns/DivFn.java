@@ -144,6 +144,105 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
+	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IIntArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IBitArray b, int axis) {
+		return new LazyDoubleArray(outerProdDims(a,b,axis)) {
+			@Override
+			public double get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) / b.get(index);
+			}
+		};
+	}
+
+	@Override
 	public String getName() {
 		return "/";
 	}

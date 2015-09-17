@@ -18,4 +18,16 @@ public interface Func {
 	public IValue reduce(ICharArray a, int axis);
 	public IValue reduce(IMixedArray a, int axis);
 	public IValue reduce(IBitArray a, int axis);
+	
+	public IValue outerprod(IIntArray a, IIntArray b, int axis);
+	public IValue outerprod(IIntArray a, IDoubleArray b, int axis);
+	public IValue outerprod(IIntArray a, IBitArray b, int axis);
+	
+	public IValue outerprod(IDoubleArray a, IIntArray b, int axis);
+	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis);
+	public IValue outerprod(IDoubleArray a, IBitArray b, int axis);
+	
+	public IValue outerprod(IBitArray a, IIntArray b, int axis);
+	public IValue outerprod(IBitArray a, IDoubleArray b, int axis);
+	public IValue outerprod(IBitArray a, IBitArray b, int axis);
 }

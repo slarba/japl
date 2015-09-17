@@ -9,6 +9,7 @@ import com.mlt.japl.newarrays.generated.LazyBitArray;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
+import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 
@@ -139,6 +140,50 @@ public class AndFn extends BaseFn {
 		};
 	}
 	
+	@Override
+	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) & b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) & b.get(index);
+			}
+		};
+	}
+	
+	@Override
+	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
+		return new LazyBitArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) & b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
+		return new LazyIntArray(outerProdDims(a,b,axis)) {
+			@Override
+			public long get(int index) {
+				int idx = index/a.length();
+				return a.get(idx) & b.get(index);
+			}
+		};
+	}
+
 	@Override
 	public IValue applyMonadic(IValue a, int axis) {
 		throw new ValenceError();

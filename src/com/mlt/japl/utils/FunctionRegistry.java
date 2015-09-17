@@ -44,6 +44,7 @@ import com.mlt.japl.newfns.SubFn;
 import com.mlt.japl.newfns.TakeFn;
 import com.mlt.japl.newfns.TrigFn;
 import com.mlt.japl.newfns.UnionFn;
+import com.mlt.japl.newfns.ZildeFn;
 
 public class FunctionRegistry {
 
@@ -95,6 +96,7 @@ public class FunctionRegistry {
 		map.put("\u22a2", new PassFn());
 		map.put("/", new ReplicateFn(false));	
 		map.put("\u233f", new ReplicateFn(true));
+		map.put("⍬", new ZildeFn());
 //		map.put("\\", new ExpandFn(false));
 //		map.put("\u2340", new ExpandFn(true));
 //		map.put("\u234b", new GradeUpFn(true));
