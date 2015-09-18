@@ -16,6 +16,7 @@ import com.mlt.japl.newfns.DropFn;
 import com.mlt.japl.newfns.EachFn;
 import com.mlt.japl.newfns.EncloseFn;
 import com.mlt.japl.newfns.EqFn;
+import com.mlt.japl.newfns.ExecuteFn;
 import com.mlt.japl.newfns.ExistsFn;
 import com.mlt.japl.newfns.ExpFn;
 import com.mlt.japl.newfns.FacFn;
@@ -45,12 +46,13 @@ import com.mlt.japl.newfns.TakeFn;
 import com.mlt.japl.newfns.TrigFn;
 import com.mlt.japl.newfns.UnionFn;
 import com.mlt.japl.newfns.ZildeFn;
+import com.mlt.japl.workspace.EvalContext;
 
 public class FunctionRegistry {
 
 	HashMap<String, Func> map;
 	
-	public FunctionRegistry() {
+	public FunctionRegistry(EvalContext context) {
 		map = new HashMap<String,Func>();
 		
 	    map.put("\u003f", new RollFn());
@@ -97,6 +99,7 @@ public class FunctionRegistry {
 		map.put("/", new ReplicateFn(false));	
 		map.put("\u233f", new ReplicateFn(true));
 		map.put("⍬", new ZildeFn());
+		map.put("⍎", new ExecuteFn(context));
 //		map.put("\\", new ExpandFn(false));
 //		map.put("\u2340", new ExpandFn(true));
 //		map.put("\u234b", new GradeUpFn(true));

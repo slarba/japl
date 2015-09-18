@@ -67,5 +67,6 @@ public class AplKeymap {
 			  ,"\u22a2"  // pass
 			  ,"⍪"  // laminate first axis
 			  ,"\u2337"  // index
+			  ,"⍎"  // execute
 	};
 }

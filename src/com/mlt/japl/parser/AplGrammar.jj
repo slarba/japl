@@ -36,7 +36,7 @@ public class AplParser
     this(reader);
     token_source.ctx = context;
     this.context = context;
-    this.fnRegistry = new FunctionRegistry();
+    this.fnRegistry = new FunctionRegistry(context);
   }
 
   public void printToErrorStream(String s)  {    PrintWriter writer = new PrintWriter(context.getErrorStream());

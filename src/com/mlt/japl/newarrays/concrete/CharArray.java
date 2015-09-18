@@ -37,6 +37,10 @@ public class CharArray extends ArrayBase implements ICharArray {
 		this.data = string;
 	}
 
+	public String getString() {
+		return data;
+	}
+
 	@Override
 	public IValue get(IMixedArray i) {
 		int[] finalDims = dimsForIndexed(i);
