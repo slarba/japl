@@ -68,5 +68,6 @@ public class AplKeymap {
 			  ,"⍪"  // laminate first axis
 			  ,"\u2337"  // index
 			  ,"⍎"  // execute
+			  ,"∇"  // line editor
 	};
 }

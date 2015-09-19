@@ -44,7 +44,7 @@ public class Interpreter extends AbstractHandler {
 		context = new EvalContext(out, error);
 		printConfig = new PrintConfig();
 		
-		startWebServer(8005);
+		//startWebServer(8005);
 	}
 
 	public void startWebServer(int port) {
@@ -82,6 +82,7 @@ public class Interpreter extends AbstractHandler {
 				parser.eval_stream();
 			} catch (ParseException e) {
 				errorStream.println("PARSE ERROR");
+				e.printStackTrace(errorStream);
 				parser.skipTo(parser.STMTSEPARATOR);
 				errorStream.flush();
 			} catch(TokenMgrError tme) {

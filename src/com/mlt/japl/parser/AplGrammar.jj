@@ -198,6 +198,7 @@ TOKEN : /* OPERATORS */
   >
 | < INTERPRETERCOMMAND: ")CLEAR" >
 | < NEWLINE: "\r" | "\n" >
+| < DEL: "\u2207" >
 }
 
 TOKEN :
@@ -220,7 +221,11 @@ void eval_stream() :
   AstNode t;}
 {
 	(
-	  (		  command = < INTERPRETERCOMMAND >		  {
+      (t = toplevel_fn_def()
+       {
+         System.out.println("DEF: " + t.print());       }
+       (< STMTSEPARATOR >)+)
+    | (		  command = < INTERPRETERCOMMAND >		  {
 		    executeCommand(command.image);
 		    getNextToken();		  }
 	  )
@@ -411,16 +416,12 @@ AstNode array() :
       {
 	    nodeList.add(new ConstantAstNode(s.toString()));
       }
-   /* | s = < CPLXCONSTANT >
-	  {
-	    nodeList.add(new ConstantAstNode(s.toString(), ConstantAstNode.COMPLEX));
-	  } */
-	| "(" idexpr = arrayexpr()
+	| idexpr = paren_arrayexpr()
 	  {
 	    nodeList.add(idexpr);
 	    mustEvaluate = true;
 	  }
-	  ")")+
+	)+
 	{
 	  if(mustEvaluate)
 	  {
@@ -434,6 +435,16 @@ AstNode array() :
 	  }
 	}
 }
+
+AstNode paren_arrayexpr() :
+{	AstNode t = null;
+	AstNode e = null;
+}
+{
+  "(" t = arrayexpr() ")" ("[" e = indexexpr() "]")?
+  {
+    if(e!=null)    {
+      return new ArrayIndexerNode(t, e);    } else return t;  }}
 
 AstNode identifierexpr() :
 {
@@ -532,6 +543,36 @@ Func outer_product() :
 	{
 	  return new OuterProdFn(right);
 	}
+}
+
+AstNode toplevel_fn_def() :
+{
+  Token outname = null;
+  Token namea = null;
+  Token nameb = null;
+  Token namec = null;
+  Token lname = null;
+  List<String > locals = new ArrayList<String >();
+  AstNode body = null;}{	< DEL > (outname = < ID > "←")?
+	    namea = < ID >
+	    (nameb = < ID > (namec = < ID >)?)?
+	    (";" lname = < ID >			{
+			  locals.add(lname.toString());			})*
+		(<STMTSEPARATOR>)+
+		body = userfn_expr_list()
+	< DEL >
+	{
+	  if(nameb==null)	  {
+	    NiladicUserFnNode n = new NiladicUserFnNode(outname!=null ? outname.toString() : null, locals, body);
+		context.set(namea.toString(), n);
+		return n;
+	  } else if(namec==null)	  {
+	    NiladicUserFnNode n = new NiladicUserFnNode(outname!=null ? outname.toString() : null, locals, body, nameb.toString());		context.set(namea.toString(), n);
+		return n;
+	  } else	  {
+	    NiladicUserFnNode n = new NiladicUserFnNode(outname!=null ? outname.toString() : null, locals, body, namec.toString(), namea.toString());		context.set(nameb.toString(), n);
+		return n;
+	  }	}
 }
 
 Func monadic_operator_as_fn() :
