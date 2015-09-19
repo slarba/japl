@@ -1,44 +1,77 @@
 package com.mlt.japl.ast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntScalar;
-import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IMixedArray;
-import com.mlt.japl.newfns.DoubleReducer;
 import com.mlt.japl.newfns.Func;
 import com.mlt.japl.newfns.UserFnReducer;
-import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class UserFnNode implements AstNode, Func {
 
+	private List<String> locals;
 	private AstNode body;
+	private String rightArgName;
+	private String leftArgName;
+	private String outName;
 	private EvalContext frame;
 
-	public UserFnNode(AstNode body) {
+	public UserFnNode(AstNode body, EvalContext frame) {
+		this.locals = new ArrayList<String>();
+		this.frame = frame;
 		this.body = body;
 	}
-
-	public UserFnNode(AstNode body, EvalContext frame) {
-		this(body);
+	
+	public UserFnNode(EvalContext frame, String outName, List<String> locals, AstNode body) {
+		this.locals = locals;
+		this.body = body;
+		this.outName = outName;
 		this.frame = frame;
 	}
-	
+
+	public UserFnNode(EvalContext frame, String outName, List<String> locals, AstNode body, String rightArgName) {
+		this.outName = outName;
+		this.locals = locals;
+		this.body = body;
+		this.rightArgName = rightArgName;
+		this.frame = frame;
+	}
+
+	public UserFnNode(EvalContext frame, String outName, List<String> locals, AstNode body, String rightArgName, String leftArgName) {
+		this.outName = outName;
+		this.locals = locals;
+		this.body = body;
+		this.rightArgName = rightArgName;
+		this.leftArgName = leftArgName;
+		this.frame = frame;
+	}
+
 	@Override
 	public IValue eval(EvalContext context) {
-		throw new RuntimeException("foo");
+		throw new AplError();
 	}
 
 	@Override
 	public String print() {
-		return "{ " + body.print() + " }";
+		StringBuilder builder = new StringBuilder();
+		for(String s : locals) {
+			builder.append(s);
+			builder.append(' ');
+		}
+		return "<userfn locals=(" + builder.toString() + 
+				") larg=" + leftArgName + 
+				" rarg=" + rightArgName +
+				" out=" + outName + 
+				">{" + body.print() + "}";
 	}
 
 	@Override
@@ -150,4 +183,5 @@ public class UserFnNode implements AstNode, Func {
 	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
 		throw new AplError();
 	}
+
 }

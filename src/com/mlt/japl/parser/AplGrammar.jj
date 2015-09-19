@@ -563,14 +563,14 @@ AstNode toplevel_fn_def() :
 	< DEL >
 	{
 	  if(nameb==null)	  {
-	    NiladicUserFnNode n = new NiladicUserFnNode(outname!=null ? outname.toString() : null, locals, body);
+	    UserFnNode n = new UserFnNode(context, outname!=null ? outname.toString() : null, locals, body);
 		context.set(namea.toString(), n);
 		return n;
 	  } else if(namec==null)	  {
-	    NiladicUserFnNode n = new NiladicUserFnNode(outname!=null ? outname.toString() : null, locals, body, nameb.toString());		context.set(namea.toString(), n);
+	    UserFnNode n = new UserFnNode(context, outname!=null ? outname.toString() : null, locals, body, nameb.toString());		context.set(namea.toString(), n);
 		return n;
 	  } else	  {
-	    NiladicUserFnNode n = new NiladicUserFnNode(outname!=null ? outname.toString() : null, locals, body, namec.toString(), namea.toString());		context.set(nameb.toString(), n);
+	    UserFnNode n = new UserFnNode(context, outname!=null ? outname.toString() : null, locals, body, namec.toString(), namea.toString());		context.set(nameb.toString(), n);
 		return n;
 	  }	}
 }

@@ -29,6 +29,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+@SuppressWarnings("serial")
 public class JaplEditorFrame extends JFrame implements ActionListener, DocumentListener {
 	JaplEditor editor;
 	private File file;
@@ -37,6 +38,11 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 	
 	public JaplEditorFrame(Font font, OutputStream replOutput) {
 		super();
+		editor = new JaplEditor(font);
+		init(font, replOutput);
+	}
+
+	private void init(Font font, OutputStream replOutput) {
 		this.replOutput = replOutput;
 		
 		JPanel panel = new JPanel();
@@ -44,7 +50,6 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		
 		setJMenuBar(createMenuBar());
 
-		editor = new JaplEditor(font);
 		editor.addDocumentListener(this);
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -59,16 +64,19 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		panel.add(new JScrollPane(editor), BorderLayout.CENTER);
 		add(panel);
 		setSize(1024, 768);
-		setVisible(true);
+		setVisible(true);		
+		editor.requestFocus();
 	}
 	
 	public JaplEditorFrame(Font aplFont, File file, OutputStream replOutput) {
-		this(aplFont, replOutput);
-
+		super();
+		editor = new JaplEditor(aplFont);
+		
 		setTitle(file.getAbsolutePath());
 		this.file = file;
 		editor.setText(readFile(file));
 		clearChanged();
+		init(aplFont, replOutput);
 	}
 
 	private JMenuBar createMenuBar() {
@@ -133,7 +141,10 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		JFileChooser chooser = new JFileChooser();
 		if(file!=null) chooser.setCurrentDirectory(file);
 		if(chooser.showSaveDialog(this)==JFileChooser.APPROVE_OPTION) {
-			save(chooser.getSelectedFile());
+			File selected = chooser.getSelectedFile();
+			save(selected);
+			setTitle(selected.getAbsolutePath());
+			
 		}		
 	}
 	
