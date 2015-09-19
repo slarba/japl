@@ -235,7 +235,6 @@ void eval_stream() :
 	< EOF >
 }
 
-// single expression is either monadic/niladic call or dyadic call/array
 AstNode toplevelexpr() :
 {
   AstNode t;
@@ -549,7 +548,7 @@ Func monadic_operator_as_fn() :
 Func operatorexpr_noinnerprod() :
 {
   	Func s = null;
-  	Token t = null;
+  	Func t = null;
 }
 {
 	s = outer_product()
@@ -560,28 +559,38 @@ Func operatorexpr_noinnerprod() :
     {
       return s;
     }
-|   t = < FUNC >
+|   t = fn_or_userfn()
     {
-      return lookupFn(t.toString());
+      return t;
     }
+}
+
+Func fn_or_userfn() :
+{
+  Token s = null;
+  AstNode userfn = null;}
+{	s = < FUNC >	{
+	  return lookupFn(s.toString());	}
+|   userfn = userfndef()	{
+	  return new UserFnNode(userfn, context);	}
 }
 
 Func function_or_inner_product() :
 {
-  Token s = null;
+  Func s = null;
   Token t = null;
   Func right = null;
   List<Func> chain = new ArrayList<Func>();
 }
 {
-	s = < FUNC > ("." right = operatorexpr_noinnerprod()
+	s = fn_or_userfn() ("." right = operatorexpr_noinnerprod()
 	{
 	  chain.add(right);
 	})*
 	{
 	  if(chain.size() > 1)
 	  {
-	    chain.add(0,lookupFn(s.toString()));
+	    chain.add(0,s);
 	    Func x = chain.get(0);
 	    for(int i=1; i<chain.size(); i++)
 	    {
@@ -591,11 +600,11 @@ Func function_or_inner_product() :
 	  }
 	  else if(chain.size()==1)
 	  {
-	    return new InnerProdFn(lookupFn(s.toString()), chain.get(0));
+	    return new InnerProdFn(s, chain.get(0));
 	  }
 	  else
 	  {
-	     return lookupFn(s.toString());
+	     return s;
 	  }
 	}
 }

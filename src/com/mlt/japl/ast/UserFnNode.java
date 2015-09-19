@@ -1,5 +1,6 @@
 package com.mlt.japl.ast;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntScalar;
@@ -60,7 +61,7 @@ public class UserFnNode implements AstNode, Func {
 
 	@Override
 	public IValue applyNiladic(int axis) {
-		return body.eval(frame);
+		return body.eval(frame.newFrame());
 	}
 
 	@Override
@@ -87,79 +88,66 @@ public class UserFnNode implements AstNode, Func {
 
 	@Override
 	public IValue reduce(IDoubleArray a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue reduce(ICharArray a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue reduce(IMixedArray a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue reduce(IBitArray a, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IDoubleArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IIntArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IBitArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new AplError();
 	}
 }

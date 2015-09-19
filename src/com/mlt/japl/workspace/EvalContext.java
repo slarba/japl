@@ -112,4 +112,10 @@ public class EvalContext {
 	public PrintConfig printConfig() {
 		return new PrintConfig();
 	}
+
+	public boolean isBound(String id) {
+		if(valueMap.containsKey(id)) return true;
+		if(parent!=null) return parent.isBound(id);
+		return false;
+	}
 }

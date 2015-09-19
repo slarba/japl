@@ -1,5 +1,6 @@
 package com.mlt.japl.workspace;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -8,6 +9,15 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import com.mlt.japl.ast.AstNode;
 import com.mlt.japl.errors.AplError;
@@ -24,16 +34,29 @@ import com.mlt.japl.parser.TokenMgrError;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
-public class Interpreter {
+public class Interpreter extends AbstractHandler {
 	private EvalContext context;
 	private ArrayList<AplBusyListener> listeners = new ArrayList<AplBusyListener>();
 	private PrintConfig printConfig;
+	private Server server;
 	
 	public Interpreter(OutputStream out, OutputStream error) {
 		context = new EvalContext(out, error);
 		printConfig = new PrintConfig();
+		
+		startWebServer(8005);
 	}
 
+	public void startWebServer(int port) {
+		server = new Server(port);
+		try {
+			server.setHandler(this);
+			server.start();
+		} catch (Exception e) {
+			throw new RuntimeException("cannot start webserver in port " + port);
+		}
+	}
+	
 	public void reset() {
 		context = new EvalContext(context.getOutputStream(), context.getErrorStream());
 	}
@@ -134,4 +157,21 @@ public class Interpreter {
 	public void addBusyListener(AplBusyListener listener) {
 		listeners.add(listener);
 	}
+
+	@Override
+	public void handle(String target, Request baseReq, HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String id = target.substring(1);
+		if(!context.isBound(id)) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			baseReq.setHandled(true);
+			return;
+		}
+		String val = context.get(id).asString(printConfig);
+		response.setContentType("text/html");
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.getWriter().write(val);
+		baseReq.setHandled(true);
+	}
+
 }
