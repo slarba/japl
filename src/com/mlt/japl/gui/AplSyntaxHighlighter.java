@@ -70,10 +70,10 @@ public class AplSyntaxHighlighter {
 	public void syntaxHighlight(StyledDocument doc, int start, int end) {
 		doc.setCharacterAttributes(start, end-start, defaultStyle, true);
 		highlightPattern(doc, start, end, operatorPattern, operatorStyle);
-		highlightPattern(doc, start, end, commentPattern, commentStyle);
 		highlightPattern(doc, start, end, numbersPattern, numbersStyle);
 		highlightPattern(doc, start, end, keywordPattern, keywordStyle);
 		highlightPattern(doc, start, end, stringPattern, stringStyle);
+		highlightPattern(doc, start, end, commentPattern, commentStyle);
 	}
 
 	public void syntaxHighlight(StyledDocument doc) {

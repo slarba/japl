@@ -2,6 +2,7 @@ package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.generated.LazyBitArray;
 import com.mlt.japl.newarrays.generated.LazyCharArray;
 import com.mlt.japl.newarrays.generated.LazyDoubleArray;
 import com.mlt.japl.newarrays.generated.LazyIntArray;
@@ -141,6 +142,25 @@ public class RotateFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IBitArray b, int ax) {
+		int axis;
+		if(ax<0) {
+			axis = firstAxis ? 0 : b.rank()-1;
+		} else {
+			axis = ax;
+		}
+		return new LazyBitArray(b.dims()) {
+			@Override
+			public long get(int index) {
+				int[] rindex = b.dims().reverseIndexInt(index);
+				int limit = b.dims().axis(axis);
+				rindex[axis] = clamp(limit, rindex[axis] + (int)a.get());
+				return b.get(b.dims().calculateIndex(rindex));
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int ax) {
 		int axis;

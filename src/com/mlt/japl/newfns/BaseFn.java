@@ -161,7 +161,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(a.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.visit_first(new IntScalar(a.get(index)), b, axis);
+				return self.visit_first(new IntScalar(a.get(index)), b.get(), axis);
 			}
 		};
 	}
