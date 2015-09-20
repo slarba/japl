@@ -19,6 +19,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -35,14 +36,17 @@ public abstract class LazyBitArray extends ArrayBase implements IBitArray {
 	
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
-		return new LazyBitArray(new Dimensions(finalDims)) {
-			@Override
-			public long get(int index) {
-				return 1;
-			}
-		};
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return new IntScalar(get(indexer.indexForSingle()));
+		Dimensions ds = new Dimensions(finalDims);
+		long[] result = new long[ds.length()];
+
+		BitArray rs = new BitArray(ds);
+		for(int j=0; j<result.length; j++) {
+			rs.setBit(j, get(indexer.step()));
+		}
+		return rs;
 	}
 
 	@Override
@@ -173,5 +177,15 @@ public abstract class LazyBitArray extends ArrayBase implements IBitArray {
 			result = prime * result + Long.hashCode(get(i));			
 		}
 		return (int)result;
+	}
+	
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return boolean.class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return force().coerceToJavaObject();
 	}
 }

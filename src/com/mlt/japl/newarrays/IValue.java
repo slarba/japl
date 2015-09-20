@@ -16,4 +16,6 @@ public interface IValue extends ArrayAcceptor {
 	
 	// generic indexing
 	IValue get(IMixedArray i);
+	Class<?> getCorrespondingJavaClass();
+	Object coerceToJavaObject();
 }

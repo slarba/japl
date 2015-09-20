@@ -2,6 +2,7 @@ package com.mlt.japl.newarrays.concrete;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
@@ -16,6 +17,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -43,15 +45,17 @@ public class CharArray extends ArrayBase implements ICharArray {
 
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return new CharScalar(get(indexForSingle(i.get(0))));
-		return new LazyCharArray(new Dimensions(finalDims)) {
-			@Override
-			public char get(int index) {
-				return 'a';
-			}
-		};
-	}	
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return new IntScalar(get(indexer.indexForSingle()));
+		Dimensions ds = new Dimensions(finalDims);
+		char[] result = new char[ds.length()];
+
+		for(int j=0; j<result.length; j++) {
+			result[j] = get(indexer.step());
+		}
+		return new CharArray(ds, result);
+	}
 
 	@Override
 	public char get(int index) {
@@ -143,5 +147,15 @@ public class CharArray extends ArrayBase implements ICharArray {
 	@Override
 	public String asString(PrintConfig config) {
 		return config.print(this);
+	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return String.class;
+	}
+	
+	@Override
+	public Object coerceToJavaObject() {
+		return data;
 	}
 }

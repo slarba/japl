@@ -1,10 +1,12 @@
 package com.mlt.japl.newarrays.generated;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
 import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.concrete.MixedArray;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
@@ -16,6 +18,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -27,15 +30,17 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 		
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return get(indexForSingle(i.get(0)));
-		return new LazyMixedArray(new Dimensions(finalDims)) {
-			@Override
-			public IValue get(int index) {
-				return IntArray.EMPTY;
-			}
-		};
-	}	
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return get(indexer.indexForSingle());
+		Dimensions ds = new Dimensions(finalDims);
+		IValue[] result = new IValue[ds.length()];
+
+		for(int j=0; j<result.length; j++) {
+			result[j] = get(indexer.step());
+		}
+		return new MixedArray(ds, result);
+	}
 
 	@Override
 	public IValue force() {
@@ -142,4 +147,13 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 		return (int)result;
 	}
 
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return Object.class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return force().coerceToJavaObject();
+	}
 }

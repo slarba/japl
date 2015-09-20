@@ -29,14 +29,7 @@ public class ConstBitArray extends ArrayBase implements IBitArray {
 
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
-		return new LazyBitArray(new Dimensions(finalDims)) {
-			@Override
-			public long get(int index) {
-				return val;
-			}
-		};
+		throw new AplError();
 	}
 
 	@Override
@@ -167,5 +160,15 @@ public class ConstBitArray extends ArrayBase implements IBitArray {
 			return -1;
 		else
 			return 0;
+	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return boolean.class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return force().coerceToJavaObject();
 	}
 }

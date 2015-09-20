@@ -120,5 +120,14 @@ public class CharScalar extends ScalarBase implements ICharScalar {
 	public IValue reshape(int[] newShape) {
 		return new CharArray(new Dimensions(newShape), new char[] { val });
 	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return char.class;
+	}
 	
+	@Override
+	public Object coerceToJavaObject() {
+		return val;
+	}
 }

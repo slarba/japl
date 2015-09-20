@@ -240,7 +240,7 @@ public class EachFn extends BaseFn {
 	
 	@Override
 	public String getName() {
-		return "each";
+		return "each<" + fn.getName() + ">";
 	}
 
 }

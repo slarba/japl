@@ -17,6 +17,8 @@ import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 public class IntScalar extends ScalarBase implements IIntScalar {
+	public static final IValue ZERO = new IntScalar(0);
+	
 	private long val;
 
 	public IntScalar(long val) {
@@ -114,6 +116,16 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 	public IValue reshape(int[] newShape) {
 		if(val==1 || val==0) return new ConstBitArray(new Dimensions(newShape), val);
 		return new IntArray(new Dimensions(newShape), new long[] { val });
+	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return long.class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return val;
 	}
 
 }

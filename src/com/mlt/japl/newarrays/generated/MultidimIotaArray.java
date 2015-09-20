@@ -5,6 +5,8 @@ import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.newarrays.concrete.IntArray;
+import com.mlt.japl.newarrays.concrete.IntScalar;
+import com.mlt.japl.newarrays.concrete.MixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;
@@ -14,6 +16,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -25,6 +28,20 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 		super(dims);
 		this.val = val;
 		itemDimensions = new Dimensions(val.length());
+	}
+
+	@Override
+	public IValue get(IMixedArray i) {
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return get(indexer.indexForSingle());
+		Dimensions ds = new Dimensions(finalDims);
+		IValue[] result = new IValue[ds.length()];
+
+		for(int j=0; j<result.length; j++) {
+			result[j] = get(indexer.step());
+		}
+		return new MixedArray(ds, result);
 	}
 
 	@Override
@@ -132,6 +149,15 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 			return false;
 		return true;
 	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return long[][].class;
+	}
 	
+	@Override
+	public Object coerceToJavaObject() {
+		return force().coerceToJavaObject();
+	}
 	
 }

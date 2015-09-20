@@ -122,4 +122,14 @@ public class MixedScalar extends ScalarBase implements IMixedScalar {
 		return new MixedArray(new Dimensions(newShape), new IValue[] { val });
 	}
 
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return Object.class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return val;
+	}
+
 }

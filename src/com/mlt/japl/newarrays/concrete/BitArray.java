@@ -2,6 +2,7 @@ package com.mlt.japl.newarrays.concrete;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
@@ -16,6 +17,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -39,14 +41,17 @@ public class BitArray extends ArrayBase implements IBitArray {
 
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
-		return new LazyBitArray(new Dimensions(finalDims)) {
-			@Override
-			public long get(int index) {
-				return 1;
-			}
-		};
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return new IntScalar(get(indexer.indexForSingle()));
+		Dimensions ds = new Dimensions(finalDims);
+		long[] result = new long[ds.length()];
+
+		BitArray rs = new BitArray(ds);
+		for(int j=0; j<result.length; j++) {
+			rs.setBit(j, get(indexer.step()));
+		}
+		return rs;
 	}
 
 	@Override
@@ -62,7 +67,7 @@ public class BitArray extends ArrayBase implements IBitArray {
 		return data[index%data.length];
 	}
 
-	public void setBit(int idx, int val) {
+	public void setBit(int idx, long val) {
 		int i = idx % actualLength;
 		int whole = i / 64;
 		int part = i % 64;
@@ -156,5 +161,19 @@ public class BitArray extends ArrayBase implements IBitArray {
 	@Override
 	public IValue reshape(int[] newShape) {
 		return new BitArray(actualLength, new Dimensions(newShape), data);
+	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return boolean[].class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		boolean[] a = new boolean[length()];
+		for(int i=0; i<length(); i++) {
+			a[i] = get(i)==1 ? true : false;
+		}
+		return a;
 	}
 }

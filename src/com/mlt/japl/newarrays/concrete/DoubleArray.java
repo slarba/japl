@@ -2,6 +2,7 @@ package com.mlt.japl.newarrays.concrete;
 
 import java.util.Arrays;
 
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
@@ -16,6 +17,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -35,15 +37,17 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 	
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return new DoubleScalar(get(indexForSingle(i.get(0))));
-		return new LazyDoubleArray(new Dimensions(finalDims)) {
-			@Override
-			public double get(int index) {
-				return 1;
-			}
-		};
-	}	
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return new DoubleScalar(get(indexer.indexForSingle()));
+		Dimensions ds = new Dimensions(finalDims);
+		double[] result = new double[ds.length()];
+
+		for(int j=0; j<result.length; j++) {
+			result[j] = get(indexer.step());
+		}
+		return new DoubleArray(ds, result);
+	}
 	
 	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
@@ -130,6 +134,16 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 	@Override
 	public String asString(PrintConfig config) {
 		return config.print(this);
+	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return double[].class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return data;
 	}
 
 }

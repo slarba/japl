@@ -9,6 +9,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
+import com.mlt.japl.newfns.Indexer;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
@@ -29,15 +30,16 @@ public class IotaArray extends ArrayBase implements IIntArray {
 
 	@Override
 	public IValue get(IMixedArray i) {
-		int[] finalDims = dimsForIndexed(i);
-		if(finalDims.length==0) return new IntScalar(get(indexForSingle(i.get(0))));
-		throw new AplError();
-//		return new LazyMixedArray(new Dimensions(finalDims)) {
-//			@Override
-//			public IValue get(int index) {
-//				return IntArray.EMPTY;
-//			}
-//		};
+		Indexer indexer = new Indexer(i, this);
+		int[] finalDims = indexer.computeResultDims();
+		if(finalDims.length==0) return new IntScalar(get(indexer.indexForSingle()));
+		Dimensions ds = new Dimensions(finalDims);
+		long[] result = new long[ds.length()];
+
+		for(int j=0; j<result.length; j++) {
+			result[j] = get(indexer.step());
+		}
+		return new IntArray(ds, result);
 	}
 	
 	@Override
@@ -131,6 +133,16 @@ public class IotaArray extends ArrayBase implements IIntArray {
 		if (val != other.val)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Class<?> getCorrespondingJavaClass() {
+		return long[].class;
+	}
+
+	@Override
+	public Object coerceToJavaObject() {
+		return force().coerceToJavaObject();
 	}
 
 }

@@ -40,7 +40,7 @@ public class ConstArrayNode implements AstNode {
 				doubleNodes++;
 			} else if(c.isInteger()) {
 				intNodes++;
-				int v = c.getInt();
+				long v = c.getInt();
 				if(v==1 || v==0)
 					totalIntZerosOnes++;
 			} else if(c.isCharConstant()) { 

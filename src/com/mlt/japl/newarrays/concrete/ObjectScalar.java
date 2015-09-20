@@ -12,118 +12,106 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
-import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
-public class DoubleScalar extends ScalarBase implements IDoubleScalar {
-	double val;
+public class ObjectScalar extends ScalarBase implements IMixedScalar {
+
+	private Object value;
 	
-	public DoubleScalar(double val) {
-		this.val = val;
-	}
-	
-	@Override
-	public double get() {
-		return val;
-	}
-	
-	@Override
-	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
-		return visitor.visit_first(this, b, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor, int axis) {
-		return visitor.visit_dyadic(a, this, axis);
-	}
-
-	@Override
-	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
-		return visitor.visit_monadic(this, axis);
+	public ObjectScalar(Object instance) {
+		value = instance;
 	}
 
 	@Override
 	public String asString(PrintConfig printConfig) {
-		return printConfig.print(this);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(val);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DoubleScalar other = (DoubleScalar) obj;
-		if (Double.doubleToLongBits(val) != Double.doubleToLongBits(other.val))
-			return false;
-		return true;
+		return "#<" + value.getClass().getName() + ": " + value.toString() + ">";
 	}
 
 	@Override
 	public IValue reshape(int[] newShape) {
-		return new DoubleArray(new Dimensions(newShape), new double[] { val });
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue accept_monadic(ArrayVisitor visitor, int axis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IValue get() {
+		return this;
 	}
 
 	@Override
 	public Class<?> getCorrespondingJavaClass() {
-		return double.class;
+		return value.getClass();
 	}
 
 	@Override
 	public Object coerceToJavaObject() {
-		return val;
+		return value;
 	}
 
 }

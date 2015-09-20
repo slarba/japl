@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
@@ -77,19 +78,44 @@ public class UserFnNode implements AstNode, Func {
 	@Override
 	public IValue applyMonadic(IValue a, int axis) {
 		EvalContext derived = frame.newFrame();
-		derived.set("\u03c9", a);
-		derived.set("\u237a", a);
-		return body.eval(derived);
+		for(String s : locals) {
+			derived.set(s, IntScalar.ZERO);
+		}
+		if(rightArgName==null) {
+			derived.set("\u03c9", a);
+			derived.set("\u237a", a);
+		} else {
+			derived.set(rightArgName, a);
+		}
+		IValue result = body.eval(derived);
+		if(outName!=null) {
+			return derived.get(outName);
+		} else return result;
 	}
 
 	@Override
 	public IValue applyDyadic(IValue a, IValue b, int axis) {
 		EvalContext derived = frame.newFrame();
-		derived.set("\u03b1", a);
-		derived.set("\u03c9", b);
-		derived.set("\u237a", a);
-		derived.set("\u2375", b);
-		return body.eval(derived);
+		for(String s : locals) {
+			derived.set(s, IntScalar.ZERO);
+		}
+		if(rightArgName==null) {
+			derived.set("\u03c9", b);
+			derived.set("\u2375", b);
+		} else {
+			derived.set(rightArgName, b);
+		}
+
+		if(leftArgName==null) {
+			derived.set("\u03b1", a);
+			derived.set("\u237a", a);
+		} else {
+			derived.set(leftArgName, a);
+		}
+		IValue result = body.eval(derived);
+		if(outName!=null) {
+			return derived.get(outName);
+		} else return result;
 	}
 
 	@Override

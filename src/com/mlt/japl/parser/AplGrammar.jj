@@ -78,6 +78,8 @@ public class AplParser
 
   public Func lookupFn(String name)
   {
+    if(name.startsWith("."))    {
+      return new MethodCallFn(name.substring(1));    }
     Func fn = fnRegistry.lookup(name);
 	if(fn==null) return context.tryGetFunction(name);
 	else return fn;
@@ -113,7 +115,6 @@ TOKEN_MGR_DECLS:
   // in effect modifies the parser dynamically
   public void CommonTokenAction(Token t)
   {
-	//EvalContext ctx = parser.getContext();
 	if(t.kind==AplParserConstants.ID)
 	{
 		if(ctx.isBoundToFunction(t.image))
@@ -128,13 +129,14 @@ SKIP :
 {
   " "
 | "\t"
-//| < "\u235d" (~["\n"])* ["\n"] >   // comments
 }
 
 TOKEN : /* OPERATORS */
 {
   < FUNC:
-    "\u003f"  // roll ?
+    ("⎕" (["a"-"z"]|["A"-"Z"])+ )
+  | ("." (["a"-"z"]|["A"-"Z"]) (["a"-"z"]|["A"-"Z"]|["0"-"9"])*)
+  | "\u003f"  // roll ?
   | "\u2308"  // ceil
   | "\u230a"  // floor
   | "\u2374"  // rho, shape
@@ -220,6 +222,7 @@ void eval_stream() :
   Token command;
   AstNode t;}
 {
+  (< STMTSEPARATOR >)*
 	(
       (t = toplevel_fn_def()
        {
@@ -227,7 +230,8 @@ void eval_stream() :
        (< STMTSEPARATOR >)+)
     | (		  command = < INTERPRETERCOMMAND >		  {
 		    executeCommand(command.image);
-		    getNextToken();		  }
+		  }
+		   (< STMTSEPARATOR >)+
 	  )
     | (	      t=toplevelexpr() 
 		  {
@@ -545,6 +549,16 @@ Func outer_product() :
 	}
 }
 
+Token id_or_fnid() :
+{
+  Token t;}
+{
+  t = < ID >  {    return t;
+  }
+| t = < FUNC >
+  {	return t;
+  }}
+
 AstNode toplevel_fn_def() :
 {
   Token outname = null;
@@ -554,8 +568,8 @@ AstNode toplevel_fn_def() :
   Token lname = null;
   List<String > locals = new ArrayList<String >();
   AstNode body = null;}{	< DEL > (outname = < ID > "←")?
-	    namea = < ID >
-	    (nameb = < ID > (namec = < ID >)?)?
+	    namea = id_or_fnid()
+	    (nameb = id_or_fnid() (namec = id_or_fnid())?)?
 	    (";" lname = < ID >			{
 			  locals.add(lname.toString());			})*
 		(<STMTSEPARATOR>)+

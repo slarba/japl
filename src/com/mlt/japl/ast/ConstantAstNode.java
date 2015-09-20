@@ -53,9 +53,9 @@ public class ConstantAstNode implements AstNode {
 		return Double.parseDouble(value);
 	}
 	
-	public int getInt() {
-		if(value.startsWith("¯")) return -Integer.parseInt(value.substring(1));
-		return Integer.parseInt(value);
+	public long getInt() {
+		if(value.startsWith("¯")) return -Long.parseLong(value.substring(1));
+		return Long.parseLong(value);
 	}
 	
 	public String getString() {
