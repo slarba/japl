@@ -10,6 +10,11 @@ public class StopFn extends BaseFn {
 	}
 
 	@Override
+	public IValue applyDyadic(IValue a, IValue b, int axis) {
+		return a.force();
+	}
+	
+	@Override
 	public String getName() {
 		return "stop";
 	}

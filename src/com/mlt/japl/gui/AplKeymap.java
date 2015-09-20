@@ -69,5 +69,6 @@ public class AplKeymap {
 			  ,"\u2337"  // index
 			  ,"⍎"  // execute
 			  ,"∇"  // line editor
+			  ,"⍕"  // format
 	};
 }

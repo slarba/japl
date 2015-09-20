@@ -21,7 +21,9 @@ import com.mlt.japl.newfns.ExistsFn;
 import com.mlt.japl.newfns.ExpFn;
 import com.mlt.japl.newfns.FacFn;
 import com.mlt.japl.newfns.FloorFn;
+import com.mlt.japl.newfns.FormatFn;
 import com.mlt.japl.newfns.Func;
+import com.mlt.japl.newfns.GradeDownFn;
 import com.mlt.japl.newfns.GradeUpFn;
 import com.mlt.japl.newfns.GtFn;
 import com.mlt.japl.newfns.GteFn;
@@ -105,10 +107,11 @@ public class FunctionRegistry {
 		map.put("⍎", new ExecuteFn(context));
 		map.put("⎕NEW", new NewFn());
 		map.put("⎕SS", new StringSearchFn());
+		map.put("⍕", new FormatFn(new PrintConfig()));
 //		map.put("\\", new ExpandFn(false));
 //		map.put("\u2340", new ExpandFn(true));
 		map.put("\u234b", new GradeUpFn());
-//		map.put("\u2352", new GradeUpFn(false));
+		map.put("\u2352", new GradeDownFn());
 //		map.put("\u2337", new IndexFn());
 	}
 	

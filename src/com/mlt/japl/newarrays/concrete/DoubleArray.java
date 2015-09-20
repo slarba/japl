@@ -146,4 +146,8 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 		return data;
 	}
 
+	public double[] data() {
+		return data;
+	}
+
 }

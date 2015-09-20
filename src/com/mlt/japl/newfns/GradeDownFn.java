@@ -14,7 +14,7 @@ import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
 import com.mlt.japl.newarrays.interf.IIntArray;
 
-public class GradeUpFn extends BaseFn {
+public class GradeDownFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IIntArray a, int axis) {
@@ -28,7 +28,7 @@ public class GradeUpFn extends BaseFn {
 		
 		Comparator<Long> comparator = new Comparator<Long>() {
 			@Override
-			public int compare(Long o1, Long o2) {
+			public int compare(Long o2, Long o1) {
 				return Long.compare(arr[(int)o1.longValue()-1], arr[(int)o2.longValue()-1]);
 			}
 		};
@@ -53,7 +53,7 @@ public class GradeUpFn extends BaseFn {
 		
 		Comparator<Long> comparator = new Comparator<Long>() {
 			@Override
-			public int compare(Long o1, Long o2) {
+			public int compare(Long o2, Long o1) {
 				return Double.compare(arr[(int)o1.longValue()-1], arr[(int)o2.longValue()-1]);
 			}
 		};
@@ -78,7 +78,7 @@ public class GradeUpFn extends BaseFn {
 		
 		Comparator<Long> comparator = new Comparator<Long>() {
 			@Override
-			public int compare(Long o1, Long o2) {
+			public int compare(Long o2, Long o1) {
 				return Character.compare(arr[(int)o1.longValue()-1], arr[(int)o2.longValue()-1]);
 			}
 		};
@@ -93,6 +93,7 @@ public class GradeUpFn extends BaseFn {
 
 	@Override
 	public String getName() {
-		return "gradeup";
+		return "gradedown";
 	}
+
 }
