@@ -7,14 +7,12 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 public abstract class MixedReducer {
 	private IMixedArray array;
 	private int axis;
-	private IValue initval;
 	private int mspan;
 	private int[] spans;
 	
-	public MixedReducer(IValue initval, IMixedArray array, int axis) {
+	public MixedReducer(IMixedArray array, int axis) {
 		this.array = array;
 		this.axis = axis;
-		this.initval = initval;
 		spans = array.dims().spans();
 		for(int i=0; i<spans.length; i++) {
 			if(i==axis) continue;
@@ -23,8 +21,9 @@ public abstract class MixedReducer {
 	}
 	
 	public IValue rank1case() {
-		IValue result = initval;
-		for(int i=array.length()-1; i>=0; i--) 
+		int i = array.length()-1;
+		IValue result = array.get(i);
+		for(i=array.length()-2; i>=0; i--) 
 			result = op(array.get(i), result);
 		return result;
 	}

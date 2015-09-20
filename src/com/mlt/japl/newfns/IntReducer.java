@@ -5,14 +5,12 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 public abstract class IntReducer {
 	private IIntArray array;
 	private int axis;
-	private long initval;
 	private int mspan;
 	private int[] spans;
 	
 	public IntReducer(long initval, IIntArray array, int axis) {
 		this.array = array;
 		this.axis = axis;
-		this.initval = initval;
 		spans = array.dims().spans();
 		for(int i=0; i<spans.length; i++) {
 			if(i==axis) continue;
@@ -21,15 +19,17 @@ public abstract class IntReducer {
 	}
 	
 	public long rank1case() {
-		long result = initval;
-		for(int i=array.length()-1; i>=0; i--) 
+		int i = array.length()-1;
+		long result = array.get(i);
+		for(i=array.length()-2; i>=0; i--) 
 			result = op(array.get(i), result);
 		return result;
 	}
 	
 	public long get(int index) {
-		long result = initval;
-		for(int i=array.dims().axis(axis)-1; i>=0; i--)
+		int i = array.dims().axis(axis)-1;
+		long result = array.get(index*mspan + i*spans[axis]);
+		for(i=array.dims().axis(axis)-2; i>=0; i--)
 			result = op(array.get(index*mspan + i*spans[axis]), result);
 		return result;
 	}

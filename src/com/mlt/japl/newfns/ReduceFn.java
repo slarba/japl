@@ -82,10 +82,7 @@ public class ReduceFn extends BaseFn {
 	@Override
 	public IValue visit_monadic(IMixedArray a, int ax) {
 		int axis = ax<0 ? (firstAxis ? 0 : a.rank()-1) : ax;
-		System.out.println("axis = " + axis);
-		System.out.println("a rank = " + a.rank());
-		System.out.println("a length = " + a.length());
-		MixedReducer reducer = new MixedReducer(a.get(0), a, axis) {
+		MixedReducer reducer = new MixedReducer(a, axis) {
 			@Override
 			public IValue op(IValue a, IValue b) {
 				return fn.applyDyadic(a, b,  ax);

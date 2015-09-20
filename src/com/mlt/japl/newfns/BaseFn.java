@@ -209,7 +209,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(a.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.visit_first(new DoubleScalar(a.get(index)), b, axis);
+				return self.visit_first(new DoubleScalar(a.get(index)), b.get(), axis);
 			}
 		};
 	}
@@ -257,7 +257,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(a.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.visit_first(new CharScalar(a.get(index)), b, axis);
+				return self.visit_first(new CharScalar(a.get(index)), b.get(), axis);
 			}
 		};
 	}
@@ -471,7 +471,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(b.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.applyDyadic(a, new IntScalar(b.get(index)), axis);
+				return self.applyDyadic(a.get(), new IntScalar(b.get(index)), axis);
 			}
 		};
 	}
@@ -482,7 +482,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(b.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.applyDyadic(a, new DoubleScalar(b.get(index)), axis);
+				return self.applyDyadic(a.get(), new DoubleScalar(b.get(index)), axis);
 			}
 		};
 	}
@@ -493,7 +493,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(b.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.applyDyadic(a, new CharScalar(b.get(index)), axis);
+				return self.applyDyadic(a.get(), new CharScalar(b.get(index)), axis);
 			}
 		};
 	}
@@ -666,7 +666,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(a.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.visit_first(new IntScalar(a.get(index)), b, axis);
+				return self.visit_first(new IntScalar(a.get(index)), b.get(), axis);
 			}
 		};
 	}
@@ -692,7 +692,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return new LazyMixedArray(b.dims()) {
 			@Override
 			public IValue get(int index) {
-				return self.applyDyadic(a, new IntScalar(b.get(index)), axis);
+				return self.applyDyadic(a.get(), new IntScalar(b.get(index)), axis);
 			}
 		};
 	}

@@ -89,8 +89,8 @@ public class UserFnNode implements AstNode, Func {
 		}
 		IValue result = body.eval(derived);
 		if(outName!=null) {
-			return derived.get(outName);
-		} else return result;
+			return derived.get(outName).force();
+		} else return result.force();
 	}
 
 	@Override
@@ -114,8 +114,8 @@ public class UserFnNode implements AstNode, Func {
 		}
 		IValue result = body.eval(derived);
 		if(outName!=null) {
-			return derived.get(outName);
-		} else return result;
+			return derived.get(outName).force();
+		} else return result.force();
 	}
 
 	@Override

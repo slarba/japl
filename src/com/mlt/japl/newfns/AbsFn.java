@@ -295,7 +295,7 @@ public class AbsFn extends BaseFn {
 
 	@Override
 	public IValue reduce(IBitArray a, int axis) {
-		BitReducer reducer = new BitReducer(a.get(0), a, axis) {
+		BitReducer reducer = new BitReducer(a, axis) {
 			@Override
 			public long op(long a, long b) {
 				return b%a;
@@ -312,7 +312,7 @@ public class AbsFn extends BaseFn {
 	
 	@Override
 	public IValue reduce(IDoubleArray a, int axis) {
-		DoubleReducer reducer = new DoubleReducer(a.get(0), a, axis) {
+		DoubleReducer reducer = new DoubleReducer(a, axis) {
 			@Override
 			public double op(double a, double b) {
 				return b%a;

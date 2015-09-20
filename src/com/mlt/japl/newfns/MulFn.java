@@ -314,7 +314,7 @@ public class MulFn extends BaseFn {
 
 	@Override
 	public IValue reduce(IBitArray a, int axis) {
-		BitReducer reducer = new BitReducer(1, a, axis) {
+		BitReducer reducer = new BitReducer(a, axis) {
 			@Override
 			public long op(long a, long b) {
 				return a*b;
@@ -331,7 +331,7 @@ public class MulFn extends BaseFn {
 	
 	@Override
 	public IValue reduce(IDoubleArray a, int axis) {
-		DoubleReducer reducer = new DoubleReducer(1, a, axis) {
+		DoubleReducer reducer = new DoubleReducer(a, axis) {
 			@Override
 			public double op(double a, double b) {
 				return a*b;

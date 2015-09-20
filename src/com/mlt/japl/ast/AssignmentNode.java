@@ -33,7 +33,7 @@ public class AssignmentNode implements AstNode {
 			context.set(id, n.func());
 			return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
 		}
-		return context.set(id, expr.eval(context));
+		return context.set(id, expr.eval(context).force());
 	}
 
 	@Override

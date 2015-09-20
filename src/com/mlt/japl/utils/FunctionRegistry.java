@@ -27,6 +27,7 @@ import com.mlt.japl.newfns.GradeDownFn;
 import com.mlt.japl.newfns.GradeUpFn;
 import com.mlt.japl.newfns.GtFn;
 import com.mlt.japl.newfns.GteFn;
+import com.mlt.japl.newfns.IndexFn;
 import com.mlt.japl.newfns.IotaFn;
 import com.mlt.japl.newfns.LogFn;
 import com.mlt.japl.newfns.LtFn;
@@ -112,7 +113,7 @@ public class FunctionRegistry {
 //		map.put("\u2340", new ExpandFn(true));
 		map.put("\u234b", new GradeUpFn());
 		map.put("\u2352", new GradeDownFn());
-//		map.put("\u2337", new IndexFn());
+		map.put("\u2337", new IndexFn());
 	}
 	
 	public Func lookup(String name) {

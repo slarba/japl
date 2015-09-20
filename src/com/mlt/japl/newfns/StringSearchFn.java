@@ -20,7 +20,6 @@ public class StringSearchFn extends BaseFn {
 	public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
 		CharArray re = (CharArray)a.force();
 		CharArray s = (CharArray)b.force();
-		System.out.println("regex=" + re.getString() + " str=" + s.getString());
 		Pattern p = Pattern.compile(re.getString());
 		Matcher m = p.matcher(s.getString());
 		
