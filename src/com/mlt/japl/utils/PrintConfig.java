@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.mlt.japl.iface.Array;
 import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.newarrays.ScalarBase;
-import com.mlt.japl.newarrays.concrete.MixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
 import com.mlt.japl.newarrays.interf.ICharScalar;

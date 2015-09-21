@@ -18,10 +18,40 @@ public class DivFn extends BaseFn {
 	}
 
 	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+		return new LazyDoubleArray(b.dims()) {
+			@Override
+			public double get(int index) {
+				return (double)a.get() / b.get(index);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(b.dims()) {
+			@Override
+			public double get(int index) {
+				return (double)a.get() / b.get(index);
+			}
+		};
+	}
+
+	@Override
 	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
 		return new DoubleScalar(a.get() / b.get());
 	}
 
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b, int axis) {
+		return new LazyDoubleArray(b.dims()) {
+			@Override
+			public double get(int index) {
+				return a.get() / b.get(index);
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
 		return new DoubleScalar(a.get() / b.get());

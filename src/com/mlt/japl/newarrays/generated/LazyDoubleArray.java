@@ -51,6 +51,11 @@ public abstract class LazyDoubleArray extends ArrayBase implements IDoubleArray 
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return new DoubleScalar(get(index));
+	}
+
+	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
 	}

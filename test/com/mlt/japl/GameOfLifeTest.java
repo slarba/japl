@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.mlt.japl.arrays.BitArray;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.Interpreter;
 
 public class GameOfLifeTest {

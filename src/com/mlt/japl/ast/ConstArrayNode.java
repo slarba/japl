@@ -2,7 +2,6 @@ package com.mlt.japl.ast;
 
 import java.util.List;
 
-import com.mlt.japl.iface.Array;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.BitArray;
 import com.mlt.japl.newarrays.concrete.CharArray;

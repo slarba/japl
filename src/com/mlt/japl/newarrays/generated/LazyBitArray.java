@@ -50,6 +50,11 @@ public abstract class LazyBitArray extends ArrayBase implements IBitArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return new IntScalar(get(index));
+	}
+
+	@Override
 	public IValue force() {
 		int whole = dims().length()/64;
 		int part = dims().length()%64;

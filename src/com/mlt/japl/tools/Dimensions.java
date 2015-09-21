@@ -249,4 +249,22 @@ public class Dimensions {
 		}
 		return result;
 	}
+
+	public Dimensions computeInnerProdDims(Dimensions b) {
+		int[] result = new int[rank()-1 + (b.rank()-1)];
+		System.out.println("new rank= " + result.length);
+		for(int i=0; i<rank()-1; i++) {
+			result[i] = dims[i];
+		}
+		for(int i=0; i<b.rank()-1; i++) {
+			result[i+rank()-1] = b.dims[i+1];
+		}
+		return new Dimensions(result);
+	}
+
+	public int firstDim() {
+		if(dims.length==0)
+			return 0;
+		return dims[0];
+	}
 }

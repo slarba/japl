@@ -29,7 +29,11 @@ public class CharScalar extends ScalarBase implements ICharScalar {
 	
 	
 	
-	
+	@Override
+	public IValue getGeneric(int index) {
+		return this;
+	}
+
 	
 	
 	

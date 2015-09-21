@@ -114,4 +114,9 @@ public class ObjectScalar extends ScalarBase implements IMixedScalar {
 		return value;
 	}
 
+	@Override
+	public IValue getGeneric(int index) {
+		return this;
+	}
+
 }

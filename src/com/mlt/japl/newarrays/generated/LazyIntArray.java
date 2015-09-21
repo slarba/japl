@@ -49,6 +49,11 @@ public abstract class LazyIntArray extends ArrayBase implements IIntArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return new IntScalar(get(index));
+	}
+
+	@Override
 	public String asString(PrintConfig config) {
 		return config.print(this);
 	}

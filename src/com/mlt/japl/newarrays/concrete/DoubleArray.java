@@ -34,6 +34,11 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 		return data[index%data.length];
 	}
 
+	@Override
+	public IValue getGeneric(int index) {
+		return new DoubleScalar(get(index));
+	}
+
 	
 	@Override
 	public IValue get(IMixedArray i) {

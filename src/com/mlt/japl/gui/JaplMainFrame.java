@@ -5,11 +5,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -18,11 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import com.mlt.japl.errors.AplError;
-import com.mlt.japl.iface.Array;
-import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.parser.TokenMgrError;
-import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.Interpreter;
 
 @SuppressWarnings("serial")
@@ -67,6 +59,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 		
 		getContentPane().add(interpreter);
 		pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 		repl.requestFocus();
 

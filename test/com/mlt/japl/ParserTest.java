@@ -248,17 +248,17 @@ public class ParserTest {
 	
 	@Test
 	public void testUserFn() {
-		assertEquals("{ +(2,3) }(2 3)", doParseAndPrint("{2 fn 3} 2 3"));
+		assertEquals("<userfn locals=() larg=null rarg=null out=null>{+(2,3)}(2 3)", doParseAndPrint("{2 fn 3} 2 3"));
 	}
 
 	@Test
 	public void testUserFnDyadic() {
-		assertEquals("{ +(2,3) }(2 3,5 6)", doParseAndPrint("2 3 {2 fn 3} 5 6"));
+		assertEquals("<userfn locals=() larg=null rarg=null out=null>{+(2,3)}(2 3,5 6)", doParseAndPrint("2 3 {2 fn 3} 5 6"));
 	}
 
 	@Test
 	public void testUserFnDyadicCombined() {
-		assertEquals("{ +(2,3) }(2 3,+(5 6,2))", doParseAndPrint("2 3 {2 fn 3} 5 6 + 2"));
+		assertEquals("<userfn locals=() larg=null rarg=null out=null>{+(2,3)}(2 3,+(5 6,2))", doParseAndPrint("2 3 {2 fn 3} 5 6 + 2"));
 	}
 	
 }

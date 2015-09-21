@@ -14,6 +14,8 @@ public interface IValue extends ArrayAcceptor {
 	String asString(PrintConfig printConfig);
 	IValue reshape(int[] newShape);
 	
+	IValue getGeneric(int index);
+	
 	// generic indexing
 	IValue get(IMixedArray i);
 	Class<?> getCorrespondingJavaClass();

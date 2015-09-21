@@ -41,7 +41,12 @@ public class IotaArray extends ArrayBase implements IIntArray {
 		}
 		return new IntArray(ds, result);
 	}
-	
+
+	@Override
+	public IValue getGeneric(int index) {
+		return new IntScalar(get(index));
+	}
+
 	@Override
 	public long get(int index) {
 		return 1+(index % val);

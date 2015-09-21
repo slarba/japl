@@ -158,4 +158,9 @@ public class MixedArray extends ArrayBase implements IMixedArray {
 		return data;
 	}
 
+	@Override
+	public IValue getGeneric(int index) {
+		return get(index);
+	}
+
 }

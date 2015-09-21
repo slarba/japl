@@ -33,6 +33,11 @@ public class ConstBitArray extends ArrayBase implements IBitArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return new IntScalar(get(index));
+	}
+
+	@Override
 	public String asString(PrintConfig config) {
 		return config.print(this);
 	}

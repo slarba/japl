@@ -99,6 +99,7 @@ public class FunctionRegistry {
 		map.put("\u2282", new EncloseFn());
 		map.put("\u2283", new DiscloseFn());
 //		map.put("\u22a5", new DecodeFn());
+//		map.put("\....", new EncodeFn());
 		map.put("\u222a", new UnionFn());
 		map.put("\u22a3", new StopFn());
 		map.put("\u22a2", new PassFn());

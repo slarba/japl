@@ -19,6 +19,13 @@ import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 import com.mlt.japl.tools.Dimensions;
 
+import it.unimi.dsi.fastutil.chars.CharOpenHashSet;
+import it.unimi.dsi.fastutil.chars.CharSet;
+import it.unimi.dsi.fastutil.doubles.DoubleOpenHashSet;
+import it.unimi.dsi.fastutil.doubles.DoubleSet;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
+import it.unimi.dsi.fastutil.longs.LongSet;
+
 public class UnionFn extends BaseFn {
 
 	@Override
@@ -43,37 +50,25 @@ public class UnionFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IIntArray a, int axis) {
-		HashSet<Long> set = new HashSet<Long>();
-		for(int i=0; i<a.length(); i++)
-			set.add(a.get(i));
-		long[] result = new long[set.size()];
-		int i=0;
-		for(Long l : set)
-			result[i++] = l;
+		LongSet set = new LongOpenHashSet();
+		for(int i=0; i<a.length(); i++) set.add(a.get(i));
+		long[] result = set.toLongArray();
 		return new IntArray(new Dimensions(result.length), result);
 	}
 
 	@Override
 	public IValue visit_monadic(IDoubleArray a, int axis) {
-		HashSet<Double> set = new HashSet<Double>();
-		for(int i=0; i<a.length(); i++)
-			set.add(a.get(i));
-		double[] result = new double[set.size()];
-		int i=0;
-		for(Double l : set)
-			result[i++] = l;
+		DoubleSet set = new DoubleOpenHashSet();
+		for(int i=0; i<a.length(); i++) set.add(a.get(i));
+		double[] result = set.toDoubleArray();
 		return new DoubleArray(new Dimensions(result.length), result);
 	}
 	
 	@Override
 	public IValue visit_monadic(ICharArray a, int axis) {
-		HashSet<Character> set = new HashSet<Character>();
-		for(int i=0; i<a.length(); i++)
-			set.add(a.get(i));
-		char[] result = new char[set.size()];
-		int i=0;
-		for(Character l : set)
-			result[i++] = l;
+		CharSet set = new CharOpenHashSet();
+		for(int i=0; i<a.length(); i++) set.add(a.get(i));
+		char[] result = set.toCharArray();
 		return new CharArray(new Dimensions(result.length), result);
 	}
 
@@ -91,71 +86,56 @@ public class UnionFn extends BaseFn {
 	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
-		HashSet<Long> set = new HashSet<Long>();
+		LongSet set = new LongOpenHashSet();
 		for(int i=0; i<a.length(); i++)
 			set.add(a.get(i));
 		for(int i=0; i<b.length(); i++)
 			set.add(b.get(i));
-		long[] result = new long[set.size()];
-		int i=0;
-		for(Long l : set)
-			result[i++] = l;
+		long[] result = set.toLongArray();
 		return new IntArray(new Dimensions(result.length), result);
 	}
 
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
-		HashSet<Double> set = new HashSet<Double>();
+		DoubleSet set = new DoubleOpenHashSet();
 		for(int i=0; i<a.length(); i++)
 			set.add(a.get(i));
 		for(int i=0; i<b.length(); i++)
 			set.add(b.get(i));
-		double[] result = new double[set.size()];
-		int i=0;
-		for(Double l : set)
-			result[i++] = l;
+		double[] result = set.toDoubleArray();
 		return new DoubleArray(new Dimensions(result.length), result);
 	}
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
-		HashSet<Double> set = new HashSet<Double>();
+		DoubleSet set = new DoubleOpenHashSet();
 		for(int i=0; i<a.length(); i++)
 			set.add((double)a.get(i));
 		for(int i=0; i<b.length(); i++)
 			set.add(b.get(i));
-		double[] result = new double[set.size()];
-		int i=0;
-		for(Double l : set)
-			result[i++] = l;
+		double[] result = set.toDoubleArray();
 		return new DoubleArray(new Dimensions(result.length), result);
 	}
 	
 	@Override
 	public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
-		HashSet<Double> set = new HashSet<Double>();
+		DoubleSet set = new DoubleOpenHashSet();
 		for(int i=0; i<a.length(); i++)
 			set.add(a.get(i));
 		for(int i=0; i<b.length(); i++)
 			set.add((double)b.get(i));
-		double[] result = new double[set.size()];
-		int i=0;
-		for(Double l : set)
-			result[i++] = l;
+		double[] result = set.toDoubleArray();
 		return new DoubleArray(new Dimensions(result.length), result);
 	}
 
 	@Override
 	public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
-		HashSet<Character> set = new HashSet<Character>();
+		CharSet set = new CharOpenHashSet();
 		for(int i=0; i<a.length(); i++)
 			set.add(a.get(i));
 		for(int i=0; i<b.length(); i++)
 			set.add(b.get(i));
-		char[] result = new char[set.size()];
-		int i=0;
-		for(Character l : set)
-			result[i++] = l;
+		char[] result = set.toCharArray();
 		return new CharArray(new Dimensions(result.length), result);
 	}
 	

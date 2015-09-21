@@ -28,6 +28,11 @@ public class DoubleScalar extends ScalarBase implements IDoubleScalar {
 	}
 	
 	@Override
+	public IValue getGeneric(int index) {
+		return this;
+	}
+
+	@Override
 	public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
 		return visitor.visit_dyadic(a, this, axis);
 	}

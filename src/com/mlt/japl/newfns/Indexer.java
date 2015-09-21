@@ -1,5 +1,6 @@
 package com.mlt.japl.newfns;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.mlt.japl.errors.IndexError;
@@ -86,6 +87,7 @@ public class Indexer {
 	public Indexer(IMixedArray index, IValue array) {
 		this.array = array;
 		this.index = index;
+		if(index.length()!=array.rank()) throw new IndexError();
 		ri = new int[index.length()];
 		indexers = new IIndexer[index.length()];
 		for(int i=0; i<index.length(); i++) {
@@ -115,18 +117,22 @@ public class Indexer {
 	public int[] computeResultDims() {
 		if(index.length()!=array.rank()) throw new IndexError();
 		int x=0;
-		int[] resultDims = new int[array.rank()];
+		ArrayList<Integer> resultDims = new ArrayList<Integer>();
 		for(int j=0; j<index.length(); j++) {
 			IValue idx = index.get(j);
 			if(idx instanceof IIntScalar) {
 				continue;
 			} else if(idx.length()==0) {
-				resultDims[x++] = array.dims().axis(j);
+				resultDims.add(array.dims().axis(j));
 			} else {
-				resultDims[x++] = idx.length();
+				for(int k=0; k<idx.dims().rank(); k++) {
+					resultDims.add(idx.dims().axis(k));
+				}
 			}
 		}
-		return Arrays.copyOf(resultDims, x);
+		int[] result = new int[resultDims.size()];
+		for(int i=0; i<result.length; i++) result[i] = resultDims.get(i);
+		return result;
 	}
 	
 	public int indexForSingle() {

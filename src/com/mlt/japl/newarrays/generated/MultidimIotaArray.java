@@ -45,6 +45,11 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return get(index);
+	}
+
+	@Override
 	public int depth() {
 		return 2;
 	}

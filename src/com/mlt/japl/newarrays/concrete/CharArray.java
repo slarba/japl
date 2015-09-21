@@ -47,7 +47,7 @@ public class CharArray extends ArrayBase implements ICharArray {
 	public IValue get(IMixedArray i) {
 		Indexer indexer = new Indexer(i, this);
 		int[] finalDims = indexer.computeResultDims();
-		if(finalDims.length==0) return new IntScalar(get(indexer.indexForSingle()));
+		if(finalDims.length==0) return new CharScalar(get(indexer.indexForSingle()));
 		Dimensions ds = new Dimensions(finalDims);
 		char[] result = new char[ds.length()];
 
@@ -55,6 +55,11 @@ public class CharArray extends ArrayBase implements ICharArray {
 			result[j] = get(indexer.step());
 		}
 		return new CharArray(ds, result);
+	}
+
+	@Override
+	public IValue getGeneric(int index) {
+		return new CharScalar(get(index));
 	}
 
 	@Override

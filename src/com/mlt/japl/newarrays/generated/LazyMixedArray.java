@@ -43,6 +43,11 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return get(index);
+	}
+
+	@Override
 	public IValue force() {
 		IValue[] data = new IValue[dims().length()];
 		for(int i=0; i<data.length; i++) data[i] = get(i);

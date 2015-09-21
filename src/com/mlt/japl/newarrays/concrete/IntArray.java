@@ -46,6 +46,11 @@ public class IntArray extends ArrayBase implements IIntArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return new IntScalar(get(index));
+	}
+
+	@Override
 	public long get(int index) {
 		return data[index%data.length];
 	}

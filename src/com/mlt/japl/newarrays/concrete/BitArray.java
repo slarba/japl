@@ -55,6 +55,11 @@ public class BitArray extends ArrayBase implements IBitArray {
 	}
 
 	@Override
+	public IValue getGeneric(int index) {
+		return new IntScalar(get(index));
+	}
+	
+	@Override
 	public long get(int idx) {
 		int i = idx % actualLength;
 		int whole = i / 64;

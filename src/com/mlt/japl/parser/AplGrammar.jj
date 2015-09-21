@@ -135,7 +135,7 @@ TOKEN : /* OPERATORS */
 {
   < FUNC:
     ("⎕" (["a"-"z"]|["A"-"Z"])+ )
-  | ("." (["a"-"z"]|["A"-"Z"]) (["a"-"z"]|["A"-"Z"]|["0"-"9"])*)
+  // | ("." (["a"-"z"]|["A"-"Z"]) (["a"-"z"]|["A"-"Z"]|["0"-"9"])*)
   | "\u003f"  // roll ?
   | "\u2308"  // ceil
   | "\u230a"  // floor
@@ -209,7 +209,7 @@ TOKEN :
 | < CONSTANT : < NUMBER > >
 | < CPLXCONSTANT: < NUMBER > "J" < NUMBER > >
 | < STRING : < STRINGDELIM > (< STRINGCHAR >)* < STRINGDELIM > >
-| < #NUMBER: ((< SIGN >)? (< DIGIT >)+ ("." (< DIGIT >)+)?) >
+| < #NUMBER: ((< SIGN >)? (< DIGIT >)* ("." (< DIGIT >)+)?) >
 | < #SIGN : ["¯"] >
 | < #DIGIT : [ "0"-"9" ] >
 | < #STRINGDELIM : ["'"] >

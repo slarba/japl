@@ -132,4 +132,9 @@ public class MixedScalar extends ScalarBase implements IMixedScalar {
 		return val;
 	}
 
+	@Override
+	public IValue getGeneric(int index) {
+		return this;
+	}
+
 }

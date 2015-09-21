@@ -128,4 +128,9 @@ public class IntScalar extends ScalarBase implements IIntScalar {
 		return val;
 	}
 
+	@Override
+	public IValue getGeneric(int index) {
+		return this;
+	}
+
 }

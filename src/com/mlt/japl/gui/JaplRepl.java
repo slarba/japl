@@ -168,8 +168,23 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 		}
 	}
 
+	private void changeFontSize(float multiplier) {
+		Font f = this.getFont();
+		Font derived = f.deriveFont(f.getSize2D()*multiplier);
+		setFont(derived);
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("kreypressed: " + e.getModifiers() + " key=" + e.getKeyChar());
+
+		if(e.getKeyChar()=='+' && e.getModifiers()==4) {
+			changeFontSize(1.5f);
+		}
+		if(e.getKeyChar()=='-' && e.getModifiers()==4) {
+			changeFontSize(0.6666666666666666f);
+		}
+		
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_ENTER:
 			if(isCaretOnEditLine()) {

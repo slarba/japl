@@ -2,7 +2,6 @@ package com.mlt.japl.ast;
 
 import java.util.List;
 
-import com.mlt.japl.iface.Array;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.MixedArray;
@@ -40,6 +39,7 @@ public class IndexExprNode implements AstNode {
 			}
 			if(j<chain.size()-1)
 				builder.append(";");
+			j++;
 		}
 		return builder.toString();
 	}
