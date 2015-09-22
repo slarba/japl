@@ -18,12 +18,12 @@ import javax.swing.SwingUtilities;
 import com.mlt.japl.workspace.Interpreter;
 
 @SuppressWarnings("serial")
-public class JaplMainFrame extends JFrame implements ActionListener {
+public class jApl extends JFrame implements ActionListener {
 	Font aplFont;
 	JaplInterpreter interpreter;
 	JaplRepl repl;
 	
-	public JaplMainFrame() {
+	public jApl() {
 		super("APL Interpreter");
 		try {
 			createGUI();
@@ -35,7 +35,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 	}
 	
 	private Font createFont(String resourcePath) {
-		InputStream is = JaplMainFrame.class.getResourceAsStream(resourcePath);
+		InputStream is = jApl.class.getResourceAsStream(resourcePath);
 		Font font;
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -46,6 +46,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 	}
 
 	public void createGUI() throws FontFormatException, IOException {
+		setTitle("jAPL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		aplFont = createFont("/com/mlt/japl/gui/SImPL.ttf");
@@ -96,7 +97,7 @@ public class JaplMainFrame extends JFrame implements ActionListener {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new JaplMainFrame();
+				new jApl();
 			}
 		});
 	}

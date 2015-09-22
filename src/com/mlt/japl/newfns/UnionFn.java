@@ -85,6 +85,36 @@ public class UnionFn extends BaseFn {
 	}
 	
 	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+		if(a.get()!=b.get()) { return new IntArray(new Dimensions(2), new long[] { a.get(), b.get() }); }
+		return a;
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+		if(a.get()!=b.get()) { return new DoubleArray(new Dimensions(2), new double[] { a.get(), b.get() }); }
+		return a;
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+		if(a.get()!=b.get()) { return new CharArray(new Dimensions(2), new char[] { a.get(), b.get() }); }
+		return a;
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
+		if(a.get()!=b.get()) { return new DoubleArray(new Dimensions(2), new double[] { a.get(), b.get() }); }
+		return a;
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
+		if(a.get()!=b.get()) { return new DoubleArray(new Dimensions(2), new double[] { a.get(), b.get() }); }
+		return b;
+	}
+
+	@Override
 	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
 		LongSet set = new LongOpenHashSet();
 		for(int i=0; i<a.length(); i++)

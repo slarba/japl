@@ -8,8 +8,11 @@ import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IIntScalar;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newarrays.interf.IMixedScalar;
 
@@ -19,6 +22,56 @@ public class OuterProdFn extends BaseFn {
 
 	public OuterProdFn(Func fn) {
 		this.fn = fn;		
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, ICharScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+	
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, ICharScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+	
+	@Override
+	public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IIntScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IDoubleScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
+	}
+	
+	@Override
+	public IValue visit_dyadic(IMixedScalar a, IMixedScalar b, int axis) {
+		return fn.applyDyadic(a, b, axis);
 	}
 	
 	@Override

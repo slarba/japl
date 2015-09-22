@@ -58,6 +58,7 @@ public class AplKeymap {
 			  ,"\u22a5"  // decode
 			  ,"\u22c4"  // statement separator
 			  ,"\u222a"  // union/unique
+			  ,"∩"   // intersection
 			  ,"\u233f"  // reduce first axis
 			  ,"\u2340"  // scan first axis
 			  ,"\u236c"  // zilde

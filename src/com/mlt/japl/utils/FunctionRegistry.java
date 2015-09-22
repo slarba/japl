@@ -28,6 +28,7 @@ import com.mlt.japl.newfns.GradeUpFn;
 import com.mlt.japl.newfns.GtFn;
 import com.mlt.japl.newfns.GteFn;
 import com.mlt.japl.newfns.IndexFn;
+import com.mlt.japl.newfns.IntersectionFn;
 import com.mlt.japl.newfns.IotaFn;
 import com.mlt.japl.newfns.LogFn;
 import com.mlt.japl.newfns.LtFn;
@@ -101,6 +102,7 @@ public class FunctionRegistry {
 //		map.put("\u22a5", new DecodeFn());
 //		map.put("\....", new EncodeFn());
 		map.put("\u222a", new UnionFn());
+		map.put("∩", new IntersectionFn());
 		map.put("\u22a3", new StopFn());
 		map.put("\u22a2", new PassFn());
 		map.put("/", new ReplicateFn(false));	

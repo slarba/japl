@@ -35,22 +35,42 @@ public class EachFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IIntArray a, int axis) {
-		return fn.applyMonadic(a, axis);
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyMonadic(new IntScalar(a.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_monadic(IDoubleArray a, int axis) {
-		return fn.applyMonadic(a, axis);
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyMonadic(new DoubleScalar(a.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_monadic(ICharArray a, int axis) {
-		return fn.applyMonadic(a, axis);
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyMonadic(new CharScalar(a.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue visit_monadic(IBitArray a, int axis) {
-		return fn.applyMonadic(a, axis);
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyMonadic(new IntScalar(a.get(index)), axis);
+			}
+		};
 	}
 
 	@Override
@@ -138,6 +158,66 @@ public class EachFn extends BaseFn {
 		};
 	}
 
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IMixedArray b, int axis) {
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyDyadic(a, b.get(index), axis);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IMixedArray b, int axis) {
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyDyadic(a, b.get(index), axis);
+			}
+		};
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IMixedArray b, int axis) {
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyDyadic(a, b.get(index), axis);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedArray a, ICharScalar b, int axis) {
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyDyadic(a.get(index), b, axis);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedArray a, IDoubleScalar b, int axis) {
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyDyadic(a.get(index), b, axis);
+			}
+		};
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedArray a, IIntScalar b, int axis) {
+		return new LazyMixedArray(a.dims()) {
+			@Override
+			public IValue get(int index) {
+				return fn.applyDyadic(a.get(index), b, axis);
+			}
+		};
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IMixedArray b, int axis) {
 		return new LazyMixedArray(a.dims()) {

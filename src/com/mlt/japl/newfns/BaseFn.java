@@ -10,6 +10,7 @@ import com.mlt.japl.newarrays.concrete.CharScalar;
 import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.concrete.MixedScalar;
+import com.mlt.japl.newarrays.generated.LazyIntArray;
 import com.mlt.japl.newarrays.generated.LazyMixedArray;
 import com.mlt.japl.newarrays.interf.IArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
@@ -746,17 +747,35 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	protected Dimensions outerProdDims(IArray a, IArray b, int axis) {
@@ -765,31 +784,67 @@ public class BaseFn implements ArrayVisitor, Func {
 
 	@Override
 	public IValue outerprod(IIntArray a, IDoubleArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IIntArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IBitArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
-		return null;
+		return new LazyMixedArray(outerProdDims(a,b,axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index/a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		};
 	}
 }

@@ -62,19 +62,19 @@ public class FacFn extends BaseFn {
 
     @Override
     public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
-    	return new DoubleScalar((double)factorial(a.get()) / (factorial(b.get())*factorial(a.get()-b.get())));
+    	return new IntScalar(factorial(b.get()) / (factorial(a.get())*factorial(b.get()-a.get())));
     }
 
     @Override
     public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
-    	return new LazyDoubleArray(a.dims()) {
+    	return new LazyIntArray(a.dims()) {
 			@Override
-			public double get(int index) {
-		    	return (double)factorial(a.get(index)) / (factorial(b.get(index))*factorial(a.get(index)-b.get(index)));
+			public long get(int index) {
+		    	return factorial(b.get(index)) / (factorial(a.get(index))*factorial(b.get(index)-a.get(index)));
 			}
     	};
     }
-    
+        
 	@Override
 	public String getName() {
 		return "fac";

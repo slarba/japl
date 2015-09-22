@@ -290,6 +290,21 @@ public class IotaFn extends BaseFn {
 	}
 	
 	@Override
+	public IValue visit_dyadic(IMixedArray a, IIntScalar b, int axis) {
+		return new IntScalar(a.length()+1);
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedArray a, ICharScalar b, int axis) {
+		return new IntScalar(a.length()+1);
+	}
+
+	@Override
+	public IValue visit_dyadic(IMixedArray a, IDoubleScalar b, int axis) {
+		return new IntScalar(a.length()+1);
+	}
+	
+	@Override
 	public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
 		if(a.get()==b.get()) return new IntScalar(1);
 		else return new IntScalar(2);

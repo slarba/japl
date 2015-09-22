@@ -135,7 +135,7 @@ TOKEN : /* OPERATORS */
 {
   < FUNC:
     ("⎕" (["a"-"z"]|["A"-"Z"])+ )
-  // | ("." (["a"-"z"]|["A"-"Z"]) (["a"-"z"]|["A"-"Z"]|["0"-"9"])*)
+  | ("." (["a"-"z"]|["A"-"Z"]) (["a"-"z"]|["A"-"Z"]|["0"-"9"])*)
   | "\u003f"  // roll ?
   | "\u2308"  // ceil
   | "\u230a"  // floor
@@ -183,6 +183,7 @@ TOKEN : /* OPERATORS */
   | "\u2282"  // enclose
   | "\u2283"  // disclose
   | "\u222a"  // union
+  | "∩"       // intersection
   | "\u22a3"  // stop
   | "\u22a2"  // pass
   | "\u2337"  // index
@@ -205,11 +206,12 @@ TOKEN : /* OPERATORS */
 
 TOKEN :
 {
-  < ID : (["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"]|["\u2395"]|["\u237a"]|["\u2375"])+ >
+  < ID : < IDCHARACTER > ((< IDCHARACTER >)|(< DIGIT >))* >
 | < CONSTANT : < NUMBER > >
 | < CPLXCONSTANT: < NUMBER > "J" < NUMBER > >
 | < STRING : < STRINGDELIM > (< STRINGCHAR >)* < STRINGDELIM > >
-| < #NUMBER: ((< SIGN >)? (< DIGIT >)* ("." (< DIGIT >)+)?) >
+| < #IDCHARACTER : ["a"-"z"]|["A"-"Z"]|["\u03b1"]|["\u03c9"]|["\u236c"]|["\u2395"]|["\u237a"]|["\u2375"]>
+| < #NUMBER: ((< SIGN >)? (< DIGIT >)+ ("." (< DIGIT >)+)?) >
 | < #SIGN : ["¯"] >
 | < #DIGIT : [ "0"-"9" ] >
 | < #STRINGDELIM : ["'"] >
@@ -273,28 +275,17 @@ AstNode toplevel_expr_list() :
   List<AstNode> statements = new ArrayList<AstNode>();
 }
 {
-	(c=toplevelexpr()
-		{
-		  statements.add(c);
-		}
-	(< STMTSEPARATOR >)+ )+
-	{
-	  if(statements.size()==1) return statements.get(0);
-	  return new StatementListNode(statements);
-	}
-}
-
-AstNode userfn_expr_list() :
-{
-  AstNode c;
-  List<AstNode> statements = new ArrayList<AstNode>();
-}
-{
-	(c=toplevelexpr()
-		{
-		  statements.add(c);
-		}
-	(< STMTSEPARATOR >)* )+
+  c=toplevelexpr()
+  {
+    statements.add(c);
+  }
+  (
+    (< STMTSEPARATOR >)+
+    c=toplevelexpr()
+    {
+      statements.add(c);
+    }
+  )*
 	{
 	  if(statements.size()==1) return statements.get(0);
 	  return new StatementListNode(statements);
@@ -330,7 +321,11 @@ AstNode arrayexpr() :{	AstNode t;
 AstNode if_expr() :
 {  AstNode cond, thenbranch, elsebranch=null;
 }
-{	":If" cond=arrayexpr() (< STMTSEPARATOR>)+ thenbranch=toplevel_expr_list() (":Else" (< STMTSEPARATOR >)* elsebranch=toplevel_expr_list())? ":EndIf"
+{	":If" cond=arrayexpr() (< STMTSEPARATOR>)+
+	   thenbranch=toplevel_expr_list() (< STMTSEPARATOR >)*
+	(":Else" (< STMTSEPARATOR >)*
+	   elsebranch=toplevel_expr_list() (< STMTSEPARATOR >)*)?
+	":EndIf"
 	{
 	  return new IfNode(cond, thenbranch, elsebranch);	}
 }
@@ -340,7 +335,9 @@ AstNode while_expr() :
   AstNode cond, body;
 }
 {
-	":While" cond=arrayexpr() (< STMTSEPARATOR>)+ body=toplevel_expr_list() ":EndWhile"
+	":While" cond=arrayexpr() (< STMTSEPARATOR>)+
+	    body=toplevel_expr_list() (< STMTSEPARATOR >)*
+	":EndWhile"
 	{
 	  return new WhileNode(cond, body);
 	}
@@ -350,7 +347,9 @@ AstNode repeat_expr() :
 {
   AstNode count, body;}
 {
-  ":Repeat" count=arrayexpr() (< STMTSEPARATOR>)+ body=toplevel_expr_list() ":EndRepeat"
+  ":Repeat" count=arrayexpr() (< STMTSEPARATOR>)+
+      body=toplevel_expr_list() (< STMTSEPARATOR >)*
+  ":EndRepeat"
   {
     return new RepeatNode(count, body);  }}
 
@@ -416,9 +415,9 @@ AstNode array() :
 	  {
 	    nodeList.add(new ConstantAstNode(s.toString()));
 	  }
-    | s = < STRING >
+    | idexpr = string_arrayexpr()
       {
-	    nodeList.add(new ConstantAstNode(s.toString()));
+	    nodeList.add(idexpr);
       }
 	| idexpr = paren_arrayexpr()
 	  {
@@ -439,6 +438,16 @@ AstNode array() :
 	  }
 	}
 }
+
+AstNode string_arrayexpr() :
+{	Token t = null;
+	AstNode e = null;
+}{
+  t = < STRING > ("[" e = indexexpr() "]")?
+  {
+    AstNode s = new ConstantAstNode(t.toString());
+    if(e!=null) return new ArrayIndexerNode(s,e);
+    else return s;  }}
 
 AstNode paren_arrayexpr() :
 {	AstNode t = null;
@@ -513,7 +522,9 @@ AstNode userfndef() :
   AstNode fnBody = null;
 }
 {
-  "{" (< STMTSEPARATOR >)* fnBody = userfn_expr_list() "}"
+  "{" (< STMTSEPARATOR >)*
+      fnBody = toplevel_expr_list() (< STMTSEPARATOR >)*
+  "}"
   {
     return fnBody;
   }
@@ -573,7 +584,7 @@ AstNode toplevel_fn_def() :
 	    (";" lname = < ID >			{
 			  locals.add(lname.toString());			})*
 		(<STMTSEPARATOR>)+
-		body = userfn_expr_list()
+		body = toplevel_expr_list() (< STMTSEPARATOR >)*
 	< DEL >
 	{
 	  if(nameb==null)	  {

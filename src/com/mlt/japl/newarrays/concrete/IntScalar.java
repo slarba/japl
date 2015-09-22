@@ -18,6 +18,8 @@ import com.mlt.japl.utils.PrintConfig;
 
 public class IntScalar extends ScalarBase implements IIntScalar {
 	public static final IValue ZERO = new IntScalar(0);
+
+	public static final IValue ONE = new IntScalar(1);
 	
 	private long val;
 

@@ -20,70 +20,6 @@ public class Indexer {
 		int get();
 	}
 
-	class ConstIndexer implements IIndexer {
-		int c;
-		
-		public ConstIndexer(int c) {
-			this.c = c;
-		}
-		
-		public boolean step() {
-			return true;
-		}
-		
-		public int get() {
-			return c;
-		}
-	}
-	
-	class RangeIndexer implements IIndexer {
-		int upto;
-		int c;
-		
-		public RangeIndexer(int upto) {
-			this.upto = upto;
-			this.c = 0;
-		}
-
-		public int get() {
-			return c;
-		}
-		
-		public boolean step() {
-			if(c>=upto) {
-				c=0;
-				return true;
-			} else {
-				c++;
-				return false;				
-			}
-		}
-	}
-
-	class ValueIndexer implements IIndexer {
-		long[] vals;
-		int c;
-		
-		public ValueIndexer(long[] vals) {
-			this.vals = vals;
-			this.c = 0;
-		}
-		
-		public int get() {
-			return (int)vals[c]-1;
-		}
-		
-		public boolean step() {
-			if(c>=vals.length) {
-				c=0;
-				return true;
-			} else {
-				c++;
-				return false;
-			}
-		}
-	}
-	
 	public Indexer(IMixedArray index, IValue array) {
 		this.array = array;
 		this.index = index;
@@ -116,7 +52,6 @@ public class Indexer {
 	
 	public int[] computeResultDims() {
 		if(index.length()!=array.rank()) throw new IndexError();
-		int x=0;
 		ArrayList<Integer> resultDims = new ArrayList<Integer>();
 		for(int j=0; j<index.length(); j++) {
 			IValue idx = index.get(j);

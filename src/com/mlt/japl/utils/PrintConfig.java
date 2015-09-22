@@ -105,7 +105,7 @@ public class PrintConfig {
 				}
 				buffer.append('\n');
 			}
-			for(int k=0; k<newLines-1; k++)
+			for(int k=0; k<newLines-2; k++)
 				buffer.append('\n');
 		}
 		return buffer.toString();
