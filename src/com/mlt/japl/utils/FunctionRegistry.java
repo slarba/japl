@@ -46,6 +46,7 @@ import com.mlt.japl.newfns.RotateFn;
 import com.mlt.japl.newfns.RhoFn;
 import com.mlt.japl.newfns.RollFn;
 import com.mlt.japl.newfns.ScanFn;
+import com.mlt.japl.newfns.SlurpFn;
 import com.mlt.japl.newfns.StopFn;
 import com.mlt.japl.newfns.StringSearchFn;
 import com.mlt.japl.newfns.SubFn;
@@ -110,6 +111,7 @@ public class FunctionRegistry {
 		map.put("⍬", new ZildeFn());
 		map.put("⍎", new ExecuteFn(context));
 		map.put("⎕NEW", new NewFn());
+		map.put("⎕SLURP", new SlurpFn());
 		map.put("⎕SS", new StringSearchFn());
 		map.put("⍕", new FormatFn(new PrintConfig()));
 //		map.put("\\", new ExpandFn(false));
