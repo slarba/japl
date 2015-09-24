@@ -210,4 +210,84 @@ public class UserFnNode implements AstNode, Func {
 		throw new AplError();
 	}
 
+	@Override
+	public IValue outerprod(IIntArray a, ICharArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IIntArray a, IMixedArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, ICharArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IDoubleArray a, IMixedArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, ICharArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IBitArray a, IMixedArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(ICharArray a, IIntArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(ICharArray a, IDoubleArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(ICharArray a, IBitArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(ICharArray a, IMixedArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(ICharArray a, ICharArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IMixedArray a, IIntArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IMixedArray a, IDoubleArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IMixedArray a, IBitArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IMixedArray a, ICharArray b, int axis) {
+		throw new AplError();
+	}
+
+	@Override
+	public IValue outerprod(IMixedArray a, IMixedArray b, int axis) {
+		throw new AplError();
+	}
+
 }

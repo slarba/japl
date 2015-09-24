@@ -1,5 +1,7 @@
 package com.mlt.japl.newfns;
 
+import java.util.Arrays;
+
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.newarrays.IValue;
@@ -131,25 +133,14 @@ public class ReplicateFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IMixedArray b, int ax) {
-		if(a.rank()>1) throw new RankError();
 		int axis = ax<0 ? b.rank()-1 : ax;
-		int n=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			n += Math.abs(x);
-		}
-		int[] lookup = new int[n];
-		int j=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			for(int k=0; k<Math.abs(x); k++) {
-				if(x<0) lookup[j++] = -i;
-				else lookup[j++] = i;
-			}
-		}
+		if(a.rank()>1) throw new RankError();
+		int n = computeTotalAxisLen(a, b);
+		int[] lookup = makeIndexLookup(a, n);
 		return new LazyMixedArray(b.dims().replaceAxis(axis, n)) {
 			@Override
 			public IValue get(int index) {
+				index = index%length();
 				int[] ri = dims().reverseIndexInt(index);
 				ri[axis] = lookup[ri[axis]];
 				if(ri[axis]<0) return IntArray.EMPTY;
@@ -160,25 +151,14 @@ public class ReplicateFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IIntArray b, int ax) {
-		if(a.rank()>1) throw new RankError();
 		int axis = ax<0 ? b.rank()-1 : ax;
-		int n=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			n += Math.abs(x);
-		}
-		int[] lookup = new int[n];
-		int j=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			for(int k=0; k<Math.abs(x); k++) {
-				if(x<0) lookup[j++] = -i;
-				else lookup[j++] = i;
-			}
-		}
+		if(a.rank()>1) throw new RankError();
+		int n = computeTotalAxisLen(a, b);
+		int[] lookup = makeIndexLookup(a, n);
 		return new LazyIntArray(b.dims().replaceAxis(axis, n)) {
 			@Override
 			public long get(int index) {
+				index = index%length();
 				int[] ri = dims().reverseIndexInt(index);
 				ri[axis] = lookup[ri[axis]];
 				if(ri[axis]<0) return 0;
@@ -187,24 +167,39 @@ public class ReplicateFn extends BaseFn {
 		};
 	}
 
-	@Override
-	public IValue visit_dyadic(IIntArray a, ICharArray b, int ax) {
-		if(a.rank()>1) throw new RankError();
-		int axis = ax<0 ? b.rank()-1 : ax;
+	private int computeTotalAxisLen(IIntArray a, IValue b) {
 		int n=0;
+		int pos=0;
 		for(int i=0; i<a.length(); i++) {
 			int x = (int)a.get(i);
+			if(x>=0) pos++;
 			n += Math.abs(x);
 		}
+		if(pos!=b.length()) throw new LengthError();
+		return n;
+	}
+
+	private int[] makeIndexLookup(IIntArray a, int n) {
 		int[] lookup = new int[n];
 		int j=0;
+		int l=0;
 		for(int i=0; i<a.length(); i++) {
 			int x = (int)a.get(i);
 			for(int k=0; k<Math.abs(x); k++) {
-				if(x<0) lookup[j++] = -i;
-				else lookup[j++] = i;
+				if(x<0) lookup[j++] = -1;
+				else lookup[j++] = l;
 			}
+			if(x>=0) l++;
 		}
+		return lookup;
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntArray a, ICharArray b, int ax) {
+		int axis = ax<0 ? b.rank()-1 : ax;
+		if(a.rank()>1) throw new RankError();
+		int n = computeTotalAxisLen(a, b);
+		int[] lookup = makeIndexLookup(a, n);
 		return new LazyCharArray(b.dims().replaceAxis(axis, n)) {
 			@Override
 			public char get(int index) {
@@ -218,22 +213,10 @@ public class ReplicateFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IDoubleArray b, int ax) {
-		if(a.rank()>1) throw new RankError();
 		int axis = ax<0 ? b.rank()-1 : ax;
-		int n=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			n += Math.abs(x);
-		}
-		int[] lookup = new int[n];
-		int j=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			for(int k=0; k<Math.abs(x); k++) {
-				if(x<0) lookup[j++] = -i;
-				else lookup[j++] = i;
-			}
-		}
+		if(a.rank()>1) throw new RankError();
+		int n = computeTotalAxisLen(a, b);
+		int[] lookup = makeIndexLookup(a, n);
 		return new LazyDoubleArray(b.dims().replaceAxis(axis, n)) {
 			@Override
 			public double get(int index) {
@@ -247,22 +230,10 @@ public class ReplicateFn extends BaseFn {
 
 	@Override
 	public IValue visit_dyadic(IIntArray a, IBitArray b, int ax) {
-		if(a.rank()>1) throw new RankError();
 		int axis = ax<0 ? b.rank()-1 : ax;
-		int n=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			n += Math.abs(x);
-		}
-		int[] lookup = new int[n];
-		int j=0;
-		for(int i=0; i<a.length(); i++) {
-			int x = (int)a.get(i);
-			for(int k=0; k<Math.abs(x); k++) {
-				if(x<0) lookup[j++] = -i;
-				else lookup[j++] = i;
-			}
-		}
+		if(a.rank()>1) throw new RankError();
+		int n = computeTotalAxisLen(a, b);
+		int[] lookup = makeIndexLookup(a, n);
 		return new LazyBitArray(b.dims().replaceAxis(axis, n)) {
 			@Override
 			public long get(int index) {

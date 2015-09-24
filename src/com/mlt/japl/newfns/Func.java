@@ -22,12 +22,31 @@ public interface Func {
 	public IValue outerprod(IIntArray a, IIntArray b, int axis);
 	public IValue outerprod(IIntArray a, IDoubleArray b, int axis);
 	public IValue outerprod(IIntArray a, IBitArray b, int axis);
+	public IValue outerprod(IIntArray a, ICharArray b, int axis);
+	public IValue outerprod(IIntArray a, IMixedArray b, int axis);
 	
 	public IValue outerprod(IDoubleArray a, IIntArray b, int axis);
 	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis);
 	public IValue outerprod(IDoubleArray a, IBitArray b, int axis);
+	public IValue outerprod(IDoubleArray a, ICharArray b, int axis);
+	public IValue outerprod(IDoubleArray a, IMixedArray b, int axis);
 	
 	public IValue outerprod(IBitArray a, IIntArray b, int axis);
 	public IValue outerprod(IBitArray a, IDoubleArray b, int axis);
 	public IValue outerprod(IBitArray a, IBitArray b, int axis);
+	public IValue outerprod(IBitArray a, ICharArray b, int axis);
+	public IValue outerprod(IBitArray a, IMixedArray b, int axis);
+
+	public IValue outerprod(ICharArray a, IIntArray b, int axis);
+	public IValue outerprod(ICharArray a, IDoubleArray b, int axis);
+	public IValue outerprod(ICharArray a, IBitArray b, int axis);
+	public IValue outerprod(ICharArray a, IMixedArray b, int axis);
+	public IValue outerprod(ICharArray a, ICharArray b, int axis);
+
+	public IValue outerprod(IMixedArray a, IIntArray b, int axis);
+	public IValue outerprod(IMixedArray a, IDoubleArray b, int axis);
+	public IValue outerprod(IMixedArray a, IBitArray b, int axis);
+	public IValue outerprod(IMixedArray a, ICharArray b, int axis);
+	public IValue outerprod(IMixedArray a, IMixedArray b, int axis);
+	
 }

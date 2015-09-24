@@ -176,8 +176,6 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("kreypressed: " + e.getModifiers() + " key=" + e.getKeyChar());
-
 		if(e.getKeyChar()=='+' && e.getModifiers()==4) {
 			changeFontSize(1.5f);
 		}
@@ -263,7 +261,6 @@ public class JaplRepl extends JTextPane implements KeyListener, DocumentListener
 		lineHistory.add(trimmed);
 		lineHistoryPosition = lineHistory.size();
 		System.out.println("line entered: " + trimmed);
-		//insertResult("\n" + trimmed);
 		PrintWriter p = new PrintWriter(lineOutputStream);
 		p.println(trimmed);
 		p.flush();

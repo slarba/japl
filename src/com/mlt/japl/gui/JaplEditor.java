@@ -44,7 +44,6 @@ public class JaplEditor extends JTextPane implements DocumentListener {
 	private void syntaxHighlight() {
 		getStyledDocument().removeDocumentListener(this);
 		getStyledDocument().removeDocumentListener(parentListener);
-		System.out.println("syntax highlight");
 		StyledDocument doc = getStyledDocument();
 		highlighter.syntaxHighlight(doc);
 		getStyledDocument().addDocumentListener(this);
