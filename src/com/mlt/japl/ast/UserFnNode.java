@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.LazyMixedArray;
@@ -15,6 +16,7 @@ import com.mlt.japl.newarrays.interf.IIntArray;
 import com.mlt.japl.newarrays.interf.IMixedArray;
 import com.mlt.japl.newfns.Func;
 import com.mlt.japl.newfns.UserFnReducer;
+import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
 public class UserFnNode implements AstNode, Func {
@@ -128,9 +130,8 @@ public class UserFnNode implements AstNode, Func {
 		return print();
 	}
 
-	@Override
-	public IValue reduce(IIntArray a, int axis) {
-		UserFnReducer reducer = new UserFnReducer(new IntScalar(a.get(0)), a, axis) {
+	private IValue generic_reduce(IValue a, int axis) {
+		UserFnReducer reducer = new UserFnReducer(a, axis) {
 			@Override
 			public IValue op(IValue a, IValue b) {
 				return applyDyadic(a, b, axis);
@@ -142,152 +143,171 @@ public class UserFnNode implements AstNode, Func {
 			public IValue get(int index) {
 				return reducer.get(index);
 			}
-		};
+		}.force();		
+	}
+	
+	@Override
+	public IValue reduce(IIntArray a, int axis) {
+		return generic_reduce(a, axis);
 	}
 
 	@Override
 	public IValue reduce(IDoubleArray a, int axis) {
-		throw new AplError();
+		return generic_reduce(a, axis);
 	}
 
 	@Override
 	public IValue reduce(ICharArray a, int axis) {
-		throw new AplError();
+		return generic_reduce(a, axis);
 	}
 
 	@Override
 	public IValue reduce(IMixedArray a, int axis) {
-		throw new AplError();
+		return generic_reduce(a, axis);
 	}
 
 	@Override
 	public IValue reduce(IBitArray a, int axis) {
-		throw new AplError();
+		return generic_reduce(a, axis);
 	}
 
+	protected Dimensions outerProdDims(IValue a, IValue b, int axis) {
+		return a.dims().concat(b.dims());
+	}
+
+	private IValue generic_outerprod(IValue a, IValue b, int axis) {
+		return new LazyMixedArray(outerProdDims(a, b, axis)) {
+			@Override
+			public IValue get(int index) {
+				int idx = index / a.length();
+				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
+			}
+		}.force();
+	}
+	
 	@Override
 	public IValue outerprod(IIntArray a, IIntArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IDoubleArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IBitArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IDoubleArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IBitArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IIntArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IBitArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IIntArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IDoubleArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, ICharArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IIntArray a, IMixedArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, ICharArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IDoubleArray a, IMixedArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, ICharArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IBitArray a, IMixedArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(ICharArray a, IIntArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(ICharArray a, IDoubleArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(ICharArray a, IBitArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(ICharArray a, IMixedArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(ICharArray a, ICharArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IMixedArray a, IIntArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IMixedArray a, IDoubleArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IMixedArray a, IBitArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IMixedArray a, ICharArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 	@Override
 	public IValue outerprod(IMixedArray a, IMixedArray b, int axis) {
-		throw new AplError();
+		return generic_outerprod(a, b, axis);
 	}
 
 }

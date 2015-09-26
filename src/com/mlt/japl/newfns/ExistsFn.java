@@ -1,11 +1,15 @@
 package com.mlt.japl.newfns;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.newarrays.generated.LazyBitArray;
 import com.mlt.japl.newarrays.interf.IBitArray;
 import com.mlt.japl.newarrays.interf.ICharArray;
+import com.mlt.japl.newarrays.interf.ICharScalar;
 import com.mlt.japl.newarrays.interf.IDoubleArray;
+import com.mlt.japl.newarrays.interf.IDoubleScalar;
 import com.mlt.japl.newarrays.interf.IIntArray;
+import com.mlt.japl.newarrays.interf.IIntScalar;
 
 import it.unimi.dsi.fastutil.chars.CharOpenHashSet;
 import it.unimi.dsi.fastutil.chars.CharSet;
@@ -16,6 +20,80 @@ import it.unimi.dsi.fastutil.longs.LongSet;
 
 public class ExistsFn extends BaseFn {
 
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+		for(int i=0; i<b.length(); i++) {
+			if(b.get(i)==a.get()) return IntScalar.ONE;
+		}
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IIntArray b, int axis) {
+		for(int i=0; i<b.length(); i++) {
+			if(b.get(i)==a.get()) return IntScalar.ONE;
+		}
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IIntArray b, int axis) {
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+		for(int i=0; i<b.length(); i++) {
+			if(b.get(i)==a.get()) return IntScalar.ONE;
+		}
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b, int axis) {
+		for(int i=0; i<b.length(); i++) {
+			if(b.get(i)==a.get()) return IntScalar.ONE;
+		}
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IDoubleArray b, int axis) {
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, IBitArray b, int axis) {
+		return IntScalar.ZERO;
+	}
+	
+	@Override
+	public IValue visit_dyadic(IIntScalar a, ICharArray b, int axis) {
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+		if(a.get()!=0 || a.get()!=1) return IntScalar.ZERO;
+		for(int i=0; i<b.length(); i++) {
+			if(b.get(i) == a.get()) return IntScalar.ONE;
+		}
+		return IntScalar.ZERO;
+	}
+	
+	@Override
+	public IValue visit_dyadic(IDoubleScalar a, ICharArray b, int axis) {
+		return IntScalar.ZERO;
+	}
+
+	@Override
+	public IValue visit_dyadic(ICharScalar a, ICharArray b, int axis) {
+		for(int i=0; i<b.length(); i++) {
+			if(b.get(i)==a.get()) return IntScalar.ONE;
+		}
+		return IntScalar.ZERO;
+	}
+	
 	@Override
 	public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
 		LongSet set = new LongOpenHashSet();

@@ -357,13 +357,16 @@ AstNode repeat_expr() :
 // argument expr
 AstNode monadic_call_or_niladic() :
 {
+  Token fn;
   Func s;
   AstNode t = null;
   AstNode arg = null;
   AstNode axis = null;
 }
 {
-  s=fn_expr() ("[" axis=arrayexpr() "]")? (t=arrayexpr())?
+  fn = < FUNC > "\u2190" t=arrayexpr()  {
+    return new AssignmentNode(fn.toString(), t);  }
+| s=fn_expr() ("[" axis=arrayexpr() "]")? (t=arrayexpr())?
   {
     if(t!=null)
     {

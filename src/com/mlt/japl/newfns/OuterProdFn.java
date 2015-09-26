@@ -127,7 +127,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(a.get(idx), new IntScalar(b.get(index)), axis);
 			}
-		};
+		}.force();
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(a.get(idx), new DoubleScalar(b.get(index)), axis);
 			}
-		};
+		}.force();
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(a.get(idx), new IntScalar(b.get(index)), axis);
 			}
-		};
+		}.force();
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(a.get(idx), new CharScalar(b.get(index)), axis);
 			}
-		};
+		}.force();
 	}
 	
 	@Override
@@ -171,7 +171,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(a.get(idx), b.get(index), axis);
 			}
-		};
+		}.force();
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(new IntScalar(a.get(idx)), b.get(index), axis);
 			}
-		};
+		}.force();
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public class OuterProdFn extends BaseFn {
 			public IValue get(int index) {
 				return fn.applyDyadic(new IntScalar(a.get(index)), b.get(), axis);
 			}
-		};
+		}.force();
 	}
 	
 	@Override
@@ -203,7 +203,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(new DoubleScalar(a.get(idx)), b.get(index), axis);
 			}
-		};
+		}.force();
 	}
 	
 	@Override
@@ -214,7 +214,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(new CharScalar(a.get(idx)), b.get(index), axis);
 			}
-		};
+		}.force();
 	}
 
 	@Override
@@ -225,7 +225,7 @@ public class OuterProdFn extends BaseFn {
 				int idx = index / a.length();
 				return fn.applyDyadic(new IntScalar(a.get(idx)), b.get(index), axis);
 			}
-		};
+		}.force();
 	}
 	
 	@Override

@@ -4,6 +4,8 @@ import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.ArrayBase;
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.BitArray;
+import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.newarrays.concrete.DoubleArray;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
@@ -49,8 +51,50 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
 
 	@Override
 	public IValue force() {
+		int ints = 0;
+		int doubles = 0;
+		int chars = 0;
+		int ones = 0;
+		int zeros = 0;
 		IValue[] data = new IValue[dims().length()];
-		for(int i=0; i<data.length; i++) data[i] = get(i);
+		for(int i=0; i<data.length; i++) {
+			IValue d = get(i);
+			if(d instanceof IIntScalar) { 
+				ints++;
+				IIntScalar x = (IIntScalar)d;
+				if(x.get()==1) ones++; else if(x.get()==0) zeros++;
+			} else if(d instanceof IDoubleScalar) doubles++;
+			else if(d instanceof ICharScalar) chars++;
+			data[i] = get(i);
+		}
+		if(data.length==ints) {
+			if(ones+zeros==ints) {
+				BitArray b = new BitArray(dims());
+				for(int i=0; i<b.length(); i++) {
+					b.setBit(i, ((IIntScalar)data[i]).get());
+				}
+				return b;
+			}
+			long[] result = new long[ints];
+			for(int i=0; i<ints; i++) {
+				result[i] = ((IIntScalar)data[i]).get();
+			}
+			return new IntArray(dims(), result);
+		}
+		if(data.length==doubles) {
+			double[] result = new double[doubles];
+			for(int i=0; i<doubles; i++) {
+				result[i] = ((IDoubleScalar)data[i]).get();
+			}
+			return new DoubleArray(dims(), result);
+		}
+		if(data.length==chars) {
+			char[] result = new char[chars];
+			for(int i=0; i<chars; i++) {
+				result[i] = ((ICharScalar)data[i]).get();
+			}
+			return new CharArray(dims(), result);
+		}
 		return new MixedArray(dims(), data);
 	}
 

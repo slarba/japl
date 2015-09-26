@@ -570,7 +570,7 @@ public class BaseFn implements ArrayVisitor, Func {
 		return a.accept_monadic(this, axis);
 	}
 
-	public void checkLengths(IArray a, IArray b) {
+	public void checkLengths(IValue a, IValue b) {
 		if(a.dims().rank()!=b.dims().rank()) throw new RankError();
 		if(!a.dims().equals(b.dims())) throw new LengthError();
 	}
@@ -740,7 +740,7 @@ public class BaseFn implements ArrayVisitor, Func {
 				int idx = index/a.length();
 				return applyDyadic(a.getGeneric(idx), b.getGeneric(index), axis);
 			}
-		};		
+		}.force();
 	}
 	
 	@Override
