@@ -274,6 +274,11 @@ public class AddFn extends BaseFn {
 	public IValue visit_monadic(IBitArray a, int axis) {
 		return a;
 	}
+
+	@Override
+	public IValue visit_monadic(IMixedArray a, int axis) {
+		return a;
+	}
 	
 	@Override
 	public IValue visit_monadic(IIntScalar a, int axis) {
@@ -282,6 +287,11 @@ public class AddFn extends BaseFn {
 
 	@Override
 	public IValue visit_monadic(IDoubleScalar a, int axis) {
+		return a;
+	}
+
+	@Override
+	public IValue visit_monadic(IMixedScalar a, int axis) {
 		return a;
 	}
 	

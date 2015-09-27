@@ -28,7 +28,7 @@ public class AplSyntaxHighlighter {
 			+ "\u2228\u2227\u2371\u2372\u2190"
 			+ "\u2218\u22a5\u22c4\u222a\u233f"
 			+ "\u2340\u236c\u2395\u22a3\\."
-			+ "\u22a2\u2337\u2207\u2229]+");
+			+ "\u22a2\u2337\u2207\u2229⍪]+");
 	
 	Style numbersStyle;
 	Style keywordStyle;

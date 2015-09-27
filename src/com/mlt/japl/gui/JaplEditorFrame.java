@@ -64,6 +64,7 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 		panel.add(new JScrollPane(editor), BorderLayout.CENTER);
 		add(panel);
 		setSize(1024, 768);
+		setLocationRelativeTo(null);
 		setVisible(true);		
 		editor.requestFocus();
 	}
@@ -144,7 +145,7 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
 			File selected = chooser.getSelectedFile();
 			save(selected);
 			setTitle(selected.getAbsolutePath());
-			
+			this.file = selected;
 		}		
 	}
 	
