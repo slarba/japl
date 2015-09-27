@@ -263,6 +263,9 @@ AstNode toplevelexpr() :
 	{
 	  return t;
 	}
+|   t = for_expr()
+	{
+	  return t;	}
 |   t = arrayexpr()
 	{
 	  return t;
@@ -319,16 +322,38 @@ AstNode arrayexpr() :{	AstNode t;
 }
 
 AstNode if_expr() :
-{  AstNode cond, thenbranch, elsebranch=null;
+{  AstNode cond=null;
+  AstNode thenbranch=null;
+  AstNode elsebranch=null;
+  AstNode c = null;
+  AstNode tb = null;
+  List<AstNode > elseIfs = new ArrayList<AstNode >();
+  List<AstNode > thenBranches = new ArrayList<AstNode >();
 }
 {	":If" cond=arrayexpr() (< STMTSEPARATOR>)+
 	   thenbranch=toplevel_expr_list() (< STMTSEPARATOR >)*
+	(":ElseIf" c=arrayexpr() (< STMTSEPARATOR >)+
+	   tb=toplevel_expr_list() (< STMTSEPARATOR >)*	   {
+	     elseIfs.add(c);
+	     thenBranches.add(tb);	   })*
 	(":Else" (< STMTSEPARATOR >)*
 	   elsebranch=toplevel_expr_list() (< STMTSEPARATOR >)*)?
 	":EndIf"
 	{
-	  return new IfNode(cond, thenbranch, elsebranch);	}
+	  return new IfNode(cond, thenbranch, elsebranch, elseIfs, thenBranches);	}
 }
+
+AstNode for_expr() :
+{	Token loopVar = null;
+	AstNode expr = null;
+	AstNode body = null;
+}
+{
+  ":For" loopVar=< ID > ":In" expr=arrayexpr() (< STMTSEPARATOR >)+
+  	body = toplevel_expr_list() (< STMTSEPARATOR >)*
+  ":EndFor"
+  {
+    return new ForNode(loopVar.toString(), expr, body);  }}
 
 AstNode while_expr() :
 {

@@ -1,5 +1,7 @@
 package com.mlt.japl.ast;
 
+import java.util.List;
+
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newarrays.concrete.IntScalar;
@@ -11,11 +13,15 @@ public class IfNode implements AstNode {
 	private AstNode elseBranch;
 	private AstNode thenBranch;
 	private AstNode cond;
+	private List<AstNode> elseIfs;
+	private List<AstNode> thenBranches;
 
-	public IfNode(AstNode cond, AstNode thenBranch, AstNode elseBranch) {
+	public IfNode(AstNode cond, AstNode thenBranch, AstNode elseBranch, List<AstNode> elseIfs, List<AstNode> thenBranches) {
 		this.cond = cond;
 		this.thenBranch = thenBranch;
 		this.elseBranch = elseBranch;
+		this.elseIfs = elseIfs;
+		this.thenBranches = thenBranches;
 		
 	}
 	
@@ -24,11 +30,18 @@ public class IfNode implements AstNode {
 		IValue cond_result = cond.eval(context);
 		if(cond_result.equals(new IntScalar(1))) {
 			return thenBranch.eval(context);
+		} else {
+			for(int i=0; i<elseIfs.size(); i++) {
+				cond_result = elseIfs.get(i).eval(context);
+				if(cond_result.equals(new IntScalar(1))) {
+					return thenBranches.get(i).eval(context);
+				}
+			}
+			if(elseBranch!=null)
+				return elseBranch.eval(context);
+			else
+				return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);			
 		}
-		if(elseBranch!=null)
-			return elseBranch.eval(context);
-		else
-			return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
 	}
 
 	@Override

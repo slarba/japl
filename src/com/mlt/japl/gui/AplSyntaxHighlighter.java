@@ -12,7 +12,7 @@ import javax.swing.text.StyledDocument;
 
 public class AplSyntaxHighlighter {
 	Pattern numbersPattern = Pattern.compile("[¯]?[0-9]+([\\.][0-9]+)?");
-	Pattern keywordPattern = Pattern.compile(":(While)|(Do)|(EndWhile)|(If)|(Then)|(Else)|(EndIf)|(Repeat)|(EndRepeat)");
+	Pattern keywordPattern = Pattern.compile(":(While)|(Do)|(EndWhile)|(If)|(Else)|(EndIf)|(Repeat)|(EndRepeat)|(ElseIf)|(For)|(In)|(EndFor)");
 	Pattern commentPattern = Pattern.compile("\u235d.*\n");
 	Pattern stringPattern = Pattern.compile("'([^']*)'");
 	
