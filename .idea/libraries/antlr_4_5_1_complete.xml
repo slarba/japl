@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jetty-6.1.25">
+  <library name="antlr-4.5.1-complete">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/jetty-6.1.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/antlr-4.5.1-complete.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

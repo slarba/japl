@@ -6,33 +6,33 @@ import com.mlt.japl.tools.Dimensions;
 
 public abstract class ScalarBase implements IValue {
 
-	@Override
-	public Dimensions dims() {
-		return Dimensions.EMPTY;
-	}
+    @Override
+    public Dimensions dims() {
+        return Dimensions.EMPTY;
+    }
 
-	@Override
-	public IValue get(IMixedArray i) {
-		throw new IndexError();
-	}
-	
-	@Override
-	public int rank() {
-		return 0;
-	}
+    @Override
+    public IValue get(IMixedArray i) {
+        throw new IndexError();
+    }
 
-	@Override
-	public int depth() {
-		return 0;
-	}
+    @Override
+    public int rank() {
+        return 0;
+    }
 
-	@Override
-	public int length() {
-		return 0;
-	}
+    @Override
+    public int depth() {
+        return 0;
+    }
 
-	@Override
-	public IValue force() {
-		return this;
-	}
+    @Override
+    public int length() {
+        return 0;
+    }
+
+    @Override
+    public IValue force() {
+        return this;
+    }
 }

@@ -1,6 +1,7 @@
 package com.mlt.japl.workspace;
 
 public interface AplBusyListener {
-	void evaluationStarted();
-	void evaluationEnded();
+    void evaluationStarted();
+
+    void evaluationEnded();
 }

@@ -139,6 +139,13 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitComplexnum(AplParser.ComplexnumContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitString(AplParser.StringContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -168,6 +175,13 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitFunc(AplParser.FuncContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitOuterproduct(AplParser.OuterproductContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

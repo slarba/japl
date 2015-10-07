@@ -5,21 +5,21 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class AstGuardExpr extends AstNode {
 
-	private AstNode condition;
-	private AstNode result;
+    private AstNode condition;
+    private AstNode result;
 
-	public AstGuardExpr(AstNode condition, AstNode result) {
-		this.condition = condition;
-		this.result = result;
-	}
+    public AstGuardExpr(AstNode condition, AstNode result) {
+        this.condition = condition;
+        this.result = result;
+    }
 
-	@Override
-	public String toString() {
-		return "guard: " + condition + " => " + result;
-	}
+    @Override
+    public String toString() {
+        return "guard: " + condition + " => " + result;
+    }
 
-	@Override
-	public IValue eval(EvalContext context) {
-		return null;
-	}
+    @Override
+    public IValue eval(EvalContext context) {
+        return null;
+    }
 }

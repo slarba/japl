@@ -15,24 +15,27 @@ options {
 	}
 
 @lexer::members {
-boolean isFnSymbol(String sym) {
-   System.out.println("foo");
-   return sym.equals("specialsym");
-}
+    boolean isFnSymbol(String sym) {
+       return sym.equals("specialsym");
+    }
 }
 
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
         {if(isFnSymbol(getText())) setType(AplParser.FUNC);}
     ;
 
-INT :	'0'..'9'+
+SIGN: '\u00af';
+
+INT :	SIGN? '0'..'9'+
     ;
 
 FLOAT
-    :   ('0'..'9')+ '.' ('0'..'9')* EXPONENT?
-    |   '.' ('0'..'9')+ EXPONENT?
-    |   ('0'..'9')+ EXPONENT
+    :   SIGN? ('0'..'9')+ '.' ('0'..'9')* EXPONENT?
+    |   SIGN? '.' ('0'..'9')+ EXPONENT?
+    |   SIGN? ('0'..'9')+ EXPONENT
     ;
+
+COMPLEX: (INT | FLOAT) 'J' (INT|FLOAT);
 
 COMMENT
     :   '\u235D' ~('\n'|'\r')* '\r'? '\n'
@@ -105,7 +108,9 @@ FOR     : ':For' ;
 IN      : ':In' ;
 ENDFOR  : (':EndFor' | ':End') ;
 
-OPERATOR : ('/' | '\\' | '¨') ;
+OPERATOR : ('/' | '\u233f' | '\\' | '\u2340' | '¨') ;
+
+OUTERPRODUCT : '\u2218.' ;
 
 sep	:	DIAMOND | (NL | COMMENT)+
 	;
@@ -172,7 +177,7 @@ dyadic_call_or_array
 array	:	arrayitem+
 	;
 
-arrayitem : ident | integer | floating | string | subarrayexpr
+arrayitem : ident | integer | floating | complexnum | string | subarrayexpr
           ;
 
 subarrayexpr
@@ -184,6 +189,8 @@ integer	:	INT
 
 floating :       FLOAT
         ;
+
+complexnum : COMPLEX ;
 
 string 	:	STRING index?
 	;
@@ -199,9 +206,13 @@ func_operator
         ;
 
 func	:
-                FUNC
+        func '.' func
+    |   FUNC
+    |   outerproduct
 	| 	lambdafunc
 	;
+
+outerproduct : OUTERPRODUCT func ;
 
 lambdafunc
 	:	LBRACE

@@ -5,24 +5,24 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class AstStatementList extends AstNode {
 
-	private AstNode[] stmts;
+    private AstNode[] stmts;
 
-	public AstStatementList(AstNode[] stmts) {
-		this.stmts = stmts;
-	}
+    public AstStatementList(AstNode[] stmts) {
+        this.stmts = stmts;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		for(AstNode s : stmts) {
-			builder.append(s.toString());
-			builder.append('\n');
-		}
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (AstNode s : stmts) {
+            builder.append(s.toString());
+            builder.append('\n');
+        }
+        return builder.toString();
+    }
 
-	@Override
-	public IValue eval(EvalContext context) {
-		return null;
-	}
+    @Override
+    public IValue eval(EvalContext context) {
+        return null;
+    }
 }

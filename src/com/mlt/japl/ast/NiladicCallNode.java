@@ -7,24 +7,24 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class NiladicCallNode implements AstNode {
 
-	private Func fn;
+    private Func fn;
 
-	public NiladicCallNode(Func fn) {
-		this.fn = fn;
-		if(!(fn instanceof UserFnNode)) throw new SyntaxError();
-	}
-	
-	@Override
-	public IValue eval(EvalContext context) {
-		return fn.applyNiladic(0);
-	}
+    public NiladicCallNode(Func fn) {
+        this.fn = fn;
+        if (!(fn instanceof UserFnNode)) throw new SyntaxError();
+    }
 
-	@Override
-	public String print() {
-		return fn.getName() + "(<niladic>)";
-	}
+    @Override
+    public IValue eval(EvalContext context) {
+        return fn.applyNiladic(0);
+    }
 
-	public Func func() {
-		return fn;
-	}
+    @Override
+    public String print() {
+        return fn.getName() + "(<niladic>)";
+    }
+
+    public Func func() {
+        return fn;
+    }
 }

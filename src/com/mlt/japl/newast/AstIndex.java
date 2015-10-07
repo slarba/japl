@@ -5,21 +5,21 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class AstIndex extends AstNode {
 
-	private AstNode expr;
-	private AstNode indexexpr;
+    private AstNode expr;
+    private AstNode indexexpr;
 
-	public AstIndex(AstNode str, AstNode visit) {
-		this.expr = str;
-		this.indexexpr = visit;
-	}
-	
-	@Override
-	public String toString() {
-		return expr + "[" + indexexpr + "]";
-	}
+    public AstIndex(AstNode str, AstNode visit) {
+        this.expr = str;
+        this.indexexpr = visit;
+    }
 
-	@Override
-	public IValue eval(EvalContext context) {
-		return null;
-	}
+    @Override
+    public String toString() {
+        return expr + "[" + indexexpr + "]";
+    }
+
+    @Override
+    public IValue eval(EvalContext context) {
+        return null;
+    }
 }

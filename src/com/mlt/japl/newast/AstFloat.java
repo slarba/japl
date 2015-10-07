@@ -6,18 +6,24 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class AstFloat extends AstNode {
 
-	private double value;
+    private double value;
 
-	public AstFloat(String text) {
-		value = Double.parseDouble(text);
-	}
+    public AstFloat(String text) {
+        value = parse(text);
+    }
 
-	public String toString() {
-		return Double.toString(value);
-	}
+    public static double parse(String text) {
+        long sign = 1;
+        if(text.startsWith("\u00af")) sign = -1;
+        return sign*Double.parseDouble(sign<0 ? text.substring(1) : text);
+    }
 
-	@Override
-	public IValue eval(EvalContext context) {
-		return new DoubleScalar(value);
-	}
+    public String toString() {
+        return Double.toString(value);
+    }
+
+    @Override
+    public IValue eval(EvalContext context) {
+        return new DoubleScalar(value);
+    }
 }

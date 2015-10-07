@@ -5,23 +5,23 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class AstRef extends AstNode {
 
-	private String id;
+    private String id;
 
-	public AstRef(String text) {
-		this.id = text;
-	}
+    public AstRef(String text) {
+        this.id = text;
+    }
 
-	@Override
-	public String toString() {
-		return "@" + id;
-	}
+    @Override
+    public String toString() {
+        return "@" + id;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	@Override
-	public IValue eval(EvalContext context) {
-		return null;
-	}
+    @Override
+    public IValue eval(EvalContext context) {
+        return null;
+    }
 }

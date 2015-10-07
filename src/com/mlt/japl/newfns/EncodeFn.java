@@ -6,8 +6,8 @@ import com.mlt.japl.newarrays.interf.IIntScalar;
 
 public class EncodeFn extends BaseFn {
 
-	@Override
-	public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
-		return null;
-	}
+    @Override
+    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+        return null;
+    }
 }

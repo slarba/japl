@@ -116,6 +116,12 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFloating(AplParser.FloatingContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AplParser#complexnum}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexnum(AplParser.ComplexnumContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AplParser#string}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -145,6 +151,12 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunc(AplParser.FuncContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AplParser#outerproduct}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOuterproduct(AplParser.OuterproductContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AplParser#lambdafunc}.
 	 * @param ctx the parse tree

@@ -2,14 +2,14 @@ package com.mlt.japl.newast;
 
 public class AstBuiltinFunction extends AstFunc {
 
-	private String fn;
+    private String fn;
 
-	public AstBuiltinFunction(String text) {
-		fn = text;
-	}
+    public AstBuiltinFunction(String text) {
+        fn = text;
+    }
 
-	@Override
-	public String toString() {
-		return fn;
-	}
+    @Override
+    public String toString() {
+        return fn;
+    }
 }

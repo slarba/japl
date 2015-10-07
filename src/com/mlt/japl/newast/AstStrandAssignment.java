@@ -7,21 +7,21 @@ import java.util.Arrays;
 
 public class AstStrandAssignment extends AstNode {
 
-	private String[] tids;
-	private AstNode expr;
+    private String[] tids;
+    private AstNode expr;
 
-	public AstStrandAssignment(String[] tids, AstNode expr) {
-		this.tids = tids;
-		this.expr = expr;
-	}
+    public AstStrandAssignment(String[] tids, AstNode expr) {
+        this.tids = tids;
+        this.expr = expr;
+    }
 
-	@Override
-	public String toString() {
-		return Arrays.toString(tids) + " <- " + expr;
-	}
+    @Override
+    public String toString() {
+        return Arrays.toString(tids) + " <- " + expr;
+    }
 
-	@Override
-	public IValue eval(EvalContext context) {
-		return null;
-	}
+    @Override
+    public IValue eval(EvalContext context) {
+        return null;
+    }
 }

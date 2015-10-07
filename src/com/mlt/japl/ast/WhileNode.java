@@ -8,25 +8,25 @@ import com.mlt.japl.workspace.EvalContext;
 
 public class WhileNode implements AstNode {
 
-	private AstNode cond;
-	private AstNode body;
+    private AstNode cond;
+    private AstNode body;
 
-	public WhileNode(AstNode cond, AstNode body) {
-		this.cond = cond;
-		this.body = body;
-	}
-	
-	@Override
-	public IValue eval(EvalContext context) {
-		IValue trueVal = new IntScalar(1);
-		while(cond.eval(context).equals(trueVal)) {
-			body.eval(context);
-		}
-		return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
-	}
+    public WhileNode(AstNode cond, AstNode body) {
+        this.cond = cond;
+        this.body = body;
+    }
 
-	@Override
-	public String print() {
-		return "while(" + cond.print() + ") { " + body.print() + " }";
-	}
+    @Override
+    public IValue eval(EvalContext context) {
+        IValue trueVal = new IntScalar(1);
+        while (cond.eval(context).equals(trueVal)) {
+            body.eval(context);
+        }
+        return new IntArray(Dimensions.EMPTY_ARRAY, new long[0]);
+    }
+
+    @Override
+    public String print() {
+        return "while(" + cond.print() + ") { " + body.print() + " }";
+    }
 }
