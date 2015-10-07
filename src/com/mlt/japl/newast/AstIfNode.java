@@ -3,7 +3,7 @@ package com.mlt.japl.newast;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstIfNode extends AstNode {
+public class AstIfNode implements AstNode {
 
     private AstNode cond;
     private AstNode thenb;
@@ -17,7 +17,7 @@ public class AstIfNode extends AstNode {
 
     @Override
     public String toString() {
-        return "IF(" + cond + ") {\n" + indent("   ", thenb.toString()) + "}";
+        return "IF(" + cond + ") {\n" + AstNode.indent("   ", thenb.toString()) + "}";
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.DoubleScalar;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstFloat extends AstNode {
+public class AstFloat implements AstNode {
 
     private double value;
 

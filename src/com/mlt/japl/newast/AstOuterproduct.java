@@ -6,14 +6,11 @@ import com.mlt.japl.workspace.EvalContext;
 /**
  * Created by markolau on 07/10/15.
  */
-public class AstComplex implements AstNode {
-    double real;
-    double imag;
+public class AstOuterproduct extends AstFunc {
+    private final AstFunc fn;
 
-    public AstComplex(String text) {
-        String[] parts = text.split("J");
-        real = AstFloat.parse(parts[0]);
-        imag = AstFloat.parse(parts[1]);
+    public AstOuterproduct(AstFunc fn) {
+        this.fn = fn;
     }
 
     @Override
@@ -23,6 +20,6 @@ public class AstComplex implements AstNode {
 
     @Override
     public String toString() {
-        return "complex(" + real + "," + imag + ")";
+        return "(o." + fn.toString() + ")";
     }
 }

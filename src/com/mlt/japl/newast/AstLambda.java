@@ -14,8 +14,8 @@ public class AstLambda extends AstFunc {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("{\n");
-        for (AstNode n : guards_assignments) builder.append(indent("   ", n.toString()));
-        builder.append(indent("   ", body.toString()));
+        for (AstNode n : guards_assignments) builder.append(AstNode.indent("   ", n.toString()));
+        builder.append(AstNode.indent("   ", body.toString()));
         builder.append("}");
         return builder.toString();
     }

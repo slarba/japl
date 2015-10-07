@@ -3,7 +3,7 @@ package com.mlt.japl.newast;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstStatementList extends AstNode {
+public class AstStatementList implements AstNode {
 
     private AstNode[] stmts;
 

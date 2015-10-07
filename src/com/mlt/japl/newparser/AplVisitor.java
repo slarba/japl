@@ -140,23 +140,51 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIndex(AplParser.IndexContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AplParser#indexelement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIndexelement(AplParser.IndexelementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AplParser#func_operator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunc_operator(AplParser.Func_operatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AplParser#func}.
+	 * Visit a parse tree produced by the {@code simplefunc}
+	 * labeled alternative in {@link AplParser#func}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunc(AplParser.FuncContext ctx);
+	T visitSimplefunc(AplParser.SimplefuncContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AplParser#outerproduct}.
+	 * Visit a parse tree produced by the {@code lambda}
+	 * labeled alternative in {@link AplParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambda(AplParser.LambdaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code outerproduct}
+	 * labeled alternative in {@link AplParser#func}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitOuterproduct(AplParser.OuterproductContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Innerprod}
+	 * labeled alternative in {@link AplParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInnerprod(AplParser.InnerprodContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AplParser#axis}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAxis(AplParser.AxisContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AplParser#lambdafunc}.
 	 * @param ctx the parse tree

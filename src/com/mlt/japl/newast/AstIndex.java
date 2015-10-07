@@ -3,7 +3,7 @@ package com.mlt.japl.newast;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstIndex extends AstNode {
+public class AstIndex implements AstNode {
 
     private AstNode expr;
     private AstNode indexexpr;

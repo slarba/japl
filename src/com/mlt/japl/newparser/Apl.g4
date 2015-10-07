@@ -24,6 +24,8 @@ ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
         {if(isFnSymbol(getText())) setType(AplParser.FUNC);}
     ;
 
+LABEL : ID ':' ;
+
 SIGN: '\u00af';
 
 INT :	SIGN? '0'..'9'+
@@ -95,6 +97,7 @@ LBRACE : '{' ;
 RBRACE : '}' ;
 COLON : ':' ;
 DIAMOND : '\u22C4' ;
+SEMICOLON : ';' ;
 
 IF      : ':If' ;
 ENDIF   : (':EndIf' | ':End' ) ;
@@ -112,8 +115,7 @@ OPERATOR : ('/' | '\u233f' | '\\' | '\u2340' | '¨') ;
 
 OUTERPRODUCT : '\u2218.' ;
 
-sep	:	DIAMOND | (NL | COMMENT)+
-	;
+sep	:	DIAMOND | (NL | COMMENT)+ ;
 
 toplevel
 	:	sep? expr_list sep? EOF
@@ -122,8 +124,8 @@ toplevel
 toplevelexpr
 	:	if_expr
 	|	while_expr
-        |       repeat_expr
-        |       for_expr
+    |   repeat_expr
+    |   for_expr
 	|	arrayexpr
 	;
 
@@ -131,24 +133,26 @@ expr_list
 	:	toplevelexpr (sep toplevelexpr)*
 	;
 
-if_expr	:	IF condition=arrayexpr sep
-		   thenbranch=expr_list sep?
-                (ELSEIF elifcondition=arrayexpr sep
-                   elifthenbranch=expr_list sep?)*
-		(ELSE
-		   elsebranch=expr_list sep?)?
-		ENDIF
+if_expr	:
+	IF condition=arrayexpr sep
+	   thenbranch=expr_list sep?
+    (ELSEIF elifcondition=arrayexpr sep
+            elifthenbranch=expr_list sep?)*
+	(ELSE
+		    elsebranch=expr_list sep?)?
+	ENDIF
 	;
 
-for_expr :      FOR ID IN arrayexpr sep
-                   expr_list
-                ENDFOR
-         ;
+for_expr :
+    FOR ID IN arrayexpr sep
+            expr_list
+    ENDFOR
+    ;
 
-while_expr
-	:	WHILE arrayexpr sep
+while_expr :
+    WHILE arrayexpr sep
 		expr_list sep?
-		ENDWHILE
+	ENDWHILE
 	;
 
 repeat_expr :   REPEAT arrayexpr sep
@@ -198,26 +202,28 @@ string 	:	STRING index?
 ident	:	ID index?
 	;
 
-index	:	LBRACKET arrayexpr RBRACKET
+index	:	LBRACKET indexelement+ RBRACKET
 	;
 
+indexelement : SEMICOLON | arrayexpr ;
+
 func_operator
-        :       func OPERATOR?
+        :       func (OPERATOR axis?)?
         ;
 
 func	:
-        func '.' func
-    |   FUNC
-    |   outerproduct
-	| 	lambdafunc
+        outer=func '.' inner=func   # Innerprod
+    |   FUNC axis?                  # simplefunc
+    |   OUTERPRODUCT func           # outerproduct
+	| 	lambdafunc                  # lambda
 	;
 
-outerproduct : OUTERPRODUCT func ;
+axis : LBRACKET arrayexpr RBRACKET ;
 
 lambdafunc
 	:	LBRACE
-                sep? (guard_or_assignment sep)* arrayexpr sep?
-                RBRACE
+        sep? (guard_or_assignment sep)* arrayexpr sep?
+        RBRACE
 	;
 
 guard_or_assignment :

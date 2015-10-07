@@ -3,7 +3,7 @@ package com.mlt.japl.newast;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstLocalFuncDef extends AstNode {
+public class AstLocalFuncDef implements AstNode {
 
     private String id;
     private AstFunc fn;

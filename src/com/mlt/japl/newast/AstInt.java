@@ -4,7 +4,7 @@ import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.IntScalar;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstInt extends AstNode {
+public class AstInt implements AstNode {
 
     private long value;
 

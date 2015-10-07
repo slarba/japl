@@ -3,7 +3,7 @@ package com.mlt.japl.newast;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstGuardExpr extends AstNode {
+public class AstGuardExpr implements AstNode {
 
     private AstNode condition;
     private AstNode result;

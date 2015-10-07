@@ -79,7 +79,17 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitIndex(IndexContext ctx) {
-        return visit(ctx.arrayexpr());
+        List<IndexelementContext> indices = ctx.indexelement();
+        AstNode[] index = new AstNode[indices.size()];
+        for(int i=0; i<index.length; i++) {
+            IndexelementContext iec = indices.get(i);
+            if(iec.SEMICOLON()!=null) {
+                index[i] = new AstString("'all'");
+            } else {
+                index[i] = visit(indices.get(i));
+            }
+        }
+        return new AstArray(index);
     }
 
     private AstNode fixArray(AstNode[] items) {
@@ -203,13 +213,47 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
             return new AstDyadicCall((AstFunc) visit(ctx.fn), visit(ctx.l), visit(ctx.r));
     }
 
-//    @Override
-//    public AstNode visitFunc(FuncContext ctx) {
-//        TerminalNode fn = ctx.FUNC();
-//        if (fn != null) return new AstBuiltinFunction(fn.getText());
-//        return visit(ctx.lambdafunc());
-//    }
 
+    @Override
+    public AstNode visitLambda(LambdaContext ctx) {
+        return visit(ctx.lambdafunc());
+    };
+
+    @Override
+    public AstNode visitOuterproduct(OuterproductContext ctx) {
+        return new AstOuterproduct((AstFunc)visit(ctx.func()));
+    }
+
+    @Override
+    public AstNode visitInnerprod(InnerprodContext ctx) {
+        return new AstInnerproduct(visit(ctx.outer), visit(ctx.inner));
+    }
+
+    @Override
+    public AstNode visitSimplefunc(SimplefuncContext ctx) {
+        AstNode axis = null;
+        if(ctx.axis()!=null) {
+            axis = visit(ctx.axis());
+        }
+        return new AstSimpleFunc(ctx.FUNC().getText(), axis);
+    }
+
+    @Override
+    public AstNode visitAxis(AxisContext ctx) {
+        return visit(ctx.arrayexpr());
+    }
+
+    @Override
+    public AstNode visitFunc_operator(Func_operatorContext ctx) {
+        AstNode axis = null;
+        if(ctx.axis()!=null) {
+            axis = visit(ctx.axis());
+        }
+        if(ctx.OPERATOR() != null) {
+            return new AstOperator(ctx.OPERATOR().getText(), visit(ctx.func()), axis);
+        }
+        return visit(ctx.func());
+    }
     @Override
     public AstNode visitGuard(GuardContext ctx) {
         return new AstGuardExpr(visit(ctx.arrayexpr(0)), visit(ctx.arrayexpr(1)));

@@ -5,7 +5,7 @@ import com.mlt.japl.newarrays.concrete.MixedArray;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstArray extends AstNode {
+public class AstArray implements AstNode {
 
     private AstNode[] items;
 

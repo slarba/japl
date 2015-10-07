@@ -4,7 +4,7 @@ import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.CharArray;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstString extends AstNode {
+public class AstString implements AstNode {
 
     private String text;
 

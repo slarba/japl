@@ -3,7 +3,7 @@ package com.mlt.japl.newast;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.workspace.EvalContext;
 
-public class AstAssignment extends AstNode {
+public class AstAssignment implements AstNode {
 
     private String id;
     private AstNode expr;

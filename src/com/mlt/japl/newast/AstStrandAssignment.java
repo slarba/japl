@@ -5,7 +5,7 @@ import com.mlt.japl.workspace.EvalContext;
 
 import java.util.Arrays;
 
-public class AstStrandAssignment extends AstNode {
+public class AstStrandAssignment implements AstNode {
 
     private String[] tids;
     private AstNode expr;
