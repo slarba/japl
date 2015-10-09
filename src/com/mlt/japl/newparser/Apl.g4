@@ -114,6 +114,7 @@ ENDFOR  : (':EndFor' | ':End') ;
 OPERATOR : ('/' | '\u233f' | '\\' | '\u2340' | '¨') ;
 
 OUTERPRODUCT : '\u2218.' ;
+DEL : '\u2207';
 
 sep	:	DIAMOND | (NL | COMMENT)+ ;
 
@@ -122,7 +123,8 @@ toplevel
 	;
 
 toplevelexpr
-	:	if_expr
+	:	toplevelfunc
+	|   if_expr
 	|	while_expr
     |   repeat_expr
     |   for_expr
@@ -212,7 +214,7 @@ func_operator
         ;
 
 func	:
-        outer=func '.' inner=func   # Innerprod
+        outer=func '.' inner=func   # innerprod
     |   FUNC axis?                  # simplefunc
     |   OUTERPRODUCT func           # outerproduct
 	| 	lambdafunc                  # lambda
@@ -225,6 +227,14 @@ lambdafunc
         sep? (guard_or_assignment sep)* arrayexpr sep?
         RBRACE
 	;
+
+toplevelfunc
+    : DEL (ret=ID ASSIGN)? a=ID b=ID c=ID? localslist sep
+        expr_list sep?
+      DEL
+    ;
+
+localslist : (SEMICOLON ID)* ;
 
 guard_or_assignment :
           guard | assignment

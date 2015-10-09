@@ -17,7 +17,8 @@ public class Main {
                         + "}\nfn 4 5";
         String testProgram2 = "3 4 ∘.{2}.{3}¨ 5 3";
         String testProgram3 = "+[2+3]/[2]3 4 5";
-        AplLexer lexer = new AplLexer(new ANTLRInputStream(testProgram3));
+        String testProgram4 = "∇z← b c\n2+3\n∇";
+        AplLexer lexer = new AplLexer(new ANTLRInputStream(testProgram4));
         CommonTokenStream s = new CommonTokenStream(lexer);
         AplParser parser = new AplParser(s);
         ParseTree tree = parser.toplevel();

@@ -260,6 +260,30 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     }
 
     @Override
+    public AstNode visitToplevelfunc(ToplevelfuncContext ctx) {
+        String retvar = null;
+        String leftarg = null;
+        String rightarg = null;
+        String fnname = null;
+        if(ctx.ret!=null) {
+            retvar = ctx.ret.getText();
+        }
+        if(ctx.c!=null) {
+            fnname = ctx.b.getText();
+            leftarg = ctx.a.getText();
+            rightarg = ctx.c.getText();
+        } else {
+            fnname = ctx.a.getText();
+            rightarg = ctx.b.getText();
+        }
+        String[] locals = new String[ctx.localslist().ID().size()];
+        for(int i=0; i<locals.length; i++) {
+            locals[i] = ctx.localslist().ID(i).getText();
+        }
+        return new AstToplevelFunc(fnname, retvar, visit(ctx.expr_list()), leftarg, rightarg, locals);
+    }
+
+    @Override
     public AstNode visitToplevel(ToplevelContext ctx) {
         return visit(ctx.expr_list());
     }

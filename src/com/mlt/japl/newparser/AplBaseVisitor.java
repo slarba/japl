@@ -223,6 +223,20 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitToplevelfunc(AplParser.ToplevelfuncContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitLocalslist(AplParser.LocalslistContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitGuard_or_assignment(AplParser.Guard_or_assignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

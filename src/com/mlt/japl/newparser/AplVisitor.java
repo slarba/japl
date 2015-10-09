@@ -173,7 +173,7 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOuterproduct(AplParser.OuterproductContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Innerprod}
+	 * Visit a parse tree produced by the {@code innerprod}
 	 * labeled alternative in {@link AplParser#func}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -191,6 +191,18 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLambdafunc(AplParser.LambdafuncContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AplParser#toplevelfunc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitToplevelfunc(AplParser.ToplevelfuncContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AplParser#localslist}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocalslist(AplParser.LocalslistContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AplParser#guard_or_assignment}.
 	 * @param ctx the parse tree
