@@ -2,6 +2,8 @@
 package com.mlt.japl.newparser;
 
 import java.util.*;
+import com.mlt.japl.workspace.EvalContext;
+import com.mlt.japl.newast.AstFunc;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -83,7 +85,14 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssignment(AplParser.AssignmentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFnassignment(AplParser.FnassignmentContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStrandassignment(AplParser.StrandassignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -175,6 +184,13 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitFunc_operator(AplParser.Func_operatorContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitIdfunc(AplParser.IdfuncContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

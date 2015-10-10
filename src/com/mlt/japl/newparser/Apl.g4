@@ -6,22 +6,46 @@
 
 grammar Apl;
 
-@header {
+@parser::header {
 import java.util.*;
+import com.mlt.japl.workspace.EvalContext;
+import com.mlt.japl.newast.AstFunc;
 }
 
 options {
 	language=Java;
 	}
 
-@lexer::members {
-    boolean isFnSymbol(String sym) {
-       return sym.equals("specialsym");
+@parser::members {
+    EvalContext context;
+    Stack<HashSet<String>> localFunctions;
+
+    public AplParser(TokenStream input, EvalContext context) {
+        this(input);
+        this.context = context;
+        localFunctions = new Stack<HashSet<String>>();
+        localFunctions.push(new HashSet<String>());
+    }
+
+    private void enterLambdaContext() {
+        localFunctions.push(new HashSet<String>(localFunctions.peek()));
+    }
+
+    private void exitLambdaContext() {
+        localFunctions.pop();
+    }
+
+    private void registerLocalFunction(String name, AstFunc fn) {
+        localFunctions.peek().add(name);
+    }
+
+    private boolean isFnSymbol() {
+        String sym = getCurrentToken().getText();
+        return context.isBoundToFunction(sym) || localFunctions.peek().contains(sym);
     }
 }
 
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
-        {if(isFnSymbol(getText())) setType(AplParser.FUNC);}
     ;
 
 LABEL : ID ':' ;
@@ -132,7 +156,7 @@ toplevelexpr
 	;
 
 expr_list
-	:	toplevelexpr (sep toplevelexpr)*
+	:	LABEL? toplevelexpr (sep LABEL? toplevelexpr)*
 	;
 
 if_expr	:
@@ -163,13 +187,14 @@ repeat_expr :   REPEAT arrayexpr sep
             ;
 
 arrayexpr
-	:	monadic_call_or_niladic
-	|	assignment
+	:	assignment
+	|   monadic_call_or_niladic
 	|	dyadic_call_or_array
 	;
 
-assignment
-	:	ID+ ASSIGN arrayexpr
+assignment :
+        ID ASSIGN { registerLocalFunction($ID.text, null); } func_operator  # fnassignment
+	|   ID+ ASSIGN arrayexpr   # strandassignment
 	;
 
 monadic_call_or_niladic
@@ -201,7 +226,7 @@ complexnum : COMPLEX ;
 string 	:	STRING index?
 	;
 
-ident	:	ID index?
+ident	:	{!isFnSymbol()}? ID index?
 	;
 
 index	:	LBRACKET indexelement+ RBRACKET
@@ -216,6 +241,7 @@ func_operator
 func	:
         outer=func '.' inner=func   # innerprod
     |   FUNC axis?                  # simplefunc
+    |   {isFnSymbol()}? ID          # idfunc
     |   OUTERPRODUCT func           # outerproduct
 	| 	lambdafunc                  # lambda
 	;
@@ -223,15 +249,17 @@ func	:
 axis : LBRACKET arrayexpr RBRACKET ;
 
 lambdafunc
-	:	LBRACE
+	:	LBRACE { enterLambdaContext(); }
         sep? (guard_or_assignment sep)* arrayexpr sep?
-        RBRACE
+        RBRACE { exitLambdaContext(); }
 	;
 
 toplevelfunc
     : DEL (ret=ID ASSIGN)? a=ID b=ID c=ID? localslist sep
+        { enterLambdaContext(); }
         expr_list sep?
       DEL
+        { exitLambdaContext(); }
     ;
 
 localslist : (SEMICOLON ID)* ;

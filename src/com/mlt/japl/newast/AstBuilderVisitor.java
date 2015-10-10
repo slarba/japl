@@ -2,6 +2,7 @@ package com.mlt.japl.newast;
 
 import com.mlt.japl.newparser.AplBaseVisitor;
 import com.mlt.japl.newparser.AplParser.*;
+import com.mlt.japl.workspace.EvalContext;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -13,11 +14,13 @@ import java.util.Stack;
 
 public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
-    Stack<HashMap<String, AstFunc>> localFunctions;
+    private final EvalContext rootContext;
+    private final Stack<HashMap<String, AstFunc>> localFunctions;
 
-    public AstBuilderVisitor() {
+    public AstBuilderVisitor(EvalContext rootContext) {
         localFunctions = new Stack<HashMap<String, AstFunc>>();
         localFunctions.push(new HashMap<String, AstFunc>());
+        this.rootContext = rootContext;
     }
 
     AstNode[] collect(List<? extends ParserRuleContext> items) {
@@ -92,30 +95,30 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         return new AstArray(index);
     }
 
-    private AstNode fixArray(AstNode[] items) {
-        List<AstNode> left = new ArrayList<AstNode>();
-        List<AstNode> right = new ArrayList<AstNode>();
-
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] instanceof AstRef) {
-                AstRef ref = (AstRef) items[i];
-                if (isLocalFunction(ref.getId())) {
-                    if (i == 0) {
-                        for (int j = i + 1; j < items.length; j++) right.add(items[j]);
-                        AstNode[] rarr = right.toArray(new AstNode[0]);
-                        return new AstMonadicCall(getLocalFunction(ref.getId()), fixArray(rarr));
-                    } else {
-                        AstArray larr = new AstArray(left.toArray(new AstNode[0]));
-                        for (int j = i + 1; j < items.length; j++) right.add(items[j]);
-                        AstNode[] rarr = right.toArray(new AstNode[0]);
-                        return new AstDyadicCall(getLocalFunction(ref.getId()), larr, fixArray(rarr));
-                    }
-                }
-            } else
-                left.add(items[i]);
-        }
-        return new AstArray(left.toArray(new AstNode[0]));
-    }
+//    private AstNode fixArray(AstNode[] items) {
+//        List<AstNode> left = new ArrayList<AstNode>();
+//        List<AstNode> right = new ArrayList<AstNode>();
+//
+//        for (int i = 0; i < items.length; i++) {
+//            if (items[i] instanceof AstRef) {
+//                AstRef ref = (AstRef) items[i];
+//                if (isLocalFunction(ref.getId())) {
+//                    if (i == 0) {
+//                        for (int j = i + 1; j < items.length; j++) right.add(items[j]);
+//                        AstNode[] rarr = right.toArray(new AstNode[0]);
+//                        return new AstMonadicCall(getLocalFunction(ref.getId()), fixArray(rarr));
+//                    } else {
+//                        AstArray larr = new AstArray(left.toArray(new AstNode[0]));
+//                        for (int j = i + 1; j < items.length; j++) right.add(items[j]);
+//                        AstNode[] rarr = right.toArray(new AstNode[0]);
+//                        return new AstDyadicCall(getLocalFunction(ref.getId()), larr, fixArray(rarr));
+//                    }
+//                }
+//            } else
+//                left.add(items[i]);
+//        }
+//        return new AstArray(left.toArray(new AstNode[0]));
+//    }
 
     @Override
     public AstNode visitArray(ArrayContext ctx) {
@@ -159,26 +162,31 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         localFunctions.peek().put(name, fn);
     }
 
-    private AstFunc getLocalFunction(String name) {
-        for (HashMap<String, AstFunc> s : localFunctions) {
-            if (s.containsKey(name)) return s.get(name);
-        }
-        return null;
-    }
-
-    private boolean isLocalFunction(String name) {
-        for (HashMap<String, AstFunc> s : localFunctions) {
-            if (s.containsKey(name)) return true;
-        }
-        return false;
-    }
+//    private AstFunc getLocalFunction(String name) {
+//        for (HashMap<String, AstFunc> s : localFunctions) {
+//            if (s.containsKey(name)) return s.get(name);
+//        }
+//        return null;
+//    }
+//
+//    private boolean isLocalFunction(String name) {
+//        for (HashMap<String, AstFunc> s : localFunctions) {
+//            if (s.containsKey(name)) return true;
+//        }
+//        return false;
+//    }
 
     private void enterLambdaContext() {
         localFunctions.push(new HashMap<String, AstFunc>());
     }
 
     @Override
-    public AstNode visitAssignment(AssignmentContext ctx) {
+    public AstNode visitFnassignment(FnassignmentContext ctx) {
+        return new AstAssignment(ctx.ID().getText(), visit(ctx.func_operator()));
+    }
+
+    @Override
+    public AstNode visitStrandassignment(StrandassignmentContext ctx) {
         List<TerminalNode> ids = ctx.ID();
         AstNode expr = visit(ctx.arrayexpr());
         if (ids.size() > 1) {
@@ -186,11 +194,7 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
             for (int i = 0; i < tids.length; i++) tids[i] = ids.get(i).getText();
             return new AstStrandAssignment(tids, expr);
         } else {
-            if (expr instanceof AstFunc) {
-                registerLocalFunction(ids.get(0).getText(), (AstFunc) expr);
-                return new AstLocalFuncDef(ids.get(0).getText(), (AstFunc) expr);
-            } else
-                return new AstAssignment(ids.get(0).getText(), expr);
+            return new AstAssignment(ids.get(0).getText(), expr);
         }
     }
 
@@ -236,6 +240,11 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
             axis = visit(ctx.axis());
         }
         return new AstSimpleFunc(ctx.FUNC().getText(), axis);
+    }
+
+    @Override
+    public AstNode visitIdfunc(IdfuncContext ctx) {
+        return new AstSimpleFunc(ctx.ID().getText(), null);
     }
 
     @Override

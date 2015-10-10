@@ -2,6 +2,8 @@
 package com.mlt.japl.newparser;
 
 import java.util.*;
+import com.mlt.japl.workspace.EvalContext;
+import com.mlt.japl.newast.AstFunc;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -68,11 +70,19 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayexpr(AplParser.ArrayexprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AplParser#assignment}.
+	 * Visit a parse tree produced by the {@code fnassignment}
+	 * labeled alternative in {@link AplParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignment(AplParser.AssignmentContext ctx);
+	T visitFnassignment(AplParser.FnassignmentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code strandassignment}
+	 * labeled alternative in {@link AplParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStrandassignment(AplParser.StrandassignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AplParser#monadic_call_or_niladic}.
 	 * @param ctx the parse tree
@@ -151,6 +161,13 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunc_operator(AplParser.Func_operatorContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code idfunc}
+	 * labeled alternative in {@link AplParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdfunc(AplParser.IdfuncContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code simplefunc}
 	 * labeled alternative in {@link AplParser#func}.
