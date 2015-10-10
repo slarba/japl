@@ -1,6 +1,7 @@
 package com.mlt.japl.newast;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.FuncValue;
 import com.mlt.japl.workspace.EvalContext;
 
 public class AstDyadicCall implements AstNode {
@@ -24,6 +25,7 @@ public class AstDyadicCall implements AstNode {
     public IValue eval(EvalContext context) {
         IValue right = r.eval(context);
         IValue left = l.eval(context);
-        return fn.applyDyadic(left,right,0);
+        FuncValue func = (FuncValue)fn.eval(context);
+        return func.get().applyDyadic(left,right,0);
     }
 }

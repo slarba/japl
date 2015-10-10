@@ -1,6 +1,7 @@
 package com.mlt.japl.newast;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.FuncValue;
 import com.mlt.japl.workspace.EvalContext;
 
 public class AstMonadicCall implements AstNode {
@@ -20,6 +21,7 @@ public class AstMonadicCall implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
-        return func.applyMonadic(right.eval(context), 0);
+        FuncValue fn = (FuncValue)func.eval(context);
+        return fn.get().applyMonadic(right.eval(context), 0);
     }
 }

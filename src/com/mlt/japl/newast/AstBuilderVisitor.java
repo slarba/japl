@@ -230,7 +230,7 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitInnerprod(InnerprodContext ctx) {
-        return new AstInnerproduct(visit(ctx.outer), visit(ctx.inner));
+        return new AstInnerproduct((AstFunc)visit(ctx.outer), (AstFunc)visit(ctx.inner));
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.mlt.japl.newast;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.FuncValue;
+import com.mlt.japl.newfns.UserFn;
 import com.mlt.japl.workspace.EvalContext;
 import com.mlt.japl.workspace.Var;
 
@@ -31,5 +33,11 @@ public class AstToplevelFunc extends AstFunc {
         return name + " <- function(" + (leftarg!=null ? (leftarg + ",") : "") + rightarg + ") {\n"
                 + Arrays.toString(locals) + "\n" + AstNode.indent("   ", body.toString())
                 + "}";
+    }
+
+    @Override
+    public IValue eval(EvalContext context) {
+        context.set(name, new UserFn(body, context, leftarg, rightarg, retvar));
+        return null;
     }
 }

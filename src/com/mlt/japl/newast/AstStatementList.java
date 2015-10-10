@@ -23,6 +23,8 @@ public class AstStatementList implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
-        return null;
+        IValue result = null;
+        for(int i=0; i<stmts.length; i++) result = stmts[i].eval(context);
+        return result;
     }
 }
