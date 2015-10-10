@@ -24,7 +24,14 @@ public class AstStatementList implements AstNode {
     @Override
     public IValue eval(EvalContext context) {
         IValue result = null;
-        for(int i=0; i<stmts.length; i++) result = stmts[i].eval(context);
+        int i=0;
+        for(i=0; i<stmts.length; i++) {
+            try {
+                result = stmts[i].eval(context);
+            } catch(JumpSignal jump) {
+                i = jump.getLine();
+            }
+        }
         return result;
     }
 }

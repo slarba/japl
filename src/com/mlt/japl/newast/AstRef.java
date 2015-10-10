@@ -22,6 +22,6 @@ public class AstRef implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
-        return null;
+        return context.get(id).get();
     }
 }

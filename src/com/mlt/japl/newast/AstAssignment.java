@@ -20,6 +20,6 @@ public class AstAssignment implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
-        return null;
+        return context.set(id, expr.eval(context)).get();
     }
 }

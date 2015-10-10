@@ -8,18 +8,18 @@ import com.mlt.japl.workspace.EvalContext;
 public class AstLambda extends AstFunc {
 
     private AstNode body;
-    private AstNode[] guards_assignments;
 
-    public AstLambda(AstNode[] astNodes, AstNode body) {
-        this.guards_assignments = astNodes;
-        this.body = body;
+    public AstLambda(AstNode[] guards_assignments, AstNode body) {
+        if(guards_assignments.length>0)
+            this.body = new AstGuardedBody(guards_assignments, body);
+        else
+            this.body = body;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("{\n");
-        for (AstNode n : guards_assignments) builder.append(AstNode.indent("   ", n.toString()));
         builder.append(AstNode.indent("   ", body.toString()));
         builder.append("}");
         return builder.toString();

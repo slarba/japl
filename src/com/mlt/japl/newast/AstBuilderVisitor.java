@@ -244,7 +244,7 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitIdfunc(IdfuncContext ctx) {
-        return new AstSimpleFunc(ctx.ID().getText(), null);
+        return new AstFuncRef(ctx.ID().getText());
     }
 
     @Override

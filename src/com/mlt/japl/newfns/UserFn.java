@@ -33,4 +33,16 @@ public class UserFn extends BaseFn {
         } else
             return retVal;
     }
+
+    @Override
+    public IValue applyMonadic(IValue right, int axis) {
+        EvalContext derived = context.newFrame();
+        derived.set(rightArg, right);
+        IValue retVal = body.eval(derived);
+        if(resultArg!=null) {
+            return derived.get(resultArg).get();
+        } else
+            return retVal;
+    }
+
 }

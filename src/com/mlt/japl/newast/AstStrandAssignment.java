@@ -22,6 +22,10 @@ public class AstStrandAssignment implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
-        return null;
+        IValue right = expr.eval(context);
+        for(int i=0; i<tids.length; i++) {
+            context.set(tids[i], right.getGeneric(i));
+        }
+        return right;
     }
 }

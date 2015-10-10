@@ -1,6 +1,8 @@
 package com.mlt.japl.newast;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.FuncValue;
+import com.mlt.japl.newfns.OuterProdFn;
 import com.mlt.japl.workspace.EvalContext;
 
 /**
@@ -15,7 +17,8 @@ public class AstOuterproduct extends AstFunc {
 
     @Override
     public IValue eval(EvalContext context) {
-        return null;
+        FuncValue func = (FuncValue)fn.eval(context);
+        return new FuncValue(new OuterProdFn(func.get()));
     }
 
     @Override
