@@ -1,8 +1,8 @@
 package com.mlt.japl.utils;
 
-import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.newarrays.concrete.ComplexScalar;
-import com.mlt.japl.newarrays.interf.*;
+import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.concrete.ComplexScalar;
+import com.mlt.japl.arrays.interf.*;
 import com.mlt.japl.tools.Iterator;
 
 import java.util.ArrayList;

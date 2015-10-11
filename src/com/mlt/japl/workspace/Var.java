@@ -1,6 +1,6 @@
 package com.mlt.japl.workspace;
 
-import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.arrays.IValue;
 
 public class Var {
     private IValue value;

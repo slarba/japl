@@ -11,12 +11,12 @@ public class AplSyntaxHighlighter {
     Pattern commentPattern = Pattern.compile("\u235d.*\n");
     Pattern stringPattern = Pattern.compile("'([^']*)'");
 
-    Pattern operatorPattern = Pattern.compile("[\u03b1\u03c9\u003f\u2208\u2308"
+    Pattern operatorPattern = Pattern.compile("[\u237a\u2375\u03b1\u03c9\u003f\u2308"
             + "\u230a\u2374\u223c\u2223\u2373"
             + "\u22c6\u2212\u002b\u00d7\u00f7"
             + "\u002c\u2339\u25cb\u235f\u233d"
             + "\u2296\u234b\u2352\u234e\u2355"
-            + "\u2349\u0021\u2208\u2191\u2193"
+            + "\u2349\u0021\u220a\u2191\u2193"
             + "\u22a5\u22a4\u002f\u2339\u2349"
             + "\u00a8\u003c\u2264\u003d\u2265"
             + "\u2261\u2282\u2283\u003e\u2260"

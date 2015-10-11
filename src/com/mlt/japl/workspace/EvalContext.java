@@ -1,10 +1,10 @@
 package com.mlt.japl.workspace;
 
 import com.mlt.japl.errors.ValueError;
-import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.newarrays.concrete.FuncValue;
-import com.mlt.japl.newarrays.concrete.IntArray;
-import com.mlt.japl.newfns.Func;
+import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.concrete.FuncValue;
+import com.mlt.japl.arrays.concrete.IntArray;
+import com.mlt.japl.fns.Func;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 

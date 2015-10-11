@@ -1,6 +1,6 @@
 package com.mlt.japl.utils;
 
-import com.mlt.japl.newfns.*;
+import com.mlt.japl.fns.*;
 import com.mlt.japl.workspace.EvalContext;
 
 import java.util.HashMap;

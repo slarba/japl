@@ -1,9 +1,9 @@
 package com.mlt.japl.workspace;
 
-import com.mlt.japl.newarrays.IValue;
-import com.mlt.japl.newarrays.concrete.*;
-import com.mlt.japl.newast.AstNode;
-import com.mlt.japl.parsing.Parser;
+import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.concrete.*;
+import com.mlt.japl.ast.AstNode;
+import com.mlt.japl.parser.IParser;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -35,7 +35,7 @@ public class Interpreter {
     public void eval(String s) {
         for (AplBusyListener listener : listeners) listener.evaluationStarted();
         try {
-            AstNode result = Parser.parse(s, context);
+            AstNode result = IParser.parse(s, context);
             IValue rval = result.eval(context);
             output.println(rval.asString(printConfig));
             output.flush();
@@ -49,7 +49,7 @@ public class Interpreter {
 
     public void eval(InputStream s) {
         try {
-            AstNode n = Parser.parse(s, context);
+            AstNode n = IParser.parse(s, context);
             IValue rval = n.eval(context);
             output.println(rval.asString(printConfig));
             output.flush();

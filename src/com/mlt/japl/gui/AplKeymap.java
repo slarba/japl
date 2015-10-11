@@ -6,7 +6,7 @@ public class AplKeymap {
             , "\u237a"
             , "\u2375"
             , "\u003f"  // roll ?
-            , "\u2208"  // exists
+            , "\u220a"  // exists
             , "\u2308"  // ceil
             , "\u230a"  // floor
             , "\u2374"  // rho, shape
@@ -30,7 +30,6 @@ public class AplKeymap {
             , "\u2355"  // format
             , "\u2349"  // transpose
             , "\u0021"  // factorial
-            , "\u2208"  // epsilon, membership
             , "\u2191"  // take
             , "\u2193"  // drop
             , "\u22a5"  // decode
