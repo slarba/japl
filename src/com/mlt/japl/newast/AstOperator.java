@@ -24,7 +24,7 @@ public class AstOperator extends AstFunc {
 
     @Override
     public String toString() {
-        return fn.toString() + operator + (axis!=null ? ("[" + axis.toString() + "]") : "");
+        return "(" + fn.toString() + ")" + operator + (axis!=null ? ("[" + axis.toString() + "]") : "");
     }
 
     @Override

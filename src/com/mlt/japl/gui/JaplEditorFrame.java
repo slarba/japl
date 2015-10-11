@@ -1,5 +1,7 @@
 package com.mlt.japl.gui;
 
+import com.mlt.japl.workspace.Interpreter;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -17,15 +19,15 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
     JaplEditor editor;
     private File file;
     private boolean changed;
-    private OutputStream replOutput;
+    private Interpreter replOutput;
 
-    public JaplEditorFrame(Font font, OutputStream replOutput) {
+    public JaplEditorFrame(Font font, Interpreter ipreter) {
         super();
         editor = new JaplEditor(font);
-        init(font, replOutput);
+        init(font, ipreter);
     }
 
-    public JaplEditorFrame(Font aplFont, File file, OutputStream replOutput) {
+    public JaplEditorFrame(Font aplFont, File file, Interpreter ipreter) {
         super();
         editor = new JaplEditor(aplFont);
 
@@ -33,11 +35,11 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
         this.file = file;
         editor.setText(readFile(file));
         clearChanged();
-        init(aplFont, replOutput);
+        init(aplFont, ipreter);
     }
 
-    private void init(Font font, OutputStream replOutput) {
-        this.replOutput = replOutput;
+    private void init(Font font, Interpreter ipreter) {
+        this.replOutput = ipreter;
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -175,9 +177,8 @@ public class JaplEditorFrame extends JFrame implements ActionListener, DocumentL
     private void evaluateBuffer() {
         System.out.println("evaluating buffer");
         String code = editor.getText();
-        PrintWriter writer = new PrintWriter(replOutput);
-        writer.println(code);
-        writer.flush();
+        InputStream in = new ByteArrayInputStream(code.getBytes(Charset.forName("UTF-8")));
+        replOutput.eval(in);
     }
 
     public void setChanged() {

@@ -28,6 +28,7 @@ public class Main {
                 "⍺+⍵ }\n" +
                 "20 x 10";
         EvalContext context = new EvalContext();
+/*
         com.mlt.japl.parsing.AplParser parser = new com.mlt.japl.parsing.AplParser(context);
         AstNode result = parser.parse(testProgram6);
         System.out.println(result.toString());
@@ -36,6 +37,7 @@ public class Main {
             System.out.println(r.asString(new PrintConfig()));
         } else
             System.out.println("No result");
+*/
     }
 }
 

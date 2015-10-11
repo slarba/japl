@@ -36,6 +36,13 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitInteractive(AplParser.InteractiveContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitToplevelexpr(AplParser.ToplevelexprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -78,21 +85,7 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayexpr(AplParser.ArrayexprContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitFnassignment(AplParser.FnassignmentContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitStrandassignment(AplParser.StrandassignmentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpr_assign(AplParser.Expr_assignContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -107,6 +100,20 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitDyadic_call_or_array(AplParser.Dyadic_call_or_arrayContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFnassignment(AplParser.FnassignmentContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStrandassignment(AplParser.StrandassignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -183,7 +190,14 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunc_operator(AplParser.Func_operatorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunc_oper_no_parens(AplParser.Func_oper_no_parensContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunc_oper_with_parens(AplParser.Func_oper_with_parensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -191,6 +205,13 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitIdfunc(AplParser.IdfuncContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitPowerfunc(AplParser.PowerfuncContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -212,6 +233,20 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitOuterproduct(AplParser.OuterproductContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBoundfunc(AplParser.BoundfuncContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFunc_with_parens(AplParser.Func_with_parensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

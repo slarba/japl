@@ -1,12 +1,11 @@
 package com.mlt.japl.workspace;
 
-import com.mlt.japl.ast.AstNode;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.newarrays.IValue;
 import com.mlt.japl.newarrays.concrete.*;
-import com.mlt.japl.parser.AplParser;
-import com.mlt.japl.parser.ParseException;
+import com.mlt.japl.newast.AstNode;
 import com.mlt.japl.parser.TokenMgrError;
+import com.mlt.japl.parsing.AplParser;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
@@ -15,14 +14,16 @@ import java.util.ArrayList;
 
 public class Interpreter {
     private EvalContext context;
-    private ArrayList<AplBusyListener> listeners = new ArrayList<AplBusyListener>();
+    private ArrayList<AplBusyListener> listeners = new ArrayList<>();
     private PrintConfig printConfig;
+    private PrintWriter output;
+    private PrintWriter errors;
 
     public Interpreter(OutputStream out, OutputStream error) {
         context = new EvalContext(out, error);
         printConfig = new PrintConfig();
-
-        //startWebServer(8005);
+        output = new PrintWriter(out);
+        errors = new PrintWriter(error);
     }
 
     public static void main(String[] args) {
@@ -34,53 +35,30 @@ public class Interpreter {
     }
 
     public void eval(String s) {
-        PrintWriter w = new PrintWriter(context.getOutputStream());
         for (AplBusyListener listener : listeners) listener.evaluationStarted();
         try {
-            IValue rval = parse(s).eval(context);
-            w.println(rval.asString(printConfig));
-            w.flush();
+            AstNode result = AplParser.parse(s, context);
+            IValue rval = result.eval(context);
+            output.println(rval.asString(printConfig));
+            output.flush();
+        } catch(Throwable t) {
+            t.printStackTrace(errors);
+            errors.flush();
         } finally {
             for (AplBusyListener listener : listeners) listener.evaluationEnded();
         }
     }
 
     public void eval(InputStream s) {
-        AplParser parser;
         try {
-            parser = new AplParser(new InputStreamReader(s, "UTF-8"), context);
-            PrintStream errorStream = new PrintStream(context.getErrorStream());
-            try {
-                parser.eval_stream();
-            } catch (ParseException e) {
-                errorStream.println("PARSE ERROR");
-                e.printStackTrace(errorStream);
-                parser.skipTo(parser.STMTSEPARATOR);
-                errorStream.flush();
-            } catch (TokenMgrError tme) {
-                errorStream.println("LEXICAL ERROR");
-                parser.skipTo(parser.STMTSEPARATOR);
-                errorStream.flush();
-            } catch (ArithmeticException ae) {
-                errorStream.println("DIVBYZERO");
-                errorStream.flush();
-            } catch (AplError aple) {
-                errorStream.println(aple.getMessage());
-                errorStream.flush();
-                parser.skipTo(parser.STMTSEPARATOR);
-            } catch (Exception e) {
-                e.printStackTrace(errorStream);
-                errorStream.flush();
-            }
-        } catch (UnsupportedEncodingException e2) {
-            e2.printStackTrace();
+            AstNode n = AplParser.parse(s, context);
+            IValue rval = n.eval(context);
+            output.println(rval.asString(printConfig));
+            output.flush();
+        } catch(Throwable t) {
+            t.printStackTrace(errors);
+            errors.flush();
         }
-    }
-
-    public AstNode parse(String s) {
-        AplParser parser = new AplParser(new StringReader(s), context);
-        AstNode node = parser.parse();
-        return node;
     }
 
     public void define(String id, long... data) {

@@ -109,7 +109,7 @@ FUNC 	: ('\u002b' | '\u002d' | '\u00d7' | '\u00f7' |                       // ad
            '\u003c' | '\u2264' | '\u003d' | '\u2260' | '\u2265' | '\u003e' | // lt lte eq neq gte gt
            '\u2228' | '\u2227' | '\u2371' | '\u2372' |                       // or and nor nand
            '\u220a' | '\u2282' | '\u2283' | '\u2229' | '\u222a' |            // epsilon enclose disclose intersection union
-           '/'      | '\\'     | '?'      | ','      | '!'      |
+           '?'      | ','      | '!'      |
            '\u223C' | '\u2223' | '\u2373' | '\u2374' | '\u2212' | '\u234B' | '\u2352' |
            '\u234E' | '\u2355' | '\u2349' | '\u2296' | '\u233D' | '\u25CB' | '\u22C6' |
            '\u230A' | '\u2308' | '\u235F' | '\u2339' |
@@ -141,8 +141,10 @@ IN      : ':In' ;
 ENDFOR  : (':EndFor' | ':End') ;
 
 OPERATOR : ('/' | '\u233f' | '\\' | '\u2340' | '¨') ;
+POWEROPERATOR : '\u2363';
 
-OUTERPRODUCT : '\u2218.' ;
+BOUNDWITH : '\u2218' ;
+OUTERPRODUCT : BOUNDWITH '.' ;
 DEL : '\u2207';
 
 sep	:	DIAMOND | (NL | COMMENT)+ ;
@@ -151,8 +153,11 @@ toplevel
 	:	sep? expr_list sep? EOF
 	;
 
+interactive : toplevelexpr EOF ;
+
 toplevelexpr
 	:	toplevelfunc
+	|   toplevelassignment
 	|   if_expr
 	|	while_expr
     |   repeat_expr
@@ -192,22 +197,14 @@ repeat_expr :   REPEAT arrayexpr sep
             ;
 
 arrayexpr
-	:	assignment
-	|   monadic_call_or_niladic
-	|	dyadic_call_or_array
+	:	ID ASSIGN arrayexpr                                                 # expr_assign
+	|   func_operator arrayexpr?                                            # monadic_call_or_niladic
+	|	l=array (fn=func_operator r=arrayexpr)?                             # dyadic_call_or_array
 	;
 
-assignment :
+toplevelassignment :
         ID ASSIGN { registerLocalFunction($ID.text, null); } func_operator  # fnassignment
-	|   ID+ ASSIGN arrayexpr   # strandassignment
-	;
-
-monadic_call_or_niladic
-	:	func_operator arrayexpr?
-	;
-
-dyadic_call_or_array
-	:	l=array (fn=func_operator r=arrayexpr)?
+	|   ID+ ASSIGN arrayexpr                                                # strandassignment
 	;
 
 array	:	arrayitem+
@@ -240,7 +237,8 @@ index	:	LBRACKET indexelement+ RBRACKET
 indexelement : SEMICOLON | arrayexpr ;
 
 func_operator
-        :       func (OPERATOR axis?)?
+        :       func (OPERATOR axis?)?          # func_oper_no_parens
+        |       LPAREN func_operator RPAREN     # func_oper_with_parens
         ;
 
 func	:
@@ -248,7 +246,10 @@ func	:
     |   FUNC axis?                  # simplefunc
     |   {isFnSymbol()}? ID          # idfunc
     |   OUTERPRODUCT func           # outerproduct
+    |   arrayitem BOUNDWITH func    # boundfunc
+    |   func POWEROPERATOR arrayitem # powerfunc
 	| 	lambdafunc                  # lambda
+	|   LPAREN func RPAREN          # func_with_parens
 	;
 
 axis : LBRACKET arrayexpr RBRACKET ;
@@ -270,7 +271,7 @@ toplevelfunc
 localslist : (SEMICOLON ID)* ;
 
 guard_or_assignment :
-          guard | assignment
+          guard | toplevelassignment
     ;
 
 guard : arrayexpr COLON arrayexpr;

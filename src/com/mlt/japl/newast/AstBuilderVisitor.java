@@ -14,13 +14,7 @@ import java.util.Stack;
 
 public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
-    private final EvalContext rootContext;
-    private final Stack<HashMap<String, AstFunc>> localFunctions;
-
-    public AstBuilderVisitor(EvalContext rootContext) {
-        localFunctions = new Stack<HashMap<String, AstFunc>>();
-        localFunctions.push(new HashMap<String, AstFunc>());
-        this.rootContext = rootContext;
+    public AstBuilderVisitor() {
     }
 
     AstNode[] collect(List<? extends ParserRuleContext> items) {
@@ -30,6 +24,11 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
             result[i++] = visit(t);
         }
         return result;
+    }
+
+    @Override
+    public AstNode visitInteractive(InteractiveContext ctx) {
+        return visit(ctx.toplevelexpr());
     }
 
     @Override
@@ -95,38 +94,12 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         return new AstArray(index);
     }
 
-//    private AstNode fixArray(AstNode[] items) {
-//        List<AstNode> left = new ArrayList<AstNode>();
-//        List<AstNode> right = new ArrayList<AstNode>();
-//
-//        for (int i = 0; i < items.length; i++) {
-//            if (items[i] instanceof AstRef) {
-//                AstRef ref = (AstRef) items[i];
-//                if (isLocalFunction(ref.getId())) {
-//                    if (i == 0) {
-//                        for (int j = i + 1; j < items.length; j++) right.add(items[j]);
-//                        AstNode[] rarr = right.toArray(new AstNode[0]);
-//                        return new AstMonadicCall(getLocalFunction(ref.getId()), fixArray(rarr));
-//                    } else {
-//                        AstArray larr = new AstArray(left.toArray(new AstNode[0]));
-//                        for (int j = i + 1; j < items.length; j++) right.add(items[j]);
-//                        AstNode[] rarr = right.toArray(new AstNode[0]);
-//                        return new AstDyadicCall(getLocalFunction(ref.getId()), larr, fixArray(rarr));
-//                    }
-//                }
-//            } else
-//                left.add(items[i]);
-//        }
-//        return new AstArray(left.toArray(new AstNode[0]));
-//    }
-
     @Override
     public AstNode visitArray(ArrayContext ctx) {
         AstNode[] items = collect(ctx.arrayitem());
         if (items.length == 1) {
             return items[0];
         }
-        //return fixArray(items);
         return new AstArray(items);
     }
 
@@ -145,44 +118,18 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitLambdafunc(LambdafuncContext ctx) {
-        enterLambdaContext();
-        try {
-            AstNode fn = new AstLambda(collect(ctx.guard_or_assignment()), visit(ctx.arrayexpr()));
-            return fn;
-        } finally {
-            exitLambdaContext();
-        }
-    }
-
-    private void exitLambdaContext() {
-        localFunctions.pop();
-    }
-
-    private void registerLocalFunction(String name, AstFunc fn) {
-        localFunctions.peek().put(name, fn);
-    }
-
-//    private AstFunc getLocalFunction(String name) {
-//        for (HashMap<String, AstFunc> s : localFunctions) {
-//            if (s.containsKey(name)) return s.get(name);
-//        }
-//        return null;
-//    }
-//
-//    private boolean isLocalFunction(String name) {
-//        for (HashMap<String, AstFunc> s : localFunctions) {
-//            if (s.containsKey(name)) return true;
-//        }
-//        return false;
-//    }
-
-    private void enterLambdaContext() {
-        localFunctions.push(new HashMap<String, AstFunc>());
+        AstNode fn = new AstLambda(collect(ctx.guard_or_assignment()), visit(ctx.arrayexpr()));
+        return fn;
     }
 
     @Override
     public AstNode visitFnassignment(FnassignmentContext ctx) {
         return new AstAssignment(ctx.ID().getText(), visit(ctx.func_operator()));
+    }
+
+    @Override
+    public AstNode visitExpr_assign(Expr_assignContext ctx) {
+        return new AstAssignment(ctx.ID().getText(), visit(ctx.arrayexpr()));
     }
 
     @Override
@@ -229,6 +176,16 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     }
 
     @Override
+    public AstNode visitBoundfunc(BoundfuncContext ctx) {
+        return new AstBoundFunc(visit(ctx.arrayitem()), (AstFunc)visit(ctx.func()));
+    }
+
+    @Override
+    public AstNode visitPowerfunc(PowerfuncContext ctx) {
+        return new AstPowerFunc((AstFunc)visit(ctx.func()), visit(ctx.arrayitem()));
+    }
+
+    @Override
     public AstNode visitInnerprod(InnerprodContext ctx) {
         return new AstInnerproduct((AstFunc)visit(ctx.outer), (AstFunc)visit(ctx.inner));
     }
@@ -253,7 +210,7 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     }
 
     @Override
-    public AstNode visitFunc_operator(Func_operatorContext ctx) {
+    public AstNode visitFunc_oper_no_parens(Func_oper_no_parensContext ctx) {
         AstNode axis = null;
         if(ctx.axis()!=null) {
             axis = visit(ctx.axis());
@@ -263,6 +220,17 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         }
         return visit(ctx.func());
     }
+
+    @Override
+    public AstNode visitFunc_with_parens(Func_with_parensContext ctx) {
+        return visit(ctx.func());
+    }
+
+    @Override
+    public AstNode visitFunc_oper_with_parens(Func_oper_with_parensContext ctx) {
+        return visit(ctx.func_operator());
+    }
+
     @Override
     public AstNode visitGuard(GuardContext ctx) {
         return new AstGuardExpr(visit(ctx.arrayexpr(0)), visit(ctx.arrayexpr(1)));

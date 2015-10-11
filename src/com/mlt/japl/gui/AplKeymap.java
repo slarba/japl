@@ -3,8 +3,8 @@ package com.mlt.japl.gui;
 public class AplKeymap {
     public static final String[] SYMBOLS = new String[]{
             "¯"
-            , "\u03b1"
-            , "\u03c9"
+            , "\u237a"
+            , "\u2375"
             , "\u003f"  // roll ?
             , "\u2208"  // exists
             , "\u2308"  // ceil
@@ -64,6 +64,7 @@ public class AplKeymap {
             , "\u236c"  // zilde
             , "\u235d"  // lamp
             , "\u2395"
+            , "\u2363"
             , "\u22a3"  // stop
             , "\u22a2"  // pass
             , "⍪"  // laminate first axis

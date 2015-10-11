@@ -2,6 +2,7 @@ package com.mlt.japl.workspace;
 
 import com.mlt.japl.errors.ValueError;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.FuncValue;
 import com.mlt.japl.newarrays.concrete.IntArray;
 import com.mlt.japl.newfns.Func;
 import com.mlt.japl.tools.Dimensions;
@@ -101,13 +102,10 @@ public class EvalContext {
     }
 
     public boolean isBoundToFunction(String id) {
-        if (!functionMap.containsKey(id)) {
-            if (parent != null) {
-                return parent.isBoundToFunction(id);
-            } else
-                return false;
-        }
-        return true;
+        Var v = findVar(id);
+        if(v==null) return false;
+        if(v.get() instanceof FuncValue) return true;
+        return false;
     }
 
     public PrintConfig printConfig() {

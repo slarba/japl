@@ -6,14 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 @SuppressWarnings("serial")
 public class jApl extends JFrame implements ActionListener {
     Font aplFont;
     JaplInterpreter interpreter;
     JaplRepl repl;
+    private Interpreter ipreter;
 
     public jApl() {
         super("APL Interpreter");
@@ -52,9 +55,9 @@ public class jApl extends JFrame implements ActionListener {
 
         aplFont = createFont("/com/mlt/japl/gui/SImPL.ttf");
         repl = new JaplRepl(aplFont);
-        Interpreter i = new Interpreter(repl.getOutputStream(), repl.getErrorStream());
+        ipreter = new Interpreter(repl.getOutputStream(), repl.getErrorStream());
         interpreter = new JaplInterpreter(repl, aplFont);
-        i.addBusyListener(interpreter);
+        ipreter.addBusyListener(interpreter);
         interpreter.setPreferredSize(new Dimension(1024, 768));
 
         setJMenuBar(createMenuBar());
@@ -65,11 +68,19 @@ public class jApl extends JFrame implements ActionListener {
         setVisible(true);
         repl.requestFocus();
 
+        BufferedReader lineReader = new BufferedReader(new InputStreamReader(repl.getInputStream()));
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true)
-                    i.eval(repl.getInputStream());
+                    try {
+                        String line = lineReader.readLine();
+                        System.out.println("Evaluating line: " + line);
+                        if(line==null) continue;
+                        ipreter.eval(line);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
             }
         });
         t.start();
@@ -98,7 +109,7 @@ public class jApl extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "newFile":
-                new JaplEditorFrame(aplFont, repl.getLineOutputStream());
+                new JaplEditorFrame(aplFont, ipreter);
                 break;
             case "quit":
                 System.exit(0);
@@ -106,7 +117,7 @@ public class jApl extends JFrame implements ActionListener {
             case "openFile":
                 JFileChooser chooser = new JFileChooser();
                 if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                    new JaplEditorFrame(aplFont, chooser.getSelectedFile(), repl.getLineOutputStream());
+                    new JaplEditorFrame(aplFont, chooser.getSelectedFile(), ipreter);
                 }
         }
     }

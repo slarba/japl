@@ -28,6 +28,12 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitToplevel(AplParser.ToplevelContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AplParser#interactive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInteractive(AplParser.InteractiveContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AplParser#toplevelexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -64,37 +70,40 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRepeat_expr(AplParser.Repeat_exprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AplParser#arrayexpr}.
+	 * Visit a parse tree produced by the {@code expr_assign}
+	 * labeled alternative in {@link AplParser#arrayexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayexpr(AplParser.ArrayexprContext ctx);
+	T visitExpr_assign(AplParser.Expr_assignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code monadic_call_or_niladic}
+	 * labeled alternative in {@link AplParser#arrayexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMonadic_call_or_niladic(AplParser.Monadic_call_or_niladicContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code dyadic_call_or_array}
+	 * labeled alternative in {@link AplParser#arrayexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDyadic_call_or_array(AplParser.Dyadic_call_or_arrayContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code fnassignment}
-	 * labeled alternative in {@link AplParser#assignment}.
+	 * labeled alternative in {@link AplParser#toplevelassignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFnassignment(AplParser.FnassignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code strandassignment}
-	 * labeled alternative in {@link AplParser#assignment}.
+	 * labeled alternative in {@link AplParser#toplevelassignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStrandassignment(AplParser.StrandassignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AplParser#monadic_call_or_niladic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMonadic_call_or_niladic(AplParser.Monadic_call_or_niladicContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AplParser#dyadic_call_or_array}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDyadic_call_or_array(AplParser.Dyadic_call_or_arrayContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AplParser#array}.
 	 * @param ctx the parse tree
@@ -156,11 +165,19 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIndexelement(AplParser.IndexelementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AplParser#func_operator}.
+	 * Visit a parse tree produced by the {@code func_oper_no_parens}
+	 * labeled alternative in {@link AplParser#func_operator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunc_operator(AplParser.Func_operatorContext ctx);
+	T visitFunc_oper_no_parens(AplParser.Func_oper_no_parensContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code func_oper_with_parens}
+	 * labeled alternative in {@link AplParser#func_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc_oper_with_parens(AplParser.Func_oper_with_parensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code idfunc}
 	 * labeled alternative in {@link AplParser#func}.
@@ -168,6 +185,13 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIdfunc(AplParser.IdfuncContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code powerfunc}
+	 * labeled alternative in {@link AplParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPowerfunc(AplParser.PowerfuncContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code simplefunc}
 	 * labeled alternative in {@link AplParser#func}.
@@ -189,6 +213,20 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOuterproduct(AplParser.OuterproductContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boundfunc}
+	 * labeled alternative in {@link AplParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoundfunc(AplParser.BoundfuncContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code func_with_parens}
+	 * labeled alternative in {@link AplParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc_with_parens(AplParser.Func_with_parensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code innerprod}
 	 * labeled alternative in {@link AplParser#func}.

@@ -2,49 +2,29 @@ package com.mlt.japl.newarrays.concrete;
 
 import com.mlt.japl.newarrays.ArrayVisitor;
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.ScalarBase;
 import com.mlt.japl.newarrays.interf.*;
-import com.mlt.japl.newfns.Func;
-import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
 
 /**
- * Created by markolau on 10/10/15.
+ * Created by markolau on 11/10/15.
  */
-public class FuncValue implements IValue {
-    private final Func fn;
+public class ComplexScalar extends ScalarBase {
+    double real;
+    double imag;
 
-    public FuncValue(Func fn) {
-        this.fn = fn;
+    public ComplexScalar() {
+        this(0,0);
     }
 
-    @Override
-    public Dimensions dims() {
-        return null;
-    }
-
-    @Override
-    public int rank() {
-        return 0;
-    }
-
-    @Override
-    public int depth() {
-        return 0;
-    }
-
-    @Override
-    public int length() {
-        return 0;
-    }
-
-    @Override
-    public IValue force() {
-        return null;
+    public ComplexScalar(double real, double imag) {
+        this.real = real;
+        this.imag = imag;
     }
 
     @Override
     public String asString(PrintConfig printConfig) {
-        return "<function>";
+        return printConfig.print(this);
     }
 
     @Override
@@ -54,11 +34,6 @@ public class FuncValue implements IValue {
 
     @Override
     public IValue getGeneric(int index) {
-        return null;
-    }
-
-    @Override
-    public IValue get(IMixedArray i) {
         return null;
     }
 
@@ -127,7 +102,11 @@ public class FuncValue implements IValue {
         return null;
     }
 
-    public Func get() {
-        return fn;
+    public double getReal() {
+        return real;
+    }
+
+    public double getImag() {
+        return imag;
     }
 }

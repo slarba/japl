@@ -1,6 +1,7 @@
 package com.mlt.japl.utils;
 
 import com.mlt.japl.newarrays.IValue;
+import com.mlt.japl.newarrays.concrete.ComplexScalar;
 import com.mlt.japl.newarrays.interf.*;
 import com.mlt.japl.tools.Iterator;
 
@@ -244,4 +245,7 @@ public class PrintConfig {
         return builder.toString();
     }
 
+    public String print(ComplexScalar complexScalar) {
+        return print(complexScalar.getReal()) + "J" + print(complexScalar.getImag());
+    }
 }
