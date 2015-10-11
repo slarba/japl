@@ -109,7 +109,7 @@ FUNC 	: ('\u002b' | '\u002d' | '\u00d7' | '\u00f7' |                       // ad
            '\u003c' | '\u2264' | '\u003d' | '\u2260' | '\u2265' | '\u003e' | // lt lte eq neq gte gt
            '\u2228' | '\u2227' | '\u2371' | '\u2372' |                       // or and nor nand
            '\u220a' | '\u2282' | '\u2283' | '\u2229' | '\u222a' |            // epsilon enclose disclose intersection union
-           '?'      | ','      | '!'      |
+           '?'      | ','      | '!'      |                                  // roll ravel factorial
            '\u223C' | '\u2223' | '\u2373' | '\u2374' | '\u2212' | '\u234B' | '\u2352' |
            '\u234E' | '\u2355' | '\u2349' | '\u2296' | '\u233D' | '\u25CB' | '\u22C6' |
            '\u230A' | '\u2308' | '\u235F' | '\u2339' |
@@ -238,6 +238,7 @@ indexelement : SEMICOLON | arrayexpr ;
 
 func_operator
         :       func (OPERATOR axis?)?          # func_oper_no_parens
+        |       OPERATOR axis?                  # operator_as_func
         |       LPAREN func_operator RPAREN     # func_oper_with_parens
         ;
 

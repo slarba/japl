@@ -232,6 +232,15 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     }
 
     @Override
+    public AstNode visitOperator_as_func(Operator_as_funcContext ctx) {
+        AstNode axis = null;
+        if(ctx.axis()!=null) {
+            axis = visit(ctx.axis());
+        }
+        return new AstSimpleFunc(ctx.OPERATOR().getText(), axis);
+    }
+
+    @Override
     public AstNode visitGuard(GuardContext ctx) {
         return new AstGuardExpr(visit(ctx.arrayexpr(0)), visit(ctx.arrayexpr(1)));
     }

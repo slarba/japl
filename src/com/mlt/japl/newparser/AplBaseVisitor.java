@@ -197,6 +197,13 @@ public class AplBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Ap
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitOperator_as_func(AplParser.Operator_as_funcContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitFunc_oper_with_parens(AplParser.Func_oper_with_parensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

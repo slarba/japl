@@ -172,6 +172,13 @@ public interface AplVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunc_oper_no_parens(AplParser.Func_oper_no_parensContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code operator_as_func}
+	 * labeled alternative in {@link AplParser#func_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperator_as_func(AplParser.Operator_as_funcContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code func_oper_with_parens}
 	 * labeled alternative in {@link AplParser#func_operator}.
 	 * @param ctx the parse tree
