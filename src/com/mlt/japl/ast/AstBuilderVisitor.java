@@ -119,8 +119,25 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     public AstNode visitIf_expr(If_exprContext ctx) {
         AstNode cond = visit(ctx.condition);
         AstNode thenb = visit(ctx.thenbranch);
-        AstNode elseb = visit(ctx.elsebranch);
-        return new AstIfNode(cond, thenb, elseb);
+        AstNode elseb = null;
+        List<AstNode> elifs = new ArrayList<>();
+        List<AstNode> elifthens = new ArrayList<>();
+        for (ElseifsContext c : ctx.elseifs()) {
+            elifs.add(visit(c.arrayexpr()));
+            elifthens.add(visit(c.expr_list()));
+        }
+        if(ctx.elsebranch!=null) elseb = visit(ctx.elsebranch);
+        return new AstIfNode(cond, thenb, elseb, elifs.toArray(new AstNode[elifs.size()]), elifthens.toArray(new AstNode[elifs.size()]));
+    }
+
+    @Override
+    public AstNode visitWhile_expr(While_exprContext ctx) {
+        return new AstWhileNode(visit(ctx.arrayexpr()), visit(ctx.expr_list()));
+    }
+
+    @Override
+    public AstNode visitRepeat_expr(Repeat_exprContext ctx) {
+        return new AstRepeatNode(visit(ctx.arrayexpr()), visit(ctx.expr_list()));
     }
 
     @Override

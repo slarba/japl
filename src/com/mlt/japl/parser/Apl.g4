@@ -176,12 +176,13 @@ expr_list
 if_expr	:
 	IF condition=arrayexpr sep
 	   thenbranch=expr_list sep?
-    (ELSEIF elifcondition=arrayexpr sep
-            elifthenbranch=expr_list sep?)*
-	(ELSE
+    elseifs*
+	(ELSE sep
 		    elsebranch=expr_list sep?)?
 	ENDIF
 	;
+
+elseifs : ELSEIF arrayexpr sep expr_list sep? ;
 
 for_expr :
     FOR ID IN arrayexpr sep
