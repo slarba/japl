@@ -29,7 +29,7 @@ public class Main {
                 "20 x 10";
         EvalContext context = new EvalContext();
 /*
-        com.mlt.japl.parsing.AplParser parser = new com.mlt.japl.parsing.AplParser(context);
+        com.mlt.japl.parsing.Parser parser = new com.mlt.japl.parsing.Parser(context);
         AstNode result = parser.parse(testProgram6);
         System.out.println(result.toString());
         IValue r = result.eval(context);

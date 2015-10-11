@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by markolau on 06/10/15.
  */
-public class AplParser {
+public class Parser {
     public static AstNode parse(InputStream in, EvalContext rootContext) {
         try {
             AplLexer lexer = new AplLexer(new UnbufferedCharStream(new InputStreamReader(in, "UTF-8")));
