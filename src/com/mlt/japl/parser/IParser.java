@@ -23,6 +23,7 @@ public class IParser {
             parser.addErrorListener(new ErrorListener());
             ParseTree tree = parser.toplevel();
             AstNode result = tree.accept(new AstBuilderVisitor());
+            System.out.println(result.toString());
             return result;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

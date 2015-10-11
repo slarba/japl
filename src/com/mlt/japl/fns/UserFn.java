@@ -45,4 +45,13 @@ public class UserFn extends BaseFn {
             return retVal;
     }
 
+    @Override
+    public IValue applyNiladic(int axis) {
+        EvalContext derived = context.newFrame();
+        IValue retval = body.eval(derived);
+        if(resultArg!=null) {
+            return derived.get(resultArg).get();
+        } else
+            return retval;
+    }
 }

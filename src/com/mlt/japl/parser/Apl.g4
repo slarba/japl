@@ -37,12 +37,15 @@ options {
     }
 
     private void registerLocalFunction(String name, AstFunc fn) {
+        System.out.println("Registering local function " + name);
         localFunctions.peek().add(name);
     }
 
     private boolean isFnSymbol() {
         String sym = getCurrentToken().getText();
-        return context.isBoundToFunction(sym) || localFunctions.peek().contains(sym);
+        boolean isfn = context.isBoundToFunction(sym) || localFunctions.peek().contains(sym);
+        System.out.println("Is function? " + sym + " " + isfn);
+        return isfn;
     }
 }
 
@@ -198,14 +201,15 @@ repeat_expr :   REPEAT arrayexpr sep
             ;
 
 arrayexpr
-	:	ID ASSIGN arrayexpr                                                 # expr_assign
-	|   func_operator arrayexpr?                                            # monadic_call_or_niladic
+	:	ident ASSIGN arrayexpr                                              # expr_assign
 	|	l=array (fn=func_operator r=arrayexpr)?                             # dyadic_call_or_array
+	|   func_operator arrayexpr?                                             # monadic_call_or_niladic
 	;
 
 toplevelassignment :
-        ID ASSIGN { registerLocalFunction($ID.text, null); } func_operator  # fnassignment
-	|   ID+ ASSIGN arrayexpr                                                # strandassignment
+       //ID ASSIGN arrayexpr                                              # singleassignment
+        ID ASSIGN func_operator { registerLocalFunction($ID.text, null); } # fnassignment
+	|   ID+ ASSIGN arrayexpr                                             # strandassignment
 	;
 
 array	:	arrayitem+
@@ -263,8 +267,14 @@ lambdafunc
 	;
 
 toplevelfunc
-    : DEL (ret=ID ASSIGN)? a=ID b=ID c=ID? localslist sep
-        { enterLambdaContext(); }
+    : DEL (ret=ID ASSIGN)? a=ID b=ID? c=ID? localslist sep
+        { if($c!=null) {
+             registerLocalFunction($b.text, null);
+          } else {
+             registerLocalFunction($a.text, null);
+          }
+          enterLambdaContext();
+        }
         expr_list sep?
       DEL
         { exitLambdaContext(); }

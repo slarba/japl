@@ -55,8 +55,10 @@ public class Interpreter {
         try {
             AstNode n = IParser.parse(s, context);
             IValue rval = n.eval(context);
-            output.println(rval.asString(printConfig));
-            output.flush();
+            if(rval!=null) {
+                output.println(rval.asString(printConfig));
+                output.flush();
+            }
         } catch(Throwable t) {
             t.printStackTrace(errors);
             errors.flush();

@@ -1,6 +1,7 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.concrete.FuncValue;
 import com.mlt.japl.fns.UserFn;
 import com.mlt.japl.workspace.EvalContext;
 
@@ -35,7 +36,7 @@ public class AstToplevelFunc extends AstFunc {
 
     @Override
     public IValue eval(EvalContext context) {
-        context.set(name, new UserFn(body, context, leftarg, rightarg, retvar));
+        context.set(name, new FuncValue(new UserFn(body, context, leftarg, rightarg, retvar)));
         return null;
     }
 }

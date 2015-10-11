@@ -2,6 +2,7 @@ package com.mlt.japl.ast;
 
 import com.mlt.japl.parser.AplBaseVisitor;
 import com.mlt.japl.parser.AplParser.*;
+import jdk.nashorn.internal.ir.Terminal;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -140,7 +141,7 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitExpr_assign(Expr_assignContext ctx) {
-        return new AstAssignment(ctx.ID().getText(), visit(ctx.arrayexpr()));
+        return new AstAssignment(ctx.ident().ID().getText(), visit(ctx.arrayexpr()));
     }
 
     @Override
@@ -156,12 +157,17 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         }
     }
 
+//    @Override
+//    public AstNode visitSingleassignment(SingleassignmentContext ctx) {
+//        return new AstAssignment(ctx.ID().getText(), visit(ctx.arrayexpr()));
+//    }
+
     @Override
     public AstNode visitMonadic_call_or_niladic(Monadic_call_or_niladicContext ctx) {
         ArrayexprContext array = ctx.arrayexpr();
         AstFunc func = (AstFunc) visit(ctx.func_operator());
         if (array == null) {
-            return func;
+            return new AstNiladicCall(func);
         } else {
             return new AstMonadicCall(func, visit(array));
         }
@@ -271,7 +277,8 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
             rightarg = ctx.c.getText();
         } else {
             fnname = ctx.a.getText();
-            rightarg = ctx.b.getText();
+            if(ctx.b!=null)
+                rightarg = ctx.b.getText();
         }
         String[] locals = new String[ctx.localslist().ID().size()];
         for(int i=0; i<locals.length; i++) {

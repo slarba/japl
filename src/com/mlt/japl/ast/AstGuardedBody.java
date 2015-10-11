@@ -18,8 +18,10 @@ public class AstGuardedBody implements AstNode {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append("guarded:");
         for (AstNode n : guards) builder.append(n.toString() + "\n");
         builder.append(body.toString());
+        builder.append(":guarded");
         return builder.toString();
     }
 
