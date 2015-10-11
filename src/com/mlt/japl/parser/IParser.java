@@ -18,9 +18,9 @@ public class IParser {
         try {
             AplLexer lexer = new AplLexer(new UnbufferedCharStream(new InputStreamReader(in, "UTF-8")));
             lexer.setTokenFactory(new CommonTokenFactory(true));
-            lexer.removeErrorListeners();
-            lexer.addErrorListener(new ErrorListener());
             com.mlt.japl.parser.AplParser parser = new com.mlt.japl.parser.AplParser(new UnbufferedTokenStream<CommonToken>(lexer), rootContext);
+            parser.removeErrorListeners();
+            parser.addErrorListener(new ErrorListener());
             ParseTree tree = parser.toplevel();
             AstNode result = tree.accept(new AstBuilderVisitor());
             return result;
@@ -32,9 +32,9 @@ public class IParser {
 
     public static AstNode parse(String line, EvalContext rootContext) {
         AplLexer lexer = new AplLexer(new ANTLRInputStream(line));
-        lexer.removeErrorListeners();
-        lexer.addErrorListener(new ErrorListener());
         com.mlt.japl.parser.AplParser parser = new com.mlt.japl.parser.AplParser(new CommonTokenStream(lexer), rootContext);
+        parser.removeErrorListeners();
+        parser.addErrorListener(new ErrorListener());
         ParseTree tree = parser.interactive();
         AstNode result = tree.accept(new AstBuilderVisitor());
         System.out.println(result.toString());

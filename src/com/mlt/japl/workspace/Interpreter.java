@@ -3,6 +3,7 @@ package com.mlt.japl.workspace;
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.*;
 import com.mlt.japl.ast.AstNode;
+import com.mlt.japl.errors.AplError;
 import com.mlt.japl.parser.IParser;
 import com.mlt.japl.tools.Dimensions;
 import com.mlt.japl.utils.PrintConfig;
@@ -39,6 +40,9 @@ public class Interpreter {
             IValue rval = result.eval(context);
             output.println(rval.asString(printConfig));
             output.flush();
+        } catch(AplError e) {
+            errors.println(e.getMessage());
+            errors.flush();
         } catch(Throwable t) {
             t.printStackTrace(errors);
             errors.flush();

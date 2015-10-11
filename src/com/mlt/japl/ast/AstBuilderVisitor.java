@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
@@ -75,19 +76,33 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         }
     }
 
+    // ;3    -> empty 3
+    // 3;    -> 3 empty
+    // 3;4   -> 3 4
+    // 3;;4  -> 3 empty 4
+    // ;;    -> empty empty empty
     @Override
     public AstNode visitIndex(IndexContext ctx) {
         List<IndexelementContext> indices = ctx.indexelement();
-        AstNode[] index = new AstNode[indices.size()];
-        for(int i=0; i<index.length; i++) {
+        List<AstNode> result = new ArrayList<>();
+        boolean insertEmpty = true;
+        for(int i=0; i<indices.size(); i++) {
             IndexelementContext iec = indices.get(i);
             if(iec.SEMICOLON()!=null) {
-                index[i] = new AstString("'all'");
+                if(insertEmpty)
+                    result.add(new AstEmptyArray());
+                else
+                    insertEmpty = true;
+                if(i==indices.size()-1) {
+                    result.add(new AstEmptyArray());
+                    break;
+                }
             } else {
-                index[i] = visit(indices.get(i));
+                result.add(visit(indices.get(i)));
+                insertEmpty = false;
             }
         }
-        return new AstArray(index);
+        return new AstArray(result.toArray(new AstNode[0]));
     }
 
     @Override
