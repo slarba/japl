@@ -1,7 +1,9 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.interf.IIntArray;
 import com.mlt.japl.arrays.interf.IMixedArray;
+import com.mlt.japl.errors.IndexError;
 import com.mlt.japl.workspace.EvalContext;
 
 public class AstIndex implements AstNode {
@@ -23,6 +25,9 @@ public class AstIndex implements AstNode {
     public IValue eval(EvalContext context) {
         IValue index = indexexpr.eval(context);
         IValue val = expr.eval(context);
-        return val.get((IMixedArray)index);
+        if(index instanceof IMixedArray) {
+            return val.get((IMixedArray)index);
+        }
+        throw new IndexError();
     }
 }

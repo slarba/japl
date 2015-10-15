@@ -2,6 +2,7 @@ package com.mlt.japl.workspace;
 
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.*;
+import com.mlt.japl.ast.AstAssignment;
 import com.mlt.japl.ast.AstNode;
 import com.mlt.japl.errors.AplError;
 import com.mlt.japl.parser.IParser;
@@ -38,8 +39,10 @@ public class Interpreter {
         try {
             AstNode result = IParser.parse(s, context);
             IValue rval = result.eval(context);
-            output.println(rval.asString(printConfig));
-            output.flush();
+            if(rval!=null && (!(result instanceof AstAssignment))) {
+                output.println(rval.asString(printConfig));
+                output.flush();
+            }
         } catch(AplError e) {
             errors.println(e.getMessage());
             errors.flush();
