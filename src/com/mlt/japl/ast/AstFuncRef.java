@@ -9,9 +9,15 @@ import com.mlt.japl.workspace.EvalContext;
 public class AstFuncRef extends AstFunc {
 
     private final String id;
+    private String namespace;
 
     public AstFuncRef(String id) {
         this.id = id;
+    }
+
+    public AstFuncRef(String text, String namespace) {
+        this(text);
+        this.namespace = namespace;
     }
 
     @Override
@@ -21,6 +27,7 @@ public class AstFuncRef extends AstFunc {
 
     @Override
     public String toString() {
-        return id;
+        return "@" + (namespace!=null ? namespace : "") + id;
+
     }
 }

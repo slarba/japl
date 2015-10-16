@@ -1,6 +1,7 @@
 package com.mlt.japl.ast;
 
 import com.mlt.japl.parser.AplBaseVisitor;
+import com.mlt.japl.parser.AplParser;
 import com.mlt.japl.parser.AplParser.*;
 import jdk.nashorn.internal.ir.Terminal;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -68,13 +69,29 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitIdent(IdentContext ctx) {
-        IndexContext index = ctx.index();
-        AstNode array = new AstRef(ctx.ID().getText());
-        if (index == null) {
-            return array;
-        } else {
-            return new AstIndex(array, visit(index));
+        String namespace = null;
+        if(ctx.namespaceprefix()!=null) {
+            namespace = createNamespacePrefix(ctx.namespaceprefix());
         }
+        AstNode array = new AstRef(ctx.non_fn_id().ID().getText(), namespace);
+        return array;
+    }
+
+    @Override
+    public AstNode visitIdent_idx(Ident_idxContext ctx) {
+        if(ctx.index()!=null) {
+            return new AstIndex(visit(ctx.ident()), visit(ctx.index()));
+        }
+        return visit(ctx.ident());
+    }
+
+    private String createNamespacePrefix(NamespaceprefixContext ctx) {
+        StringBuilder builder = new StringBuilder();
+        for(Non_fn_idContext c : ctx.non_fn_id()) {
+            builder.append(c.ID().getText());
+            builder.append('.');
+        }
+        return builder.toString();
     }
 
     // ;3    -> empty 3
@@ -153,12 +170,17 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitFnassignment(FnassignmentContext ctx) {
-        return new AstAssignment(ctx.ID().getText(), visit(ctx.func_operator()));
+        return new AstAssignment(ctx.ID().getText(), visit(ctx.func()));
     }
 
+//    @Override
+//    public AstNode visitExpr_assign(Expr_assignContext ctx) {
+//        return new AstAssignment(ctx.ident().non_fn_id().ID().getText(), visit(ctx.arrayexpr()));
+//    }
+
     @Override
-    public AstNode visitExpr_assign(Expr_assignContext ctx) {
-        return new AstAssignment(ctx.ident().ID().getText(), visit(ctx.arrayexpr()));
+    public AstNode visitAssign(AssignContext ctx) {
+        return visit(ctx.assignment());
     }
 
     @Override
@@ -174,30 +196,21 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         }
     }
 
-//    @Override
-//    public AstNode visitSingleassignment(SingleassignmentContext ctx) {
-//        return new AstAssignment(ctx.ID().getText(), visit(ctx.arrayexpr()));
-//    }
+    @Override
+    public AstNode visitMonadic_call(Monadic_callContext ctx) {
+        ArrayexprContext array = ctx.arrayexpr();
+        AstFunc func = (AstFunc) visit(ctx.func());
+        return new AstMonadicCall(func, visit(array));
+    }
 
     @Override
-    public AstNode visitMonadic_call_or_niladic(Monadic_call_or_niladicContext ctx) {
-        ArrayexprContext array = ctx.arrayexpr();
-        AstFunc func = (AstFunc) visit(ctx.func_operator());
-        if (array == null) {
-            return new AstNiladicCall(func);
+    public AstNode visitDyadic_call(Dyadic_callContext ctx) {
+        if(ctx.fn != null) {
+            return new AstDyadicCall((AstFunc) visit(ctx.fn), visit(ctx.l), visit(ctx.r));
         } else {
-            return new AstMonadicCall(func, visit(array));
+            return visit(ctx.l);
         }
     }
-
-    @Override
-    public AstNode visitDyadic_call_or_array(Dyadic_call_or_arrayContext ctx) {
-        if (ctx.fn == null) {
-            return visit(ctx.l);
-        } else
-            return new AstDyadicCall((AstFunc) visit(ctx.fn), visit(ctx.l), visit(ctx.r));
-    }
-
 
     @Override
     public AstNode visitLambda(LambdaContext ctx) {
@@ -235,7 +248,11 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitIdfunc(IdfuncContext ctx) {
-        return new AstFuncRef(ctx.ID().getText());
+        String namespace = null;
+        if(ctx.funcid().namespaceprefix()!=null) {
+            namespace = createNamespacePrefix(ctx.funcid().namespaceprefix());
+        }
+        return new AstFuncRef(ctx.funcid().fn_id().ID().getText(), namespace);
     }
 
     @Override
@@ -244,25 +261,16 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     }
 
     @Override
-    public AstNode visitFunc_oper_no_parens(Func_oper_no_parensContext ctx) {
-        AstNode axis = null;
-        if(ctx.axis()!=null) {
-            axis = visit(ctx.axis());
-        }
-        if(ctx.OPERATOR() != null) {
-            return new AstOperator(ctx.OPERATOR().getText(), visit(ctx.func()), axis);
-        }
-        return visit(ctx.func());
-    }
-
-    @Override
     public AstNode visitFunc_with_parens(Func_with_parensContext ctx) {
         return visit(ctx.func());
     }
 
     @Override
-    public AstNode visitFunc_oper_with_parens(Func_oper_with_parensContext ctx) {
-        return visit(ctx.func_operator());
+    public AstNode visitFunc_with_operator(Func_with_operatorContext ctx) {
+        AstFunc fn = (AstFunc)visit(ctx.func());
+        String operator = ctx.OPERATOR().getText();
+        AstNode axis = ctx.axis()!=null ? visit(ctx.axis()) : null;
+        return new AstOperator(operator, fn, axis);
     }
 
     @Override

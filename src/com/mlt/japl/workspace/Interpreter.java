@@ -38,6 +38,7 @@ public class Interpreter {
         for (AplBusyListener listener : listeners) listener.evaluationStarted();
         try {
             AstNode result = IParser.parse(s, context);
+            System.out.println("PARSE TREE: " + result.toString());
             IValue rval = result.eval(context);
             if(rval!=null && (!(result instanceof AstAssignment))) {
                 output.println(rval.asString(printConfig));
@@ -57,6 +58,7 @@ public class Interpreter {
     public void eval(InputStream s) {
         try {
             AstNode n = IParser.parse(s, context);
+            System.out.println("PARSE TREE: " + n.toString());
             IValue rval = n.eval(context);
             if(rval!=null) {
                 output.println(rval.asString(printConfig));

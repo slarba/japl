@@ -37,6 +37,7 @@ public class IParser {
         parser.removeErrorListeners();
         parser.addErrorListener(new ErrorListener());
         ParseTree tree = parser.interactive();
+        System.out.println(tree.toStringTree(parser));
         AstNode result = tree.accept(new AstBuilderVisitor());
         System.out.println(result.toString());
         return result;

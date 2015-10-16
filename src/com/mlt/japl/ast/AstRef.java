@@ -6,14 +6,21 @@ import com.mlt.japl.workspace.EvalContext;
 public class AstRef implements AstNode {
 
     private String id;
+    private String namespace;
 
     public AstRef(String text) {
         this.id = text;
     }
 
+    public AstRef(String text, String namespace) {
+        this(text);
+        this.namespace = namespace;
+    }
+
     @Override
     public String toString() {
-        return "@" + id;
+        return "@" + (namespace!=null ? namespace : "#.") + id;
+
     }
 
     public String getId() {

@@ -23,6 +23,7 @@ options {
 
     public AplParser(TokenStream input, EvalContext context) {
         this(input);
+        System.out.println("Construct new parser");
         this.context = context;
         localFunctions = new Stack<HashSet<String>>();
         localFunctions.push(new HashSet<String>());
@@ -44,7 +45,7 @@ options {
     private boolean isFnSymbol() {
         String sym = getCurrentToken().getText();
         boolean isfn = context.isBoundToFunction(sym) || localFunctions.peek().contains(sym);
-        System.out.println("Is function? " + sym + " " + isfn);
+        System.out.println(sym + " is function: " + isfn);
         return isfn;
     }
 }
@@ -146,9 +147,10 @@ ENDFOR  : (':EndFor' | ':End') ;
 
 OPERATOR : ('/' | '\u233f' | '\\' | '\u2340' | '¨') ;
 POWEROPERATOR : '\u2363';
+COMMA : '.';
 
 BOUNDWITH : '\u2218' ;
-OUTERPRODUCT : BOUNDWITH '.' ;
+OUTERPRODUCT : BOUNDWITH COMMA ;
 DEL : '\u2207';
 
 sep	:	DIAMOND | (NL | COMMENT)+ ;
@@ -160,13 +162,12 @@ toplevel
 interactive : toplevelexpr EOF ;
 
 toplevelexpr
-	:	toplevelfunc
-	|   toplevelassignment
+	:	arrayexpr
+	|   toplevelfunc
 	|   if_expr
 	|	while_expr
     |   repeat_expr
     |   for_expr
-	|	arrayexpr
 	;
 
 expr_list
@@ -202,61 +203,49 @@ repeat_expr :   REPEAT arrayexpr sep
             ;
 
 arrayexpr
-	:	ident ASSIGN arrayexpr                                              # expr_assign
-	|	l=array (fn=func_operator r=arrayexpr)?                             # dyadic_call_or_array
-	|   func_operator arrayexpr?                                             # monadic_call_or_niladic
+	:	assignment                                              # assign
+	|   func arrayexpr                                          # monadic_call
+	|	l=array (fn=func r=arrayexpr)?                          # dyadic_call
 	;
 
-toplevelassignment :
-       //ID ASSIGN arrayexpr                                              # singleassignment
-        ID ASSIGN func_operator { registerLocalFunction($ID.text, null); } # fnassignment
+assignment :
+        ID ASSIGN func { registerLocalFunction($ID.text, null); } # fnassignment
 	|   ID+ ASSIGN arrayexpr                                             # strandassignment
 	;
 
-array	:	arrayitem+
-	;
+array        : arrayitem+ ;
+arrayitem    : integer | floating | complexnum | string | subarrayexpr | ident_idx ;
+subarrayexpr : LPAREN arrayexpr RPAREN index? ;
+integer	     : INT ;
+floating     : FLOAT ;
+complexnum   : COMPLEX ;
+string       : STRING index? ;
 
-arrayitem : ident | integer | floating | complexnum | string | subarrayexpr
-          ;
+fn_id        : {isFnSymbol()}? ID ;
+non_fn_id    : {!isFnSymbol()}? ID ;
 
-subarrayexpr
-	:	LPAREN arrayexpr RPAREN index?
-	;
+funcid       : namespaceprefix? fn_id ;
+ident	     : namespaceprefix? non_fn_id ;
 
-integer	:	INT
-	;
+ident_idx    : ident index? ;
 
-floating :       FLOAT
-        ;
+namespaceprefix : (non_fn_id COMMA)+ ;
 
-complexnum : COMPLEX ;
-
-string 	:	STRING index?
-	;
-
-ident	:	{!isFnSymbol()}? ID index?
-	;
-
-index	:	LBRACKET indexelement+ RBRACKET
-	;
+index	:	LBRACKET indexelement+ RBRACKET ;
 
 indexelement : SEMICOLON | arrayexpr ;
 
-func_operator
-        :       func (OPERATOR axis?)?          # func_oper_no_parens
-        |       OPERATOR axis?                  # operator_as_func
-        |       LPAREN func_operator RPAREN     # func_oper_with_parens
-        ;
-
 func	:
-        outer=func '.' inner=func   # innerprod
-    |   FUNC axis?                  # simplefunc
-    |   {isFnSymbol()}? ID          # idfunc
-    |   OUTERPRODUCT func           # outerproduct
-    |   arrayitem BOUNDWITH func    # boundfunc
-    |   func POWEROPERATOR arrayitem # powerfunc
-	| 	lambdafunc                  # lambda
-	|   LPAREN func RPAREN          # func_with_parens
+        outer=func '.' inner=func     # innerprod
+    |   func POWEROPERATOR arrayitem  # powerfunc
+    |   func OPERATOR axis?           # func_with_operator
+    |   funcid                        # idfunc
+    |   FUNC axis?                    # simplefunc
+    |   OUTERPRODUCT func             # outerproduct
+    |   OPERATOR axis?                # operator_as_func
+	| 	lambdafunc                    # lambda
+	|   LPAREN func RPAREN            # func_with_parens
+    |   arrayitem BOUNDWITH func      # boundfunc
 	;
 
 axis : LBRACKET arrayexpr RBRACKET ;
@@ -284,7 +273,7 @@ toplevelfunc
 localslist : (SEMICOLON ID)* ;
 
 guard_or_assignment :
-          guard | toplevelassignment
+          guard | assignment
     ;
 
 guard : arrayexpr COLON arrayexpr;
