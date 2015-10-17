@@ -23,7 +23,6 @@ options {
 
     public AplParser(TokenStream input, EvalContext context) {
         this(input);
-        System.out.println("Construct new parser");
         this.context = context;
         localFunctions = new Stack<HashSet<String>>();
         localFunctions.push(new HashSet<String>());
@@ -45,12 +44,12 @@ options {
     private boolean isFnSymbol() {
         String sym = getCurrentToken().getText();
         boolean isfn = context.isBoundToFunction(sym) || localFunctions.peek().contains(sym);
-        System.out.println(sym + " is function: " + isfn);
+        System.out.println("Is function? " + sym + " : " + isfn);
         return isfn;
     }
 }
 
-ID  :	('a'..'z'|'A'..'Z'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359') ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359')*
+ID  :	('a'..'z'|'A'..'Z'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359'|'#') ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359')*
     ;
 
 LABEL : ID ':' ;
@@ -209,8 +208,8 @@ arrayexpr
 	;
 
 assignment :
-        ID ASSIGN func { registerLocalFunction($ID.text, null); } # fnassignment
-	|   ID+ ASSIGN arrayexpr                                             # strandassignment
+	    anyident+ func? ASSIGN arrayexpr                                      # strandassignment
+    |   namespaceprefix? ID ASSIGN func { registerLocalFunction($ID.text, null); } # fnassignment
 	;
 
 array        : arrayitem+ ;
@@ -226,6 +225,7 @@ non_fn_id    : {!isFnSymbol()}? ID ;
 
 funcid       : namespaceprefix? fn_id ;
 ident	     : namespaceprefix? non_fn_id ;
+anyident     : namespaceprefix? ID ;
 
 ident_idx    : ident index? ;
 
@@ -237,6 +237,7 @@ indexelement : SEMICOLON | arrayexpr ;
 
 func	:
         outer=func '.' inner=func     # innerprod
+    |   arrayitem BOUNDWITH func      # boundfunc
     |   func POWEROPERATOR arrayitem  # powerfunc
     |   func OPERATOR axis?           # func_with_operator
     |   funcid                        # idfunc
@@ -245,7 +246,6 @@ func	:
     |   OPERATOR axis?                # operator_as_func
 	| 	lambdafunc                    # lambda
 	|   LPAREN func RPAREN            # func_with_parens
-    |   arrayitem BOUNDWITH func      # boundfunc
 	;
 
 axis : LBRACKET arrayexpr RBRACKET ;

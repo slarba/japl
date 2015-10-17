@@ -185,14 +185,22 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitStrandassignment(StrandassignmentContext ctx) {
-        List<TerminalNode> ids = ctx.ID();
+        List<AnyidentContext> ids = ctx.anyident();
+        AstFunc fn = null;
+        if(ctx.func()!=null) {
+            fn = (AstFunc)visit(ctx.func());
+        }
         AstNode expr = visit(ctx.arrayexpr());
         if (ids.size() > 1) {
             String[] tids = new String[ids.size()];
-            for (int i = 0; i < tids.length; i++) tids[i] = ids.get(i).getText();
+            for (int i = 0; i < tids.length; i++) tids[i] = ids.get(i).ID().getText();
             return new AstStrandAssignment(tids, expr);
         } else {
-            return new AstAssignment(ids.get(0).getText(), expr);
+            if(fn!=null) {
+                String id = ids.get(0).ID().getText();
+                return new AstAssignment(id, new AstDyadicCall(fn, new AstRef(id), expr));
+            }
+            return new AstAssignment(ids.get(0).ID().getText(), expr);
         }
     }
 

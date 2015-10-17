@@ -2,6 +2,9 @@ package com.mlt.japl.ast;
 
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.IntScalar;
+import com.mlt.japl.arrays.interf.IIntScalar;
+import com.mlt.japl.errors.DomainError;
+import com.mlt.japl.utils.PrintConfig;
 import com.mlt.japl.workspace.EvalContext;
 
 public class AstGuardExpr implements AstNode {
@@ -22,7 +25,11 @@ public class AstGuardExpr implements AstNode {
     @Override
     public IValue eval(EvalContext context) {
         IValue condVal = condition.eval(context);
-        if(condVal.equals(IntScalar.ONE)) throw new ReturnSignal(result.eval(context));
+        System.out.println(condVal.getClass().getName());
+        if(!(condVal instanceof IIntScalar)) throw new DomainError();
+        if(condVal.equals(IntScalar.ONE)) {
+            throw new ReturnSignal(result.eval(context));
+        }
         return null;
     }
 }

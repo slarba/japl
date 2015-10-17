@@ -26,6 +26,6 @@ public class AstStrandAssignment implements AstNode {
         for(int i=0; i<tids.length; i++) {
             context.set(tids[i], right.getGeneric(i));
         }
-        return null;
+        return right;
     }
 }
