@@ -133,7 +133,12 @@ public class CharArray extends ArrayBase implements ICharArray {
 
     @Override
     public IValue reshape(int[] newShape) {
-        return new CharArray(new Dimensions(newShape), data);
+        Dimensions newDims = new Dimensions(newShape);
+        char[] newData = new char[newDims.length()];
+        for(int i=0; i<newData.length; i++) {
+            newData[i] = get(i);
+        }
+        return new CharArray(newDims, newData);
     }
 
     @Override

@@ -153,7 +153,12 @@ public class BitArray extends ArrayBase implements IBitArray {
 
     @Override
     public IValue reshape(int[] newShape) {
-        return new BitArray(actualLength, new Dimensions(newShape), data);
+        Dimensions newDims = new Dimensions(newShape);
+        BitArray a = new BitArray(newDims);
+        for(int i=0; i<newDims.length(); i++) {
+            a.setBit(i, get(i));
+        }
+        return a;
     }
 
     @Override

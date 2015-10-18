@@ -39,7 +39,7 @@ public class FuncValue implements IValue {
 
     @Override
     public IValue force() {
-        return null;
+        return this;
     }
 
     @Override

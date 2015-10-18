@@ -48,7 +48,8 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
     @Override
     public AstNode visitString(StringContext ctx) {
         IndexContext index = ctx.index();
-        AstNode str = new AstString(ctx.STRING().getText());
+        String text = ctx.STRING().getText();
+        AstNode str = new AstString(text);
         if (index == null) {
             return str;
         } else {

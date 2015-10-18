@@ -241,6 +241,23 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
+    public IValue visit_dyadic(IIntArray a, IIntScalar b, int ax) {
+        int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
+        if (axis > a.rank()) throw new AxisError();
+        Dimensions result = a.dims().laminate(new Dimensions(1), axis);
+        return new LazyIntArray(result) {
+            @Override
+            public long get(int index) {
+                int[] ri = result.reverseIndexInt(index);
+                if (ri[axis] >= a.dims().axis(axis)) {
+                    return b.get();
+                } else
+                    return a.get(a.dims().calculateIndex(ri));
+            }
+        };
+    }
+
+    @Override
     public IValue visit_dyadic(IMixedArray a, IMixedArray b, int ax) {
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();

@@ -2,6 +2,7 @@ package com.mlt.japl.ast;
 
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.CharArray;
+import com.mlt.japl.arrays.concrete.CharScalar;
 import com.mlt.japl.workspace.EvalContext;
 
 public class AstString implements AstNode {
@@ -19,6 +20,9 @@ public class AstString implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
+        if(text.length()==1) {
+            return new CharScalar(text.charAt(0));
+        }
         return new CharArray(text);
     }
 }

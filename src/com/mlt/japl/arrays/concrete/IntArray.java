@@ -132,7 +132,12 @@ public class IntArray extends ArrayBase implements IIntArray {
 
     @Override
     public IValue reshape(int[] newShape) {
-        return new IntArray(new Dimensions(newShape), data);
+        Dimensions newDims = new Dimensions(newShape);
+        long[] newData = new long[newDims.length()];
+        for(int i=0; i<newData.length; i++) {
+            newData[i] = get(i);
+        }
+        return new IntArray(newDims, newData);
     }
 
     @Override

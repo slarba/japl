@@ -40,6 +40,7 @@ public class Interpreter {
             AstNode result = IParser.parse(s, context);
             System.out.println("PARSE TREE: " + result.toString());
             IValue rval = result.eval(context);
+            System.out.println("Result type: " + rval.getClass().toString());
             if(rval!=null && (!(result instanceof AstAssignment))) {
                 output.println(rval.asString(printConfig));
                 output.flush();

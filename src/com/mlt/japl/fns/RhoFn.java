@@ -13,6 +13,9 @@ public class RhoFn extends BaseFn implements Func {
 
     @Override
     public IValue applyMonadic(IValue a, int axis) {
+        if(a.rank()==0) {
+            return IntArray.EMPTY;
+        }
         int[] dims = a.dims().asArray();
         long[] ds = new long[dims.length];
         for (int i = 0; i < ds.length; i++) {
@@ -29,6 +32,7 @@ public class RhoFn extends BaseFn implements Func {
         return b.reshape(newShape);
     }
 
+/*
     @Override
     public IValue visit_first(IMixedArray a, IValue b, int axis) {
         if (a.rank() != 1) throw new RankError();
@@ -40,10 +44,10 @@ public class RhoFn extends BaseFn implements Func {
         }
         return b.reshape(newShape);
     }
-
+*/
     @Override
     public IValue visit_first(IIntScalar a, IValue b, int axis) {
-        return b.reshape(new int[]{(int) a.get()});
+        return b.reshape(new int[]{ (int) a.get() });
     }
 
     @Override

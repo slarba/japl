@@ -129,7 +129,12 @@ public class MixedArray extends ArrayBase implements IMixedArray {
 
     @Override
     public IValue reshape(int[] newShape) {
-        return new MixedArray(new Dimensions(newShape), data);
+        Dimensions newDims = new Dimensions(newShape);
+        IValue[] newData = new IValue[newDims.length()];
+        for(int i=0; i<newData.length; i++) {
+            newData[i] = get(i);
+        }
+        return new MixedArray(newDims, newData);
     }
 
     @Override

@@ -8,8 +8,8 @@ public class AstAssignment implements AstNode {
     private String id;
     private AstNode expr;
 
-    public AstAssignment(String text, AstNode expr) {
-        this.id = text;
+    public AstAssignment(String id, AstNode expr) {
+        this.id = id;
         this.expr = expr;
     }
 
@@ -20,6 +20,7 @@ public class AstAssignment implements AstNode {
 
     @Override
     public IValue eval(EvalContext context) {
-        return context.set(id, expr.eval(context)).get();
+        IValue v = expr.eval(context);
+        return context.set(id, v.force()).get();
     }
 }

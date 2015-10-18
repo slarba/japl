@@ -122,7 +122,12 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
 
     @Override
     public IValue reshape(int[] newShape) {
-        return new DoubleArray(new Dimensions(newShape), data);
+        Dimensions newDims = new Dimensions(newShape);
+        double[] newData = new double[newDims.length()];
+        for(int i=0; i<newData.length; i++) {
+            newData[i] = get(i);
+        }
+        return new DoubleArray(newDims, newData);
     }
 
     @Override
