@@ -10,6 +10,11 @@ import com.mlt.japl.tools.Dimensions;
 
 public class TakeFn extends BaseFn {
 
+    public TakeFn(int axis) {
+        super(axis);
+
+    }
+
     private int[] createDimensions(IIntArray a, IValue b) {
         if (a.length() != b.rank()) throw new RankError();
         int[] ds = new int[a.length()];
@@ -18,7 +23,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         int[] ds = createDimensions(a, b);
         return new LazyIntArray(new Dimensions(ds)) {
             @Override
@@ -38,7 +43,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
         int[] ds = createDimensions(a, b);
         return new LazyBitArray(new Dimensions(ds)) {
             @Override
@@ -58,7 +63,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         int[] ds = createDimensions(a, b);
         return new LazyDoubleArray(new Dimensions(ds)) {
             @Override
@@ -78,7 +83,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, ICharArray b) {
         int[] ds = createDimensions(a, b);
         return new LazyCharArray(new Dimensions(ds)) {
             @Override
@@ -98,7 +103,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IMixedArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IMixedArray b) {
         int[] ds = createDimensions(a, b);
         return new LazyMixedArray(new Dimensions(ds)) {
             @Override
@@ -118,7 +123,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         if (axis < 0) {
             if (b.rank() != 1) throw new RankError();
             return new LazyIntArray(new Dimensions((int) Math.abs(a.get()))) {
@@ -162,7 +167,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, ICharArray b) {
         if (axis < 0) {
             if (b.rank() != 1) throw new RankError();
             return new LazyCharArray(new Dimensions((int) Math.abs(a.get()))) {
@@ -206,7 +211,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
         if (axis < 0) {
             if (b.rank() != 1) throw new RankError();
             return new LazyDoubleArray(new Dimensions((int) Math.abs(a.get()))) {
@@ -250,7 +255,7 @@ public class TakeFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IBitArray b) {
         if (axis < 0) {
             if (b.rank() != 1) throw new RankError();
             return new LazyBitArray(new Dimensions((int) Math.abs(a.get()))) {

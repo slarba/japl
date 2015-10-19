@@ -19,18 +19,18 @@ public class InnerProdFn extends BaseFn {
     }
 
     @Override
-    public IValue applyDyadic(IValue a, IValue b, int axis) {
-        if (a.rank() == 0 && b.rank() == 0) return right.applyDyadic(a, b, axis);
+    public IValue applyDyadic(IValue a, IValue b) {
+        if (a.rank() == 0 && b.rank() == 0) return right.applyDyadic(a, b);
         Dimensions resultDims = a.dims().computeInnerProdDims(b.dims());
         if (resultDims.rank() == 0) {
             if (a.length() != b.length()) throw new LengthError();
             IValue result = null;
             for (int i = a.length() - 1; i >= 0; i--) {
-                IValue tmp = right.applyDyadic(a.getGeneric(i), b.getGeneric(i), axis);
+                IValue tmp = right.applyDyadic(a.getGeneric(i), b.getGeneric(i));
                 if (result == null) {
                     result = tmp;
                 } else {
-                    result = left.applyDyadic(tmp, result, axis);
+                    result = left.applyDyadic(tmp, result);
                 }
             }
             if (a instanceof IMixedArray || b instanceof IMixedArray)
@@ -45,11 +45,11 @@ public class InnerProdFn extends BaseFn {
             public IValue get(int index) {
                 IValue result = null;
                 for (int i = a.dims().firstDim() - 1; i >= 0; i--) {
-                    IValue tmp = right.applyDyadic(a.getGeneric(index + i), b.getGeneric(index + i * firstSpan), axis);
+                    IValue tmp = right.applyDyadic(a.getGeneric(index + i), b.getGeneric(index + i * firstSpan));
                     if (result == null) {
                         result = tmp;
                     } else {
-                        result = left.applyDyadic(tmp, result, axis);
+                        result = left.applyDyadic(tmp, result);
                     }
                 }
                 return result;

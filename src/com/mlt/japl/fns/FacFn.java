@@ -12,6 +12,11 @@ import com.mlt.japl.arrays.interf.IIntScalar;
 
 public class FacFn extends BaseFn {
 
+    public FacFn(int axis) {
+        super(axis);
+
+    }
+
     private static double logGamma(double x) {
         // Lanczos arviointi
         double tmp = (x - 0.5) * Math.log(x + 4.5) - (x + 4.5);
@@ -30,17 +35,17 @@ public class FacFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IIntScalar a, int axis) {
+    public IValue visit_monadic(IIntScalar a) {
         return new IntScalar(factorial(a.get()));
     }
 
     @Override
-    public IValue visit_monadic(IDoubleScalar a, int axis) {
+    public IValue visit_monadic(IDoubleScalar a) {
         return new DoubleScalar(Math.exp(logGamma(a.get() + 1)));
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         return new LazyIntArray(a.dims()) {
             @Override
             public long get(int index) {
@@ -50,7 +55,7 @@ public class FacFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int axis) {
+    public IValue visit_monadic(IDoubleArray a) {
         return new LazyDoubleArray(a.dims()) {
             @Override
             public double get(int index) {
@@ -60,12 +65,12 @@ public class FacFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         return new IntScalar(factorial(b.get()) / (factorial(a.get()) * factorial(b.get() - a.get())));
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         return new LazyIntArray(a.dims()) {
             @Override
             public long get(int index) {

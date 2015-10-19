@@ -16,8 +16,8 @@ public class BoundFunc extends BaseFn {
     }
 
     @Override
-    public IValue applyMonadic(IValue right, int axis) {
-        return func.applyDyadic(left, right, axis);
+    public IValue applyMonadic(IValue right) {
+        return func.applyDyadic(left, right);
     }
 
 }

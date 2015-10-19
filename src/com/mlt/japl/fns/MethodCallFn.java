@@ -15,7 +15,7 @@ public class MethodCallFn extends BaseFn {
     }
 
     @Override
-    public IValue applyMonadic(IValue a, int axis) {
+    public IValue applyMonadic(IValue a) {
         if (!(a instanceof ObjectScalar)) throw new ValueError();
         ObjectScalar obj = (ObjectScalar) a;
         Object o = obj.coerceToJavaObject();

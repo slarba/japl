@@ -18,11 +18,11 @@ public class PowerFunc extends BaseFn {
     }
 
     @Override
-    public IValue applyMonadic(IValue right, int axis) {
+    public IValue applyMonadic(IValue right) {
         if(!(times instanceof IIntScalar)) throw new ValueError();
         IIntScalar t = (IIntScalar) times;
         for(int i=0; i<t.get(); i++) {
-            right = fn.applyMonadic(right, axis);
+            right = fn.applyMonadic(right);
         }
         return right;
     }

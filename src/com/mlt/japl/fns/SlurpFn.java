@@ -11,8 +11,12 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 public class SlurpFn extends BaseFn {
+    public SlurpFn(int axis) {
+        super(axis);
+    }
+
     @Override
-    public IValue visit_monadic(ICharArray a, int axis) {
+    public IValue visit_monadic(ICharArray a) {
         CharArray fn = (CharArray) a.force();
         try {
             String f = IOUtils.toString(new FileInputStream(fn.getString()), Charset.forName("UTF-8"));

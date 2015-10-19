@@ -48,57 +48,57 @@ public class ComplexScalar extends ScalarBase {
     }
 
     @Override
-    public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
+    public IValue accept_dyadic(ArrayVisitor visitor, IValue b) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor) {
         return null;
     }
 
     @Override
-    public IValue accept_monadic(ArrayVisitor visitor, int axis) {
+    public IValue accept_monadic(ArrayVisitor visitor) {
         return null;
     }
 

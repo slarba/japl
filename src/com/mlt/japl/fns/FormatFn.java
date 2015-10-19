@@ -7,12 +7,13 @@ import com.mlt.japl.utils.PrintConfig;
 public class FormatFn extends BaseFn {
     private PrintConfig config;
 
-    public FormatFn(PrintConfig config) {
+    public FormatFn(int axis, PrintConfig config) {
+        super(axis);
         this.config = config;
     }
 
     @Override
-    public IValue applyMonadic(IValue a, int axis) {
+    public IValue applyMonadic(IValue a) {
         return new CharArray(a.asString(config));
     }
 

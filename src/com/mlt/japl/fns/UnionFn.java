@@ -15,28 +15,33 @@ import java.util.HashSet;
 
 public class UnionFn extends BaseFn {
 
+    public UnionFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_monadic(IIntScalar a, int axis) {
+    public IValue visit_monadic(IIntScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(IDoubleScalar a, int axis) {
+    public IValue visit_monadic(IDoubleScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(ICharScalar a, int axis) {
+    public IValue visit_monadic(ICharScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(IMixedScalar a, int axis) {
+    public IValue visit_monadic(IMixedScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         LongSet set = new LongOpenHashSet();
         for (int i = 0; i < a.length(); i++) set.add(a.get(i));
         long[] result = set.toLongArray();
@@ -44,7 +49,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int axis) {
+    public IValue visit_monadic(IDoubleArray a) {
         DoubleSet set = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++) set.add(a.get(i));
         double[] result = set.toDoubleArray();
@@ -52,7 +57,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(ICharArray a, int axis) {
+    public IValue visit_monadic(ICharArray a) {
         CharSet set = new CharOpenHashSet();
         for (int i = 0; i < a.length(); i++) set.add(a.get(i));
         char[] result = set.toCharArray();
@@ -60,7 +65,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray a, int axis) {
+    public IValue visit_monadic(IMixedArray a) {
         HashSet<IValue> set = new HashSet<>();
         for (int i = 0; i < a.length(); i++)
             set.add(a.get(i));
@@ -72,7 +77,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         if (a.get() != b.get()) {
             return new IntArray(new Dimensions(2), new long[]{a.get(), b.get()});
         }
@@ -80,7 +85,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b) {
         if (a.get() != b.get()) {
             return new DoubleArray(new Dimensions(2), new double[]{a.get(), b.get()});
         }
@@ -88,7 +93,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, ICharScalar b) {
         if (a.get() != b.get()) {
             return new CharArray(new Dimensions(2), new char[]{a.get(), b.get()});
         }
@@ -96,7 +101,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleScalar b) {
         if (a.get() != b.get()) {
             return new DoubleArray(new Dimensions(2), new double[]{a.get(), b.get()});
         }
@@ -104,7 +109,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IIntScalar b) {
         if (a.get() != b.get()) {
             return new DoubleArray(new Dimensions(2), new double[]{a.get(), b.get()});
         }
@@ -112,7 +117,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         LongSet set = new LongOpenHashSet();
         for (int i = 0; i < a.length(); i++)
             set.add(a.get(i));
@@ -123,7 +128,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b) {
         DoubleSet set = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++)
             set.add(a.get(i));
@@ -134,7 +139,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         DoubleSet set = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++)
             set.add((double) a.get(i));
@@ -145,7 +150,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IIntArray b) {
         DoubleSet set = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++)
             set.add(a.get(i));
@@ -156,7 +161,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, ICharArray b) {
         CharSet set = new CharOpenHashSet();
         for (int i = 0; i < a.length(); i++)
             set.add(a.get(i));
@@ -167,7 +172,7 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, IIntArray b) {
         HashSet<IValue> set = new HashSet<>();
         for (int i = 0; i < a.length(); i++)
             set.add(new CharScalar(a.get(i)));

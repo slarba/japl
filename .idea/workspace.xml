@@ -1,7 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22d56837-8454-4726-8a08-85dc07f9f2cd" name="Default" comment="" />
+    <list default="true" id="22d56837-8454-4726-8a08-85dc07f9f2cd" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/antlr-4.5.1-complete.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/mlt/japl/utils/FunctionRegistry.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/AbsFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/AbsFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/AddFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/AddFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/AndFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/AndFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/ArrayAcceptor.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/ArrayAcceptor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/ArrayVisitor.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/ArrayVisitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstDyadicCall.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstDyadicCall.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstMonadicCall.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstMonadicCall.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstNiladicCall.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstNiladicCall.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstOperator.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstOperator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstSimpleFunc.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/ast/AstSimpleFunc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/BaseFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/BaseFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/BitArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/BitArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/BoundFunc.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/BoundFunc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/CeilFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/CeilFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/CharArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/CharArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/CharScalar.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/CharScalar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/ComplexScalar.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/ComplexScalar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/ConstBitArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/ConstBitArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/DepthFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/DepthFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/DiscloseFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/DiscloseFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/DivFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/DivFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/DoubleArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/DoubleArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/DoubleScalar.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/DoubleScalar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/DropFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/DropFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/EachFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/EachFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/EncodeFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/EncodeFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/EqFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/EqFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ExecuteFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ExecuteFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ExistsFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ExistsFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ExpFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ExpFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/FacFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/FacFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/FloorFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/FloorFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/FormatFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/FormatFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/Func.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/Func.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/FuncValue.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/FuncValue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/GenericReducer.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/GenericReducer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/GradeDownFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/GradeDownFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/GradeUpFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/GradeUpFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/GtFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/GtFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/GteFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/GteFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/IndexFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/IndexFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/InnerProdFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/InnerProdFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntScalar.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntScalar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/IntersectionFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/IntersectionFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/IotaArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/IotaArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/IotaFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/IotaFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyBitArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyBitArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyCharArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyCharArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyDoubleArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyDoubleArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyIntArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyIntArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyMixedArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyMixedArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/LogFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/LogFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/LtFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/LtFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/LteFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/LteFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/MethodCallFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/MethodCallFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/MixedArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/MixedArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/MixedScalar.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/MixedScalar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/MulFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/MulFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/MultidimIotaArray.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/MultidimIotaArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/NandFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/NandFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/NeqFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/NeqFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/NewFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/NewFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/NorFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/NorFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/NotFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/NotFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/ObjectScalar.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/ObjectScalar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/OrFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/OrFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/OuterProdFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/OuterProdFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/PassFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/PassFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/PowerFunc.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/PowerFunc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/RavelFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/RavelFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ReduceFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ReduceFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ReplicateFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ReplicateFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ReverseFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ReverseFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/RhoFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/RhoFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/RollFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/RollFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/RotateFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/RotateFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ScanFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ScanFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/SlurpFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/SlurpFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/StopFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/StopFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/StringSearchFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/StringSearchFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/SubFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/SubFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/TakeFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/TakeFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/TrigFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/TrigFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/UnionFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/UnionFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/UserFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/UserFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mlt/japl/fns/ZildeFn.java" afterPath="$PROJECT_DIR$/src/com/mlt/japl/fns/ZildeFn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Japl.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,102 +116,116 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RavelFn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/RavelFn.java">
+      <file leaf-file-name="BaseFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/BaseFn.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="218" column="9" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
+              <caret line="728" column="18" selection-start-line="728" selection-start-column="18" selection-end-line="728" selection-end-column="18" />
+              <folding>
+                <element signature="e#738#739#0" expanded="true" />
+                <element signature="e#770#771#0" expanded="true" />
+                <element signature="e#17720#17721#0" expanded="true" />
+                <element signature="e#17761#17762#0" expanded="true" />
+                <element signature="e#18608#18609#0" expanded="true" />
+                <element signature="e#18659#18660#0" expanded="true" />
+                <element signature="e#18727#18728#0" expanded="true" />
+                <element signature="e#18778#18779#0" expanded="true" />
+                <element signature="e#19078#19079#0" expanded="true" />
+                <element signature="e#19129#19130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbsFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/AbsFn.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="292" column="18" selection-start-line="292" selection-start-column="18" selection-end-line="292" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScanFn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ScanFn.java">
+      <file leaf-file-name="AstSimpleFunc.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstSimpleFunc.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.55423474">
+              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EncodeFn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EncodeFn.java">
+      <file leaf-file-name="AstOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstOperator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LazyCharArray.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyCharArray.java">
+      <file leaf-file-name="AddFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/AddFn.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
+              <caret line="290" column="18" selection-start-line="290" selection-start-column="18" selection-end-line="290" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="OrFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/OrFn.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MultidimIotaArray.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/MultidimIotaArray.java">
+      <file leaf-file-name="SubFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/SubFn.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+              <caret line="285" column="13" selection-start-line="285" selection-start-column="13" selection-end-line="285" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConstBitArray.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/ConstBitArray.java">
+      <file leaf-file-name="MulFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/MulFn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4011887">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="332" column="53" selection-start-line="332" selection-start-column="53" selection-end-line="332" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EncloseFn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java">
+      <file leaf-file-name="FloorFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/FloorFn.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <caret line="230" column="0" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DropFn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DropFn.java">
+      <file leaf-file-name="EqFn.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EqFn.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TakeFn.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/TakeFn.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="262" column="27" selection-start-line="262" selection-start-column="27" selection-end-line="262" selection-end-column="27" />
-              <folding />
+              <caret line="456" column="43" selection-start-line="456" selection-start-column="43" selection-end-line="456" selection-end-column="43" />
+              <folding>
+                <element signature="e#11896#11897#0" expanded="true" />
+                <element signature="e#11949#11950#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -149,57 +255,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newast/AstOperator.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newfns/PowerFunc.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newast/AstPowerFunc.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newparser/Apl.g4" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newast/AstBuilderVisitor.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newfns/ExecuteFn.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/parsing/AplParser.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/newast/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/parser/Parser.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/gui/AplKeymap.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstSimpleFunc.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/gui/AplSyntaxHighlighter.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstEmptyArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstToplevelFunc.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstNiladicCall.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/UserFn.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstGuardedBody.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstIfNode.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstWhileNode.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstRepeatNode.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstIndex.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstRef.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/parser/IParser.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstFuncRef.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/parser/ErrorListener.java" />
-        <option value="$PROJECT_DIR$/gen/com/mlt/japl/parser/AplParser.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/parser/Apl.g4" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstGuardExpr.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/workspace/Interpreter.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/CharArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/DoubleArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/MixedArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/BitArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/MultidimIotaArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/RhoFn.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyBitArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyCharArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyDoubleArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyIntArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyMixedArray.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstBuilderVisitor.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstString.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/IotaFn.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstStrandAssignment.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/FuncValue.java" />
-        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstAssignment.java" />
         <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/RavelFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/FacFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/RhoFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/IotaFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/TrigFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ExistsFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/LtFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/GtFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/LteFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/GteFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/NotFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/NeqFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/NorFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/NandFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ReverseFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/RotateFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/TakeFn.java" />
         <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/DropFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/DepthFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/DiscloseFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/UnionFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/IntersectionFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/StopFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/PassFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ReplicateFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ZildeFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ExecuteFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/NewFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/SlurpFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/StringSearchFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/FormatFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/GradeUpFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/GradeDownFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/IndexFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ReduceFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/ScanFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/EachFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstSimpleFunc.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/Func.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/AddFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/ast/AstOperator.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/AbsFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/AndFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/CeilFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/DivFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/EqFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/FloorFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/MulFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/SubFn.java" />
+        <option value="$PROJECT_DIR$/src/com/mlt/japl/fns/OrFn.java" />
       </list>
     </option>
   </component>
@@ -313,6 +419,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="workspace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Japl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Japl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="japl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -485,24 +613,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Japl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Japl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parser" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -836,24 +946,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1123" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32783705" sideWeight="0.4659212" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32783705" sideWeight="0.40042597" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32783705" sideWeight="0.386049" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3200776" sideWeight="0.5804047" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3200776" sideWeight="0.58998936" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.543162" sideWeight="0.49361023" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3200776" sideWeight="0.41001064" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18636848" sideWeight="0.49659202" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18636848" sideWeight="0.49659202" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328807" sideWeight="0.48935038" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2072232" sideWeight="0.50340796" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986421" sideWeight="0.49574015" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -861,10 +974,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39895925" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3200776" sideWeight="0.4195953" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920355" sideWeight="0.4914803" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -904,353 +1014,31 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/mlt/japl/fns/AddFn.java</url>
+          <line>298</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstWhileNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstRepeatNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/Indexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstFuncRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2932331">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstFuncRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/parser/ErrorListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstDyadicCall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/com/mlt/japl/parser/AplParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1097" column="63" selection-start-line="1097" selection-start-column="63" selection-end-line="1097" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstGuardedBody.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/parser/IParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstLambda.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstGuardExpr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/parser/Apl.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.740741">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/workspace/Interpreter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/CharArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/DoubleArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/MixedArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/tools/Dimensions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="141" column="17" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
-          <folding>
-            <element signature="e#3737#3738#0" expanded="true" />
-            <element signature="e#3764#3765#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/IntScalar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/RhoFn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/BitArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyBitArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="40" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/IotaArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyIntArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyDoubleArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstBuilderVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/IotaFn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="418" column="0" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
-          <folding>
-            <element signature="e#12021#12022#0" expanded="true" />
-            <element signature="e#12060#12061#0" expanded="true" />
-            <element signature="e#12147#12148#0" expanded="true" />
-            <element signature="e#12186#12187#0" expanded="true" />
-            <element signature="e#12276#12277#0" expanded="true" />
-            <element signature="e#12315#12316#0" expanded="true" />
-            <element signature="e#12405#12406#0" expanded="true" />
-            <element signature="e#12444#12445#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstStrandAssignment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstMonadicCall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/concrete/FuncValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/IValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/ScalarBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstAssignment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AplSignal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyMixedArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="49" selection-start-line="152" selection-start-column="49" selection-end-line="152" selection-end-column="49" />
-          <folding>
-            <element signature="e#465#466#0" expanded="true" />
-            <element signature="e#492#493#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/RavelFn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="218" column="9" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ScanFn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/TakeFn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="262" column="27" selection-start-line="262" selection-start-column="27" selection-end-line="262" selection-end-column="27" />
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DropFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13372956">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1258,47 +1046,412 @@
     <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DropFn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EncodeFn.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DepthFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DepthFn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/LazyCharArray.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13372956">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EncloseFn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DiscloseFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DiscloseFn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/MultidimIotaArray.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/UnionFn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/arrays/generated/ConstBitArray.java">
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/IntersectionFn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4011887">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/IntersectionFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/StopFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/StopFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/PassFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/PassFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ReplicateFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ZildeFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13372956">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ZildeFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ExecuteFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/NewFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/NewFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/SlurpFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding>
+            <element signature="e#391#392#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/SlurpFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#391#392#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/StringSearchFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/StringSearchFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/FormatFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/GradeUpFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13372956">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/GradeUpFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/GradeDownFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13372956">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/GradeDownFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/IndexFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11144131">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/IndexFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ScanFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EachFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/IotaFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#621#622#0" expanded="true" />
+            <element signature="e#697#698#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/Func.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/ReduceFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/AndFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="136" column="51" selection-start-line="136" selection-start-column="51" selection-end-line="136" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/CeilFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="216" column="53" selection-start-line="216" selection-start-column="53" selection-end-line="216" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/DivFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="168" column="54" selection-start-line="168" selection-start-column="54" selection-end-line="168" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/EqFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="456" column="43" selection-start-line="456" selection-start-column="43" selection-end-line="456" selection-end-column="43" />
+          <folding>
+            <element signature="e#11896#11897#0" expanded="true" />
+            <element signature="e#11949#11950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/FloorFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="230" column="0" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/MulFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="332" column="53" selection-start-line="332" selection-start-column="53" selection-end-line="332" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/SubFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="285" column="13" selection-start-line="285" selection-start-column="13" selection-end-line="285" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/OrFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="142" column="5" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/AddFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="290" column="18" selection-start-line="290" selection-start-column="18" selection-end-line="290" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/BaseFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="728" column="18" selection-start-line="728" selection-start-column="18" selection-end-line="728" selection-end-column="18" />
+          <folding>
+            <element signature="e#738#739#0" expanded="true" />
+            <element signature="e#770#771#0" expanded="true" />
+            <element signature="e#17720#17721#0" expanded="true" />
+            <element signature="e#17761#17762#0" expanded="true" />
+            <element signature="e#18608#18609#0" expanded="true" />
+            <element signature="e#18659#18660#0" expanded="true" />
+            <element signature="e#18727#18728#0" expanded="true" />
+            <element signature="e#18778#18779#0" expanded="true" />
+            <element signature="e#19078#19079#0" expanded="true" />
+            <element signature="e#19129#19130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/fns/AbsFn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="292" column="18" selection-start-line="292" selection-start-column="18" selection-end-line="292" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mlt/japl/ast/AstSimpleFunc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55423474">
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -1,18 +1,21 @@
 package com.mlt.japl.fns;
 
-import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.IntArray;
 import com.mlt.japl.arrays.interf.IIntArray;
 import com.mlt.japl.arrays.interf.IIntScalar;
-import com.mlt.japl.arrays.interf.IMixedArray;
 import com.mlt.japl.tools.Dimensions;
 
 public class RhoFn extends BaseFn implements Func {
 
+    public RhoFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue applyMonadic(IValue a, int axis) {
+    public IValue applyMonadic(IValue a) {
         if(a.rank()==0) {
             return IntArray.EMPTY;
         }
@@ -25,7 +28,7 @@ public class RhoFn extends BaseFn implements Func {
     }
 
     @Override
-    public IValue visit_first(IIntArray a, IValue b, int axis) {
+    public IValue visit_first(IIntArray a, IValue b) {
         if (a.rank() != 1) throw new RankError();
         int[] newShape = new int[a.length()];
         for (int i = 0; i < newShape.length; i++) newShape[i] = (int) a.get(i);
@@ -46,7 +49,7 @@ public class RhoFn extends BaseFn implements Func {
     }
 */
     @Override
-    public IValue visit_first(IIntScalar a, IValue b, int axis) {
+    public IValue visit_first(IIntScalar a, IValue b) {
         return b.reshape(new int[]{ (int) a.get() });
     }
 

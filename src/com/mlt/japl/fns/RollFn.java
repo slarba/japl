@@ -15,13 +15,17 @@ public class RollFn extends BaseFn {
 
     Random rand = new Random(System.currentTimeMillis());
 
+    public RollFn(int axis) {
+        super(axis);
+    }
+
     @Override
-    public IValue visit_monadic(IIntScalar a, int axis) {
+    public IValue visit_monadic(IIntScalar a) {
         return new IntScalar(1 + Math.abs(rand.nextLong() % a.get()));
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         if (a.rank() == 1 && a.length() == 1) return new IntScalar(1 + Math.abs(rand.nextLong() % a.get(0)));
         long[] result = new long[a.length()];
         for (int i = 0; i < result.length; i++)
@@ -30,7 +34,7 @@ public class RollFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         long count = a.get();
         long max = b.get();
         if (count > max) throw new ValueError();

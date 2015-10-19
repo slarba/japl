@@ -11,12 +11,14 @@ import com.mlt.japl.tools.Dimensions;
 public class RavelFn extends BaseFn {
     private boolean firstAxis;
 
-    public RavelFn(boolean firstAxis) {
+    public RavelFn(int axis, boolean firstAxis) {
+        super(axis);
+
         this.firstAxis = firstAxis;
     }
 
     @Override
-    public IValue applyMonadic(IValue a, int axis) {
+    public IValue applyMonadic(IValue a) {
         if (a instanceof IScalar) {
             return a.reshape(new int[]{1});
         }
@@ -24,27 +26,27 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         return new IntArray(new Dimensions(2), new long[]{a.get(), b.get()});
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b) {
         return new DoubleArray(new Dimensions(2), new double[]{a.get(), b.get()});
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, ICharScalar b) {
         return new CharArray(new Dimensions(2), new char[]{a.get(), b.get()});
     }
 
     @Override
-    public IValue visit_dyadic(IMixedScalar a, IMixedScalar b, int axis) {
+    public IValue visit_dyadic(IMixedScalar a, IMixedScalar b) {
         return new MixedArray(new Dimensions(2), new IValue[]{a.get(), b.get()});
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         if (b.rank() != 1) throw new RankError();
         return new LazyIntArray(new Dimensions(1 + b.length())) {
             @Override
@@ -55,7 +57,7 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
         if (b.rank() != 1) throw new RankError();
         return new LazyDoubleArray(new Dimensions(1 + b.length())) {
             @Override
@@ -66,7 +68,7 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, ICharArray b) {
         if (b.rank() != 1) throw new RankError();
         return new LazyMixedArray(new Dimensions(1 + b.length())) {
             @Override
@@ -77,7 +79,7 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IMixedArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IMixedArray b) {
         if (b.rank() != 1) throw new RankError();
         return new LazyMixedArray(new Dimensions(1 + b.length())) {
             @Override
@@ -88,7 +90,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -105,7 +108,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -122,7 +126,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, IIntArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -139,7 +144,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IBitArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, IBitArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -156,7 +162,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IDoubleArray a, IIntArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -173,7 +180,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -190,7 +198,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int ax) {
+    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -207,7 +216,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharArray b, int ax) {
+    public IValue visit_dyadic(ICharArray a, ICharArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);
@@ -224,7 +234,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharScalar b, int ax) {
+    public IValue visit_dyadic(ICharArray a, ICharScalar b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(new Dimensions(1), axis);
@@ -241,7 +252,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntScalar b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IIntScalar b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(new Dimensions(1), axis);
@@ -258,7 +270,8 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IMixedArray a, IMixedArray b, int ax) {
+    public IValue visit_dyadic(IMixedArray a, IMixedArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis > a.rank()) throw new AxisError();
         Dimensions result = a.dims().laminate(b.dims(), axis);

@@ -17,6 +17,6 @@ public class AstNiladicCall implements AstNode {
     @Override
     public IValue eval(EvalContext context) {
         FuncValue val = (FuncValue)func.eval(context);
-        return val.get().applyNiladic(0);
+        return val.get().applyNiladic();
     }
 }

@@ -26,67 +26,67 @@ public class ObjectScalar extends ScalarBase implements IMixedScalar {
     }
 
     @Override
-    public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
+    public IValue accept_dyadic(ArrayVisitor visitor, IValue b) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor, int axis) {
+    public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue accept_monadic(ArrayVisitor visitor, int axis) {
+    public IValue accept_monadic(ArrayVisitor visitor) {
         // TODO Auto-generated method stub
         return null;
     }

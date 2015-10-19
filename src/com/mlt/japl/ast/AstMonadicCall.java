@@ -22,6 +22,6 @@ public class AstMonadicCall implements AstNode {
     @Override
     public IValue eval(EvalContext context) {
         FuncValue fn = (FuncValue)func.eval(context);
-        return fn.get().applyMonadic(right.eval(context), 0);
+        return fn.get().applyMonadic(right.eval(context));
     }
 }

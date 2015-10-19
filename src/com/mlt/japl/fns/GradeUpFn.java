@@ -17,9 +17,15 @@ import java.util.List;
 
 public class GradeUpFn extends BaseFn {
 
+    public GradeUpFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_monadic(IIntArray a, int ax) {
+    public IValue visit_monadic(IIntArray a) {
         if (a instanceof IotaArray) return a;
+        int ax = this.axis;
         int axis = ax < 0 ? 0 : ax;
 
         IntArray as = (IntArray) a.force();
@@ -56,7 +62,8 @@ public class GradeUpFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int ax) {
+    public IValue visit_monadic(IDoubleArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? 0 : ax;
 
         DoubleArray as = (DoubleArray) a.force();
@@ -93,7 +100,8 @@ public class GradeUpFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(ICharArray a, int ax) {
+    public IValue visit_monadic(ICharArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? 0 : ax;
 
         CharArray as = (CharArray) a.force();
@@ -130,22 +138,22 @@ public class GradeUpFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IIntScalar a, int ax) {
+    public IValue visit_monadic(IIntScalar a) {
         throw new RankError();
     }
 
     @Override
-    public IValue visit_monadic(ICharScalar a, int ax) {
+    public IValue visit_monadic(ICharScalar a) {
         throw new RankError();
     }
 
     @Override
-    public IValue visit_monadic(IDoubleScalar a, int ax) {
+    public IValue visit_monadic(IDoubleScalar a) {
         throw new RankError();
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray a, int ax) {
+    public IValue visit_monadic(IMixedArray a) {
         throw new DomainError();
     }
 

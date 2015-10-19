@@ -26,6 +26,6 @@ public class AstDyadicCall implements AstNode {
         IValue right = r.eval(context);
         IValue left = l.eval(context);
         FuncValue func = (FuncValue)fn.eval(context);
-        return func.get().applyDyadic(left,right,0);
+        return func.get().applyDyadic(left,right);
     }
 }

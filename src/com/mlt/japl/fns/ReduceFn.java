@@ -11,7 +11,8 @@ public class ReduceFn extends BaseFn {
     private Func fn;
     private boolean firstAxis;
 
-    public ReduceFn(Func fn, boolean b) {
+    public ReduceFn(int axis, Func fn, boolean b) {
+        super(axis);
         this.fn = fn;
         this.firstAxis = b;
     }
@@ -22,60 +23,65 @@ public class ReduceFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IIntScalar a, int axis) {
+    public IValue visit_monadic(IIntScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(IDoubleScalar a, int axis) {
+    public IValue visit_monadic(IDoubleScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(ICharScalar a, int axis) {
+    public IValue visit_monadic(ICharScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(IMixedScalar a, int axis) {
+    public IValue visit_monadic(IMixedScalar a) {
         return a;
     }
 
     @Override
-    public IValue visit_monadic(IBitArray a, int ax) {
+    public IValue visit_monadic(IBitArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis >= a.rank()) throw new AxisError();
         return fn.reduce(a, axis);
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int ax) {
+    public IValue visit_monadic(IIntArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis >= a.rank()) throw new AxisError();
-        return fn.reduce(a, axis < 0 ? (firstAxis ? 0 : a.rank() - 1) : axis);
+        return fn.reduce(a, axis);
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int ax) {
+    public IValue visit_monadic(IDoubleArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis >= a.rank()) throw new AxisError();
-        return fn.reduce(a, axis < 0 ? (firstAxis ? 0 : a.rank() - 1) : axis);
+        return fn.reduce(a, axis);
     }
 
     @Override
-    public IValue visit_monadic(ICharArray a, int ax) {
+    public IValue visit_monadic(ICharArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         if (axis >= a.rank()) throw new AxisError();
-        return fn.reduce(a, axis < 0 ? (firstAxis ? 0 : a.rank() - 1) : axis);
+        return fn.reduce(a, axis);
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray a, int ax) {
+    public IValue visit_monadic(IMixedArray a) {
+        int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
         MixedReducer reducer = new MixedReducer(a, axis) {
             @Override
             public IValue op(IValue a, IValue b) {
-                return fn.applyDyadic(a, b, ax);
+                return fn.applyDyadic(a, b);
             }
         };
         if (a.rank() == 1) return new MixedScalar(reducer.rank1case());

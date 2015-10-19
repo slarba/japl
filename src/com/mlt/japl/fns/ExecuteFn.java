@@ -15,12 +15,13 @@ public class ExecuteFn extends BaseFn {
 
     private EvalContext context;
 
-    public ExecuteFn(EvalContext ctx) {
+    public ExecuteFn(int axis, EvalContext ctx) {
+        super(axis);
         this.context = ctx;
     }
 
     @Override
-    public IValue visit_monadic(ICharArray a, int axis) {
+    public IValue visit_monadic(ICharArray a) {
         CharArray v = (CharArray) a.force();
         try {
             AstNode node = IParser.parse(new ByteArrayInputStream(v.getString().getBytes("UTF-8")), context);

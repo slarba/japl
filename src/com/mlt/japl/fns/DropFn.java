@@ -10,8 +10,13 @@ import com.mlt.japl.tools.Dimensions;
 
 public class DropFn extends BaseFn {
 
+    public DropFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         long d = a.get();
         long dim = d < 0 ? b.length() + d : b.length() - d;
         return new LazyIntArray(new Dimensions((int) Math.max(0, dim))) {
@@ -24,7 +29,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         int[] ds = new int[a.length()];
         for (int i = 0; i < ds.length; i++) ds[i] = (int) Math.max(0, b.dims().axis(i) - Math.abs(a.get(i)));
         return new LazyIntArray(new Dimensions(ds)) {
@@ -40,7 +45,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
         long d = a.get();
         long dim = d < 0 ? b.length() + d : b.length() - d;
         return new LazyDoubleArray(new Dimensions((int) Math.max(0, dim))) {
@@ -53,7 +58,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         int[] ds = new int[a.length()];
         for (int i = 0; i < ds.length; i++) ds[i] = (int) Math.max(0, b.dims().axis(i) - Math.abs(a.get(i)));
         return new LazyDoubleArray(new Dimensions(ds)) {
@@ -69,7 +74,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IBitArray b) {
         long d = a.get();
         long dim = d < 0 ? b.length() + d : b.length() - d;
         return new LazyBitArray(new Dimensions((int) Math.max(0, dim))) {
@@ -82,7 +87,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
         int[] ds = new int[a.length()];
         for (int i = 0; i < ds.length; i++) ds[i] = (int) Math.max(0, b.dims().axis(i) - Math.abs(a.get(i)));
         return new LazyBitArray(new Dimensions(ds)) {
@@ -98,7 +103,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, ICharArray b) {
         int[] ds = new int[a.length()];
         for (int i = 0; i < ds.length; i++) ds[i] = (int) Math.max(0, b.dims().axis(i) - Math.abs(a.get(i)));
         return new LazyCharArray(new Dimensions(ds)) {
@@ -114,7 +119,7 @@ public class DropFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, ICharArray b) {
         long d = a.get();
         long dim = d < 0 ? b.length() + d : b.length() - d;
         return new LazyCharArray(new Dimensions((int) Math.max(0, dim))) {

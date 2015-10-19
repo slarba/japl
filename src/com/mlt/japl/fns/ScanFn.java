@@ -6,24 +6,25 @@ public class ScanFn extends BaseFn {
 
     private Func fn;
 
-    public ScanFn(Func fn, boolean b) {
+    public ScanFn(int axis, Func fn, boolean b) {
+        super(axis);
         this.fn = fn;
     }
 
     @Override
-    public IValue applyDyadic(IValue a, IValue b, int axis) {
+    public IValue applyDyadic(IValue a, IValue b) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue applyMonadic(IValue a, int axis) {
+    public IValue applyMonadic(IValue a) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public IValue applyNiladic(int axis) {
+    public IValue applyNiladic() {
         // TODO Auto-generated method stub
         return null;
     }

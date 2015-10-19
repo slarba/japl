@@ -13,13 +13,18 @@ import com.mlt.japl.tools.Dimensions;
 
 public class IotaFn extends BaseFn {
 
+    public IotaFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_monadic(IIntScalar a, int axis) {
+    public IValue visit_monadic(IIntScalar a) {
         return new IotaArray(new Dimensions((int) a.get()), a.get());
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         if (a.rank() > 1) throw new RankError();
         int[] shape = new int[a.length()];
         for (int i = 0; i < shape.length; i++) shape[i] = (int) a.get(i);
@@ -27,7 +32,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i) == b.get()) return new IntScalar(i + 1);
@@ -36,7 +41,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i) == b.get()) return new IntScalar(i + 1);
@@ -45,7 +50,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IDoubleScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i) == b.get()) return new IntScalar(i + 1);
@@ -54,7 +59,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         if (a.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
             @Override
@@ -68,7 +73,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
             @Override
@@ -82,7 +87,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IIntArray b) {
         if (a.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
             @Override
@@ -96,7 +101,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
             @Override
@@ -110,7 +115,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, ICharArray b) {
         if (a.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
             @Override
@@ -124,7 +129,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(ICharArray a, ICharScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i) == b.get()) return new IntScalar(i + 1);
@@ -133,7 +138,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -148,7 +153,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -163,19 +168,19 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(IIntArray a, ICharScalar b) {
         if (a.rank() > 1) throw new RankError();
         return new IntScalar(a.length() + 1);
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(IBitArray a, ICharScalar b) {
         if (a.rank() > 1) throw new RankError();
         return new IntScalar(a.length() + 1);
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IIntScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i) == b.get()) return new IntScalar(i + 1);
@@ -185,28 +190,28 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IBitArray a, ICharArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new IntArray(b.dims(), new long[]{a.length() + 1});
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, IBitArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new IntArray(b.dims(), new long[]{a.length() + 1});
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, ICharArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new IntArray(b.dims(), new long[]{a.length() + 1});
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -221,7 +226,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -236,7 +241,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IBitArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -251,21 +256,21 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, ICharArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new IntArray(b.dims(), new long[]{a.length() + 1});
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new IntArray(b.dims(), new long[]{a.length() + 1});
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IIntArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -280,7 +285,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -295,7 +300,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IIntScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i) == b.get()) return new IntScalar(i + 1);
@@ -304,7 +309,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IBitArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -319,7 +324,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, ICharArray b) {
         if (a.rank() > 1) throw new RankError();
         if (b.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
@@ -334,77 +339,77 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IMixedArray a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IMixedArray a, IIntScalar b) {
         return new IntScalar(a.length() + 1);
     }
 
     @Override
-    public IValue visit_dyadic(IMixedArray a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(IMixedArray a, ICharScalar b) {
         return new IntScalar(a.length() + 1);
     }
 
     @Override
-    public IValue visit_dyadic(IMixedArray a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IMixedArray a, IDoubleScalar b) {
         return new IntScalar(a.length() + 1);
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         if (a.get() == b.get()) return new IntScalar(1);
         else return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b) {
         if (a.get() == b.get()) return new IntScalar(1);
         else return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, IIntScalar b) {
         return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, ICharScalar b) {
         return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, IDoubleScalar b) {
         return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, ICharScalar b) {
         return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IIntScalar b) {
         if (a.get() == b.get()) return new IntScalar(1);
         else return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleScalar b) {
         if (a.get() == b.get()) return new IntScalar(1);
         else return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, ICharScalar b) {
         if (a.get() == b.get()) return new IntScalar(1);
         else return new IntScalar(2);
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray a, int axis) {
+    public IValue visit_monadic(IMixedArray a) {
         throw new DomainError();
     }
 
     @Override
-    public IValue visit_dyadic(IMixedScalar a, IMixedArray b, int axis) {
+    public IValue visit_dyadic(IMixedScalar a, IMixedArray b) {
         if (a.rank() > 1) throw new RankError();
         return new LazyIntArray(b.dims()) {
             @Override
@@ -418,7 +423,7 @@ public class IotaFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IMixedArray a, IMixedScalar b, int axis) {
+    public IValue visit_dyadic(IMixedArray a, IMixedScalar b) {
         if (a.rank() > 1) throw new RankError();
         for (int i = 0; i < a.length(); i++) {
             if (a.get(i).equals(b.get())) return new IntScalar(i + 1);

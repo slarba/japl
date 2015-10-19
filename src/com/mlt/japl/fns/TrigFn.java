@@ -8,6 +8,11 @@ import com.mlt.japl.arrays.interf.*;
 
 public class TrigFn extends BaseFn {
 
+    public TrigFn(int axis) {
+        super(axis);
+
+    }
+
     private static double trig(int a, double b) {
         switch (a) {
             case -7:
@@ -46,17 +51,17 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IIntScalar a, int axis) {
+    public IValue visit_monadic(IIntScalar a) {
         return new DoubleScalar(Math.PI * a.get());
     }
 
     @Override
-    public IValue visit_monadic(IDoubleScalar a, int axis) {
+    public IValue visit_monadic(IDoubleScalar a) {
         return new DoubleScalar(Math.PI * a.get());
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         return new LazyDoubleArray(a.dims()) {
             @Override
             public double get(int index) {
@@ -66,7 +71,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int axis) {
+    public IValue visit_monadic(IDoubleArray a) {
         return new LazyDoubleArray(a.dims()) {
             @Override
             public double get(int index) {
@@ -76,7 +81,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IBitArray a, int axis) {
+    public IValue visit_monadic(IBitArray a) {
         return new LazyDoubleArray(a.dims()) {
             @Override
             public double get(int index) {
@@ -86,12 +91,12 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         return new DoubleScalar(trig((int) a.get(), b.get()));
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         return new LazyDoubleArray(b.dims()) {
             @Override
             public double get(int index) {
@@ -101,7 +106,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
         return new LazyDoubleArray(b.dims()) {
             @Override
             public double get(int index) {
@@ -111,7 +116,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IBitArray b) {
         return new LazyDoubleArray(b.dims()) {
             @Override
             public double get(int index) {
@@ -121,7 +126,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         return new LazyDoubleArray(b.dims()) {
             @Override
             public double get(int index) {
@@ -131,7 +136,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         return new LazyDoubleArray(b.dims()) {
             @Override
             public double get(int index) {
@@ -141,7 +146,7 @@ public class TrigFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
         return new LazyDoubleArray(b.dims()) {
             @Override
             public double get(int index) {

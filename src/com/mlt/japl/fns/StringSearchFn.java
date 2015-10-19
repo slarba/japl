@@ -13,8 +13,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringSearchFn extends BaseFn {
+    public StringSearchFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, ICharArray b) {
         CharArray re = (CharArray) a.force();
         CharArray s = (CharArray) b.force();
         Pattern p = Pattern.compile(re.getString());

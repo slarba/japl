@@ -6,8 +6,13 @@ import com.mlt.japl.arrays.interf.*;
 
 public class ReverseFn extends BaseFn {
 
+    public ReverseFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         return new LazyIntArray(a.dims().reverse()) {
             @Override
             public long get(int index) {
@@ -20,7 +25,7 @@ public class ReverseFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int axis) {
+    public IValue visit_monadic(IDoubleArray a) {
         return new LazyDoubleArray(a.dims().reverse()) {
             @Override
             public double get(int index) {
@@ -33,7 +38,7 @@ public class ReverseFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(ICharArray a, int axis) {
+    public IValue visit_monadic(ICharArray a) {
         return new LazyCharArray(a.dims().reverse()) {
             @Override
             public char get(int index) {
@@ -46,7 +51,7 @@ public class ReverseFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IBitArray a, int axis) {
+    public IValue visit_monadic(IBitArray a) {
         return new LazyBitArray(a.dims().reverse()) {
             @Override
             public long get(int index) {
@@ -59,7 +64,7 @@ public class ReverseFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray a, int axis) {
+    public IValue visit_monadic(IMixedArray a) {
         return new LazyMixedArray(a.dims().reverse()) {
             @Override
             public IValue get(int index) {

@@ -11,13 +11,15 @@ public class ReplicateFn extends BaseFn {
 
     private boolean firstAxis;
 
-    public ReplicateFn(boolean firstAxis) {
+    public ReplicateFn(int axis, boolean firstAxis) {
+        super(axis);
         this.firstAxis = firstAxis;
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IMixedArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, IMixedArray b) {
         if (a.rank() > 1) throw new RankError();
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.length() != b.dims().axis(axis)) throw new LengthError();
         int n = 0, j = 0;
@@ -37,8 +39,9 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, IIntArray b) {
         if (a.rank() > 1) throw new RankError();
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.length() != b.dims().axis(axis)) throw new LengthError();
         int n = 0, j = 0;
@@ -58,8 +61,9 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, ICharArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, ICharArray b) {
         if (a.rank() > 1) throw new RankError();
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.length() != b.dims().axis(axis)) throw new LengthError();
         int n = 0, j = 0;
@@ -79,8 +83,9 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IDoubleArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, IDoubleArray b) {
         if (a.rank() > 1) throw new RankError();
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.length() != b.dims().axis(axis)) throw new LengthError();
         int n = 0, j = 0;
@@ -100,8 +105,9 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IBitArray b, int ax) {
+    public IValue visit_dyadic(IBitArray a, IBitArray b) {
         if (a.rank() > 1) throw new RankError();
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.length() != b.dims().axis(axis)) throw new LengthError();
         int n = 0, j = 0;
@@ -121,7 +127,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IMixedArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IMixedArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.rank() > 1) throw new RankError();
         int n = computeTotalAxisLen(a, b);
@@ -139,7 +146,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.rank() > 1) throw new RankError();
         int n = computeTotalAxisLen(a, b);
@@ -184,7 +192,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, ICharArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, ICharArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.rank() > 1) throw new RankError();
         int n = computeTotalAxisLen(a, b);
@@ -201,7 +210,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.rank() > 1) throw new RankError();
         int n = computeTotalAxisLen(a, b);
@@ -218,7 +228,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int ax) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         if (a.rank() > 1) throw new RankError();
         int n = computeTotalAxisLen(a, b);
@@ -235,7 +246,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         int x = (int) a.get();
         int n = b.dims().axis(axis) * Math.abs(x);
@@ -256,7 +268,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, ICharArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, ICharArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         int x = (int) a.get();
         int n = b.dims().axis(axis) * Math.abs(x);
@@ -277,7 +290,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         int x = (int) a.get();
         int n = b.dims().axis(axis) * Math.abs(x);
@@ -298,7 +312,8 @@ public class ReplicateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IMixedArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IMixedArray b) {
+        int ax = this.axis;
         int axis = ax < 0 ? b.rank() - 1 : ax;
         int x = (int) a.get();
         int n = b.dims().axis(axis) * Math.abs(x);

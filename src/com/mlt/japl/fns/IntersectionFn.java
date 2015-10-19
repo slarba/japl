@@ -18,8 +18,13 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 
 public class IntersectionFn extends BaseFn {
+    public IntersectionFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         LongSet seta = new LongOpenHashSet();
         LongSet setb = new LongOpenHashSet();
         for (int i = 0; i < a.length(); i++) seta.add(a.get(i));
@@ -32,7 +37,7 @@ public class IntersectionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         DoubleSet seta = new DoubleOpenHashSet();
         DoubleSet setb = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++) seta.add(a.get(i));
@@ -45,7 +50,7 @@ public class IntersectionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IIntArray b) {
         DoubleSet seta = new DoubleOpenHashSet();
         DoubleSet setb = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++) seta.add(a.get(i));
@@ -58,7 +63,7 @@ public class IntersectionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IDoubleArray b) {
         DoubleSet seta = new DoubleOpenHashSet();
         DoubleSet setb = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++) seta.add(a.get(i));
@@ -71,7 +76,7 @@ public class IntersectionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, ICharArray b) {
         CharSet seta = new CharOpenHashSet();
         CharSet setb = new CharOpenHashSet();
         for (int i = 0; i < a.length(); i++) seta.add(a.get(i));
@@ -84,7 +89,7 @@ public class IntersectionFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IBitArray b) {
         LongSet seta = new LongOpenHashSet();
         LongSet setb = new LongOpenHashSet();
         for (int i = 0; i < a.length(); i++) seta.add(a.get(i));

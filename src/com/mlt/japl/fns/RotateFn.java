@@ -9,7 +9,8 @@ public class RotateFn extends BaseFn {
 
     private boolean firstAxis;
 
-    public RotateFn(boolean firstAxis) {
+    public RotateFn(int axis, boolean firstAxis) {
+        super(axis);
         this.firstAxis = firstAxis;
     }
 
@@ -20,8 +21,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IIntArray a, int ax) {
+    public IValue visit_monadic(IIntArray a) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : a.rank() - 1;
         } else {
@@ -38,8 +40,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IDoubleArray a, int ax) {
+    public IValue visit_monadic(IDoubleArray a) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : a.rank() - 1;
         } else {
@@ -56,8 +59,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(ICharArray a, int ax) {
+    public IValue visit_monadic(ICharArray a) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : a.rank() - 1;
         } else {
@@ -74,8 +78,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IBitArray a, int ax) {
+    public IValue visit_monadic(IBitArray a) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : a.rank() - 1;
         } else {
@@ -92,8 +97,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray a, int ax) {
+    public IValue visit_monadic(IMixedArray a) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : a.rank() - 1;
         } else {
@@ -110,13 +116,14 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         return b;
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : b.rank() - 1;
         } else {
@@ -134,8 +141,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IBitArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IBitArray b) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : b.rank() - 1;
         } else {
@@ -153,8 +161,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IDoubleArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IDoubleArray b) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : b.rank() - 1;
         } else {
@@ -172,8 +181,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, ICharArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, ICharArray b) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : b.rank() - 1;
         } else {
@@ -191,8 +201,9 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IMixedArray b, int ax) {
+    public IValue visit_dyadic(IIntScalar a, IMixedArray b) {
         int axis;
+        int ax = this.axis;
         if (ax < 0) {
             axis = firstAxis ? 0 : b.rank() - 1;
         } else {
@@ -210,12 +221,12 @@ public class RotateFn extends BaseFn {
     }
 
     @Override
-    public IValue outerprod(IIntArray a, IIntArray b, int axis) {
+    public IValue outerprod(IIntArray a, IIntArray b) {
         return new LazyMixedArray(a.dims().concat(b.dims())) {
             @Override
             public IValue get(int index) {
                 int idx = index / a.length();
-                return visit_dyadic(new IntScalar(a.get(idx)), new IntScalar(b.get(index)), axis);
+                return visit_dyadic(new IntScalar(a.get(idx)), new IntScalar(b.get(index)));
             }
         };
     }

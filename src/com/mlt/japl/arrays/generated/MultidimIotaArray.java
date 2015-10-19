@@ -45,8 +45,8 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
     }
 
     @Override
-    public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IBitArray a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
@@ -55,53 +55,53 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
     }
 
     @Override
-    public IValue accept_dyadic(ArrayVisitor visitor, IValue b, int axis) {
-        return visitor.visit_first(this, b, axis);
+    public IValue accept_dyadic(ArrayVisitor visitor, IValue b) {
+        return visitor.visit_first(this, b);
     }
 
     @Override
-    public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IIntArray a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IDoubleArray a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(ICharArray a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IMixedArray a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IIntScalar a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IDoubleScalar a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(ICharScalar a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor, int axis) {
-        return visitor.visit_dyadic(a, this, axis);
+    public IValue accept_dyadic(IMixedScalar a, ArrayVisitor visitor) {
+        return visitor.visit_dyadic(a, this);
     }
 
     @Override
-    public IValue accept_monadic(ArrayVisitor visitor, int axis) {
-        return visitor.visit_monadic(this, axis);
+    public IValue accept_monadic(ArrayVisitor visitor) {
+        return visitor.visit_monadic(this);
     }
 
     @Override

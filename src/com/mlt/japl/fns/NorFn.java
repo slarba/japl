@@ -11,13 +11,18 @@ import com.mlt.japl.arrays.interf.IIntArray;
 import com.mlt.japl.arrays.interf.IIntScalar;
 
 public class NorFn extends BaseFn {
+    public NorFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         return new IntScalar(~(a.get() | b.get()));
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IBitArray b) {
         return new LazyBitArray(a.dims()) {
             @Override
             public long get(int index) {
@@ -27,7 +32,7 @@ public class NorFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IBitArray b) {
         checkLengths(a, b);
         return new LazyIntArray(a.dims()) {
             @Override
@@ -38,7 +43,7 @@ public class NorFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IIntArray b) {
         checkLengths(a, b);
         return new LazyIntArray(a.dims()) {
             @Override
@@ -49,7 +54,7 @@ public class NorFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         checkLengths(a, b);
         return new LazyIntArray(a.dims()) {
             @Override
@@ -61,7 +66,7 @@ public class NorFn extends BaseFn {
 
     // scalar/array
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         return new LazyIntArray(b.dims()) {
             @Override
             public long get(int index) {
@@ -71,7 +76,7 @@ public class NorFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntScalar b) {
         return new LazyIntArray(a.dims()) {
             @Override
             public long get(int index) {
@@ -82,7 +87,7 @@ public class NorFn extends BaseFn {
 
     // scalar/array
     @Override
-    public IValue visit_dyadic(IIntScalar a, IBitArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IBitArray b) {
         return new LazyIntArray(b.dims()) {
             @Override
             public long get(int index) {
@@ -92,7 +97,7 @@ public class NorFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IBitArray a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IBitArray a, IIntScalar b) {
         if (b.get() == 0) return new ConstBitArray(a.dims(), 0);
         return new LazyIntArray(a.dims()) {
             @Override
@@ -103,7 +108,7 @@ public class NorFn extends BaseFn {
     }
 
     @Override
-    public IValue applyMonadic(IValue a, int axis) {
+    public IValue applyMonadic(IValue a) {
         throw new ValenceError();
     }
 

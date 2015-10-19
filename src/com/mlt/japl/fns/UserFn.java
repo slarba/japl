@@ -23,7 +23,7 @@ public class UserFn extends BaseFn {
     }
 
     @Override
-    public IValue applyDyadic(IValue left, IValue right, int axis) {
+    public IValue applyDyadic(IValue left, IValue right) {
         EvalContext derived = context.newFrame();
         if(leftArg!=null) derived.set(leftArg, left);
         if(rightArg!=null) derived.set(rightArg, right);
@@ -35,7 +35,7 @@ public class UserFn extends BaseFn {
     }
 
     @Override
-    public IValue applyMonadic(IValue right, int axis) {
+    public IValue applyMonadic(IValue right) {
         EvalContext derived = context.newFrame();
         derived.set(rightArg, right);
         IValue retVal = body.eval(derived);
@@ -46,7 +46,7 @@ public class UserFn extends BaseFn {
     }
 
     @Override
-    public IValue applyNiladic(int axis) {
+    public IValue applyNiladic() {
         EvalContext derived = context.newFrame();
         IValue retval = body.eval(derived);
         if(resultArg!=null) {

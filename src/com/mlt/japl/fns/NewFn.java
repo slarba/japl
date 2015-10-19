@@ -14,8 +14,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class NewFn extends BaseFn {
+    public NewFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_monadic(ICharArray a, int axis) {
+    public IValue visit_monadic(ICharArray a) {
         CharArray c = (CharArray) a.force();
         try {
             Class<?> clas = Class.forName(c.getString());
@@ -53,7 +58,7 @@ public class NewFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IMixedArray as, int axis) {
+    public IValue visit_monadic(IMixedArray as) {
         MixedArray a = (MixedArray) as.force();
         if (a.length() < 1) throw new LengthError();
         IValue className = a.get(0);

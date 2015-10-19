@@ -24,7 +24,7 @@ public class GenericReducer {
         int i = array.length() - 1;
         IValue result = array.getGeneric(i);
         for (i = array.length() - 2; i >= 0; i--)
-            result = fn.applyDyadic(array.getGeneric(i), result, axis);
+            result = fn.applyDyadic(array.getGeneric(i), result);
         return result;
     }
 
@@ -32,7 +32,7 @@ public class GenericReducer {
         int i = array.dims().axis(axis) - 1;
         IValue result = array.getGeneric(index * mspan + i * spans[axis]);
         for (i = array.dims().axis(axis) - 2; i >= 0; i--)
-            result = fn.applyDyadic(array.getGeneric(index * mspan + i * spans[axis]), result, axis);
+            result = fn.applyDyadic(array.getGeneric(index * mspan + i * spans[axis]), result);
         return result;
     }
 };

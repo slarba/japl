@@ -19,8 +19,13 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 
 public class NotFn extends BaseFn {
+    public NotFn(int axis) {
+        super(axis);
+
+    }
+
     @Override
-    public IValue visit_monadic(IIntArray a, int axis) {
+    public IValue visit_monadic(IIntArray a) {
         return new LazyIntArray(a.dims()) {
             @Override
             public long get(int index) {
@@ -30,7 +35,7 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_monadic(IBitArray a, int axis) {
+    public IValue visit_monadic(IBitArray a) {
         return new LazyBitArray(a.dims()) {
             @Override
             public long get(int index) {
@@ -40,25 +45,25 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntScalar b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntScalar b) {
         if (a.get() != b.get()) return b;
         else return IntArray.EMPTY;
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b, int axis) {
+    public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b) {
         if (a.get() != b.get()) return b;
         else return IntArray.EMPTY;
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, ICharScalar b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, ICharScalar b) {
         if (a.get() != b.get()) return b;
         else return IntArray.EMPTY;
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IIntArray b) {
         LongSet s = new LongOpenHashSet();
         for (int i = 0; i < a.length(); i++) s.add(a.get(i));
         LongArrayList l = new LongArrayList();
@@ -71,7 +76,7 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntArray a, IDoubleArray b, int axis) {
+    public IValue visit_dyadic(IIntArray a, IDoubleArray b) {
         LongSet s = new LongOpenHashSet();
         for (int i = 0; i < a.length(); i++) s.add(a.get(i));
         DoubleArrayList l = new DoubleArrayList();
@@ -84,7 +89,7 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IDoubleArray a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IDoubleArray a, IIntArray b) {
         DoubleSet s = new DoubleOpenHashSet();
         for (int i = 0; i < a.length(); i++) s.add(a.get(i));
         DoubleArrayList l = new DoubleArrayList();
@@ -97,7 +102,7 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(IIntScalar a, IIntArray b, int axis) {
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
         LongArrayList l = new LongArrayList();
         for (int i = 0; i < b.length(); i++) {
             long val = b.get(i);
@@ -108,7 +113,7 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharScalar a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharScalar a, ICharArray b) {
         CharArrayList l = new CharArrayList();
         for (int i = 0; i < b.length(); i++) {
             char val = b.get(i);
@@ -119,7 +124,7 @@ public class NotFn extends BaseFn {
     }
 
     @Override
-    public IValue visit_dyadic(ICharArray a, ICharArray b, int axis) {
+    public IValue visit_dyadic(ICharArray a, ICharArray b) {
         CharSet s = new CharOpenHashSet();
         for (int i = 0; i < a.length(); i++) s.add(a.get(i));
         CharArrayList l = new CharArrayList();
