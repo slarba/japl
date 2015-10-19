@@ -9,9 +9,8 @@ public class AstInt implements AstNode {
     private long value;
 
     public AstInt(String text) {
-        long sign = 1;
-        if(text.startsWith("\u00af")) sign = -1;
-        value = sign*Long.parseLong(sign<0 ? text.substring(1) : text);
+        text = text.replace('\u00af', '-');
+        value = Long.parseLong(text);
     }
 
     @Override

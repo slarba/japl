@@ -49,7 +49,7 @@ options {
     }
 }
 
-ID  :	('a'..'z'|'A'..'Z'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359'|'#') ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359')*
+ID  :	('a'..'z'|'A'..'Z'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359'|'\u236c'|'#') ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'\u237a'|'\u2375'|'\u2206'|'\u2359')*
     ;
 
 LABEL : ID ':' ;
@@ -85,7 +85,7 @@ STRING
     ;
 
 fragment
-EXPONENT : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
+EXPONENT : ('e'|'E') SIGN? ('0'..'9')+ ;
 
 fragment
 HEX_DIGIT : ('0'..'9'|'a'..'f'|'A'..'F') ;
@@ -238,6 +238,7 @@ indexelement : SEMICOLON | arrayexpr ;
 func	:
         outer=func '.' inner=func     # innerprod
     |   arrayitem BOUNDWITH func      # boundfunc
+    |   l=func BOUNDWITH r=func       # composefunc
     |   func POWEROPERATOR arrayitem  # powerfunc
     |   func OPERATOR axis?           # func_with_operator
     |   funcid                        # idfunc

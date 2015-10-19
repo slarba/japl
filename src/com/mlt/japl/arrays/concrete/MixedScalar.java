@@ -14,6 +14,10 @@ public class MixedScalar extends ScalarBase implements IMixedScalar {
         this.val = val;
     }
 
+    public IValue prototype() {
+        return val.prototype();
+    }
+
     @Override
     public int depth() {
         return val.depth() + 1;

@@ -16,6 +16,10 @@ public abstract class LazyIntArray extends ArrayBase implements IIntArray {
         super(dims);
     }
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     @Override
     public IValue force() {
         long[] data = new long[dims().length()];

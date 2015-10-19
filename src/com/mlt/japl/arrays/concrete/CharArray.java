@@ -16,6 +16,10 @@ public class CharArray extends ArrayBase implements ICharArray {
         this.data = new String(data);
     }
 
+    public IValue prototype() {
+        return new CharArray(dims(), new char[] { ' ' });
+    }
+
     public CharArray(Dimensions dims, String data) {
         super(dims);
         this.data = data;

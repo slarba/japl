@@ -1,6 +1,7 @@
 package com.mlt.japl.fns;
 
 import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.errors.DomainError;
 
 public class GenericReducer {
     private IValue array;
@@ -22,6 +23,7 @@ public class GenericReducer {
 
     public IValue rank1case() {
         int i = array.length() - 1;
+        if(i<0) throw new DomainError();
         IValue result = array.getGeneric(i);
         for (i = array.length() - 2; i >= 0; i--)
             result = fn.applyDyadic(array.getGeneric(i), result);

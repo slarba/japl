@@ -20,6 +20,10 @@ public class IntArray extends ArrayBase implements IIntArray {
         this.data = data;
     }
 
+    public IValue prototype() {
+        return new IntArray(dims(), new long[] { 0 });
+    }
+
     @Override
     public IValue get(IMixedArray i) {
         Indexer indexer = new Indexer(i, this);

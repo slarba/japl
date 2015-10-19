@@ -10,7 +10,11 @@ public class AstString implements AstNode {
     private String text;
 
     public AstString(String text) {
-        this.text = text.substring(1, text.length()-1);
+        this.text = text.substring(1, text.length()-1)
+                .replaceAll("\\\\n", "\n")
+                .replaceAll("\\\\t", "\t")
+                .replaceAll("\\\\r", "\r")
+                .replaceAll("\\\\'", "'");
     }
 
     @Override

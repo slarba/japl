@@ -18,6 +18,10 @@ public class DoubleArray extends ArrayBase implements IDoubleArray {
         this.data = data;
     }
 
+    public IValue prototype() {
+        return new DoubleArray(dims(), new double[] { 0 });
+    }
+
     @Override
     public double get(int index) {
         return data[index % data.length];

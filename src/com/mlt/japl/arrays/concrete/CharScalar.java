@@ -19,6 +19,9 @@ public class CharScalar extends ScalarBase implements ICharScalar {
         return val;
     }
 
+    public IValue prototype() {
+        return new CharScalar(' ');
+    }
 
     @Override
     public IValue getGeneric(int index) {

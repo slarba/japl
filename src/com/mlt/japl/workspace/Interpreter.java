@@ -18,9 +18,13 @@ public class Interpreter {
     private PrintConfig printConfig;
     private PrintWriter output;
     private PrintWriter errors;
+    private OutputStream out;
+    private OutputStream error;
 
     public Interpreter(OutputStream out, OutputStream error) {
-        context = new EvalContext(out, error);
+        this.out = out;
+        this.error = error;
+        reset();
         printConfig = new PrintConfig();
         output = new PrintWriter(out);
         errors = new PrintWriter(error);
@@ -31,7 +35,7 @@ public class Interpreter {
     }
 
     public void reset() {
-        context = new EvalContext(context.getOutputStream(), context.getErrorStream());
+        context = new EvalContext(out, error);
     }
 
     public void eval(String s) {

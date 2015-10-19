@@ -5,6 +5,7 @@ import com.mlt.japl.arrays.ArrayVisitor;
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.CharArray;
 import com.mlt.japl.arrays.concrete.CharScalar;
+import com.mlt.japl.arrays.concrete.IntScalar;
 import com.mlt.japl.arrays.interf.*;
 import com.mlt.japl.fns.Indexer;
 import com.mlt.japl.tools.Dimensions;
@@ -14,6 +15,10 @@ public abstract class LazyCharArray extends ArrayBase implements ICharArray {
 
     public LazyCharArray(Dimensions dims) {
         super(dims);
+    }
+
+    public IValue prototype() {
+        return new CharScalar(' ');
     }
 
     @Override

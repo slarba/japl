@@ -13,6 +13,10 @@ import com.mlt.japl.utils.PrintConfig;
 public class FuncValue implements IValue {
     private final Func fn;
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     public FuncValue(Func fn) {
         this.fn = fn;
     }

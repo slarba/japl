@@ -5,6 +5,7 @@ import com.mlt.japl.arrays.ArrayVisitor;
 import com.mlt.japl.arrays.IValue;
 import com.mlt.japl.arrays.concrete.DoubleArray;
 import com.mlt.japl.arrays.concrete.DoubleScalar;
+import com.mlt.japl.arrays.concrete.IntScalar;
 import com.mlt.japl.arrays.interf.*;
 import com.mlt.japl.fns.Indexer;
 import com.mlt.japl.tools.Dimensions;
@@ -14,6 +15,10 @@ public abstract class LazyDoubleArray extends ArrayBase implements IDoubleArray 
 
     public LazyDoubleArray(Dimensions dims) {
         super(dims);
+    }
+
+    public IValue prototype() {
+        return new DoubleScalar(0);
     }
 
     @Override

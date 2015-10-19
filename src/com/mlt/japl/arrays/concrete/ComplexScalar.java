@@ -22,6 +22,10 @@ public class ComplexScalar extends ScalarBase {
         this.imag = imag;
     }
 
+    public IValue prototype() {
+        return new ComplexScalar();
+    }
+
     @Override
     public String asString(PrintConfig printConfig) {
         return printConfig.print(this);

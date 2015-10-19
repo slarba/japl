@@ -18,6 +18,10 @@ public class IotaArray extends ArrayBase implements IIntArray {
         this.val = val;
     }
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     @Override
     public IValue get(IMixedArray i) {
         Indexer indexer = new Indexer(i, this);

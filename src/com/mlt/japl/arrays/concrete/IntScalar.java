@@ -19,6 +19,10 @@ public class IntScalar extends ScalarBase implements IIntScalar {
         this.val = val;
     }
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     @Override
     public long get() {
         return val;

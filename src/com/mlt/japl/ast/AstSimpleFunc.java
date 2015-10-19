@@ -76,7 +76,6 @@ public class AstSimpleFunc extends AstFunc {
             case "\u22a2": return new PassFn(axis);
             case "/": return new ReplicateFn(axis,false);
             case "\u233f": return new ReplicateFn(axis,true);
-            case "⍬": return new ZildeFn(axis);
             case "⍎": return new ExecuteFn(axis,context);
             case "⎕NEW": return new NewFn(axis);
             case "⎕SLURP": return new SlurpFn(axis);

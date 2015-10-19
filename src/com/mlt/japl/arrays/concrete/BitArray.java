@@ -3,6 +3,7 @@ package com.mlt.japl.arrays.concrete;
 import com.mlt.japl.arrays.ArrayBase;
 import com.mlt.japl.arrays.ArrayVisitor;
 import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.generated.ConstBitArray;
 import com.mlt.japl.arrays.interf.*;
 import com.mlt.japl.fns.Indexer;
 import com.mlt.japl.tools.Dimensions;
@@ -13,6 +14,10 @@ import java.util.Arrays;
 public class BitArray extends ArrayBase implements IBitArray {
     long[] data;
     int actualLength;
+
+    public IValue prototype() {
+        return new ConstBitArray(dims(), 0);
+    }
 
     public BitArray(Dimensions dims) {
         super(dims);

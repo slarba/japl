@@ -15,6 +15,26 @@ public class TakeFn extends BaseFn {
 
     }
 
+    @Override
+    public IValue visit_monadic(IMixedArray a) {
+        int maxlen = 0;
+        for(int i=0; i<a.length(); i++) {
+            maxlen = Math.max(a.get(i).length(), maxlen);
+        }
+        int ml = maxlen;
+        Dimensions resultDims = new Dimensions(a.length(), maxlen);
+        return new LazyMixedArray(resultDims) {
+            @Override
+            public IValue get(int index) {
+                int row = index/ml;
+                IValue v = a.get(row);
+                int col = index%ml;
+                if(col>=v.length()) return v.getGeneric(0).prototype();
+                return v.getGeneric(col);
+            }
+        }.force();
+    }
+
     private int[] createDimensions(IIntArray a, IValue b) {
         if (a.length() != b.rank()) throw new RankError();
         int[] ds = new int[a.length()];
@@ -176,9 +196,9 @@ public class TakeFn extends BaseFn {
                     long ai = a.get();
                     if (ai < 0) {
                         long ix = Math.abs(b.length() + ai);
-                        if (index < ix) return 0;
+                        if (index < ix) return ' ';
                         index -= ix;
-                    } else if (index >= b.length()) return 0;
+                    } else if (index >= b.length()) return ' ';
                     return b.get(index);
                 }
             };
@@ -199,9 +219,9 @@ public class TakeFn extends BaseFn {
                         long ai = a.get();
                         if (ai < 0) {
                             long ix = Math.abs(b.dims().axis(i) + ai);
-                            if (idx[i] < ix) return 0;
+                            if (idx[i] < ix) return ' ';
                             idx[i] -= ix;
-                        } else if (idx[i] >= b.dims().axis(i)) return 0;
+                        } else if (idx[i] >= b.dims().axis(i)) return ' ';
                     }
                 }
                 return b.get(b.dims().calculateIndex(idx));
@@ -246,6 +266,50 @@ public class TakeFn extends BaseFn {
                             if (idx[i] < ix) return 0;
                             idx[i] -= ix;
                         } else if (idx[i] >= b.dims().axis(i)) return 0;
+                    }
+                }
+                return b.get(b.dims().calculateIndex(idx));
+            }
+        };
+
+    }
+
+    @Override
+    public IValue visit_dyadic(IIntScalar a, IMixedArray b) {
+        if (axis < 0) {
+            if (b.rank() != 1) throw new RankError();
+            return new LazyMixedArray(new Dimensions((int) Math.abs(a.get()))) {
+                @Override
+                public IValue get(int index) {
+                    long ai = a.get();
+                    if (ai < 0) {
+                        long ix = Math.abs(b.length() + ai);
+                        if (index < ix) return b.prototype();
+                        index -= ix;
+                    } else if (index >= b.length()) return b.prototype();
+                    return b.get(index);
+                }
+            };
+        }
+        if (axis >= b.rank()) throw new AxisError();
+
+        int[] ds = new int[b.rank()];
+        for (int i = 0; i < ds.length; i++) {
+            if (i == axis) ds[i] = (int) Math.abs(a.get());
+            else ds[i] = b.dims().axis(i);
+        }
+        return new LazyMixedArray(new Dimensions(ds)) {
+            @Override
+            public IValue get(int index) {
+                int[] idx = dims().reverseIndexInt(index);
+                for (int i = 0; i < idx.length; i++) {
+                    if (i == axis) {
+                        long ai = a.get();
+                        if (ai < 0) {
+                            long ix = Math.abs(b.dims().axis(i) + ai);
+                            if (idx[i] < ix) return b.prototype();
+                            idx[i] -= ix;
+                        } else if (idx[i] >= b.dims().axis(i)) return b.prototype();
                     }
                 }
                 return b.get(b.dims().calculateIndex(idx));

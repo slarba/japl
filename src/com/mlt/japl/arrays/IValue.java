@@ -27,4 +27,6 @@ public interface IValue extends ArrayAcceptor {
     Class<?> getCorrespondingJavaClass();
 
     Object coerceToJavaObject();
+
+    IValue prototype();
 }

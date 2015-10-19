@@ -19,31 +19,31 @@ public class DiscloseFn extends BaseFn {
 
     @Override
     public IValue visit_monadic(IIntArray a) {
-        if (a.length() == 0) return a;
+        if (a.length() == 0) return a.prototype();
         return new IntScalar(a.get(0));
     }
 
     @Override
     public IValue visit_monadic(IDoubleArray a) {
-        if (a.length() == 0) return a;
+        if (a.length() == 0) return a.prototype();
         return new DoubleScalar(a.get(0));
     }
 
     @Override
     public IValue visit_monadic(ICharArray a) {
-        if (a.length() == 0) return a;
+        if (a.length() == 0) return a.prototype();
         return new CharScalar(a.get(0));
     }
 
     @Override
     public IValue visit_monadic(IBitArray a) {
-        if (a.length() == 0) return a;
+        if (a.length() == 0) return a.prototype();
         return new IntScalar(a.get(0));
     }
 
     @Override
     public IValue visit_monadic(IMixedArray a) {
-        if (a.length() == 0) return a;
+        if (a.length() == 0) return a.prototype();
         return a.get(0);
     }
 

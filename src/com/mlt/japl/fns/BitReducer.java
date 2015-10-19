@@ -20,6 +20,7 @@ public abstract class BitReducer {
 
     public long rank1case() {
         int i = array.length() - 1;
+        if(i<0) return 0;
         long result = array.get(i);
         for (i = array.length() - 2; i >= 0; i--)
             result = op(array.get(i), result);

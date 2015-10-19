@@ -18,6 +18,10 @@ public class ConstBitArray extends ArrayBase implements IBitArray {
         this.val = val;
     }
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     @Override
     public IValue get(IMixedArray i) {
         throw new AplError();

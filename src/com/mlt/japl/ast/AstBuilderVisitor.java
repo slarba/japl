@@ -121,7 +121,7 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
                 insertEmpty = false;
             }
         }
-        return new AstArray(result.toArray(new AstNode[0]));
+        return new AstIndexArray(result.toArray(new AstNode[0]));
     }
 
     @Override
@@ -212,6 +212,13 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         return new AstMonadicCall(func, visit(array));
     }
 
+/*
+    @Override
+    public AstNode visitNiladic_call(Niladic_callContext ctx) {
+        return new AstNiladicCall((AstFunc)visit(ctx.func()));
+    }
+*/
+
     @Override
     public AstNode visitDyadic_call(Dyadic_callContext ctx) {
         if(ctx.fn != null) {
@@ -219,6 +226,13 @@ public class AstBuilderVisitor extends AplBaseVisitor<AstNode> {
         } else {
             return visit(ctx.l);
         }
+    }
+
+    @Override
+    public AstNode visitComposefunc(ComposefuncContext ctx) {
+        AstFunc r = (AstFunc)visit(ctx.r);
+        AstFunc l = (AstFunc)visit(ctx.l);
+        return new AstCompose(l, r);
     }
 
     @Override

@@ -17,6 +17,10 @@ public abstract class LazyBitArray extends ArrayBase implements IBitArray {
         super(dims);
     }
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     @Override
     public long getBits(int idx) {
         throw new AplError();

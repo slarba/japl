@@ -293,6 +293,16 @@ public class EachFn extends BaseFn {
     }
 
     @Override
+    public IValue visit_dyadic(IIntArray a, ICharScalar b) {
+        return new LazyMixedArray(a.dims()) {
+            @Override
+            public IValue get(int index) {
+                return fn.applyDyadic(new IntScalar(a.get(index)), b);
+            }
+        };
+    }
+
+    @Override
     public IValue visit_dyadic(IMixedScalar a, IDoubleArray b) {
         return new LazyMixedArray(b.dims()) {
             @Override

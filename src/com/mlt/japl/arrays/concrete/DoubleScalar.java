@@ -19,6 +19,10 @@ public class DoubleScalar extends ScalarBase implements IDoubleScalar {
         return val;
     }
 
+    public IValue prototype() {
+        return new DoubleScalar(0);
+    }
+
     @Override
     public IValue getGeneric(int index) {
         return this;

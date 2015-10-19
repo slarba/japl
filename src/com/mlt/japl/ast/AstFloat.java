@@ -13,9 +13,8 @@ public class AstFloat implements AstNode {
     }
 
     public static double parse(String text) {
-        long sign = 1;
-        if(text.startsWith("\u00af")) sign = -1;
-        return sign*Double.parseDouble(sign<0 ? text.substring(1) : text);
+        text = text.replace('\u00af', '-');
+        return Double.parseDouble(text);
     }
 
     public String toString() {

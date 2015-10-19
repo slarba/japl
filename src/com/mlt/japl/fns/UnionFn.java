@@ -85,6 +85,66 @@ public class UnionFn extends BaseFn {
     }
 
     @Override
+    public IValue visit_dyadic(IIntScalar a, IIntArray b) {
+        LongSet set = new LongOpenHashSet();
+        for (int i = 0; i < b.length(); i++)
+            set.add(b.get(i));
+        set.add(a.get());
+        long[] result = set.toLongArray();
+        return new IntArray(new Dimensions(result.length), result);
+    }
+
+    @Override
+    public IValue visit_dyadic(IDoubleScalar a, IDoubleArray b) {
+        DoubleSet set = new DoubleOpenHashSet();
+        for (int i = 0; i < b.length(); i++)
+            set.add(b.get(i));
+        set.add(a.get());
+        double[] result = set.toDoubleArray();
+        return new DoubleArray(new Dimensions(result.length), result);
+    }
+
+    @Override
+    public IValue visit_dyadic(ICharScalar a, ICharArray b) {
+        CharSet set = new CharOpenHashSet();
+        for (int i = 0; i < b.length(); i++)
+            set.add(b.get(i));
+        set.add(a.get());
+        char[] result = set.toCharArray();
+        return new CharArray(new Dimensions(result.length), result);
+    }
+
+    @Override
+    public IValue visit_dyadic(IIntArray a, IIntScalar b) {
+        LongSet set = new LongOpenHashSet();
+        for (int i = 0; i < b.length(); i++)
+            set.add(a.get(i));
+        set.add(b.get());
+        long[] result = set.toLongArray();
+        return new IntArray(new Dimensions(result.length), result);
+    }
+
+    @Override
+    public IValue visit_dyadic(IDoubleArray a, IDoubleScalar b) {
+        DoubleSet set = new DoubleOpenHashSet();
+        for (int i = 0; i < b.length(); i++)
+            set.add(a.get(i));
+        set.add(b.get());
+        double[] result = set.toDoubleArray();
+        return new DoubleArray(new Dimensions(result.length), result);
+    }
+
+    @Override
+    public IValue visit_dyadic(ICharArray a, ICharScalar b) {
+        CharSet set = new CharOpenHashSet();
+        for (int i = 0; i < b.length(); i++)
+            set.add(a.get(i));
+        set.add(b.get());
+        char[] result = set.toCharArray();
+        return new CharArray(new Dimensions(result.length), result);
+    }
+
+    @Override
     public IValue visit_dyadic(IDoubleScalar a, IDoubleScalar b) {
         if (a.get() != b.get()) {
             return new DoubleArray(new Dimensions(2), new double[]{a.get(), b.get()});

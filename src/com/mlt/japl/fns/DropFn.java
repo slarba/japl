@@ -1,11 +1,13 @@
 package com.mlt.japl.fns;
 
 import com.mlt.japl.arrays.IValue;
+import com.mlt.japl.arrays.concrete.*;
 import com.mlt.japl.arrays.generated.LazyBitArray;
 import com.mlt.japl.arrays.generated.LazyCharArray;
 import com.mlt.japl.arrays.generated.LazyDoubleArray;
 import com.mlt.japl.arrays.generated.LazyIntArray;
 import com.mlt.japl.arrays.interf.*;
+import com.mlt.japl.tools.AxisIterator;
 import com.mlt.japl.tools.Dimensions;
 
 public class DropFn extends BaseFn {
@@ -13,6 +15,111 @@ public class DropFn extends BaseFn {
     public DropFn(int axis) {
         super(axis);
 
+    }
+
+    @Override
+    public IValue visit_monadic(IIntScalar a) {
+        return a;
+    }
+
+    @Override
+    public IValue visit_monadic(IDoubleScalar a) {
+        return a;
+    }
+
+    @Override
+    public IValue visit_monadic(ICharScalar a) {
+        return a;
+    }
+
+    @Override
+    public IValue visit_monadic(IMixedScalar a) {
+        return a;
+    }
+
+    @Override
+    public IValue visit_monadic(IIntArray a) {
+        int ax = (axis<0) ? a.rank()-1 : axis;
+        Dimensions resultDims = a.dims().elideAxis(ax);
+        IValue[] result = new IValue[resultDims.length()];
+        AxisIterator iterator = new AxisIterator(a.dims().asArray(), a.dims().spans(), ax);
+        for(int i=0; i<result.length; i++) {
+            long[] tmp = new long[a.dims().axis(ax)];
+            for(int j=0; j<tmp.length; j++) {
+                tmp[j] = a.get(iterator.index());
+                iterator.step();
+            }
+            result[i] = new IntArray(new Dimensions(tmp.length), tmp);
+        }
+        return new MixedArray(resultDims, result);
+    }
+
+    @Override
+    public IValue visit_monadic(ICharArray a) {
+        int ax = (axis<0) ? a.rank()-1 : axis;
+        Dimensions resultDims = a.dims().elideAxis(ax);
+        IValue[] result = new IValue[resultDims.length()];
+        AxisIterator iterator = new AxisIterator(a.dims().asArray(), a.dims().spans(), ax);
+        for(int i=0; i<result.length; i++) {
+            char[] tmp = new char[a.dims().axis(ax)];
+            for(int j=0; j<tmp.length; j++) {
+                tmp[j] = a.get(iterator.index());
+                iterator.step();
+            }
+            result[i] = new CharArray(new Dimensions(tmp.length), tmp);
+        }
+        return new MixedArray(resultDims, result);
+    }
+
+    @Override
+    public IValue visit_monadic(IDoubleArray a) {
+        int ax = (axis<0) ? a.rank()-1 : axis;
+        Dimensions resultDims = a.dims().elideAxis(ax);
+        IValue[] result = new IValue[resultDims.length()];
+        AxisIterator iterator = new AxisIterator(a.dims().asArray(), a.dims().spans(), ax);
+        for(int i=0; i<result.length; i++) {
+            double[] tmp = new double[a.dims().axis(ax)];
+            for(int j=0; j<tmp.length; j++) {
+                tmp[j] = a.get(iterator.index());
+                iterator.step();
+            }
+            result[i] = new DoubleArray(new Dimensions(tmp.length), tmp);
+        }
+        return new MixedArray(resultDims, result);
+    }
+
+    @Override
+    public IValue visit_monadic(IMixedArray a) {
+        int ax = (axis<0) ? a.rank()-1 : axis;
+        Dimensions resultDims = a.dims().elideAxis(ax);
+        IValue[] result = new IValue[resultDims.length()];
+        AxisIterator iterator = new AxisIterator(a.dims().asArray(), a.dims().spans(), ax);
+        for(int i=0; i<result.length; i++) {
+            IValue[] tmp = new IValue[a.dims().axis(ax)];
+            for(int j=0; j<tmp.length; j++) {
+                tmp[j] = a.get(iterator.index());
+                iterator.step();
+            }
+            result[i] = new MixedArray(new Dimensions(tmp.length), tmp);
+        }
+        return new MixedArray(resultDims, result);
+    }
+
+    @Override
+    public IValue visit_monadic(IBitArray a) {
+        int ax = (axis<0) ? a.rank()-1 : axis;
+        Dimensions resultDims = a.dims().elideAxis(ax);
+        IValue[] result = new IValue[resultDims.length()];
+        AxisIterator iterator = new AxisIterator(a.dims().asArray(), a.dims().spans(), ax);
+        for(int i=0; i<result.length; i++) {
+            BitArray tmp = new BitArray(new Dimensions(a.dims().axis(ax)));
+            for(int j=0; j<tmp.length(); j++) {
+                tmp.setBit(j, a.get(iterator.index()));
+                iterator.step();
+            }
+            result[i] = tmp;
+        }
+        return new MixedArray(resultDims, result);
     }
 
     @Override

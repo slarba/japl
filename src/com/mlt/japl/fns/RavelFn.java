@@ -270,6 +270,78 @@ public class RavelFn extends BaseFn {
     }
 
     @Override
+    public IValue visit_dyadic(IMixedArray a, IMixedScalar b) {
+        int ax = this.axis;
+        int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
+        if (axis > a.rank()) throw new AxisError();
+        Dimensions result = a.dims().laminate(new Dimensions(1), axis);
+        return new LazyMixedArray(result) {
+            @Override
+            public IValue get(int index) {
+                int[] ri = result.reverseIndexInt(index);
+                if (ri[axis] >= a.dims().axis(axis)) {
+                    return b.get();
+                } else
+                    return a.get(a.dims().calculateIndex(ri));
+            }
+        };
+    }
+
+    @Override
+    public IValue visit_dyadic(IMixedArray a, IIntScalar b) {
+        int ax = this.axis;
+        int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
+        if (axis > a.rank()) throw new AxisError();
+        Dimensions result = a.dims().laminate(new Dimensions(1), axis);
+        return new LazyMixedArray(result) {
+            @Override
+            public IValue get(int index) {
+                int[] ri = result.reverseIndexInt(index);
+                if (ri[axis] >= a.dims().axis(axis)) {
+                    return b;
+                } else
+                    return a.get(a.dims().calculateIndex(ri));
+            }
+        };
+    }
+
+    @Override
+    public IValue visit_dyadic(IMixedArray a, IDoubleScalar b) {
+        int ax = this.axis;
+        int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
+        if (axis > a.rank()) throw new AxisError();
+        Dimensions result = a.dims().laminate(new Dimensions(1), axis);
+        return new LazyMixedArray(result) {
+            @Override
+            public IValue get(int index) {
+                int[] ri = result.reverseIndexInt(index);
+                if (ri[axis] >= a.dims().axis(axis)) {
+                    return b;
+                } else
+                    return a.get(a.dims().calculateIndex(ri));
+            }
+        };
+    }
+
+    @Override
+    public IValue visit_dyadic(IMixedArray a, ICharScalar b) {
+        int ax = this.axis;
+        int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
+        if (axis > a.rank()) throw new AxisError();
+        Dimensions result = a.dims().laminate(new Dimensions(1), axis);
+        return new LazyMixedArray(result) {
+            @Override
+            public IValue get(int index) {
+                int[] ri = result.reverseIndexInt(index);
+                if (ri[axis] >= a.dims().axis(axis)) {
+                    return b;
+                } else
+                    return a.get(a.dims().calculateIndex(ri));
+            }
+        };
+    }
+
+    @Override
     public IValue visit_dyadic(IMixedArray a, IMixedArray b) {
         int ax = this.axis;
         int axis = ax < 0 ? (firstAxis ? 0 : a.rank() - 1) : ax;
@@ -283,6 +355,33 @@ public class RavelFn extends BaseFn {
                     return b.get(b.dims().indexWithReplacedAxis(axis, ri[axis] - a.dims().axis(axis), ri));
                 } else
                     return a.get(a.dims().calculateIndex(ri));
+            }
+        };
+    }
+
+    @Override
+    public IValue visit_dyadic(IMixedScalar a, IIntScalar b) {
+        return new MixedArray(new Dimensions(2), new IValue[] { a.get(), b });
+    }
+
+    @Override
+    public IValue visit_dyadic(IMixedScalar a, IDoubleScalar b) {
+        return new MixedArray(new Dimensions(2), new IValue[] { a.get(), b });
+    }
+
+    @Override
+    public IValue visit_dyadic(IMixedScalar a, ICharScalar b) {
+        return new MixedArray(new Dimensions(2), new IValue[] { a.get(), b });
+    }
+
+
+    @Override
+    public IValue visit_dyadic(IMixedScalar a, IMixedArray b) {
+        if (b.rank() != 1) throw new RankError();
+        return new LazyMixedArray(new Dimensions(1 + b.length())) {
+            @Override
+            public IValue get(int index) {
+                return index == 0 ? a.get() : b.get(index - 1);
             }
         };
     }

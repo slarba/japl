@@ -36,7 +36,7 @@ public class AstToplevelFunc extends AstFunc {
 
     @Override
     public IValue eval(EvalContext context) {
-        context.set(name, new FuncValue(new UserFn(body, context, leftarg, rightarg, retvar)));
+        context.set(name, new FuncValue(new UserFn(body, context, leftarg, rightarg, retvar, locals)));
         return null;
     }
 }

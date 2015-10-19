@@ -42,6 +42,8 @@ public class EvalContext {
         this();
         this.out = out;
         this.error = error;
+
+        set("\u236c", IntArray.EMPTY);
     }
 
     public void reset() {
@@ -116,5 +118,9 @@ public class EvalContext {
         if (valueMap.containsKey(id)) return true;
         if (parent != null) return parent.isBound(id);
         return false;
+    }
+
+    public void setLocal(String l, IValue val) {
+        valueMap.put(l, new Var(val));
     }
 }

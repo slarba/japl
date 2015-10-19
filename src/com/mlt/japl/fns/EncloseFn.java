@@ -28,7 +28,7 @@ public class EncloseFn extends BaseFn {
 
     @Override
     public IValue visit_monadic(IMixedScalar a) {
-        return a;
+        return new MixedScalar(a);
     }
 
     @Override

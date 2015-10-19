@@ -15,6 +15,12 @@ public abstract class LazyMixedArray extends ArrayBase implements IMixedArray {
         super(dims);
     }
 
+    public IValue prototype() {
+        if(dims().length()>0)
+            return get(0).prototype();
+        return MixedArray.EMPTY;
+    }
+
     @Override
     public IValue get(IMixedArray i) {
         Indexer indexer = new Indexer(i, this);

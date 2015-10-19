@@ -1,15 +1,12 @@
 package com.mlt.japl.fns;
 
+import com.mlt.japl.arrays.concrete.*;
 import com.mlt.japl.errors.DomainError;
 import com.mlt.japl.errors.LengthError;
 import com.mlt.japl.errors.RankError;
 import com.mlt.japl.errors.ValenceError;
 import com.mlt.japl.arrays.ArrayVisitor;
 import com.mlt.japl.arrays.IValue;
-import com.mlt.japl.arrays.concrete.CharScalar;
-import com.mlt.japl.arrays.concrete.DoubleScalar;
-import com.mlt.japl.arrays.concrete.IntScalar;
-import com.mlt.japl.arrays.concrete.MixedScalar;
 import com.mlt.japl.arrays.generated.LazyMixedArray;
 import com.mlt.japl.arrays.interf.*;
 import com.mlt.japl.tools.Dimensions;
@@ -23,6 +20,10 @@ public class BaseFn implements ArrayVisitor, Func {
 
     public BaseFn(int axis) {
         this.axis = axis;
+    }
+
+    public IValue prototype() {
+        return IntArray.EMPTY;
     }
 
     @Override

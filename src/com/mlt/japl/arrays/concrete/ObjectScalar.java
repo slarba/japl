@@ -14,6 +14,10 @@ public class ObjectScalar extends ScalarBase implements IMixedScalar {
         value = instance;
     }
 
+    public IValue prototype() {
+        return new IntScalar(0);
+    }
+
     @Override
     public String asString(PrintConfig printConfig) {
         return "#<" + value.getClass().getName() + ": " + value.toString() + ">";

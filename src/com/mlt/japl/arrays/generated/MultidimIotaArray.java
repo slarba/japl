@@ -20,6 +20,10 @@ public class MultidimIotaArray extends ArrayBase implements IMixedArray {
         itemDimensions = new Dimensions(val.length());
     }
 
+    public IValue prototype() {
+        return new IntArray(itemDimensions, new long[] { 0 });
+    }
+
     @Override
     public IValue get(IMixedArray i) {
         Indexer indexer = new Indexer(i, this);

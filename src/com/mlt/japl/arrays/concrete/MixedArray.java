@@ -16,6 +16,12 @@ public class MixedArray extends ArrayBase implements IMixedArray {
     IValue[] data;
     int depth;
 
+    public IValue prototype() {
+        if(dims().length()>0) return get(0).prototype();
+        else
+        return MixedArray.EMPTY;
+    }
+
     public MixedArray(Dimensions dims, IValue[] data) {
         super(dims);
         this.data = data;

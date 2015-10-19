@@ -27,6 +27,6 @@ public class AstLambda extends AstFunc {
 
     @Override
     public IValue eval(EvalContext context) {
-        return new FuncValue(new UserFn(body, context, "\u237a", "\u2375", null));
+        return new FuncValue(new UserFn(body, context, "\u237a", "\u2375", null, null));
     }
 }
